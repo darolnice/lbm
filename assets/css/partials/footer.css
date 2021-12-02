@@ -1,0 +1,186 @@
+
+#main__footer{
+    padding: 0;
+    padding-top: 20px;
+    background-color: rgba(3, 26, 49, 0.82);
+    color: #f7f7f7;
+    z-index: 1;
+    width: 100%;
+    height: 92vh;
+    bottom: 0;
+    font-family: Bahnschrift, serif!important;
+    display: block;
+    position: relative;
+}
+
+.row{
+    /*border: 1px solid white;*/
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    display: flex;
+}
+
+
+#t_div{
+    /*border: 1px solid white;*/
+    margin-top: 0;
+    width: 30%;
+    height:100%;
+    margin-left: 10.5%;
+}
+
+#txt1{
+    font-size: 14px;
+    font-weight: 300;
+    font-family: Bahnschrift, serif!important;
+    line-height: 1.8;
+    margin-top: 30px;
+}
+#follow\ us{font-size: 13px}
+
+
+/*footer menu start*/
+#footer_menu{
+    height: auto;
+    margin-left: 90px;
+    color: white;
+    text-align: start;
+    z-index: 1;
+    margin-top:0;
+    /*border: 1px solid rgba(194, 16, 16, 0.92);*/
+    padding-top: -20px;
+    line-height: 1.5;
+}
+
+ul li{
+    line-height: 1.9!important;
+}
+ul li a{
+    font-size: 10px;
+    text-decoration: none!important;
+}
+
+#menulist{
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+#menu{margin: 23px}
+#ul_list{margin-top: -20px}
+
+
+/*footer menu end*/
+
+/*about vcc start*/
+#abt_us_content_div{
+    margin-top: 0;
+    height: auto;
+    margin-left: 5%;
+    /*border: 1px solid rgba(194, 16, 16, 0.92);*/
+}
+#ab_us{
+    color: white;
+    font-size: 13px;
+}
+#abt_us_content_div p{
+    margin: 23px
+}
+#abt_us_content_div ul{
+    margin-top: -20px
+}
+
+/*copyright div start*/
+#copyright_div{
+    padding: 0;
+    height: 88.5px;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(30, 189, 243, 0.89);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-top: 220px!important;
+
+}
+#bottom-copyright{
+    margin-right: 50px;
+    padding-top: 40px;
+    font-size: 14px;
+    text-align: center;
+    color: white!important;
+}
+
+.btn_tc, .btn_pc{
+    background: none;
+    color: white;
+    border: none;
+}
+.btn_pc:before{
+    content: '|';
+    background: none;
+    color: white;
+    border: none;
+    margin-right: 10px;
+}
+/*copyright div end*/
+
+
+#ft_sn_div{
+    border: 1px solid rgba(113, 112, 112, 0.21);
+    width: 275px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    margin-left: 75%;
+    margin-top: -19%;
+    float: right;
+    top: 0;
+    padding-left: 10px;
+}
+
+#ft_fbk{
+    border: 1px solid rgba(113, 112, 112, 0.21);
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-left: 0;
+    font-size: 30px;
+    color: white;
+    background-color: #2944cb;
+    font-weight: bolder;
+    outline: none;
+}
+#ft_twt{
+    border: 1px solid rgba(113, 112, 112, 0.21);
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-left: 40px;
+    color: white;
+    background-color: #1791e3;
+    font-weight: bolder;
+    outline: none;
+    font-size: 30px;
+}
+
+
+@media screen and (max-width:1000px){
+    #main__footer{
+        display: block!important;
+    }
+
+    #footer_menu{
+        width: 100%!important;
+        margin-left: 10px!important;
+
+    }
+
+    #ft_sn_div{
+        width: 100%!important;
+        margin-left: 10px!important;
+        margin-top: 20px!important;
+        margin-bottom: 10px!important;
+    }
+
+}

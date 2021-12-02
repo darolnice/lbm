@@ -1,0 +1,205 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    padding: 0;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+section{
+    /*border: 1px solid coral;*/
+    height: auto;
+    display: block;
+    margin-top: 60px;
+    margin-bottom: 100px;
+
+}
+
+.rec_choose{
+    display: none;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    justify-content: center;
+    /*box-shadow: 0 0.5px 3px rgb(32 32 32);*/
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.97);
+    margin-left: 27%;
+    margin-top: 15vh;
+    padding-top: 3%;
+    box-shadow: 0 0 0 55em rgba(92, 92, 92, 0.39);
+}
+#rec_cls{
+    border: none;
+    background: none;
+    font-size: 22px;
+    font-weight: 500;
+    color: black;
+    position: absolute;
+    top: 0;
+    margin-left: 10px;
+}
+.rec_choose button{
+    border: none;
+    background-color: #0a7f75;
+    color: white;
+    font-size: 13px;
+    outline: none!important;
+    width: 80%;
+    height: 40px;
+    margin-bottom: 10px;
+    transition: .5s linear;
+    text-transform: uppercase;
+}
+.rec_choose button:hover{
+    background-color: #2c5bb6;
+}
+
+.rec__pre{
+    display: flex;
+    /*border: 1px solid #260947;*/
+    width: 100%;
+    height: auto;
+}
+
+.rec_txt{
+    width: 50% !important;
+    height: auto;
+    display: block;
+    /*border: 1px solid #260947;*/
+
+}
+
+.rec_txt h1{
+    font-size: 90px;
+    color: darkcyan;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.rec_txt h6{
+    font-size: 12px;
+    font-weight: 400;
+    color: #4e4c4c;
+    line-height: 1.7;
+}
+.rec_txt button{
+    background-color: royalblue;
+    width: 40%;
+    height: 35px;
+    border: none;
+    outline: none!important;
+    font-size: 12px;
+    transition: .6s linear;
+    color: white;
+    margin-top: 20px;
+}
+.rec_txt button:hover{
+    background-color: #21a1ac;
+
+}
+.rec_img img{
+    margin-top: -50px;
+}
+
+/*************************************************************/
+
+
+.rec__options{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+.rec_sig, .rec_back_prd, .rec_resol{
+    height: auto;
+    width: 50%;
+    margin-right: 10px;
+    border: 1px solid rgba(232, 232, 232, 0.68);
+    padding: 15px;
+    display: none;
+}
+.rec_back_prd{
+    height: auto;
+    width: 50%;
+    margin-right: 0;
+}
+
+.confid{
+    font-weight: 500!important;
+    color: black!important;
+    font-size: 9px!important;
+    width: 40% !important;
+    height: auto!important;
+    line-height: 2!important;
+    float: right!important;
+    margin-top: -101% !important;
+}
+.confid_{
+    font-weight: 500!important;
+    color: black!important;
+    font-size: 9px!important;
+    width: 40% !important;
+    height: auto!important;
+    line-height: 2!important;
+    float: right!important;
+    margin-top: -145% !important;
+}
+
+.rec_sig h6, .rec_back_prd h6, .rec_resol h6{
+    font-size: 20px;
+    color: darkcyan;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.rec_sig p, .rec_back_prd p, .rec_resol p{
+    font-size: 14px;
+    color: black;
+    width: 80%;
+}
+
+.rec_sig input, textarea, select, .rec_back_prd input, textarea, select, .rec_resol input{
+    width: 50%;
+    height: 40px;
+    border-radius: 0;
+    border: 1px solid #c6c5c5;
+    outline: none!important;
+    margin-bottom: 5px;
+    font-size: 11px;
+    padding-left: 5px;
+}
+
+textarea{
+    min-height: 200px;
+    max-height: 300px;
+}
+
+.rec_back_prd textarea{
+    min-height: 80px;
+    max-height: 100px;
+}
+
+.rec_sig_sbt{
+    background-color: #0a7f75;
+    color: white!important;
+    border: none!important;
+    font-size: 13px;
+    font-weight: 500;
+    transition: .6s linear;
+}
+.rec_sig_sbt:hover{
+    background-color: #0877a1;
+}
+
+.rec_img{
+    width: 50%;
+    height: 80%;
+    /*margin-top: 15vh;*/
+}
+
+.rec_img img{
+    width: 100%;
+    height: 100%;
+}

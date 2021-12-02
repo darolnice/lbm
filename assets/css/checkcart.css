@@ -1,0 +1,218 @@
+body{
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Bahnschrift, serif!important;
+    position: relative;
+}
+
+.chkcrt_table h6{
+    color: black!important;
+    display: block;
+}
+.chkcrt_table h5{
+    font-size: 13px!important;
+    float: left;
+    margin-top: 65px!important;
+    margin-left: -50px;
+    display: none;
+    color: black!important;
+}
+
+#chkcrt_tabl{
+    /*border: 1px solid coral;*/
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 150px;
+    background-color: white;
+}
+
+table{
+    /*border: 1px solid coral;*/
+    width: 84%;
+    height: 100px;
+    display: table;
+    margin-left: 13%;
+    margin-top: 15% !important;
+}
+
+table tr td{
+    /*border: 1px solid coral;*/
+    padding-bottom: 12px;
+}
+
+#shop_name{
+    margin-left: 13%!important;
+    font-weight: 400;
+    font-size: 11px;
+    margin-bottom: -45px!important;
+    margin-top: 20px!important;
+    text-transform: uppercase;
+}
+
+.tl{
+    margin-bottom: 15px;
+    /*border: 1px solid coral;*/
+    color: darkcyan!important;
+    height: 50px;
+    font-size: 11px;
+}
+
+#crt_name, #crt_qte, #crt_clr, #crt_sze, #crt_price{
+    font-size: 13px!important;
+    color: black !important;
+    border-radius: 1px;
+}
+
+.ml{
+    margin-left: 13%;
+}
+
+.sub{
+    position: relative;
+    width: 72%;
+    margin-left: 13%;
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(205, 201, 201, 0.78);
+}
+
+.cc_pi, .cc_si{
+    display: none;
+}
+
+.sub p{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.sub input{
+    outline: none;
+    border: 0.5px solid #e7e4e4;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    width: 47%;
+    height: 35px;
+    font-size: 11px;
+    padding-left: 8px;
+}
+.sub input::placeholder{
+    font-size: 10px;
+}
+
+.vr{
+    margin-right: 10px;
+    font-weight: normal;
+    width: 50px!important;
+    /*border: 1px solid coral;*/
+    float: right;
+}
+
+
+.btn_t{
+    background: #15558d;
+    border: none;
+    width: 150px;
+    height: 35px;
+    float: right;
+    right: 0;
+    position: absolute;
+    outline: none!important;
+    color: #f7f7f7;
+    cursor: default!important;
+    border-radius: 3px;
+}
+
+.bn{
+    /*border: 1px solid coral;*/
+    margin-top: 15px;
+    display: table;
+    justify-content: center;
+    text-align: center;
+    width: 100.1% !important;
+}
+
+.bnw{
+    background: #15558d!important;
+    border: none;
+    width: 100% !important;
+    height: 35px;
+    border-radius: 4px!important;
+    outline: none!important;
+    color: #ffffff;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.ttal{
+    color: black!important;
+    display: flex;
+}
+
+
+/**************************************/
+.sec2_cc{
+    border: 1px solid rgba(69, 179, 189, 0.63);
+    width: 20%;
+    height: auto;
+    float: right;
+    top: 15.5%;
+    right: 16%;
+    display: none;
+    position: absolute;
+}
+
+
+.cc_mth-p{
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 2% 5%;
+    display: block;
+}
+.cc_mth-p h6{
+    font-size: 10px!important;
+    background-color: #08b18f;
+    border-radius: 0 0 3px 3px;
+    padding-top: 8px;
+    height: 30px;
+    margin-top: -2.5% !important;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    cursor: default;
+    width: 180px;
+    margin-left: 13%;
+}
+.cc_mth-p form label{
+    padding-top: 5px;
+    border: 1px solid rgba(206, 205, 204, 0.89);
+    width: 200px;
+    height: 50px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.cc_plansClose{
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    border: 2px solid rgba(69, 179, 189, 0.63);
+    outline: none!important;
+    font-size: 17px;
+    text-align: center;
+    background-color: #ffffff;
+    color: black;
+    margin-left: 220px;
+    margin-top: -23%;
+    position: absolute;
+}

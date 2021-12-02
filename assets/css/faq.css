@@ -1,0 +1,74 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.text_ttl{
+    font-size: 60px;
+    font-weight: 400;
+    color: darkcyan;
+    margin-left: -18px;
+}
+
+h3{
+    font-size: 20px!important;
+}
+
+.rec_choose{
+    display: none;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.97);
+    margin-left: 27%;
+    margin-top: 15vh;
+    padding-top: 3%;
+    box-shadow: 0 0 0 55em rgba(42, 41, 41, 0.39);
+    z-index: 88899;
+}
+.rec_choose h6{
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 10px!important;
+}
+.rec_choose p{
+    font-size: 14px;
+    font-family: Bahnschrift, serif;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center!important;
+    line-height: 1.5!important;
+    color: #1d1d1d;
+}
+
+
+#rec_cls{
+    border: none;
+    background: none;
+    font-size: 22px;
+    font-weight: 500;
+    color: black;
+    position: absolute;
+    top: 0;
+    margin-left: 25px;
+}
+.rec_choose button{
+    border: none;
+    background-color: #0a7f75;
+    color: white;
+    font-size: 13px;
+    outline: none!important;
+    width: 70%;
+    height: 35px;
+    margin-bottom: 10px;
+    transition: .5s linear;
+    text-transform: uppercase;
+}
+.rec_choose button:hover{
+    background-color: #2c5bb6;
+}

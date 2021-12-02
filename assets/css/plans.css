@@ -1,0 +1,180 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans" ,sans-serif;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: block;
+    align-items: center;
+    background-color: #78b3f5;
+}
+
+.__cyp{
+    /*border: 2px solid white;*/
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+.__cyp p{
+    font-size: 50px;
+    font-weight: 500;
+    color: white;
+    margin-left: 1.8%;
+}
+
+
+
+.pricing-table{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: auto;
+    width: 90%;
+    margin: auto;
+}
+.pricing-card{
+    flex: 1;
+    height: 400px;
+    border: none;
+    max-width: 250px;
+    background-color: white;
+    margin: 20px 10px;
+    text-align: center;
+    cursor: default;
+    overflow: hidden;
+    color: rgba(45, 45, 45, 0.72);
+    transition: .3s linear;
+    box-shadow: 0 1px 9px rgb(127, 124, 127);
+}
+.pricing-card-header{
+    display: inline-block;
+    background-color: #22bbbb;
+    padding: 12px 30px;
+    border-radius: 0 0 15px 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #fff;
+    transition: .4s linear;
+}
+.pricing-card-header:hover {
+    border-radius: 0;
+    box-shadow: 0 0 0 15em #22bbbb;
+
+}
+._price{
+    font-size: 22px;
+    color: #22bbbb;
+    margin: 30px 0;
+    transition: .2s linear;
+}
+._price sup, ._price span{
+    font-size: 15px;
+    font-weight: 500;
+}
+.pricing-card:hover, .pricing-card:hover ._price{
+    color: white;
+}
+.pricing-card li{
+    font-size: 14px;
+    padding: 5px 0;
+    text-transform: uppercase;
+}
+
+.order-btn{
+    display: inline-block;
+    margin-top: 35px;
+    border: 2px solid #07a7a7;
+    color: #07a7a7;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13px;
+    transition: .3s linear;
+    text-decoration: none;
+    outline: none!important;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.order-btn:hover{
+    color: white;
+    background-color: #07a7a7 ;
+}
+
+.mth-p{
+    background-color: white;
+    width: 30%;
+    height: 400px;
+    margin-top: 20px;
+    justify-content: center;
+    text-align: center;
+    padding: 2% 5%;
+    float: right;
+    position: relative;
+    display: none;
+}
+.mth-p h6{
+    font-size: 11px;
+    background-color: #08b18f;
+    border-radius: 0 0 6px 6px;
+    padding-top: 8px;
+    height: 30px;
+    margin-top: -10% !important;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    cursor: default;
+}
+.mth-p form label{
+    padding-top: 5px;
+    border: 1px solid rgba(206, 205, 204, 0.89);
+    width: 200px;
+    height: 50px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: Bahnschrift, serif;
+    cursor: pointer;
+}
+
+.plansClose{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    outline: none!important;
+    font-size: 15px;
+    text-align: center;
+    background-color: #78b3f5;
+    top: 0;
+    color: white;
+    margin-left: 250px;
+    margin-top: -10px;
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px){
+    .pricing-card{
+        flex: 50%;
+    }
+}

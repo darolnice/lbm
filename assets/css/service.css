@@ -1,0 +1,368 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0;
+    padding: 0;
+}
+
+/************************************/
+section{
+    /*border: 1px solid coral;*/
+    display: block;
+    height: auto;
+    padding-top: 30px;
+    margin-bottom: 80px;
+}
+
+/*
+*******add with js
+*/
+.focus__{
+    background-color: rgba(97, 213, 224, 0.79);
+}
+
+.__for_preSale_preImg{
+    margin-right: 10px;
+    width: 50% !important;
+    display: block!important;
+}
+.__for_pre_sale{
+    width: 100% !important;
+}
+.for_pre_sale_img{
+    width: 100% !important;
+}
+.for_presentation{
+    height: auto!important;
+}
+/*
+*********add with js
+*/
+
+/***********************************/
+.text-primary{
+    color: #1d1d1d !important;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+}
+.small{
+    margin-top: 10px;
+    color: gray;
+    font-size: 12px;
+    color: #6a6868;
+}
+.btn_primary{
+    border: none;
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: white;
+    background-color: darkcyan;
+    width: 30%;
+    height: 30px;
+    margin-top: 0;
+    outline: none!important;
+    position: relative;
+    bottom: 0;
+    border-radius: 4px;
+    transition: .6s linear;
+}
+.btn_primary:hover{
+    background-color: #0bc4c4;
+}
+
+
+/************************************/
+.__our_serv{
+    /*border: 1px solid coral;*/
+    display: block;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.first__, .first_block{
+    width: 100%;
+    height: auto;
+    /*border: 1px solid gray;*/
+    display: flex;
+}
+.others___, .rest__{
+    width: 100%;
+    height: auto;
+    /*border: 1px solid gray;*/
+    display: flex;
+}
+
+.txt{
+    width: 49.2%;
+    height: auto;
+    /*border: 1px solid gray;*/
+    display: block;
+    margin-right: 10px;
+}
+.txt h1{
+    color: #0a7f75;
+    font-weight: 400;
+    font-size: 90px;
+}
+.txt h6{
+    font-weight: 400;
+    line-height: 1.7;
+    margin-top: 0;
+    color: #474646;
+    font-size: 14px;
+}
+.txt h6:first-letter{
+    font-weight: 600;
+    font-size: 20px;
+    color: #970597;
+}
+
+.serv__1, .serv__2{
+    flex-wrap: wrap;
+    width: 50%;
+    height: 200px;
+    display: block;
+    /*border: 1px solid #c9c9c9;*/
+    margin-right: 10px;
+    border-radius: 3px;
+    text-align: left;
+    padding: 10px;
+    box-shadow: 0 0.5px 3px rgb(32 32 32);
+}
+.__s1_s2, .__itms{
+    width: 50%;
+    display: flex;
+    margin-bottom: 10px;
+    /*border: 1px solid coral;*/
+}
+.serv__1 img, .serv__2 img{
+    width: 50px;
+    height: 50px;
+}
+.serv__1 b, .serv__2 b{
+    font-size: 9px;
+    color: #970597;
+    padding: 4px;
+    background-color: rgba(243, 243, 243, 0.76);
+    border-radius: 3px;
+    float: right;
+    right: 10px;
+    margin-top: 10px;
+}
+
+
+.serv__3, .serv__4, .serv__5, .serv__6{
+    width: 25%;
+    height: 200px;
+    display: block;
+    /*border: 1px solid #c9c9c9;*/
+    margin-right: 10px;
+    border-radius: 3px;
+    text-align: left;
+    padding: 10px;
+    box-shadow: 0 0.5px 3px rgb(32 32 32);
+}
+.serv__3 img, .serv__4 img, .serv__5 img, .serv__6 img{
+    width: 50px;
+    height: 50px;
+}
+.serv__3 b, .serv__4 b, .serv__5 b, .serv__6 b{
+    font-size: 9px;
+    color: #970597;
+    padding: 4px;
+    background-color: rgba(243, 243, 243, 0.76);
+    border-radius: 3px;
+    float: right;
+    right: 10px;
+    margin-top: 10px;
+}
+/***********************************/
+
+
+/************************************/
+.__custumers_serv{
+    /*border: 1px solid coral;*/
+    display: block;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    height: auto;
+    margin-top: 75px;
+}
+
+.__custumers_serv h1{
+    font-size: 55px;
+}
+/***********************************/
+
+
+/********************************************/
+.presentation{
+    /*border: 1px solid coral;*/
+    margin-top: 100px;
+    height: 1200px;
+    display: none;
+}
+
+.pre_frst{
+    display: flex;
+    height: auto;
+    width: 100%;
+}
+.pre_txt{
+    /*border: 1px solid coral;*/
+    width: 50%;
+    height: auto;
+    padding-right: 10px;
+}
+.pre_txt h1{
+    font-size: 90px;
+    color: #880997;
+    font-weight: 400;
+}
+.pre_txt h6{
+    line-height: 1.8;
+    font-size: 13px;
+    color: #555454;
+    margin-top: 10px;
+}
+.pre_txt h6::first-letter{
+    font-weight: 600;
+    font-size: 20px;
+    color: #172bdb;
+}
+
+.pre_buy{
+    width: 50%;
+    height: auto;
+    display: block;
+    box-shadow: 0 0.5px 2px rgb(20 20 20);
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.pre_buy img{
+    width: 60px;
+    height: 60px;
+}
+.pre_buy b, .pre_sale b, .preShop b{
+    font-size: 10px;
+    color: #172bdb;
+    padding: 6px;
+    background-color: rgba(243, 243, 243, 0.76);
+    border-radius: 3px;
+    float: right;
+    right: 10px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+.pre_buy .text-primary, .pre_sale .text-primary{
+    color: #1d1d1d !important;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+.pre_buy button, .pre_sale button{
+    border: none;
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #bd3ecd;
+    width: 40%;
+    height: 35px;
+    margin-top: 0;
+    outline: none!important;
+    position: relative;
+    bottom: 0;
+    border-radius: 2px;
+    transition: .6s linear;
+}
+.pre_buy button:hover, .pre_sale button:hover{
+    background-color: #7d088b;
+}
+
+
+.preSale_preImg{
+    /*border: 1px solid crimson;*/
+    height: auto;
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    box-shadow: 0 0.5px 2px rgb(20 20 20);
+    border-radius: 2px;
+}
+
+.step__{
+    /*border: 1px solid crimson;*/
+    height: 265px;
+    display: flex;
+}
+.step__ ol{
+    /*border: 1px solid crimson;*/
+    width: 100%;
+}
+.step__ ol li{
+    /*border: 1px solid crimson;*/
+    width: 98%;
+    line-height: 2.5;
+    /*display: block;*/
+}
+.pre_sale button{
+    margin-top: 10px;
+}
+
+.pre_sale_img{
+    width: 50%;
+    height: 500px;
+    display: flex;
+    /*border: 1px solid crimson;*/
+}
+.pre_sale_img img{
+    width: 50%;
+    height:100%;
+}
+
+.pre_sale{
+    display: block;
+    width: 48%;
+    height: auto;
+    padding: 10px;
+    border-radius: 2px;
+}
+.pre_sale .small{
+    margin-bottom: 0;
+}
+.pre_sale img{
+    width: 60px;
+    height: 60px;
+}
+
+
+
+.preShop{
+    box-shadow: 0 0.5px 2px rgb(20 20 20);
+    width: 50%;
+    padding: 10px;
+    margin-top: 50px;
+    border-radius: 2px;
+    display: none;
+}
+
+.preShop img{
+   width: 50px;
+    height: 50px;
+}
+.preShop button{
+    width: 100%;
+}
+.preShop div{
+    width: 48%;
+    box-shadow: 0 0.5px 2px rgb(20 20 20);
+    border-radius: 2px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+/*********************************************

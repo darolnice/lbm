@@ -1,0 +1,224 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color:darkcyan!important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:root{
+    --raduis: 3px;
+}
+
+.container{
+    /*border: 1px solid coral;*/
+    width: 30% !important;
+    height: 450px;
+    margin-top: 10% !important;
+    display: block;
+    background: none;
+}
+
+.ttl{
+    margin-bottom: 30px;
+    font-weight: 500;
+    margin-top: 7%;
+    color: white;
+    font-size: 16.5px;
+}
+
+.form-group{
+    /*border: 1px solid #f5f1f0;*/
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+    justify-content: center;
+    height: 350px;
+}
+
+input{
+    width: 100%;
+    margin-bottom: 10px!important;
+    height: 35px;
+    border: none;
+    border-radius: var(--raduis) !important;
+    float: right;
+    outline: none;
+    text-align: center;
+    font-size: 11px!important;
+}
+
+input::placeholder{
+    text-align: center;
+    font-size: 12px;
+    color: black;
+}
+
+.submit{
+    border:none;
+    border-radius: var(--raduis);
+    background: none;
+    color: #f7f7f7;
+    margin-top: 0;
+    font-size: 11px;
+    transition: .6s ease-in-out;
+}
+.submit:hover{
+    transition: .6s ease-in-out;
+    color: #0ee7d5;
+}
+
+.btn__lg{
+    width: 100%;
+    height: 35px;
+    border: none;
+    font-size: 10px;
+    padding-top: 2px;
+    background: none;
+    color: #f7f7f7;
+    outline: none!important;
+    border-radius: var(--raduis);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    transition: .6s ease-in-out;
+}
+.btn__lg:hover{
+    transition: .6s ease-in-out;
+    color: #09d2e3;
+}
+
+.link, .s_signup_a{
+    padding: 10px 50px 10px 45px;
+    /*border: 1px solid coral;*/
+    color: white;
+    text-decoration: none!important;
+    border: 0.5px solid white;
+    text-transform: uppercase;
+    font-size: 11px;
+    background-color: transparent;
+    font-weight: normal;
+    margin-top: 15px;
+    margin-bottom: -8px!important;
+    transition: .6s ease-in-out;
+}
+.link:hover, .s_signup_a:hover{
+    transition: .6s ease-in-out;
+    color: #111111;
+}
+
+
+.s_signup_a_{
+    color: white;
+    text-decoration: none!important;
+    font-size: 11px;
+    margin-top: 10px!important;
+}
+
+.s_signup_a_:hover{
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.forg_rem{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: start;
+}
+.forg_rem input{
+    width: 15px;
+    height: 15px;
+    margin-left: 0;
+    margin-top: 5px;
+}
+.forg_rem label{
+    font-size: 11.5px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.forg_rem a{
+    text-decoration: none!important;
+    color: black;
+    text-align: right;
+    font-size: 11.5px;
+    margin-top: 5px;
+    margin-left: 90px;
+}
+
+
+.dntacc{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+.dntacc b{
+    color: #f5f3f3;
+    font-weight: normal!important;
+    font-size: 11.5px;
+    margin-right: 10px;
+    cursor: default;
+}
+.dntacc a{
+    text-decoration: none!important;
+    color: black;
+    text-align: right;
+    font-size: 11.5px;
+}
+
+
+.fbk_twr{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    position: relative;
+    margin-top: 15px;
+}
+.fbk_twr b{
+    color: #f5f3f3;
+    font-weight: normal!important;
+    font-size: 12px;
+    cursor: default;
+    position: absolute;
+    margin-left: 47%;
+    margin-top: 15px;
+}
+.fbk_twr button{
+    border: none;
+    border-radius: 4px;
+    color: white;
+    width: 45%;
+    height: 50px;
+    font-size: 10px;
+    outline: none!important;
+}
+.btnfbk{
+    background-color: #2f5ce5;
+}
+.btntwr{
+    background-color: #0a2d97;
+    margin-left: 30px;
+}
+

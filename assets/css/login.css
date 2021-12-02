@@ -1,0 +1,217 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #0a7f75!important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:root{
+    --raduis: 3px!important;
+}
+
+.container{
+    /*border: 1px solid coral;*/
+    width: 30% !important;
+    height: 450px;
+    margin-top: 10%;
+    display: block;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--raduis) !important;
+}
+
+.ttl{
+    margin-bottom: 30px;
+    font-weight: bold;
+    margin-top: -7%;
+    color: #fff;
+}
+.ttl img{
+    margin-top: -6px;
+}
+
+.form-group{
+    /*border: 1px solid coral;*/
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+    justify-content: center;
+    height: 350px;
+}
+
+input{
+    width: 100%;
+    margin-bottom: 10px!important;
+    height: 35px;
+    border: 0.5px solid rgba(212, 207, 207, 0.72);
+    border-radius: var(--raduis) !important;
+    float: right;
+    outline: none;
+    text-align: center;
+    font-size: 11px!important;
+}
+
+input::placeholder{
+    text-align: center;
+    font-size: 11px;
+}
+
+
+.forg_rem{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: start;
+}
+.forg_rem input{
+    width: 15px;
+    height: 15px;
+    margin-left: 0;
+    margin-top: 5px;
+}
+.forg_rem label{
+    font-size: 11.5px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.forg_rem a{
+    text-decoration: none!important;
+    color: black;
+    text-align: right;
+    font-size: 11.5px;
+    margin-top: 5px;
+    margin-left: 90px;
+}
+
+
+
+.dntacc{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+.dntacc b{
+    color: #f5f3f3;
+    font-weight: normal!important;
+    font-size: 11.5px;
+    margin-right: 10px;
+    cursor: default;
+}
+.dntacc a{
+    text-decoration: none!important;
+    color: black;
+    text-align: right;
+    font-size: 11.5px;
+}
+
+
+.submit{
+    border:none;
+    border-radius: var(--raduis);
+    background: none;
+    color: #f7f7f7;
+    margin-top: 5px;
+    font-size: 11px;
+    transition: .6s ease-in-out;
+}
+.submit:hover{
+    transition: .6s ease-in-out;
+    color: #08eeee;
+}
+
+.fbk_twr{
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: auto;
+    display: flex;
+    position: relative;
+    margin-top: 15px;
+}
+.fbk_twr b{
+    color: #f5f3f3;
+    font-weight: normal!important;
+    font-size: 12px;
+    cursor: default;
+    position: absolute;
+    margin-left: 47%;
+    margin-top: 15px;
+}
+.fbk_twr button{
+    border: none;
+    border-radius: 4px;
+    color: white;
+    width: 45%;
+    height: 50px;
+    font-size: 10px;
+    outline: none!important;
+}
+.btnfbk{
+    background-color: #2f5ce5;
+}
+.btntwr{
+    background-color: #0a2d97;
+    margin-left: 30px;
+}
+.imgbusi{
+    margin-top: 22px;
+    position: absolute;
+    margin-left: 8px;
+}
+
+.btn__lg{
+    width: 100%;
+    height: 35px;
+    border: none;
+    font-size: 10px;
+    padding-top: 2px;
+    background: none;
+    color: #f7f7f7;
+    outline: none!important;
+    border-radius: var(--raduis) !important;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    transition: .6s ease-in-out;
+}
+.btn__lg:hover{
+    transition: .6s ease-in-out;
+    color: #00040c;
+}
+
+.s_signup_a{
+    padding: 10px 50px 10px 50px;
+    /*border: 1px solid coral;*/
+    color: white;
+    text-decoration: none!important;
+    border: 0.5px solid white;
+    text-transform: uppercase;
+    font-size: 11px;
+    background-color: transparent;
+    font-weight: 400;
+    margin-top: 15px;
+    margin-bottom: -10px!important;
+    transition: .6s ease-in-out;
+}
+.s_signup_a:hover{
+    transition: .6s ease-in-out;
+    color: black;
+}
+
+
+
+.reserved_{
+    color: white;
+    text-decoration: none!important;
+    font-size: 11px;
+    margin-top: 10px!important;
+}
+.reserved_:hover{
+    color: #fff;
+}
