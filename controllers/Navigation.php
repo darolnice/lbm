@@ -52,6 +52,7 @@ class Navigation
     private $BusiClient;
     private $SuClient;
     private $shoplist;
+    private $s_Data;
 
 
 
@@ -66,6 +67,13 @@ class Navigation
 
 
 
+    /**
+     * @return mixed
+     */
+    public function getSData()
+    {
+        return $this->s_Data;
+    }
 
     /**
      * @return mixed
@@ -466,7 +474,6 @@ class Navigation
     }
 
     public function showHome(){
-        session_start();
         $f = new Functions();
         $db = new MgrProducts();
         $db_ = new MgrCat();
@@ -505,7 +512,6 @@ class Navigation
         $this->getBestSaling();
         $this->getBestShop();
 
-//        var_dump($this->getLbmProdData());
     }
 
     public function showProduct(){
@@ -629,14 +635,20 @@ class Navigation
     }
 
     public function showShop(){
-        session_start();
-        $current_business = $_GET['name'];
         $d = new MgrProducts();
         $f = new Functions();
+        $current_business = $f->e($_GET['name']);
+        setcookie('ssc', serialize('add_at'), time()+60*24);
 
-        $this->data = (new Pagination)->showDataWithPagination($f->e($current_business), "prod_name", 0,50);
-        $this->shopCatSort = (new MgrCat())->ShopFindByCategory($current_business, $f->e($_GET['Search']));
-        $this->searchProdShop = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+        if($_COOKIE['spl']){
+            $this->data = (new Pagination)->showDataWithRange($current_business, (int)$_COOKIE['spl'], 0, 50);
+            $this->shopCatSort = (new MgrCat)->ShopFindByCategory($current_business, $f->e($_GET['search']));
+            $this->searchProdShop = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+        }else{
+            $this->data = (new Pagination)->showDataWithPagination($current_business, "prod_name", 0,50);
+            $this->shopCatSort = (new MgrCat)->ShopFindByCategory($current_business, $f->e($_GET['search']));
+            $this->searchProdShop = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+        }
 
         include_once S_VIEWS.'/shop.view.php';
         $this->getData();
@@ -647,8 +659,10 @@ class Navigation
     public function showSetting(){
         session_start();
         Functions::Auth_UserISNT();
-        include_once S_VIEWS.'/setting.view.php';
+        $this->s_Data = (new MgrUser)->current_saller_data($_SESSION['saller_id']);
 
+        include_once S_VIEWS.'/setting.view.php';
+        $this->getSData();
     }
 
     public function showPlans(){
@@ -978,7 +992,6 @@ class Navigation
             $_SESSION['filter_user'] = $_POST['cust_gender'];
             Functions::redir('admin');
         }
-
     }
 
     public function showAnnonces(){
@@ -1218,8 +1231,6 @@ class Navigation
     }
 
     public function showShopList(){
-        session_start();
-
         $this->shoplist = (new MgrProducts)->getAllItemsFromTable('ref', 0, 1000);
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();

@@ -199,7 +199,7 @@ class Functions extends Navigation
      */
     public static function Auth_SU_userISNT(): void
     {
-        if (!isset($_SESSION['username'])){
+        if (!isset($_SESSION['username']) || isset($_SESSION['saller_id'])){
             Functions::redir('login');
             exit();
         }
@@ -493,7 +493,7 @@ class Functions extends Navigation
      * @return bool
      */
      public static function moveUloadImage(string $tmp, string $new_name): bool {
-         $img_upload_path = 'assets/images/upload/'.$new_name;
+         $img_upload_path = 'public_html/assets/images/upload/'.$new_name;
          return move_uploaded_file($tmp, $img_upload_path);
      }
 

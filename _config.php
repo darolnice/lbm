@@ -26,11 +26,11 @@ class MyAutoLoad
         define('S_SERVICES', ROOT.'/services/');
         define('S_API', ROOT.'/api/');
         define('S_MODELS', ROOT.'/models/services/');
-        define('S_VIEWS', ROOT.'/views/');
+        define('S_VIEWS', ROOT.'/public_html/views/');
         define('S_CLASSES', ROOT.'/class/');
         define('S_DATABASE', ROOT.'/models/');
 
-        define('S_ASSETS', HOST.'/assets/');
+        define('S_ASSETS', HOST.'/public_html/assets/');
     }
 
     public static function autoload($class)

@@ -34,6 +34,7 @@ class MgrLogin extends Database
             $_SESSION['order by'] = 'prod_name';
             if($data->shop_name === 'lbm'){
                 $_SESSION['client_order'] = 'statu';
+                $_SESSION['filter_user'] = 'username';
             }
 
             Functions::save_in_cookies($data->username, $data->city, $data->phone_number, $data->email);

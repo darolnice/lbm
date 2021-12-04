@@ -16,7 +16,7 @@ class Rooter
 
     private $routes = [
                         ""                  => ["controllers" => "navigation", "method" => "showHome"],
-                        "session"           => ["controllers" => "navigation",  "method" => "session"],
+                        "session"           => ["controllers" => "navigation", "method" => "session"],
                         "product"           => ["controllers" => "navigation", "method" => "showProduct"],
                         "checkcart"         => ["controllers" => "navigation", "method" => "showCheckcart"],
                         "contact"           => ["controllers" => "navigation", "method" => "showContact"],
@@ -24,7 +24,7 @@ class Rooter
                         "shop"              => ["controllers" => "navigation", "method" => "showShop"],
                         "annonces"          => ["controllers" => "navigation", "method" => "showAnnonces"],
                         "blog"              => ["controllers" => "navigation", "method" => "showBlog"],
-                        "services"          => ["controllers" => "navigation", "method" => "showService"],
+                        "service"           => ["controllers" => "navigation", "method" => "showService"],
                         "faq"               => ["controllers" => "navigation", "method" => "showFaq"],
                         "reclamations"      => ["controllers" => "navigation", "method" => "showReclam"],
                         "profil"            => ["controllers" => "navigation", "method" => "showProfil"],
@@ -96,6 +96,8 @@ class Rooter
                         'jxchat'            => ["api"   => "AjaxApiRes",  "method" => "jxchat"],
 
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
+                        "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
+
 
 
     ];

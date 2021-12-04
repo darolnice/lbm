@@ -142,7 +142,7 @@ class AjaxApiRes
                 //delete old files
                 if(isset($img_to_update)){
                     foreach($img_to_update as $tdl) {
-                        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.$tdl;
+                        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.$tdl;
                         try{
                             unlink($path);
                         }catch(Exception $e){
@@ -857,12 +857,12 @@ class AjaxApiRes
 
         if (in_array($img_ex_lc, $allowed_exs)){
             $new_img_name = uniqid("PP-", true).'.'.$img_ex_lc;
-            $img_upload_path = 'assets/images/upload/'.$new_img_name;
+            $img_upload_path = 'public_html/assets/images/upload/'.$new_img_name;
             if($table === 'sallers'){
                 $r = (new RestApi)->jxUV('profil_image', $new_img_name, (int)$code);
                 if($r !== 'Auth code is wrong'){
                     try {
-                        unlink('assets/images/upload/'.$old_image);
+                        unlink('public_html/assets/images/upload/'.$old_image);
                     }catch(Exception $e){
                         return $e->getMessage();
                     }
@@ -893,12 +893,10 @@ class AjaxApiRes
      */
     public function jxHomeRange(){
         if(isset($_POST['data'])){
-            setcookie('hrpc', $_POST['data'][0]);
+            setcookie($_POST['data'][1], $_POST['data'][0]);
             $this->response($this->HTTP_OK, 'true', 45);
         }
     }
-
-
 
     /**
      * @param string $topic
@@ -922,7 +920,9 @@ class AjaxApiRes
         ]));
     }
 
-
+    /**
+     * @throws Exception
+     */
     public function jxchat(){
         if(!empty($_POST['data'])){
             $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -945,7 +945,14 @@ class AjaxApiRes
     }
 
 
-
+    public function ftcSetD(){
+        session_start();
+        if(!empty($_POST['data'])){
+            $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], (string)$post[1], $post[0]);
+            $this->response($this->HTTP_OK, $r, 106);
+        }
+    }
 
 
 

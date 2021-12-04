@@ -121,7 +121,7 @@ class Pagination extends Database
                 $qr->execute();
                 echo json_encode($qr->fetchAll(PDO::FETCH_ASSOC));
             }
-        }catch( PDOException $e){
+        }catch(PDOException $e){
             echo $e->getMessage();
         }
     }

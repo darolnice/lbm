@@ -167,11 +167,22 @@ class MgrUser extends Database
      * @param string $columb
      * @param $sallerData
      */
-    public function updateSallerData(string $sallerId, string $columb, $sallerData)
+    public function updateSallerData($sallerId, string $columb, $sallerData)
     {
-        $n = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = $sallerId");
-        $n->execute(['data' => $sallerData]);
-        $n->closeCursor();
+        try {
+            $n = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
+            $n->bindValue('data', $sallerData, PDO::PARAM_STR);
+            $n->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
+
+            if($n->execute()){
+                $n->closeCursor();
+                return Functions::sentNotif('Update successfully');
+            }
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
     }
 
 
