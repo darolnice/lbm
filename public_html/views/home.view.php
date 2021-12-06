@@ -212,7 +212,7 @@ $title = "Home"
                         <div class="hme_prd_img_div">
                             <img class="hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getSplbm()[$x]['img1']?>" alt="product">
                             <div class="hme_add">
-                                <a href="<?= 'product?id='.$this->getSplbm()[$x]['id']."&sub=".$this->getSplbm()[$x]['sub_category']."&shop=".$this->getSplbm()[$x]['shop_name']?>">View Product</a>
+                                <a href="<?= 'product?id='.$this->getSplbm()[$x]['id']."&sub=".$this->getSplbm()[$x]['sub_category']."&shop=".$this->getSplbm()[$x][' shop_name']?>">View Product</a>
                             </div>
                         </div>
                         <div class="hme_np">

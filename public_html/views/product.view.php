@@ -79,8 +79,8 @@ $title = "Product"
 
        <div class="info">
            <p class="p_nm"><?= $this->getShopProdData()->prod_name;?></p>
-           <p class="p_pce"><a><?= $this->getShopProdData()->price;?></a><sup>US$</sup>
-                <del class="p_prom"><?= $this->getShopProdData()->promo;?></del><sup style="color: crimson" class="sp_promo">US$</sup>
+           <p class="p_pce"><a><?= $this->getShopProdData()->price;?></a><sup><?= $this->getShopPref()[0]['currency'];?></sup>
+                <del class="p_prom"><?= $this->getShopProdData()->promo;?></del><sup style="color: crimson" class="sp_promo"><?= $this->getShopPref()[0]['currency'];?></sup>
            </p>
 
            <p class="p_rt">

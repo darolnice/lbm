@@ -410,7 +410,7 @@ class Functions extends Navigation
         $compter = 0;
         $ray = ['Men', 'Electronic', 'Health', 'Automobile', 'Woman', 'Child', 'Accessories', 'Sport', 'Mode'];
         $nr = [];
-        foreach((new Navigation)->showBlog() as $c_){
+        foreach((new Navigation)->showForum() as $c_){
             if(in_array($c_['category'], $ray)){
                 array_push($nr, $c_['category']);
             }

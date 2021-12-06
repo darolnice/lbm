@@ -56,7 +56,7 @@ $(document).ready(function () {
 
     document.querySelector('#persn').addEventListener('click', function () {
         if (document.querySelector('.stat_point').getAttribute('id') === 'online'){
-            $('#myDropdown').toggle(300);
+            $('#myDropdown').show(300);
         }else{
             window.open('login', '_parent');
         }

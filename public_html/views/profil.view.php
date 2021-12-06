@@ -36,28 +36,7 @@
             </div>
             <h1 class="prof_ttl">About us</h1>
             <p>
-                dolor sit amet, consectetur adipisicing elit.
-                Architecto facilis in ipsam
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                Adipisci dolor est ex harum, laboriosam minus quas sunt veniam!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Architecto facilis in ipsam
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                Adipisci dolor est ex harum, laboriosam minus quas sunt veniam!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Architecto facilis in ipsam
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                Adipisci dolor est ex harum, laboriosam minus quas sunt veniam!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                Adipisci dolor est ex harum, laboriosam minus quas sunt veniam!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Architecto facilis in ipsam
-                iusto magnam neque nesciunt officia officiis possimus similique?
-                Adipisci dolor est ex harum, laboriosam minus quas sunt veniam!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Architecto facilis in ipsam.
+               <?= $this->getProfilData()[0]['description'];?>
             </p>
         </div>
     </section>
@@ -171,7 +150,7 @@
             <div class="flex-lg-wrap" id="tl2">
 
                 <div class="home-currency-item" id="tl2_div_title">
-                    <h6 class="text-center" id="s2_title">SEO</h6>
+                    <h6 class="text-center" id="s2_title">CEO</h6>
                 </div>
                 <img id="sec8_img2_qg" src="<?= S_ASSETS?>images/img/lite.jpg" alt="loggo">
                 <div class="home-currency-item-desc u_list" id="tl2_div_detail">
@@ -197,8 +176,6 @@
             </div>
         </div>
     </section>
-
-
 
 </body>
 

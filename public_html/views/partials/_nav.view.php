@@ -68,12 +68,12 @@
             </a>
         </li>
 
-        <li class="cool <?= Functions::setActive('blog');?>" id="stl__">
-            <a class="" href="blog">
+        <li class="cool <?= Functions::setActive('forum');?>" id="stl__">
+            <a class="" href="forum">
                 <img class=""
                      style="width: 12px; height: 12px; margin-top: 4px; margin-right: 2px;"
                      src="<?= S_ASSETS?>images/svg/save_alt_black_24dp.svg" alt="">
-                Blog
+                forum
             </a>
         </li>
 
@@ -150,14 +150,22 @@
 
             <div class="dropdown-content" id="myDropdown" style="display: none">
                 <?php if ($_SESSION['saller_id']): ?>
-                    <a id="u_sett" href="admin">
+                    <a id="u_sett" href="dashboard">
                         <img class="nav_ico" src="<?= S_ASSETS?>images/svg/dashboard_black.svg" alt="user image">
-                        Dashboard</a>
+                        Dashboard
+                    </a>
+
+                    <a id="lgt" href="setting">
+                        <img class="nav_ico" src="<?= S_ASSETS?>images/svg/settings_black.svg" alt="user image">
+                        Setting</a>
                 <?php endif;?>
 
-                <a id="lgt" href="<?= Functions::go($_SESSION['username'])?>">
-                    <img class="nav_ico" src="<?= S_ASSETS?>images/svg/settings_black.svg" alt="user image">
-                    Setting</a>
+                <?php if ($_SESSION['current_user_id']): ?>
+                    <a id="u_sett" href="panel">
+                        <img class="nav_ico" src="<?= S_ASSETS?>images/svg/dashboard_black.svg" alt="user image">
+                        Dashboard
+                    </a>
+                <?php endif;?>
 
                 <a id="lgt" href="logout">
                     <img class="nav_ico" src="<?= S_ASSETS?>images/svg/refresh_black_24dp.svg" alt="user image">

@@ -219,9 +219,13 @@ h6{
 .div_sec4{
     /*border: 1px solid crimson;*/
     height: 100%;
-    display: block;
+    display: flex;
     justify-content: center;
     text-align: center;
+    flex-wrap: wrap;
+}
+.div_sec4 span b{
+    color: #0a0000!important;
 }
 
 .div_sec4 h5{
@@ -233,56 +237,37 @@ h6{
 }
 
 
-.usg{
-    /*border: 1px solid crimson;*/
-    margin-right: 40px;
-    padding-left: 25px;
-    padding-right: 40px;
-}
-.them{
-    /*border: 1px solid crimson;*/
-    margin-right: 40px;
-    padding-left: 25px;
-    padding-right: 40px;
-}
-.secur{
-    /*border: 1px solid crimson;*/
-    margin-right: 40px;
-    padding-left: 18px;
-    padding-right: 40px;
-}
-.pay{
-    /*border: 1px solid crimson;*/
-    margin-right: 40px;
-    padding-left: 18px;
-    padding-right: 40px;
-}
-.sett_ttl{
-    /*border: 1px solid crimson;*/
-    margin-right: 40px;
+.usg, .them, .secur, .pay, .sett_ttl{
     padding-left: 40px;
-    padding-right: 40px;
+    text-align: left;
+    height: auto;
+    width: 100%;
 }
 
+
 .div_sec4 span .sett_btn_usg{
-    border: 3px solid #c11436;
+    border:none;
     text-align: center;
-    color: #7d7a7a;
-    font-size: 16px!important;
+    color: #fff;
+    font-size: 14px!important;
     margin-top: 10px;
     background: none;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    box-shadow: 0 1px 3px rgb(32 32 2);
     outline: none;
     cursor: default;
+    margin-left: 15px;
+    box-shadow: 0 1px 3px rgb(32 32 2);
+    background-color: crimson;
 }
 .div_sec4 span .sett_btn_them{
-    border: 3px solid #e87b07;
+    border: none;
+    background-color: #e87b07!important;
     text-align: center;
-    color: #7d7a7a;
-    font-size: 16px!important;
+    margin-left: 7px;
+    color: #fff;
+    font-size: 14px!important;
     margin-top: 10px;
     background: none;
     width: 60px;
@@ -293,10 +278,12 @@ h6{
     cursor: default;
 }
 .div_sec4 span .sett_btn_secur{
-    border: 3px solid #0c15bb;
+    border:none;
+    margin-left: -2px;
+    background-color: #282ea1 !important;
     text-align: center;
-    color: #7d7a7a;
-    font-size: 16px!important;
+    color: #fff;
+    font-size: 14px!important;
     margin-top: 10px;
     background: none;
     width: 60px;
@@ -307,10 +294,12 @@ h6{
     cursor: default;
 }
 .div_sec4 span .sett_btn_pay{
-    border: 3px solid #5fa80b;
+    border:none;
+    margin-left: -5px;
+    background-color: #5fa80b !important;
     text-align: center;
-    color: #7d7a7a;
-    font-size: 16px!important;
+    color: #fff;
+    font-size: 14px!important;
     margin-top: 10px;
     background: none;
     width: 60px;
@@ -322,13 +311,14 @@ h6{
 }
 .div_sec4 span .sett_btn_ttl{
     border: 3px;
+    margin-left: 18px;
     text-align: center;
     color: black;
     font-size: 16px!important;
     margin-top: 10px;
     background: none;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     box-shadow: 0 1px 3px rgb(32 32 2);
     outline: none;
@@ -515,7 +505,7 @@ h6{
     height: 76%;
     float: right;
     margin-right: 20%;
-    margin-top: -34%;
+    margin-top: -43%;
     text-align: center;
     padding-top: 15px;
     display: none;
@@ -553,7 +543,13 @@ h6{
     background-color: #dc143c;
 }
 .sett_violet{
-    background-color: #ee82ee;
+    background-color: #b509a3;
+}
+.sett_black{
+    background-color: #000;
+}
+.sett_gray{
+    background-color: #5e5d5d;
 }
 
 
@@ -618,21 +614,23 @@ h6{
     height: 20px;
 }
 
-#p__pi h4, #cmt__pi h4 , .pm__form h4{
+#p__pi h4, #cmt__pi h4, .pm__form h4{
     color: white;
     background-color: #747272;
-    width: 210px;
-    height: 35px;
+    width: 110px;
+    /*width: auto;*/
+    height: 28px;
     border-radius: 3px;
     padding-top: 8px;
     text-align: center;
-    font-size: 14px;
+    font-size: 11px;
     border: none;
     font-weight: normal;
-    margin-left: 21%;
+    margin-left: 30%;
     flex-wrap: wrap;
     cursor: default;
-    display: block;
+    display: none;
+    transition: 1s ease-in-out;
 }
 
 
@@ -668,4 +666,32 @@ h6{
 #s_mp_ div span{
     float: right;
     margin-right: 25px;
+}
+
+#s_mp_ h4{
+    font-size: 11px;
+    background-color: gray;
+    color: white;
+    width: 110px;
+    height: 25px;
+    margin-left: 35%;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 5px;
+    display: none;
+}
+
+.l_div a, .d_div a{
+    background-color: royalblue!important;
+    color: #fff!important;
+    font-size: 14px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: default;
+    width: 20px;
+    height: 20x;
+    position: absolute;
+    margin-left: 20%;
+    margin-top: -2%;
 }

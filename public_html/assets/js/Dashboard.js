@@ -1,4 +1,4 @@
-class Admin {
+class Dashboard {
 
     constructor() {}
 
@@ -24,7 +24,7 @@ class Admin {
            },
             dataType: 'json',
            success: function (response) {
-                new Admin().push_dat(response);
+                new Dashboard().push_dat(response);
            }
         });
     }
@@ -67,7 +67,7 @@ class Admin {
 
                 if (dta['message'] === 1){
                     new Index().lbmAlert('Product add sucessfully');
-                    new Admin().closeElemet('.new__prod');
+                    new Dashboard().closeElemet('.new__prod');
 
                     setTimeout(function () {
                         new Index().scrollTo(0);
@@ -340,7 +340,7 @@ $(document).ready(function () {
             location.href = 'https://localhost/projets/lebolma/admin';
     });
     $('#Dcancel').on('click', function () {
-        new Admin().closeElemet('.newDiscount');
+        new Dashboard().closeElemet('.newDiscount');
     });
     $('#cust__close').on('click', function () {
         $('.aboutUser').fadeOut(100);
@@ -349,7 +349,7 @@ $(document).ready(function () {
     document.querySelectorAll("#clse").forEach(items => {
         items.addEventListener('click', function () {
             let selct = '.'+items.parentElement.getAttribute('class');
-            new Admin().closeElemet(selct);
+            new Dashboard().closeElemet(selct);
         });
     });
     document.querySelectorAll('.short__by p').forEach(btn =>{
@@ -365,21 +365,21 @@ $(document).ready(function () {
         elemnt.addEventListener("click", function () {
             if (specials.includes(view)){
                 if (view === "setting"){
-                    new Admin().setting();
+                    new Dashboard().setting();
                 }
                 if (view === "addinpromo"){
-                    new Admin().addinpromo();
+                    new Dashboard().addinpromo();
                 }
 
             }else {
                 let selector = '.'+view;
-                new Admin().showElemet(selector);
+                new Dashboard().showElemet(selector);
             }
         });
     });
     document.querySelectorAll('.edit').forEach(btn =>{
         btn.addEventListener('click', function () {
-            new Admin().ajxShowEditProd(btn.getAttribute('data-id'));
+            new Dashboard().ajxShowEditProd(btn.getAttribute('data-id'));
         });
     });
     document.querySelectorAll('#delprod').forEach(del =>{
@@ -399,7 +399,7 @@ $(document).ready(function () {
                 $('.poppup').fadeOut(300);
             });
             $('.opt2').on('click', function () {
-                new Admin().ajaxDelProd(del.getAttribute('data-id'));
+                new Dashboard().ajaxDelProd(del.getAttribute('data-id'));
             });
         });
     });
@@ -411,7 +411,7 @@ $(document).ready(function () {
             }else {
                 right = 'Limited'
             }
-            new Admin().ajxSetRight(setR.getAttribute('data-uid'), right, setR.getAttribute('data-name'));
+            new Dashboard().ajxSetRight(setR.getAttribute('data-uid'), right, setR.getAttribute('data-name'));
         });
     });
     document.querySelectorAll('.adm_delsub').forEach(setR =>{
@@ -421,7 +421,7 @@ $(document).ready(function () {
             new Index().popup(ttl, msg, 'CANCEL', 'DELETE');
         });
         $('.opt2').on('click', function () {
-            new Admin().ajxDelSA(setR.getAttribute('data-uid'));
+            new Dashboard().ajxDelSA(setR.getAttribute('data-uid'));
         });
         $('.opt1', '#close_pop').on('click', function () {
             $('.poppup').fadeOut(300);
@@ -594,7 +594,7 @@ $(document).ready(function () {
             arr.push(inputs[e_].value);
         }
         arr.push(sessionStorage.getItem('pid'));
-        new Admin().ajxEditProd(arr, img_at_change);
+        new Dashboard().ajxEditProd(arr, img_at_change);
     });
 
     document.forms["add_new_prod_from"].addEventListener('submit', function (e) {
@@ -631,7 +631,7 @@ $(document).ready(function () {
                 new Index().post_asyn_fetch("ftcUpAdminImg", this, formData);
             }
         }else{
-            new Admin().ajxUpdateUserData("profil_image", null, null);
+            new Dashboard().ajxUpdateUserData("profil_image", null, null);
             new Index().lbmLoad('31%', '-8%');
         }
     });
@@ -658,13 +658,13 @@ $(document).ready(function () {
 
                     if(response['message'] === 'free'){
                         if (!lunch){
-                            new Admin().ajxUpdateUserData("username", null, null);
+                            new Dashboard().ajxUpdateUserData("username", null, null);
                             new Index().lbmLoad('26%', '-8%');
                             lunch = true;
                         }
 
                         if (field.value !== ''){
-                            new Admin().ajxUpdateUserData("username", el.value, field.value);
+                            new Dashboard().ajxUpdateUserData("username", el.value, field.value);
 
                         }else if ($('#up__name_auth').css('display') === 'inline-block'){
                             new Index().lbmAlert('Enter authentification code', 'info');
@@ -700,13 +700,13 @@ $(document).ready(function () {
 
         if (mail.match(regmail) && field.css('display') !== 'none'){
             if (code !== ''){
-                new Admin().ajxUpdateUserData("email", mail, code);
+                new Dashboard().ajxUpdateUserData("email", mail, code);
             }else {
                 new Index().lbmAlert('Enter authentification code', 'info');
             }
 
         }else{
-            new Admin().ajxUpdateUserData("email", null, null);
+            new Dashboard().ajxUpdateUserData("email", null, null);
             new Index().lbmLoad('26%', '-8%');
         }
     });
@@ -719,13 +719,13 @@ $(document).ready(function () {
 
         if (typeof +phn === "number" && field.css('display') !== 'none'){
             if (code !== ''){
-                new Admin().ajxUpdateUserData("phone_number", phn, code);
+                new Dashboard().ajxUpdateUserData("phone_number", phn, code);
             }else {
                 new Index().lbmAlert('Enter your phone number', 'info');
             }
 
         }else{
-            new Admin().ajxUpdateUserData("phone_number", null, null);
+            new Dashboard().ajxUpdateUserData("phone_number", null, null);
             new Index().lbmLoad('26%', '-8%');
         }
     });
@@ -738,13 +738,13 @@ $(document).ready(function () {
 
         if (field.css('display') !== 'none'){
             if (code !== ''){
-                new Admin().ajxUpdateUserData("city", city, code);
+                new Dashboard().ajxUpdateUserData("city", city, code);
             }else {
                 new Index().lbmAlert('Enter your city', 'info');
             }
 
         }else{
-            new Admin().ajxUpdateUserData("city", null, null);
+            new Dashboard().ajxUpdateUserData("city", null, null);
             new Index().lbmLoad('26%', '-8%');
         }
     });
@@ -786,7 +786,7 @@ $(document).ready(function () {
             new Index().lbmAlert('Password D\'nt Matches', 'danger');
             return;
         }
-        new Admin().ajxNewSA(right, name, email, phone, pass, img);
+        new Dashboard().ajxNewSA(right, name, email, phone, pass, img);
     });
 
     $('#d3').on('click', function () {

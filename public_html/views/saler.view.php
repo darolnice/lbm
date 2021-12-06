@@ -21,7 +21,7 @@
                 <input type="checkbox" id="remenber">
                 <label for="remenber">Remenber me</label>
 
-                <a href="../../index.php">Password forget</a>
+                <a href="forget">Password forget</a>
             </span>
 
             <input class="submit" type="submit" name="submit" value="CONNECT">
@@ -29,7 +29,7 @@
 
             <span class="dntacc">
                 <b>Do not have account?</b>
-                <a href="../../index.php">sign up</a>
+                <a href="register">sign up</a>
             </span>
 
             <span class="fbk_twr">

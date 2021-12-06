@@ -81,9 +81,9 @@ $(document).ready(function () {
     let barr = document.querySelector('.barometre_');
     let cmm = new Index();
 
-    if (cmm.getCookie('hrpc')){
-        tm.textContent = 'Price: [$1'+' - '+'$'+cmm.getCookie('hrpc')+']';
-        tm.style.left = (cmm.getCookie('hrpc')/20)+'%';
+    if (cmm.getCookie('spl')){
+        tm.textContent = 'Price: [1'+cmm.getCookie('curr')+' - '+cmm.getCookie('spl')+cmm.getCookie('curr')+']';
+        tm.style.left = '50%';
         tm.style.display = 'block';
     }
 
@@ -92,7 +92,7 @@ $(document).ready(function () {
         let max = this.getAttribute('max');
         tm.style.display = 'block';
         tm.style.left = value/2+'%';
-        tm.textContent = ('$'+((value / max)*1000).toFixed(0));
+        tm.textContent = 'Price: [1'+cmm.getCookie('curr')+' - '+((value / max)*1000).toFixed(0)+' '+cmm.getCookie('curr')+']';
     });
     barr.addEventListener('change', function () {
         let max = this.getAttribute('max');

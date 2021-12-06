@@ -944,13 +944,23 @@ class AjaxApiRes
         }
     }
 
-
+    /**
+     *
+     */
     public function ftcSetD(){
         session_start();
         if(!empty($_POST['data'])){
-            $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], (string)$post[1], $post[0]);
-            $this->response($this->HTTP_OK, $r, 106);
+            if(count($_POST['data']) === 2){
+                $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], (string)$post[1], $post[0]);
+                $this->response($this->HTTP_OK, $r, 106);
+            }
+
+            if(count($_POST['data']) === 3){
+                $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $r = (new MgrShop)->updateShopCheckboxSettting($post[1], $post[2], $_SESSION['saller_id'], $post[0]);
+                $this->response($this->HTTP_OK, $r, 166);
+            }
         }
     }
 

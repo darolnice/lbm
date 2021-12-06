@@ -1,9 +1,9 @@
 <?php
 //use Lbm\Partials\Partials;
-$title = "Blog"
+$title = "Forum"
 ?>
 <?php include('partials/_header.view.php');?>
-<link rel="stylesheet" href="<?= S_ASSETS?>css/blog.css">
+<link rel="stylesheet" href="<?= S_ASSETS?>css/forum.css">
 
 
     <body>
@@ -11,7 +11,7 @@ $title = "Blog"
         <section class="container" id="c___">
 
             <section class="container" id="blog__sec1">
-                <h2>Blog</h2>
+                <h2>Forum</h2>
 
                 <?php for ($s=0; $s<count($this->getBlogData()); $s++):?>
                     <div class="blog_v">
@@ -214,7 +214,7 @@ $title = "Blog"
 <!--         scripts start -->
         <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
         <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
-        <script src="<?= S_ASSETS?>js/blog.js"></script>
+        <script src="<?= S_ASSETS?>js/forum.js"></script>
         <script src="<?= S_ASSETS?>js/Index.js"></script>
         <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>
 <!--        scripts end -->

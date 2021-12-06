@@ -1,11 +1,11 @@
 <?php
-//namespace Lbm\MgrCat;
+//namespace Lbm\MgrShop;
 //
 //use Lbm\Functions\Functions;
 //use Lmm\Database\Database;
 //use PDO;
 
-class MgrCat extends Database
+class MgrShop extends Database
 {
 
     /**
@@ -62,7 +62,7 @@ class MgrCat extends Database
      * @return array
      */
     public function ShopFindByCategory(string $shop, string $category): array {
-        $q = $this->getDb()->prepare("SELECT * FROM $shop WHERE category= :category");
+        $q = $this->getDb()->prepare("SELECT * FROM $shop WHERE category = :category");
         $q->execute(['category'=> htmlentities($category)]);
         $data = $q->fetchAll(PDO::FETCH_ASSOC);
         $q->closeCursor();
@@ -97,8 +97,25 @@ class MgrCat extends Database
         return $data;
     }
 
+    /**
+     * @param string $columb
+     * @param string $entrie
+     * @param $s_id
+     * @param $data
+     */
+    public function updateShopCheckboxSettting(string $columb, string $entrie, $s_id, $data){
+        $q = parent::getDb()->prepare("SELECT $columb FROM sallers WHERE id = $s_id");
+        $q->execute();
+        $dta = $q->fetchAll(PDO::FETCH_ASSOC);
+        $tab = json_decode($dta[0][$columb], true);
+        $tab[0][$entrie] = $data;
 
-
+        $qr = parent::getDb()->prepare("UPDATE sallers SET $columb = :col WHERE id = $s_id");
+        if($qr->execute(['col' => json_encode($tab)])){
+            return Functions::sentNotif('Update successfully');
+        }
+        return false;
+    }
 
 
 

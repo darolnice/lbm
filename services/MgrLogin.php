@@ -38,7 +38,7 @@ class MgrLogin extends Database
             }
 
             Functions::save_in_cookies($data->username, $data->city, $data->phone_number, $data->email);
-            Functions::redir('admin');
+            Functions::redir('dashboard');
         }else{
             $errors[] = '- Password is wrong click on PASSWORD FORGET for reset your password or click on SIGNUP to create account';
             (new Functions)->notif_errors($errors);

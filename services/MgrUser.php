@@ -170,10 +170,26 @@ class MgrUser extends Database
     public function updateSallerData($sallerId, string $columb, $sallerData)
     {
         try {
+            if($columb === 'shop_name'){
+                $oldName = $_SESSION['shop_name'];
+                $t = parent::getDb()->prepare("ALTER TABLE $oldName RENAME TO $sallerData");
+
+                if($t->execute()){
+                    $y = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
+                    $y->bindValue('data', $sallerData, PDO::PARAM_STR);
+                    $y->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
+
+                    if($y->execute()){
+                        $y->closeCursor();
+                        $_SESSION['shop_name'] = $sallerData;
+                        return Functions::sentNotif('Update successfully');
+                    }
+                }
+            }
+
             $n = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
             $n->bindValue('data', $sallerData, PDO::PARAM_STR);
             $n->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
-
             if($n->execute()){
                 $n->closeCursor();
                 return Functions::sentNotif('Update successfully');
@@ -402,4 +418,20 @@ class MgrUser extends Database
             return [$e->getMessage()];
         }
     }
+
+    /**
+     * @return array
+     */
+    public function AllItemsFromTable(): array {
+        try {
+            $qr = parent::getDb()->prepare("SELECT * FROM sallers");
+            $qr->execute();
+            return $qr->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $e){
+            return [$e->getMessage()];
+        }
+    }
+
+
+
 }

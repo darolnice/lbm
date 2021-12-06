@@ -57,7 +57,7 @@ $title = "Shop list";
                                     <span>
                                         <b>Name : </b><a><?= $this->getShoplist()[$li]['shop_name']?></a>
                                         <b>Country : </b><a><?= $this->getShoplist()[$li]['country']?></a>
-                                        <b>Activity : </b><a><?= $this->getShoplist()[$li]['pa']?></a>
+                                        <b>Activity : </b><a><?= $this->getShoplist()[$li]['activity']?></a>
                                     </span>
                                 </li>
                             <?php endfor;?>
@@ -95,7 +95,7 @@ $title = "Shop list";
                         <ul>
                             <?php $country = []?>
                             <?php foreach($this->getShoplist() as $value): ?>
-                                <?php array_push($country, $value['pa']);?>
+                                <?php array_push($country, $value['activity']);?>
                             <?php endforeach;?>
 
                             <?php foreach(array_unique($country) as $item): ?>

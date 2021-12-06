@@ -391,7 +391,7 @@ class Index {
                         formData.append('nw__im4', imgData[3]);
                         formData.append('nw__im5', imgData[4]);
 
-                        new Admin().FtcNewProd('jxNewProd', formData);
+                        new Dashboard().FtcNewProd('jxNewProd', formData);
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
@@ -402,8 +402,13 @@ class Index {
                     }
                 }
                 if(response["response_code"] === 200 && response["res_id"] === 106){
-                    $('#'+context).fadeOut();
+                    let id = '#'+context;
+                    document.querySelector(id).previousElementSibling.previousElementSibling.style.display = 'none';
+                    $(id).fadeOut();
                     new Index().lbmAlert(response["message"]);
+                }
+                if(response["response_code"] === 200 && response["res_id"] === 166){
+                    new Index().lbmAlert(response["message"])
                 }
             }
         });
@@ -533,7 +538,7 @@ class Index {
         fetch('jxEditProd', {method: "post", body: value}).then(res => res.json().then(dta => {
             if (dta['res_id'] === 49){
                 new Index().lbmAlert('Product update successfully');
-                new Admin().closeElemet('.edit__prod');
+                new Dashboard().closeElemet('.edit__prod');
             }
         }));
     }

@@ -63,7 +63,7 @@ $title = "Sign up";
                        name="password_confirm">
             </label>
 
-            <a id="already" href="../../index.php">Already account!</a>
+            <a id="already" href="business">Already account!</a>
 
             <label>
                 <input name="soumettre" id="cnnct_sign" type="submit" value="SUBMIT">

@@ -619,7 +619,6 @@ class RestApi extends Database
         return false;
     }
 
-
     /**
      * @param $destinataire
      * @param $expediteur
@@ -654,6 +653,11 @@ class RestApi extends Database
         return false;
     }
 
+    /**
+     * @param $tab
+     * @param $initiateur
+     * @return int
+     */
     function zal ($tab, $initiateur): int {
         foreach($tab as $item => $k){
             if($k['id'][$initiateur]){

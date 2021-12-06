@@ -15,8 +15,8 @@ $title = "Setting";
             </form>
         </div>
 
-        <form action="plans" method="post">
-            <input type="submit" name="continue" class="sett_cls" value="CONTINUE">
+        <form action="dashboard" method="post">
+            <input type="submit" name="continue" class="sett_cls" value="DASHBOARD">
         </form>
     </section>
 
@@ -100,7 +100,7 @@ $title = "Setting";
                             </h6>
 
                             <form method="post" id="_s_pa">
-                                <select class="pa_slct" name="activity">
+                                <select class="pa_slct" name="activity" id="__paSettslct">
                                     <option value="<?= $this->getSData()[0]['shop_name']?>"><?= $this->getSData()[0]['activity']?></option>
                                     <option value="General Market">General Market</option>
                                     <option value="Electronic">Electronic</option>
@@ -119,8 +119,8 @@ $title = "Setting";
                                 Matricul
                             </h6>
                             <form method="post" id="sett_mt_item">
-                                <input type="text" name="in_mt_nm" class="sett_inSub" value="<?= $this->getSData()[0]['matricule']?>" required>
-                                <input type="submit" name="in_sbmt_mt" class="sett_i_Sub" value="SAVE">
+                                <input id="__setmtid" type="text" name="in_mt_nm" class="sett_inSub" value="<?= $this->getSData()[0]['matricule']?>" required>
+                                <input id="__setmtbtn" type="submit" name="in_sbmt_mt" class="sett_i_Sub" value="SAVE">
                             </form>
                         </td>
                     </tr>
@@ -134,7 +134,7 @@ $title = "Setting";
                             </h6>
 
                             <form method="post" id="_s_lt">
-                                <select class="lt_slct" name="country">
+                                <select id="__setslid" class="lt_slct" name="country">
                                     <option value="<?= $this->getSData()[0]['shop_location']?>"><?= $this->getSData()[0]['shop_location']?></option>
                                     <option value="Douala">Douala</option>
                                     <option value="Yaounde">Yaounde</option>
@@ -147,19 +147,15 @@ $title = "Setting";
 
                     <tr class="__tb_shp">
                         <td>
-                            <button class="close"></button>
+                            <button class="close">&times;</button>
                             <h6>
                                 <img class="ict" src="<?= S_ASSETS?>images/svg/local_shipping_black_24dp.svg" alt="bag image">
                                 Shipping
                             </h6>
 
-                            <span class="yes_no">
-                                 <button class="yes">YES</button>
-                                 <button class="no">NO</button>
-                            </span>
-
-                            <form method="post" class="shp_form">
-                                <select class="shp_slct" name="sheapping">
+                            <form method="post" id="__setShfr" class="shp_form">
+                                <select id="__ship_sett" class="shp_slct" name="sheapping">
+                                    <option value="NOT">NO SHIPPING</option>
                                     <option value="DHL">DHL</option>
                                     <option value="ROYAL">ROYAL SHEAPPING</option>
                                     <option value="SOLAR">SOLAR</option>
@@ -173,15 +169,14 @@ $title = "Setting";
                             <button class="close">&times;</button>
                             <h6>
                                 <img class="ict" src="<?= S_ASSETS?>images/svg/euro_symbol_black_24dp.svg" alt="bag image">
-                                Devise
+                                Currency
                             </h6>
                             <form method="post" id="_s_de">
-                                <select class="dv_slct" name="devise">
-                                    <option  value="<?= $this->getSData()[0]['currency']?>"><?= $this->getSData()[0]['currency']?></option>
-                                    <option value="US$">US dollar</option>
-                                    <option value="Euro">Euro</option>
-                                    <option value="Pound">Pound</option>
-                                    <option value="FCFA">Franc CFA</option>
+                                <select id="__setdeid" class="dv_slct" name="devise">
+                                    <option value="&dollar;">US dollar</option>
+                                    <option value="&euro;">Euro</option>
+                                    <option value="&pound;">Pound</option>
+                                    <option value="CFA">Franc CFA</option>
                                 </select>
                             </form>
                         </td>
@@ -203,16 +198,22 @@ $title = "Setting";
                             </h6>
 
                             <div id="_s_th" class="light_dark">
-                                <div class="l_div">
+                                <div class="l_div" data-entrie="theme" data-value="Simplify">
+                                    <?php if(json_decode($this->getSData()[0]['theme'], true)[0]['theme'] === 'Simplify'):?>
+                                        <a>&checkmark;</a>
+                                    <?php endif;?>
                                     <img class="ict" id="light" src="<?= S_ASSETS?>images/svg/smile.png"
-                                         alt="bag image"/>
-                                    <p class="text-center mr-4">ligth</p>
+                                         alt="bag image">
+                                    <p class="text-center mr-4">Simplify</p>
                                 </div>
 
-                                <div class="d_div">
+                                <div class="d_div" data-entrie="theme" data-value="Smart">
+                                    <?php if(json_decode($this->getSData()[0]['theme'], true)[0]['theme'] === 'Smart'):?>
+                                        <a>&checkmark;</a>
+                                    <?php endif;?>
                                     <img class="ict" id="dark" src="<?= S_ASSETS?>images/svg/smile.png"
                                          alt="bag image"/>
-                                    <p class="text-center mr-4">dark</p>
+                                    <p class="text-center mr-4">Smart</p>
                                 </div>
                             </div>
                         </td>
@@ -227,8 +228,10 @@ $title = "Setting";
                             </h6>
 
                             <form method="post" id="_s_nc">
-                                <select class="cn_slct" name="columb">
-                                    <option value="Default">Default</option>
+                                <select class="cn_slct set__th" name="columb" data-entrie="cn">
+                                    <option value="<?=json_decode($this->getSData()[0]['theme'], true)[0]['cn']?>">
+                                        <?= json_decode($this->getSData()[0]['theme'], true)[0]['cn']?>
+                                    </option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                 </select>
@@ -241,22 +244,25 @@ $title = "Setting";
                             <button class="close">&times;</button>
                             <h6>
                                 <img class="ict" id="persn" src="<?= S_ASSETS?>images/svg/category_black_24dp.svg" alt="bag image">
-                                Font Color
+                                Color
                             </h6>
 
                             <div id="_s_fc">
-                                <h5 class="__pn">Product name</h5>
-                                <h5 class="__prc">Price</h5>
-                                <h5 class="__op">Promo price</h5>
-                                <h5 class="__btns">Button</h5>
+                                <h5 class="__pn" data-entrie="pnc">Product name</h5>
+                                <h5 class="__prc" data-entrie="pc">Price</h5>
+                                <h5 class="__op" data-entrie="ppc">Promo price</h5>
+                                <h5 class="__slc" data-entrie="slc">Color / Size</h5>
+                                <h5 class="__btns" data-entrie="btnc">Button</h5>
 
                                 <form class="colr form-group" method="post">
                                     <input type="button" name="sett_green" class="sett_green" data-color_code="#55bf6d">
-                                    <input type="button" name="sett_bleu" class="sett_bleu" data-color_code="#FF4169E1">
-                                    <input type="button" name="sett_orange" class="sett_orange" data-color_code="#FFFF7F50">
+                                    <input type="button" name="sett_bleu" class="sett_bleu" data-color_code="#4169e1">
+                                    <input type="button" name="sett_orange" class="sett_orange" data-color_code="#ff7f50">
                                     <input type="button" name="sett_cyan" class="sett_cyan" data-color_code="#07b4b4">
-                                    <input type="button" name="sett_crimson" class="sett_crimson" data-color_code="#FFDC143C">
-                                    <input type="button" name="sett_violet" class="sett_violet" data-color_code="#FFEE82EE">
+                                    <input type="button" name="sett_crimson" class="sett_crimson" data-color_code="#dc143c">
+                                    <input type="button" name="sett_violet" class="sett_violet" data-color_code="#b509a3">
+                                    <input type="button" name="sett_black" class="sett_black" data-color_code="#000">
+                                    <input type="button" name="sett_black" class="sett_gray" data-color_code="#5e5d5d">
                                 </form>
                             </div>
                         </td>
@@ -271,10 +277,11 @@ $title = "Setting";
                             </h6>
 
                             <form class="hp_form" method="post" id="_s_hp">
-                                <select class="hp_slct" name="homepage">
-                                    <option value="Product">Default</option>
-                                    <option value="Profil">Profil page</option>
-                                    <option value="Product">Product page</option>
+                                <select class="hp_slct set__th" name="homepage" data-entrie="hp">
+                                    <option value="<?=json_decode($this->getSData()[0]['theme'], true)[0]['hp']?>">
+                                        <?= json_decode($this->getSData()[0]['theme'], true)[0]['hp']?>
+                                    </option>
+                                    <option value="Product page">Product page</option>
                                 </select>
                             </form>
                         </td>
@@ -283,6 +290,12 @@ $title = "Setting";
             </table>
         </div>
 
+        <?php
+            function chk($bool){
+                if($bool === 'true'){echo 'checked';}
+                echo '';
+            }
+        ?>
         <div class="confidentiality">
             <p>Confidentiality and security</p>
             <table class="table-hover jumbotron" id="tble">
@@ -296,8 +309,14 @@ $title = "Setting";
                             </h6>
 
                             <form class="lt_form" method="post" id="sett_sk_item">
-                                <input type="text" name="in_sk" class="sett_inSk" placeholder="10 characters min" minlength="10">
-                                <input type="submit" name="in_submt" class="sett_i_Sav" value="SAVE">
+                                <input type="text"
+                                       id="__setSkinp"
+                                       value="<?= $this->getSData()[0]['shop_key']?>"
+                                       name="in_sk"
+                                       class="sett_inSk"
+                                       placeholder="10 characters min"
+                                       minlength="10">
+                                <input id="__skbtn" type="submit" name="in_submt" class="sett_i_Sav" value="SAVE">
                             </form>
                         </td>
                     </tr>
@@ -311,12 +330,40 @@ $title = "Setting";
                             </h6>
                             
                             <form method="post" id="p__pi">
-                                <h4><b>visible</b></h4>
+                                <h4><b></b></h4>
 
-                                <div>Name<span><input type="checkbox" name="name" class="chk_nm"></span></div>
-                                <div>Phone number<span><input type="checkbox" name="ph" class="chk_ph"></span></div>
-                                <div>E-mail<span><input type="checkbox" name="Eml" class="chk_eml"></span></div>
-                                <div>Profil picture<span><input type="checkbox" name="ppr" class="chk_ppr"></span></div>
+                                <div>Name
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="name"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['name'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['name']?>"
+                                               type="checkbox" name="name" class="chk_nm">
+                                    </span>
+                                </div>
+                                <div>Phone number
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="phone"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['phone'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['phone']?>"
+                                               type="checkbox" name="ph" class="chk_ph">
+                                    </span>
+                                </div>
+                                <div>E-mail
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="email"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['email'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['email']?>"
+                                               type="checkbox" name="Eml" class="chk_eml">
+                                    </span>
+                                </div>
+                                <div>Profil picture
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="pp"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['pp'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['pp']?>"
+                                               type="checkbox" name="ppr" class="chk_ppr">
+                                    </span>
+                                </div>
                             </form>
                         </td>
                     </tr>
@@ -330,9 +377,24 @@ $title = "Setting";
                             </h6>
 
                             <form method="post" id="cmt__pi">
-                                <h4><b>allow</b></h4>
-                                <div>Product comment's<span><input type="checkbox" name="p_cmt" class="p_cmt"></span></div>
-                                <div>Shop comment's<span><input type="checkbox" name="sp_cmt" class="sp_cmt"></span></div>
+                                <h4><b></b></h4>
+                                <div>Product comment's
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="prod_cmt" type="checkbox"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['prod_cmt'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['prod_cmt']?>"
+                                               name="p_cmt" id="p_cmt">
+                                    </span>
+                                </div>
+
+                                <div>Shop comment's
+                                    <span>
+                                        <input data-b="confidentiality" data-xiss="shop_cmt" type="checkbox"
+                                               <?php chk(json_decode($this->getSData()[0]['confidentiality'], true)[0]['shop_cmt'])?>
+                                               value="<?= json_decode($this->getSData()[0]['confidentiality'], true)[0]['shop_cmt']?>"
+                                               name="sp_cmt" id="sp_cmt">
+                                    </span>
+                                </div>
                             </form>
                         </td>
                     </tr>
@@ -345,8 +407,8 @@ $title = "Setting";
                                 Rules
                             </h6>
                             <form class="lt_form" method="post" id="sett_rule_item">
-                                <textarea name="in_rl" class="sett_inRl"></textarea>
-                                <input type="submit" name="rl_sbmt" class="sett_i_rl" value="SAVE">
+                                <textarea id="__shpruta_id" name="in_rl" class="sett_inRl"><?= $this->getSData()[0]['shop_rules']?></textarea>
+                                <input id="__shpru_btnid" type="submit" name="rl_sbmt" class="sett_i_rl" value="SAVE">
                             </form>
                         </td>
                     </tr>
@@ -367,14 +429,61 @@ $title = "Setting";
                             </h6>
 
                             <form method="post" id="s_mp_">
-                                <h4><b>Accepted</b></h4>
+                                <h4><b></b></h4>
 
-                                <div>Visa/Mastercard<span><input type="checkbox" name="visa" class="visa"></span></div>
-                                <div>Bank<span><input type="checkbox" name="bank" class="bank"></span></div>
-                                <div>PayPal<span><input type="checkbox" name="PayPal" class="PayPal"></span></div>
-                                <div>Mobil money<span><input type="checkbox" name="Mobil" class="Mobil"></span></div>
-                                <div>Orange money<span><input type="checkbox" name="Orange" class="Orange"></span></div>
-                                <div>YUP<span><input type="checkbox" name="YUP" class="YUP"></span></div>
+                                <div>Visa/Mastercard
+                                    <span>
+                                        <input data-b="payment" data-xiss="visa"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['visa'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['visa']?>"
+                                               type="checkbox" name="visa" class="visa">
+                                    </span>
+                                </div>
+
+                                <div>Bank
+                                    <span>
+                                        <input data-b="payment" data-xiss="bank"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['bank'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['bank']?>"
+                                               type="checkbox" name="bank" class="bank">
+                                    </span>
+                                </div>
+
+                                <div>PayPal
+                                    <span>
+                                        <input data-b="payment" data-xiss="paypal"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['paypal'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['paypal']?>"
+                                               type="checkbox" name="PayPal" class="PayPal">
+                                    </span>
+                                </div>
+
+                                <div>Mtn Mobil money
+                                    <span>
+                                        <input data-b="payment" data-xiss="momo"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['momo'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['momo']?>"
+                                               type="checkbox" name="Mobil" class="Mobil">
+                                    </span>
+                                </div>
+
+                                <div>Orange money
+                                    <span>
+                                        <input data-b="payment" data-xiss="om"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['om'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['om']?>"
+                                               type="checkbox" name="Orange" class="Orange">
+                                    </span>
+                                </div>
+
+                                <div>YUP
+                                    <span>
+                                        <input data-b="payment" data-xiss="yup"
+                                               <?php chk(json_decode($this->getSData()[0]['payment'], true)[0]['yup'])?>
+                                               value="<?= json_decode($this->getSData()[0]['payment'], true)[0]['yup']?>"
+                                               type="checkbox" name="YUP" class="YUP">
+                                    </span>
+                                </div>
                             </form>
                       </td>
                    </tr>
@@ -391,22 +500,22 @@ $title = "Setting";
                 <b>
                     Profil
                 </b>
-                <button class="sett_btn_usg">50%</button>
+                <button class="sett_btn_usg">60%</button>
             </span>
 
             <span class="them">
                 <b>Theme</b>
-                <button class="sett_btn_them">30%</button>
+                <button class="sett_btn_them">90%</button>
             </span>
 
             <span class="secur">
                 <b>Security</b>
-                <button class="sett_btn_secur">80%</button>
+                <button class="sett_btn_secur">90%</button>
             </span>
 
             <span class="pay">
                 <b>Payment</b>
-                <button class="sett_btn_pay">70%</button>
+                <button class="sett_btn_pay">50%</button>
             </span>
 
             <span class="sett_ttl">

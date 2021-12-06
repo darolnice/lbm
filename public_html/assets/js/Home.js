@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     if (cmm.getCookie('hrpc')){
         tm.textContent = 'Price: [$1'+' - '+'$'+cmm.getCookie('hrpc')+']';
-        tm.style.left = (cmm.getCookie('hrpc')/20)+'%';
+        tm.style.left = '30%';
         tm.style.display = 'block';
     }
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
         let max = this.getAttribute('max');
         tm.style.display = 'block';
         tm.style.left = value/2+'%';
-        tm.textContent = ('$'+((value / max)*1000).toFixed(0));
+        tm.textContent = 'Price: [$1'+' - '+'$'+((value / max)*1000).toFixed(0)+']';
     });
     barr.addEventListener('change', function () {
         let max = this.getAttribute('max');

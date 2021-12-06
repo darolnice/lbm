@@ -23,22 +23,22 @@
 
                 <ul id="ul_list">
                     <li>
-                        <a id="menulist" href="">Home</a>
+                        <a id="menulist" href="./">Home</a>
                     </li>
                     <li>
                         <a id="menulist">Category</a>
                     </li>
                     <li>
-                        <a href="../../../index.php" id="menulist">Annonces</a>
+                        <a href="annonces" id="menulist">Annonces</a>
                     </li>
                     <li>
-                        <a href="../../../index.php" id="menulist">Blog</a>
+                        <a href="forom" id="menulist">Blog</a>
                     </li>
                     <li>
-                        <a href="../../../index.php" id="menulist">Faq</a>
+                        <a href="fzaq" id="menulist">Faq</a>
                     </li>
                     <li>
-                        <a id="menulist" href="../../../index.php">Contact Us</a>
+                        <a id="menulist" href="contact">Contact Us</a>
                     </li>
                 </ul>
             </div>

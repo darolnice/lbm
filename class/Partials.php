@@ -3,7 +3,7 @@
 //
 //use Lbm\Cart\Cart;
 //use Lbm\Functions\Functions;
-//use Lbm\MgrCat\MgrCat;
+//use Lbm\MgrShop\MgrShop;
 
 
 class Partials
@@ -26,7 +26,7 @@ class Partials
 
     public function showNav(){
         session_start();
-        $this->data = ($db = new MgrCat)->showAllCategories();
+        $this->data = ($db = new MgrShop)->showAllCategories();
         include_once S_VIEWS.'partials/_nav.view.php';
 
         $this->getData();
@@ -34,7 +34,7 @@ class Partials
 
     public function showHomeNav(){
         session_start();
-        $this->data = ($db = new MgrCat)->showAllCategories();
+        $this->data = ($db = new MgrShop)->showAllCategories();
         include_once S_VIEWS.'partials/_homeNav.view.php';
 
         $this->getData();

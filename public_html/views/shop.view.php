@@ -5,6 +5,7 @@ $title = "Shop";?>
 
 <?php include('partials/_header.view.php');?>
 <link rel="stylesheet" href="<?= S_ASSETS?>css/shop.css">
+<!--<link rel="stylesheet" href="--><?//= S_ASSETS?><!--css/home.css">-->
 
 <body>
     <section class="both">
@@ -16,207 +17,318 @@ $title = "Shop";?>
                 </p>
             </div>
 
-            <section id="sec1">
-                <?php if (isset($_GET['sp'])): ?>
-                    <?php for ($i=0; $i<count($this->getSearchProdShop()); $i++): ?>
-                        <div class="cont">
-                            <div class="prd_img_div">
-                                <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getSearchProdShop()[$i]['img1']?>" alt="product">
+            <?php if(json_decode($this->getShopPref()[0]['theme'], true)[0]['theme'] === 'Smart'):?>
+                <section id="smart_theme">
+                    <?php if (isset($_GET['sp'])): ?>
+                        <?php for ($i=0; $i<count($this->getSearchProdShop()); $i++): ?>
+                            <div class="cont">
+                                <div class="prd_img_div">
+                                    <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getSearchProdShop()[$i]['img1']?>" alt="product">
 
-                                <?php if ($this->getSearchProdShop()[$i]['color']): ?>
-                                    <?php $_ck = explode(',', $this->getSearchProdShop()[$i]['color']);?>
-                                    <form method="post" class="form_color">
-                                        <select name="color" id="prod_clr">
-                                            <?php foreach ($_ck as $_k__):?>
-                                                <option value="<?= $_k__?>"><?= $_k__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
+                                    <?php if ($this->getSearchProdShop()[$i]['color']): ?>
+                                        <?php $_ck = explode(',', $this->getSearchProdShop()[$i]['color']);?>
+                                        <form method="post" class="form_color">
+                                            <select name="color" id="prod_clr">
+                                                <?php foreach ($_ck as $_k__):?>
+                                                    <option value="<?= $_k__?>"><?= $_k__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
 
-                                <?php if ($this->getSearchProdShop()[$i]['size']): ?>
+                                    <?php if ($this->getSearchProdShop()[$i]['size']): ?>
 
-                                    <?php $k = explode(',', $this->getSearchProdShop()[$i]['size']);?>
-                                    <form method="post" class="form_size">
-                                        <select name="size" id="prod_sze">
-                                            <?php foreach ($k as $k__):?>
-                                                <option value="<?= $k__?>"><?= $k__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
-                            </div>
+                                        <?php $k = explode(',', $this->getSearchProdShop()[$i]['size']);?>
+                                        <form method="post" class="form_size">
+                                            <select name="size" id="prod_sze">
+                                                <?php foreach ($k as $k__):?>
+                                                    <option value="<?= $k__?>"><?= $k__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
+                                </div>
 
-                            <div class="np">
-                                <?php $chk = new Functions();
-                                      $chk->isChk($this->getSearchProdShop()[$i]['checked']);
-                                ?>
+                                <div class="np">
+                                    <?php $chk = new Functions();
+                                    $chk->isChk($this->getSearchProdShop()[$i]['checked']);
+                                    ?>
 
-                                <h4 class="nm"><?= $this->getSearchProdShop()[$i]['prod_name'];?></h4>
-                                <span class="sspp">
+                                    <h4 class="nm"><?= $this->getSearchProdShop()[$i]['prod_name'];?></h4>
+                                    <span class="sspp">
                                     <p class="ss_prc"><?= $this->getSearchProdShop()[$i]['price']. '$';?></p>
                                     <del class="ss_prc_prom"><?= $this->getSearchProdShop()[$i]['promo']. '$';?></del>
                                 </span>
 
-                                <span class="r_span">
+                                    <span class="r_span">
                                     <?php for ($r=0; $r<$this->getSearchProdShop()[$i]['rating']; $r++): ?>
                                         <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>                                    <?php endfor ?>
                                 </span>
-                                <b class="rater" title="Rater"><?= $this->getSearchProdShop()[$i]['rater']?></b>
-                                <p class="desc"><?= $this->getSearchProdShop()[$i]['short_desc'];?></p>
+                                    <b class="rater" title="Rater"><?= $this->getSearchProdShop()[$i]['rater']?></b>
+                                    <p class="desc"><?= $this->getSearchProdShop()[$i]['short_desc'];?></p>
+                                </div>
+
+                                <div class="add">
+
+                                    <button class="btn-group" id="ad" style="display: block"
+                                            data-id="<?= $this->getSearchProdShop()[$i]['id'];?>"
+                                            data-name="<?= $this->getSearchProdShop()[$i]['prod_name'];?>"
+                                            data-price="<?= $this->getSearchProdShop()[$i]['price'];?>"
+                                            data-max="<?= $this->getSearchProdShop()[$i]['quantity'];?>"
+                                            data-color="<?= $this->getSearchProdShop()[$i]['color'];?>"
+                                            data-size="<?= $this->getSearchProdShop()[$i]['size'];?>"
+                                            data-qte="<?= $this->getSearchProdShop()[$i]['quantity'];?>">BUY NOW</button>
+
+                                    <a class="btn-group"
+                                       style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"
+                                       href="product?id=<?= $this->getSearchProdShop()[$i]['id'].'&sub='.$this->getSearchProdShop()[$i]['sub_category'].'&shop='.$_GET['name']?>">VIEW PRODUCT</a>
+                                </div>
                             </div>
+                        <?php endfor ?>
 
-                            <div class="add">
+                    <?php elseif(isset($_GET['Search'])):?>
+                        <?php for ($i=0; $i<count($this->getShopCatSort()); $i++): ?>
+                            <div class="cont">
 
-                                <button class="btn-group" id="ad" style="display: block"
-                                        data-id="<?= $this->getSearchProdShop()[$i]['id'];?>"
-                                        data-name="<?= $this->getSearchProdShop()[$i]['prod_name'];?>"
-                                        data-price="<?= $this->getSearchProdShop()[$i]['price'];?>"
-                                        data-max="<?= $this->getSearchProdShop()[$i]['quantity'];?>"
-                                        data-color="<?= $this->getSearchProdShop()[$i]['color'];?>"
-                                        data-size="<?= $this->getSearchProdShop()[$i]['size'];?>"
-                                        data-qte="<?= $this->getSearchProdShop()[$i]['quantity'];?>">BUY NOW</button>
+                                <div class="prd_img_div">
+                                    <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getShopCatSort()[$i]['img1']?>" alt="product">
 
-                                <a class="btn-group" href="product?id=<?= $this->getSearchProdShop()[$i]['id'].'&sub='.$this->getSearchProdShop()[$i]['sub_category'].'&shop='.$_GET['name']?>">VIEW PRODUCT</a>
-                            </div>
-                        </div>
-                    <?php endfor ?>
+                                    <?php if ($this->getShopCatSort()[$i]['color']): ?>
+                                        <?php $_ck = explode(',', $this->getShopCatSort()[$i]['color']);?>
+                                        <form method="post" class="form_color">
+                                            <select name="color" id="prod_clr">
+                                                <?php foreach ($_ck as $_k__):?>
+                                                    <option value="<?= $_k__?>"><?= $_k__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
 
-                <?php elseif(isset($_GET['Search'])):?>
-                    <?php for ($i=0; $i<count($this->getShopCatSort()); $i++): ?>
-                        <div class="cont">
+                                    <?php if ($this->getShopCatSort()[$i]['size']): ?>
 
-                            <div class="prd_img_div">
-                                <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getShopCatSort()[$i]['img1']?>" alt="product">
+                                        <?php $k = explode(',', $this->getShopCatSort()[$i]['size']);?>
+                                        <form method="post" class="form_size">
+                                            <select name="size" id="prod_sze">
+                                                <?php foreach ($k as $k__):?>
+                                                    <option value="<?= $k__?>"><?= $k__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
+                                </div>
 
-                                <?php if ($this->getShopCatSort()[$i]['color']): ?>
-                                    <?php $_ck = explode(',', $this->getShopCatSort()[$i]['color']);?>
-                                    <form method="post" class="form_color">
-                                        <select name="color" id="prod_clr">
-                                            <?php foreach ($_ck as $_k__):?>
-                                                <option value="<?= $_k__?>"><?= $_k__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
+                                <div class="np">
+                                    <?php $chk = new Functions();
+                                    $chk->isChk($this->getShopCatSort()[$i]['checked']);
+                                    ?>
 
-                                <?php if ($this->getShopCatSort()[$i]['size']): ?>
+                                    <h4 class="nm"><?= $this->getShopCatSort()[$i]['prod_name'];?></h4>
 
-                                    <?php $k = explode(',', $this->getShopCatSort()[$i]['size']);?>
-                                    <form method="post" class="form_size">
-                                        <select name="size" id="prod_sze">
-                                            <?php foreach ($k as $k__):?>
-                                                <option value="<?= $k__?>"><?= $k__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
-                            </div>
+                                    <p class="prc"><?= $this->getShopCatSort()[$i]['price']. '$';?>
+                                        <del class="prc_prom"><?= $this->getShopCatSort()[$i]['promo']. '$';?></del>
+                                    </p>
 
-                            <div class="np">
-                                <?php $chk = new Functions();
-                                $chk->isChk($this->getShopCatSort()[$i]['checked']);
-                                ?>
-
-                                <h4 class="nm"><?= $this->getShopCatSort()[$i]['prod_name'];?></h4>
-
-                                <p class="prc"><?= $this->getShopCatSort()[$i]['price']. '$';?>
-                                    <del class="prc_prom"><?= $this->getShopCatSort()[$i]['promo']. '$';?></del>
-                                </p>
-
-                                <span class="r_span">
+                                    <span class="r_span">
                                     <?php for ($r=0; $r<$this->getShopCatSort()[$i]['rating']; $r++): ?>
                                         <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>                                    <?php endfor ?>
                                 </span>
-                                <b class="rater" title="Rater"><?= $this->getShopCatSort()[$i]['rater']?></b>
-                                <p class="desc"><?= $this->getShopCatSort()[$i]['short_desc'];?></p>
+                                    <b class="rater" title="Rater"><?= $this->getShopCatSort()[$i]['rater']?></b>
+                                    <p class="desc"><?= $this->getShopCatSort()[$i]['short_desc'];?></p>
+                                </div>
+
+                                <div class="add">
+
+                                    <button class="btn-group" id="ad" style="display: block"
+                                            data-id="<?= $this->getShopCatSort()[$i]['id'];?>"
+                                            data-name="<?= $this->getShopCatSort()[$i]['prod_name'];?>"
+                                            data-price="<?= $this->getShopCatSort()[$i]['price'];?>"
+                                            data-max="<?= $this->getShopCatSort()[$i]['quantity'];?>"
+                                            data-color="<?= $this->getShopCatSort()[$i]['color'];?>"
+                                            data-size="<?= $this->getShopCatSort()[$i]['size'];?>"
+                                            data-qte="<?= $this->getShopCatSort()[$i]['quantity'];?>">BUY NOW</button>
+
+                                    <a class="btn-group" href="product?id=<?= Functions::ShopPrdLink($this->getShopCatSort()[$i]['id'], $this->getShopCatSort()[$i]['sub_category'].'&shop='.$_GET['name'])?>">VIEW PRODUCT</a>
+                                </div>
                             </div>
+                        <?php endfor ?>
 
-                            <div class="add">
+                    <?php else:?>
+                        <?php for ($i=0; $i<count($this->getData()); $i++): ?>
+                            <div class="cont">
+                                <div class="prd_img_div">
+                                    <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getData()[$i]['img1']?>" alt="product">
 
-                                <button class="btn-group" id="ad" style="display: block"
-                                        data-id="<?= $this->getShopCatSort()[$i]['id'];?>"
-                                        data-name="<?= $this->getShopCatSort()[$i]['prod_name'];?>"
-                                        data-price="<?= $this->getShopCatSort()[$i]['price'];?>"
-                                        data-max="<?= $this->getShopCatSort()[$i]['quantity'];?>"
-                                        data-color="<?= $this->getShopCatSort()[$i]['color'];?>"
-                                        data-size="<?= $this->getShopCatSort()[$i]['size'];?>"
-                                        data-qte="<?= $this->getShopCatSort()[$i]['quantity'];?>">BUY NOW</button>
+                                    <?php if ($this->getData()[$i]['color']): ?>
+                                        <?php $h = explode(',', $this->getData()[$i]['color']);?>
+                                        <form method="post" class="form_color">
+                                            <select name="color" id="prod_clr"
+                                                    style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['slc']?>">>
+                                                <?php foreach ($h as $h__):?>
+                                                    <option value="<?= $h__?>"><?= $h__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
 
-                                <a class="btn-group" href="product?id=<?= Functions::ShopPrdLink($this->getShopCatSort()[$i]['id'], $this->getShopCatSort()[$i]['sub_category'])?>">VIEW PRODUCT</a>
+                                    <?php if ($this->getData()[$i]['size']): ?>
+                                        <?php $k = explode(',', $this->getData()[$i]['size']);?>
+                                        <form method="post" class="form_size">
+                                            <select name="size" id="prod_sze"
+                                                    style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['slc']?>">
+                                                <?php foreach ($k as $k__):?>
+                                                    <option value="<?= $k__?>"><?= $k__?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </form>
+                                    <?php endif ?>
+                                </div>
+
+                                <div class="np">
+                                    <?php $chk = new Functions();
+                                    $chk->isChk($this->getData()[$i]['checked']);
+                                    ?>
+
+                                    <h4 class="nm" style="color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['pnc']?>">
+                                        <?= $this->getData()[$i]['prod_name'];?></h4>
+
+                                    <p class="prc" style="color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['pc']?>">
+                                        <?= $this->getData()[$i]['price']. $this->getShopPref()[0]['currency'];?>
+                                        <del class="prc_prom" style="color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['ppc']?>">
+                                            <?= $this->getData()[$i]['promo']. $this->getShopPref()[0]['currency'];?>
+                                        </del>
+                                    </p>
+
+                                    <span class="r_span">
+                                <?php for ($r=0; $r<$this->getData()[$i]['rating']; $r++): ?>
+                                    <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                                <?php endfor ?>
+                            </span>
+                                    <b class="rater" title="Rater"><?= $this->getData()[$i]['rater']?></b>
+                                    <p class="desc"><?= $this->getData()[$i]['proprities'];?></p>
+                                </div>
+
+                                <div class="add">
+                                    <button class="btn-group" id="ad"
+                                            style="display: block; background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"
+                                            data-id="<?= $this->getData()[$i]['id'];?>"
+                                            data-name="<?= $this->getData()[$i]['prod_name'];?>"
+                                            data-price="<?= $this->getData()[$i]['price'];?>"
+                                            data-max="<?= $this->getData()[$i]['quantity'];?>"
+                                            data-color="<?= $this->getData()[$i]['color'];?>"
+                                            data-size="<?= $this->getData()[$i]['size'];?>"
+                                            data-qte="<?= $this->getData()[$i]['quantity'];?>">BUY NOW</button>
+
+                                    <a class="btn-group"
+                                       style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"
+                                       href="product?id=<?= Functions::ShopPrdLink($this->getData()[$i]['id'], $this->getData()[$i]['sub_category'].'&shop='.$_GET['name'])?>">VIEW PRODUCT</a>
+                                </div>
                             </div>
-                        </div>
-                    <?php endfor ?>
+                        <?php endfor ?>
+
+                    <?php endif;?>
+                </section>
 
                 <?php else:?>
-                    <?php for ($i=0; $i<count($this->getData()); $i++): ?>
-                        <div class="cont">
 
-                            <div class="prd_img_div">
-                                <img class="prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getData()[$i]['img1']?>" alt="product">
-
-                                <?php if ($this->getData()[$i]['color']): ?>
-
-                                    <?php $h = explode(',', $this->getData()[$i]['color']);?>
-                                    <form method="post" class="form_color">
-                                        <select name="color" id="prod_clr">
-                                            <?php foreach ($h as $h__):?>
-                                                <option value="<?= $h__?>"><?= $h__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
-
-                                <?php if ($this->getData()[$i]['size']): ?>
-
-                                    <?php $k = explode(',', $this->getData()[$i]['size']);?>
-                                    <form method="post" class="form_size">
-                                        <select name="size" id="prod_sze">
-                                            <?php foreach ($k as $k__):?>
-                                                <option value="<?= $k__?>"><?= $k__?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </form>
-                                <?php endif ?>
+                <section id="simplify_theme">
+                    <?php if (isset($_GET['sp'])): ?>
+                        <?php for ($x=0; $x<count($this->getSearchProdShop()); $x++): ?>
+                            <div class="lbm_hme_cont vu">
+                                <div class="hme_prd_img_div">
+                                    <img class="hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getSearchProdShop()[$x]['img1']?>" alt="product">
+                                    <div class="hme_add">
+                                        <a href="<?= 'product?id='.$this->getSearchProdShop()[$x]['id']."&sub=".$this->getSearchProdShop()[$x]['sub_category']."&shop=".$_GET['name']?>">View Product</a>
+                                    </div>
+                                </div>
+                                <div class="hme_np">
+                                    <h4 class="hme_nm"><?= $this->getSearchProdShop()[$x]['prod_name']?></h4>
+                                    <p class="hme_prc"><?= '$'.$this->getSearchProdShop()[$x]['price']?>
+                                        <strong>
+                                            <del><?= '$'.$this->getSearchProdShop()[$x]['promo']?></del>
+                                        </strong>
+                                    </p>
+                                    <div class="prm_rating">
+                                        <p class="prm_rating_p">
+                                            <?php for ($o=0; $o<$this->getSearchProdShop()[$x]['rating']; $o++): ?>
+                                                <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                                            <?php endfor ?>
+                                        </p>
+                                        <b class="prm_rater" title="Rater"><?= 'raters '.$this->getSearchProdShop()[$x]['rater']?></b>
+                                        <?php (new Functions)->isChk_home($this->getSearchProdShop()[$x]['checked']);?>
+                                    </div>
+                                </div>
                             </div>
+                        <?php endfor; ?>
 
-                            <div class="np">
-                                <?php $chk = new Functions();
-                                    $chk->isChk($this->getData()[$i]['checked']);
-                                ?>
+                    <?php elseif (isset($_GET['Search'])): ?>
+                        <?php for ($l=0; $l<count($this->getShopCatSort()); $l++): ?>
+                            <div class="lbm_hme_cont vu">
+                                <div class="lbm_hme_prd_img_div">
+                                    <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getShopCatSort()[$l]['img1']?>" alt="product">
+                                    <div class="lbm_hme_add vu">
+                                        <a href="<?= 'product?id='.$this->getShopCatSort()[$l]['id']."&sub=".$this->getShopCatSort()[$l]['sub_category']."&shop=".$_GET['name']?>">View Product</a>
+                                    </div>
+                                </div>
 
-                                <h4 class="nm"><?= $this->getData()[$i]['prod_name'];?></h4>
+                                <div class="lbm_hme_np">
+                                    <h4 class="lbm_hme_nm"><?= $this->getShopCatSort()[$l]['prod_name']?></h4>
+                                    <p class="lbm_hme_prc"><?= '$'.$this->getShopCatSort()[$l]['price']?>
+                                        <strong>
+                                            <del><?= '$'.$this->getShopCatSort()[$l]['promo']?></del>
+                                        </strong>
+                                    </p>
 
-                                <p class="prc"><?= $this->getData()[$i]['price']. '$';?>
-                                    <del class="prc_prom"><?= $this->getData()[$i]['promo']. '$';?></del>
-                                </p>
-
-                                <span class="r_span">
-                                <?php for ($r=0; $r<$this->getData()[$i]['rating']; $r++): ?>
-                                    <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>                                <?php endfor ?>
-                            </span>
-                                <b class="rater" title="Rater"><?= $this->getData()[$i]['rater']?></b>
-                                <p class="desc"><?= $this->getData()[$i]['proprities'];?></p>
+                                    <div class="lbm_rating">
+                                        <p class="lbm_rating_p">
+                                            <?php for ($r=0; $r<$this->getShopCatSort()[$l]['rating']; $r++): ?>
+                                                <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                                            <?php endfor ?>
+                                        </p>
+                                        <b class="lbm_rater" title="Rater">raters (<?= $this->getShopCatSort()[$l]['rater']?>)</b>
+                                        <?php (new Functions)->isChk_home($this->getShopCatSort()[$l]['checked']);?>
+                                    </div>
+                                </div>
                             </div>
+                        <?php endfor; ?>
 
-                            <div class="add">
+                    <?php else:?>
+                        <?php for ($z=0; $z<count($this->getData()); $z++): ?>
+                            <div class="lbm_hme_cont vu">
+                                <div class="lbm_hme_prd_img_div">
+                                    <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getData()[$z]['img1']?>" alt="product">
+                                    <div class="lbm_hme_add">
+                                        <a href="<?= 'product?id='.$this->getData()[$z]['id']."&sub=".$this->getData()[$z]['sub_category']."&shop=".$_GET['name']?>">View Product</a>
+                                    </div>
+                                </div>
 
-                                <button class="btn-group" id="ad" style="display: block"
-                                        data-id="<?= $this->getData()[$i]['id'];?>"
-                                        data-name="<?= $this->getData()[$i]['prod_name'];?>"
-                                        data-price="<?= $this->getData()[$i]['price'];?>"
-                                        data-max="<?= $this->getData()[$i]['quantity'];?>"
-                                        data-color="<?= $this->getData()[$i]['color'];?>"
-                                        data-size="<?= $this->getData()[$i]['size'];?>"
-                                        data-qte="<?= $this->getData()[$i]['quantity'];?>">BUY NOW</button>
+                                <div class="lbm_hme_np">
+                                    <h4 style="color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['pnc']?>"
+                                        class="lbm_hme_nm"><?= $this->getData()[$z]['prod_name']?>
+                                    </h4>
 
-                                <a class="btn-group" href="product?id=<?= Functions::ShopPrdLink($this->getData()[$i]['id'], $this->getData()[$i]['sub_category'])?>">VIEW PRODUCT</a>
+                                    <p style="color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['pc']?>"
+                                       class="lbm_hme_prc"><?= $this->getData()[$z]['price'].$this->getShopPref()[0]['currency']?>
+                                        <strong>
+                                            <del><?= $this->getData()[$z]['promo'].$this->getShopPref()[0]['currency']?></del>
+                                        </strong>
+                                    </p>
+
+                                    <div class="lbm_rating">
+                                        <p class="lbm_rating_p">
+                                            <?php for ($r=0; $r<$this->getData()[$z]['rating']; $r++): ?>
+                                                <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                                            <?php endfor ?>
+                                        </p>
+                                        <b class="lbm_rater" title="Rater"><?= $this->getData()[$z]['rater']?></b>
+                                        <?php (new Functions)->isChk_home($this->getData()[$z]['checked']);?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    <?php endfor ?>
+                        <?php endfor; ?>
 
-                <?php endif;?>
-            </section>
+                    <?php endif;?>
+                </section>
+            <?php endif;?>
 
             <article class="d-block">
                 <div class="blg_f_div">
@@ -284,7 +396,7 @@ $title = "Shop";?>
                     </ul>
                 </div>
             </article>
-        </section>
+    </section>
 
     <!-- scripts start -->
     <script src="<?= S_ASSETS?>js/jquery.min.js"></script>

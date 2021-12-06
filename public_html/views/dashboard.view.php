@@ -4,7 +4,7 @@
     $title = ' '.$_SESSION['username'];
 ?>
 <?php include_once('partials/_header.view.php');?>
-<link rel="stylesheet" href="<?= S_ASSETS?>css/admin.css">
+<link rel="stylesheet" href="<?= S_ASSETS?>css/dashboard.css">
 
 <body>
     <div class="container-fluid">
@@ -140,7 +140,7 @@
                     <div class="admin_stat_point" id="<?= Functions::online();?>"></div>
 
                     <div class="admin_dropdown-content" id="admin_myDropdown" style="display: none">
-                        <a id="admin_u_sett" href="admin">
+                        <a id="admin_u_sett" href="dashboard">
                             <img class="_i_size" src="<?= S_ASSETS?>images/svg/dashboard_black.svg" alt="user image">
                             Dashboard
                         </a>
@@ -1126,7 +1126,7 @@
                             <div class="rows col-sm-2 col-md-8 aboutUser" style="display: none">
                                 <button id="cust__close" class="close mrinf_close">&times;</button>
                                 <div class="UserD">
-                                    <p class="text-left ml-1 mt-5">About Admin</p>
+                                    <p class="text-left ml-1 mt-5">About dashboard</p>
                                     <div class="prod_img__prom">
                                         <div class="u_img"><img src="<?= S_ASSETS ?>images/svg/person_black_24dp.svg" alt=""></div>
                                     </div>
@@ -1237,7 +1237,7 @@
                                             <div class="prd____">
                                                 <div class="nme_n_price">
                                                     <h6 class="nme"><?= $this->getBusiProd()[$n]['prod_name'];?></h6>
-                                                    <h6 class="price"><?= $this->getBusiProd()[$n]['price']. '$';?></h6>
+                                                    <h6 class="price"><?= $this->getBusiProd()[$n]['price'].$this->getSallerData()[0]['currency'];?></h6>
                                                 </div>
 
                                                 <div class="ctgr_n_qte">
@@ -1436,7 +1436,7 @@
                                         <div class="prd____">
                                             <div class="nme_n_price">
                                                 <h6 class="nme font-weight-normal"><?= $this->getShopData()[$i]['prod_name'];?></h6>
-                                                <h6 class="price font-weight-normal"><?= $this->getShopData()[$i]['price']. '$';?></h6>
+                                                <h6 class="price font-weight-normal"><?= $this->getShopData()[$i]['price']. $this->getSallerData()[0]['currency'];?></h6>
                                             </div>
 
                                             <div class="ctgr_n_qte">
@@ -1780,7 +1780,7 @@
     <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
     <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
     <script src="<?= S_ASSETS?>js/Index.js"></script>
-    <script src="<?= S_ASSETS?>js/Admin.js"></script>
+    <script src="<?= S_ASSETS?>js/dashboard.js"></script>
     <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>
     <!-- scripts end -->
 </body>
