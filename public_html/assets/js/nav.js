@@ -1,25 +1,22 @@
 $(document).ready(function () {
 
-    // window.addEventListener('scroll', function () {
-    //     if (window.scrollY  >= 1552){
-    //         // $(".nav-bar").removeClass('nav-bar');
-    //     }
-    //     //
-    //     // if(window.scrollY  >= 10){
-    //     //     document.querySelector('.nav-bar').className = 'nav-bar';
-    //     // }
-    // });
+    let lk = location.href
 
-
-    let reg = /&/ig;
-    let shp = function(){
-        if (reg.test(location.href)){
-            return location.href.split('/')[5].split('=')[1].split('&')[0];
-        }else {
-            return location.href.split('/')[5].split('=')[1];
+    let regex = /lebolma\/shop\?/i;
+    if (regex.test(lk)){
+        if (document.querySelector('.messa__')){
+            document.querySelector('.messa__').classList.add('pouce__');
         }
     }
 
+    let reg = /&/ig;
+    let shp = function(){
+        if (reg.test(lk)){
+            return lk.split('/')[5].split('=')[1].split('&')[0];
+        }else {
+            return lk.split('/')[5].split('=')[1];
+        }
+    }
 
     let params = new URLSearchParams(window.location.search);
     let shop_name = params.get('name');
@@ -54,13 +51,11 @@ $(document).ready(function () {
         }
     });
 
-
     function refresh(){
         document.querySelector('#total').innerHTML = localStorage.getItem('cart');
         requestAnimationFrame(refresh);
     }
     requestAnimationFrame(refresh);
-
 
     document.querySelector('#persn').addEventListener('click', function () {
         if (document.querySelector('.stat_point').getAttribute('id') === 'online'){

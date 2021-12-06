@@ -171,18 +171,23 @@ class MgrUser extends Database
     {
         try {
             if($columb === 'shop_name'){
+
                 $oldName = $_SESSION['shop_name'];
                 $t = parent::getDb()->prepare("ALTER TABLE $oldName RENAME TO $sallerData");
-
                 if($t->execute()){
-                    $y = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
-                    $y->bindValue('data', $sallerData, PDO::PARAM_STR);
-                    $y->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
 
-                    if($y->execute()){
-                        $y->closeCursor();
-                        $_SESSION['shop_name'] = $sallerData;
-                        return Functions::sentNotif('Update successfully');
+                    $g = parent::getDb()->prepare("UPDATE $sallerData SET shop_name = :shop_name");
+                    $g->bindValue('shop_name', $sallerData, PDO::PARAM_STR);
+                    if($g->execute()){
+
+                        $y = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
+                        $y->bindValue('data', $sallerData, PDO::PARAM_STR);
+                        $y->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
+                        if($y->execute()){
+                            $y->closeCursor();
+                            $_SESSION['shop_name'] = $sallerData;
+                            return Functions::sentNotif('Update successfully');
+                        }
                     }
                 }
             }
@@ -192,7 +197,7 @@ class MgrUser extends Database
             $n->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
             if($n->execute()){
                 $n->closeCursor();
-                return Functions::sentNotif('Update successfully');
+                return 'Update successfully';
             }
 
         }catch(PDOException $e){

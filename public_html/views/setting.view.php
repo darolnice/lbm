@@ -25,7 +25,7 @@ $title = "Setting";
             <p class="usg1"><img class="ic" src="<?= S_ASSETS?>images/svg/settings_applications_black_24dp.svg" alt="bag image">Profil</p>
             <p class="thm1"><img class="ic" src="<?= S_ASSETS?>images/svg/palette_black_24dp.svg" alt="bag image">Theme</p>
             <p class="cfd1"><img class="ic" src="<?= S_ASSETS?>images/svg/v_user_noir_24dp.svg" alt="bag image">Confidentiality and Security</p>
-            <p class="pynt1"><img class="ic" src="<?= S_ASSETS?>images/svg/payments_noir.svg" alt="bag image">Payment method</p>
+            <p class="pynt1"><img class="ic" src="<?= S_ASSETS?>images/svg/payments_noir.svg" alt="bag image">Payment</p>
             <br>
 
             <p class="pynt1"><img class="ic" src="<?= S_ASSETS?>images/svg/more_black_24dp.svg" alt="bag image">Avanced</p>
@@ -85,7 +85,7 @@ $title = "Setting";
                                 Cover picture
                             </h6>
                             <form method="post" id="sett_cp_item">
-                                <input type="file" name="in_cp" class="in_cp" required>
+                                <input id="profcpId" type="file" name="in_cp" class="in_cp" data-cci ="<?= $this->getSData()[0]['cover_image']?>">
                                 <input type="submit" name="sett_cp_sbmt" class="sett_cp_sbmt" value="SAVE">
                             </form>
                         </td>

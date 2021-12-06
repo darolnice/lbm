@@ -480,7 +480,7 @@ class Functions extends Navigation
          $img_ex = pathinfo($array['name'], PATHINFO_EXTENSION);
          $img_ex_lc = strtolower($img_ex);
 
-         if($array['size'] > 50000000){return false;}
+         if($array['size'] > 500000){return false;}
          if($array['name'] === ''){return false;}
          if(!in_array($img_ex_lc, $allowed_exs)){return false;}
 

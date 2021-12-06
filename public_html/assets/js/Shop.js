@@ -66,12 +66,6 @@ $(document).ready(function () {
         }
     }
 
-
-    let __sec = document.querySelector('#sec1');
-    if (__sec.childElementCount < 4){
-        __sec.style.marginBottom = '80ex';
-    }
-
     if (document.querySelector('.messa__')){
         document.querySelector('.messa__').style.marginLeft = '36.5%';
     }

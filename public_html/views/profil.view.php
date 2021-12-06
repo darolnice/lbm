@@ -8,7 +8,7 @@
 <body>
 
     <section id="home_pre_sec1">
-        <img id="img1_pre_sec1" src="<?= S_ASSETS?>images/img/question-marks.jpg" alt="investir">
+        <img id="img1_pre_sec1" src="<?= S_ASSETS?>images/upload/<?= $this->getProfilData()[0]['cover_image']?>" alt="investir">
 
         <div id="pre_cntnr">
 

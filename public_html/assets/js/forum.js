@@ -1,4 +1,5 @@
 $(document).ready( function () {
+
     document.querySelectorAll('.blg__more_cmt').forEach(item =>{
         item.addEventListener('click', function () {
             if (document.querySelector('.__blg_cmt')){

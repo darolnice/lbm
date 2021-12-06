@@ -405,9 +405,11 @@ class Index {
                     let id = '#'+context;
                     document.querySelector(id).previousElementSibling.previousElementSibling.style.display = 'none';
                     $(id).fadeOut();
+                    $('.load').hide();
                     new Index().lbmAlert(response["message"]);
                 }
                 if(response["response_code"] === 200 && response["res_id"] === 166){
+                    $('.load').hide();
                     new Index().lbmAlert(response["message"])
                 }
             }

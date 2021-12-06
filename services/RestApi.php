@@ -164,9 +164,10 @@ class RestApi extends Database
     /**
      * @param $columb
      * @param $newValue
-     * @param $code
+     * @param null $code
+     * @return string
      */
-    public function jxUV($columb, $newValue, $code){
+    public function jxUV($columb, $newValue, $code = null){
         $errors = [];
         $q = parent::getDb()->prepare('SELECT auth_code FROM sallers WHERE id = :id');
         $q->execute(["id" => $_SESSION['saller_id']]);

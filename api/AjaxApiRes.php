@@ -833,8 +833,8 @@ class AjaxApiRes
             $this->jxUploadImage(
                 $_FILES['inpFile']['name'],
                 $_FILES['inpFile']['tmp_name'],
+                'profil_image',
                 'sallers',
-                null,
                 $_SESSION['old_pp'],
                 htmlentities($_COOKIE['dxa']),
             );
@@ -844,13 +844,13 @@ class AjaxApiRes
     /**
      * @param $img_name
      * @param $img_path
+     * @param $columb
      * @param null $table
-     * @param null $id
      * @param null $old_image
      * @param null $code
-     * @return bool
+     * @return bool|string
      */
-    public function jxUploadImage($img_name, $img_path, $table = null, $id = null, $old_image = null, $code = null){
+    public function jxUploadImage($img_name, $img_path, $columb, $table = null, $old_image = null, $code = null){
         $allowed_exs = array("jpg", "png", "jpeg");
         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
         $img_ex_lc = strtolower($img_ex);
@@ -859,16 +859,24 @@ class AjaxApiRes
             $new_img_name = uniqid("PP-", true).'.'.$img_ex_lc;
             $img_upload_path = 'public_html/assets/images/upload/'.$new_img_name;
             if($table === 'sallers'){
-                $r = (new RestApi)->jxUV('profil_image', $new_img_name, (int)$code);
+                if($columb === 'cover_image'){
+                    $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], 'cover_image', $new_img_name);
+                }else{
+                    $r = (new RestApi)->jxUV($columb, $new_img_name, (int)$code);
+                }
+
                 if($r !== 'Auth code is wrong'){
-                    try {
-                        unlink('public_html/assets/images/upload/'.$old_image);
-                    }catch(Exception $e){
-                        return $e->getMessage();
+                    if($old_image !== ""){
+                        try {
+                            unlink('public_html/assets/images/upload/'.$old_image);
+                        }catch(Exception $e){
+                            return $e->getMessage();
+                        }
                     }
                     move_uploaded_file($img_path, $img_upload_path);
                 }
-                unset($_SESSION['old_pp']);
+
+                if($old_image !== ""){unset($_SESSION['old_pp']);}
                 $this->response($this->HTTP_OK, $r, 20);
             }
 
@@ -960,6 +968,22 @@ class AjaxApiRes
                 $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
                 $r = (new MgrShop)->updateShopCheckboxSettting($post[1], $post[2], $_SESSION['saller_id'], $post[0]);
                 $this->response($this->HTTP_OK, $r, 166);
+            }
+        }
+
+        if(isset($_FILES)){
+            $oldImgName = $_POST['oldCover'];
+            $indice = $_POST['indice'];
+
+            $newImgName =  $_FILES['newCover']['name'];
+            $newImgTmp  =  $_FILES['newCover']['tmp_name'];
+            $newImgSize =  $_FILES['newCover']['size'];
+
+            if($newImgSize > 500000){
+                $this->response($this->HTTP_OK, 'Image is too large', null);
+
+            }else{
+                $this->jxUploadImage($newImgName, $newImgTmp, $indice, "sallers", $oldImgName, null);
             }
         }
     }

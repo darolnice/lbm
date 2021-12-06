@@ -2,42 +2,47 @@ class Setting{
     constructor() {}
 
     /**
+     *
      * @param form
      * @param btn
      * @param indice
      * @param context
      */
-    postSetting = (form, btn ,indice = null, context)=>{
+    postSetting = (form, btn, indice = null, context)=>{
         let form_ = document.querySelector('#'+form);
         let btn_ = document.querySelector('#'+btn);
 
-        btn_.addEventListener('click', (e)=>{
-            if (indice === 'shop_name'){
-                e.preventDefault();
-                $.ajax({
-                    type:'POST',
-                    url:'ckReadyUse',
-                    data: {prop: form_.value},
-                    success:function (response) {
-                        if (response["message"] !== 'free'){
-                            document.querySelector('#setshopname').style.borderColor = 'red';
-                            new Index().lbmAlert(response["message"], 'danger');
-                            return null;
-                        }else {
-                            new Index().jxPostData('ftcSetD', context, form_.value, indice);
-                        }
-                    }
-                });
+        if (btn_ !== null){
+            btn_.addEventListener('click', (e)=>{
+                new Index().lbmLoad('50%', null);
 
-            }else {
-                if (form_.value !== ''){
+                if (indice === 'shop_name'){
                     e.preventDefault();
-                    new Index().jxPostData('ftcSetD', context, form_.value, indice);
+                    $.ajax({
+                        type:'POST',
+                        url:'ckReadyUse',
+                        data: {prop: form_.value},
+                        success:function (response) {
+                            if (response["message"] !== 'free'){
+                                document.querySelector('#setshopname').style.borderColor = 'red';
+                                new Index().lbmAlert(response["message"], 'danger');
+                                return null;
+                            }else {
+                                new Index().jxPostData('ftcSetD', context, form_.value, indice);
+                            }
+                        }
+                    });
+
                 }else {
-                    new Index().lbmAlert('Please complete form', 'info');
+                    if (form_.value !== ''){
+                        e.preventDefault();
+                        new Index().jxPostData('ftcSetD', context, form_.value, indice);
+                    }else {
+                        new Index().lbmAlert('Please complete form', 'info');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -70,6 +75,57 @@ class Setting{
         new Index().jxPostData('ftcSetD', null, state, columb, entrie);
         setTimeout(()=>{$('#'+toast).fadeOut()},2000);
      }
+
+    /**
+     *
+     * @param url
+     * @param context
+     * @param data
+     */
+     fetch_setting(url, context, data){
+         fetch(url, {
+             method: 'POST',
+             body: data,
+         }).then(res => res.json()
+             .then(val => {
+                 $('.load').hide();
+                 $('#'+context).hide();
+                 let cl = document.querySelector('#'+context).previousElementSibling.previousElementSibling;
+                 cl.style.visibility = 'hidden';
+                 new Index().lbmAlert(val['message']);
+             })
+         )
+     }
+
+    /**
+     *
+     * @param input
+     * @param form
+     * @param context
+     * @param indice
+     */
+     postimage = (input, form, context, indice)=>{
+         if (form !== null){
+             document.querySelector('#'+form).addEventListener('submit', (e)=>{
+                 e.preventDefault();
+                 new Index().lbmLoad('50%', null);
+                 let inp = document.querySelector('#'+input);
+                 if (inp.value !== ''){
+                     let oldImg = inp.getAttribute("data-cci");
+                     let newImg = inp.files[0];
+                     let fd = new FormData;
+
+                     fd.append('newCover', newImg);
+                     fd.append('oldCover', oldImg);
+                     fd.append('indice', indice);
+                     new Setting().fetch_setting("ftcSetD", context, fd);
+                 }
+             });
+         }
+     }
+
+
+
 
 }
 
@@ -209,7 +265,8 @@ $(document).ready(function () {
     sett.selectPostSetting('__paSettslct', 'activity','_s_pa');
     sett.selectPostSetting('__setslid', 'shop_location','_s_lt');
     sett.selectPostSetting('__setdeid', 'currency','_s_de');
-    // sett.selectPostSetting('__ship_sett', 'shipping', '__setShfr');
+    sett.selectPostSetting('__ship_sett','shipping', '__setShfr');
 
+    sett.postimage('profcpId', 'sett_cp_item', 'sett_cp_item', 'cover_image');
 
 });
