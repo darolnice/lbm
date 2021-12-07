@@ -864,9 +864,12 @@ class AjaxApiRes
                 $new_img_name = uniqid("CI1-", true).'.'.$img_ex_lc;
             }elseif($columb === 'col_2_img'){
                 $new_img_name = uniqid("CI2-", true).'.'.$img_ex_lc;
+            }elseif($columb === 'cover_image'){
+                $new_img_name = uniqid("CI-", true).'.'.$img_ex_lc;
             }else{
                 $new_img_name = uniqid("PP-", true).'.'.$img_ex_lc;
             }
+
 
             $img_upload_path = 'public_html/assets/images/upload/'.$new_img_name;
             if($table === 'sallers'){
@@ -985,7 +988,7 @@ class AjaxApiRes
             }
         }
 
-        if(isset($_FILES)){
+        if(isset($_FILES['newCover'])){
             $oldImgName = $_POST['oldCover'];
             $indice = $_POST['indice'];
 

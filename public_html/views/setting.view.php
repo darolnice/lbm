@@ -281,8 +281,8 @@ $title = "Setting";
                                 <h5 class="__op" data-entrie="ppc">Promo price</h5>
                                 <h5 class="__slc" data-entrie="slc">Color / Size</h5>
                                 <h5 class="__btns" data-entrie="btnc">Button</h5>
-                                <h5 class="__btns" data-entrie="wm">Welcome Message</h5>
-                                <h5 class="__btns" data-entrie="sm">Short Message</h5>
+                                <h5 class="__wm" data-entrie="wm">Welcome Message</h5>
+                                <h5 class="__sm" data-entrie="sm">Short Message</h5>
 
                                 <form class="colr form-group" method="post">
                                     <input type="button" title="green" name="sett_green" class="sett_green" data-color_code="#55bf6d">

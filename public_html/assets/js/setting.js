@@ -163,6 +163,9 @@ $(document).ready(function () {
             document.querySelector(".__btns").style.boxShadow = '0 1px 2px #2b2a2a';
             document.querySelector(".__prc").style.boxShadow = '0 1px 2px #2b2a2a';
             document.querySelector(".__pn").style.boxShadow = '0 1px 2px #2b2a2a';
+            document.querySelector(".__wm").style.boxShadow = '0 1px 2px #2b2a2a';
+            document.querySelector(".__sm").style.boxShadow = '0 1px 2px #2b2a2a';
+            document.querySelector(".__slc").style.boxShadow = '0 1px 2px #2b2a2a';
 
             clr = item.getAttribute('data-entrie');
             item.style.boxShadow = '1px 1px 2px #0acec7';
