@@ -20,25 +20,25 @@ $(document).ready(function () {
         }, 500);
     });
 
-    // const  ratio = .1;
-    // const option = {
-    //     root: null,
-    //     rootMargin:'0px',
-    //     threshold: ratio
-    // }
-    // var handleInter = function (entries, observer) {
-    //     entries.forEach(function (entry) {
-    //         if (entry.intersectionRatio > ratio){
-    //             entry.target.classList.add('reveal-visible');
-    //             observer.unobserve(entry.target);
-    //         }
-    //     });
-    // }
-    // const observer = new IntersectionObserver(handleInter, option);
-    // let obs = observer.observe(document.querySelectorAll('[class*= "reveal-"]'));
-    // obs.forEach(function (r) {
-    //     observer.observe(r);
-    // });
+    const ratio = .1;
+    const option = {
+        root: null,
+        rootMargin:'0px',
+        threshold: ratio
+    }
+    var handleInter = function (entries, observer) {
+        entries.forEach((entry) =>{
+            if (entry.intersectionRatio > ratio){
+                entry.target.classList.add('reveal-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }
+    const observer = new IntersectionObserver(handleInter, option);
+    let obs = document.querySelectorAll('[class *= "reveal-"]');
+    obs.forEach(function (r) {
+        observer.observe(r);
+    });
 
     document.forms['prof_form'].addEventListener('submit', function (e) {
         e.preventDefault();

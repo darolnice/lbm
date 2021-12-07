@@ -1,0 +1,17 @@
+{
+  "name": "vendor_name/lebolma",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Darol",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-pdo": "*"
+  }
+}

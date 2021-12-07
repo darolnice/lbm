@@ -82,12 +82,40 @@ $title = "Setting";
                             <button class="close">&times;</button>
                             <h6>
                                 <img class="ict" src="<?= S_ASSETS?>images/svg/image_noir.svg" alt="bag image">
-                                Cover picture
+                                Picture
                             </h6>
-                            <form method="post" id="sett_cp_item">
-                                <input id="profcpId" type="file" name="in_cp" class="in_cp" data-cci ="<?= $this->getSData()[0]['cover_image']?>">
-                                <input type="submit" name="sett_cp_sbmt" class="sett_cp_sbmt" value="SAVE">
-                            </form>
+
+                            <div class="" id="allpdiv">
+                                <form method="post" id="sett_cp_item">
+                                    <b class="mb-0 mt-2">Profil Page: Cover Picture</b>
+                                    <input id="profcpId" type="file" name="in_cp" class="in_cp" data-cci ="<?= $this->getSData()[0]['cover_image']?>">
+                                    <input type="submit" name="sett_cp_sbmt" class="sett_cp_sbmt" value="SAVE">
+                                </form>
+
+                                <form method="post" id="ppsp_form">
+                                    <b class="mb-0 ">Profil Page: Second Picture</b>
+                                    <input id="ppsp" type="file" name="ppsp" class="in_cp" data-cci ="<?= $this->getSData()[0]['snd_img']?>">
+                                    <input type="submit" name="ppsp_sbt" class="sett_cp_sbmt" value="SAVE">
+                                </form>
+
+                                <form method="post" id="pppc_form">
+                                    <b class="mb-0">Profil Page: Picture CEO</b>
+                                    <input id="pppc" type="file" name="pppc" class="in_cp" data-cci ="<?= $this->getSData()[0]['ceo_img']?>">
+                                    <input type="submit" name="pppc_sbt" class="sett_cp_sbmt" value="SAVE">
+                                </form>
+
+                                <form method="post" id="ppp_1_form">
+                                    <b class="mb-0">Profil Page: Picture Collaborator 1</b>
+                                    <input id="ppp_1" type="file" name="ppp_1" class="in_cp" data-cci ="<?= $this->getSData()[0]['col_1_img']?>">
+                                    <input type="submit" name="ppp_1_sbt" class="sett_cp_sbmt" value="SAVE">
+                                </form>
+
+                                <form method="post" id="ppp_2_form">
+                                    <b class="mb-0">Profil Page: Picture Collaborator 2</b>
+                                    <input id="ppp_2" type="file" name="ppp_2" class="in_cp" data-cci ="<?= $this->getSData()[0]['col_2_img']?>">
+                                    <input type="submit" name="ppp_2_sbt" class="sett_cp_sbmt" value="SAVE">
+                                </form>
+                            </div>
                         </td>
                     </tr>
 
@@ -253,16 +281,20 @@ $title = "Setting";
                                 <h5 class="__op" data-entrie="ppc">Promo price</h5>
                                 <h5 class="__slc" data-entrie="slc">Color / Size</h5>
                                 <h5 class="__btns" data-entrie="btnc">Button</h5>
+                                <h5 class="__btns" data-entrie="wm">Welcome Message</h5>
+                                <h5 class="__btns" data-entrie="sm">Short Message</h5>
 
                                 <form class="colr form-group" method="post">
-                                    <input type="button" name="sett_green" class="sett_green" data-color_code="#55bf6d">
-                                    <input type="button" name="sett_bleu" class="sett_bleu" data-color_code="#4169e1">
-                                    <input type="button" name="sett_orange" class="sett_orange" data-color_code="#ff7f50">
-                                    <input type="button" name="sett_cyan" class="sett_cyan" data-color_code="#07b4b4">
-                                    <input type="button" name="sett_crimson" class="sett_crimson" data-color_code="#dc143c">
-                                    <input type="button" name="sett_violet" class="sett_violet" data-color_code="#b509a3">
-                                    <input type="button" name="sett_black" class="sett_black" data-color_code="#000">
-                                    <input type="button" name="sett_black" class="sett_gray" data-color_code="#5e5d5d">
+                                    <input type="button" title="green" name="sett_green" class="sett_green" data-color_code="#55bf6d">
+                                    <input type="button" title="bleu" name="sett_bleu" class="sett_bleu" data-color_code="#4169e1">
+                                    <input type="button" title="orange" name="sett_orange" class="sett_orange" data-color_code="#ff7f50">
+                                    <input type="button" title="darkcyan" name="sett_cyan" class="sett_Dcyan" data-color_code="#07b4b4">
+                                    <input type="button" title="crimson" name="sett_crimson" class="sett_crimson" data-color_code="#dc143c">
+                                    <input type="button" title="violet" name="sett_violet" class="sett_violet" data-color_code="#b509a3">
+                                    <input type="button" title="black" name="sett_black" class="sett_black" data-color_code="#000">
+                                    <input type="button" title="gray" name="sett_black" class="sett_gray" data-color_code="#5e5d5d">
+                                    <input type="button" title="white" name="sett_white" class="sett_white" data-color_code="#fff">
+                                    <input type="button" title="cyan" name="sett_cyan" class="sett_cyan" data-color_code="#00ffff">
                                 </form>
                             </div>
                         </td>

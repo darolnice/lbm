@@ -89,10 +89,11 @@ class Setting{
          }).then(res => res.json()
              .then(val => {
                  $('.load').hide();
-                 $('#'+context).hide();
-                 let cl = document.querySelector('#'+context).previousElementSibling.previousElementSibling;
-                 cl.style.visibility = 'hidden';
-                 new Index().lbmAlert(val['message']);
+                 if (val['message'] !== 'Update successfully'){
+                     new Index().lbmAlert(val['message'], "danger");
+                 }else {
+                     new Index().lbmAlert(val['message']);
+                 }
              })
          )
      }
@@ -105,12 +106,12 @@ class Setting{
      * @param indice
      */
      postimage = (input, form, context, indice)=>{
+         let inp = document.querySelector('#'+input);
          if (form !== null){
              document.querySelector('#'+form).addEventListener('submit', (e)=>{
                  e.preventDefault();
-                 new Index().lbmLoad('50%', null);
-                 let inp = document.querySelector('#'+input);
                  if (inp.value !== ''){
+                     new Index().lbmLoad('50%', null);
                      let oldImg = inp.getAttribute("data-cci");
                      let newImg = inp.files[0];
                      let fd = new FormData;
@@ -119,13 +120,13 @@ class Setting{
                      fd.append('oldCover', oldImg);
                      fd.append('indice', indice);
                      new Setting().fetch_setting("ftcSetD", context, fd);
+
+                 }else {
+                     new Index().lbmAlert('PLease upload image', 'info');
                  }
              });
          }
      }
-
-
-
 
 }
 
@@ -136,8 +137,16 @@ $(document).ready(function () {
 
     document.querySelectorAll('#tbod tr').forEach(item =>{
         item.addEventListener('click', ()=>{
-            item.children[0].children[2].style.display = 'block';
-            item.children[0].children[0].style.display = 'block';
+            if (item.children[0].children[2].getAttribute('id') === 'allpdiv'){
+                document.querySelector('#allpdiv').style.display = 'block';
+                let frm = document.querySelectorAll('#allpdiv form');
+                frm.forEach(elt =>{elt.style.display = 'block'});
+                item.children[0].children[0].style.display = 'block';
+
+            }else {
+                item.children[0].children[2].style.display = 'block';
+                item.children[0].children[0].style.display = 'block';
+            }
         });
     });
     document.querySelectorAll('.close').forEach(item =>{
@@ -240,21 +249,10 @@ $(document).ready(function () {
     });
     //side bar end
 
-
-    $('.yes').on('click', function () {
-        document.querySelector(".shp_form").style.display = 'block';
-    });
-    $('.no').on('click', function (e) {
-        e.stopPropagation();
-        document.querySelector(".shp_form").style.display = 'none';
-        document.querySelector(".yes_no").style.display = 'none';
-    });
-
     $('.sett_cls').on('click', ()=>{
        localStorage.setItem('active', '0');
     });
     $(".ic").on('click', function () {open('./', '_parent')});
-
 
     sett.postSetting('setshopname', '__snSetid','shop_name','sett_sub_item');
     sett.postSetting('__setdes_ta', '__setdes_id','description','sett_desc_item');
@@ -268,5 +266,10 @@ $(document).ready(function () {
     sett.selectPostSetting('__ship_sett','shipping', '__setShfr');
 
     sett.postimage('profcpId', 'sett_cp_item', 'sett_cp_item', 'cover_image');
+    sett.postimage('ppsp', 'ppsp_form', 'sett_cp_item', 'snd_img');
+    sett.postimage('pppc', 'pppc_form', 'sett_cp_item', 'ceo_img');
+    sett.postimage('ppp_1', 'ppp_1_form', 'sett_cp_item', 'col_1_img');
+    sett.postimage('ppp_2', 'ppp_2_form', 'sett_cp_item', 'col_2_img');
+
 
 });

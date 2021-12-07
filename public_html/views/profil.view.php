@@ -13,26 +13,27 @@
         <div id="pre_cntnr">
 
             <div id="pre_p">
-                <p class="reveal-1" id="sec1_pre_titre">Welcome to <?= $_GET['name']?>,
+                <p class="reveal-1" id="sec1_pre_titre" style="color: <?= json_decode($this->getProfilData()[0]['theme'], true)[0]['wm']?>">
+                Welcome to <?= $_GET['name']?>,
                     do your market easy
                 </p>
-                <p class="reveal-2" id="sec1_pre_desc">Découvrez comment ça marche et vous aussi financé votre projet
+                <p class="reveal-2" id="sec1_pre_desc" style="color: <?= json_decode($this->getProfilData()[0]['theme'], true)[0]['sm']?>!important;">
+                    Découvrez comment ça marche et vous aussi financé votre projet
                     en toute simplicité avec des taux d'intéret inférieurs à 10%
                 </p>
             </div>
 
-            <div id="pre_encaiss_div">
-                <button class="btn-lg reveal-3" id="sec1_pre_btn_subs">Get Discount</button>
-                <button class="btn-lg reveal-3" id="sec1_pre_btn_cont">Contact us</button>
+            <div class="reveal-3" id="pre_encaiss_div">
+                <button class="btn-lg" id="sec1_pre_btn_subs">Get Discount</button>
+                <button class="btn-lg" id="sec1_pre_btn_cont">Contact us</button>
             </div>
         </div>
     </section>
 
-    <section class="container" id="pre_sec2">
-
+    <section class="container reveal-2" id="pre_sec2">
         <div id="pre_depot_detail">
             <div id="pre_xpl">
-                <img class="bnk" src="<?= S_ASSETS?>images/img/lite.jpg" alt="project_lis2">
+                <img class="bnk" src="<?= S_ASSETS?>images/upload/<?= $this->getProfilData()[0]['snd_img']?>" alt="snd">
             </div>
             <h1 class="prof_ttl">About us</h1>
             <p>
@@ -41,7 +42,7 @@
         </div>
     </section>
 
-    <section class="container" id="sec4_stat">
+    <section class="container reveal-2" id="sec4_stat">
         <p id="ttr">
             Some statistiques
         </p>
@@ -99,7 +100,7 @@
         </div>
     </section>
 
-    <section class="container" id="credit_sec3">
+    <section class="container reveal-2" id="credit_sec3">
         <?php for ($t=0; $t<count($this->getProfilData()); $t++):?>
         <?php if($this->getProfilData()[$t]['comments'] !== null): ?>
             <p id="cred_tes">Comment's</p>
@@ -128,7 +129,7 @@
         <?php endfor;?>
     </section>
 
-    <section class="container reveal-1" id="home_sec8">
+    <section class="container reveal-2" id="home_sec8">
         <div id="sec8_div1">
             <p id="ow_T">OUR TEAM</p>
         </div>
@@ -138,7 +139,7 @@
                 <div class="home-currency-item" id="tl1_div_title">
                     <h6 class="text-center" id="tl1_title">Market manger</h6>
                 </div>
-                <img id="sec8_img1_qg" src="<?= S_ASSETS?>images/img/lite.jpg" alt="loggo">
+                <img id="sec8_img1_qg" src="<?= S_ASSETS?>images/upload/<?= $this->getProfilData()[0]['col_1_img']?>" alt="col1">
                 <div class="home-currency-item-desc u_list" id="tl1_div_detail">
                     <h6 class="text-center" id="tl1_detail">Far far away, behind the word mountains,
                         far from the countries
@@ -152,7 +153,7 @@
                 <div class="home-currency-item" id="tl2_div_title">
                     <h6 class="text-center" id="s2_title">CEO</h6>
                 </div>
-                <img id="sec8_img2_qg" src="<?= S_ASSETS?>images/img/lite.jpg" alt="loggo">
+                <img id="sec8_img2_qg" src="<?= S_ASSETS?>images/upload/<?= $this->getProfilData()[0]['ceo_img']?>" alt="ceo">
                 <div class="home-currency-item-desc u_list" id="tl2_div_detail">
                     <h6 class="text-center" id="tl2_detail">Far far away, behind the word mountains,
                         far from the countries
@@ -166,7 +167,7 @@
                 <div class="home-currency-item" id="tl3_div_title">
                     <h6 class="text-center" id="tl3_title">Logistique manger</h6>
                 </div>
-                <img id="sec8_img3_qg" src="<?= S_ASSETS?>images/img/lite.jpg" alt="loggo">
+                <img id="sec8_img3_qg" src="<?= S_ASSETS?>images/upload/<?= $this->getProfilData()[0]['col_2_img']?>" alt="loggo">
                 <div class="home-currency-item-desc u_list" id="s3_list">
                     <h6 class="text-center" id="tl3_detail">Far far away, behind the word mountains,
                         far from the countries

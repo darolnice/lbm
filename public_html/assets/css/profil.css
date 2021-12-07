@@ -8,6 +8,30 @@ body{
     user-select: none;
 }
 
+/******************************** dynamique class ************************/
+
+[class *= "reveal-"]{
+    opacity: 0;
+    transform: translateY(30);
+}
+.reveal-1{
+    transition: .8s ease-in-out;
+}
+.reveal-2{
+    transition: 1s ease-in-out;
+}
+.reveal-3{
+    transition: 1.2s ease-in-out;
+}
+.reveal-visible{
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: .3s
+}
+
+/**************************************************************************/
+
+
 /**debut premiere section**/
 #home_pre_sec1{
     width: 100%;

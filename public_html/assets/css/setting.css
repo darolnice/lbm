@@ -398,8 +398,8 @@ h6{
     border-radius: 3px;
     outline: none;
     border: none;
-    margin-top: 5px;
-    font-size: 13px;
+    margin-top: 15px;
+    font-size: 11px!important;
 }
 .sett_cp_sbmt{
     /*height: 40px;*/
@@ -505,7 +505,7 @@ h6{
     height: 76%;
     float: right;
     margin-right: 20%;
-    margin-top: -43%;
+    margin-top: -52%;
     text-align: center;
     padding-top: 15px;
     display: none;
@@ -536,8 +536,8 @@ h6{
 .sett_orange{
     background-color: #ff7f50;
 }
-.sett_cyan{
-    background-color: #07b4b4;
+.sett_Dcyan{
+    background-color: darkcyan;
 }
 .sett_crimson{
     background-color: #dc143c;
@@ -551,7 +551,13 @@ h6{
 .sett_gray{
     background-color: #5e5d5d;
 }
-
+.sett_white{
+    box-shadow: 1px 2px 4px 5px #b8b7b7;
+    background-color: #fff;
+}
+.sett_cyan{
+    background-color: #00ffff;
+}
 
 .sett_inSk{
     width:95%;
@@ -690,7 +696,7 @@ h6{
     outline: none;
     cursor: default;
     width: 20px;
-    height: 20x;
+    height: 20px;
     position: absolute;
     margin-left: 20%;
     margin-top: -2%;

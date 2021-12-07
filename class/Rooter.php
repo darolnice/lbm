@@ -98,8 +98,6 @@ class Rooter
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
 
-
-
     ];
 
 
