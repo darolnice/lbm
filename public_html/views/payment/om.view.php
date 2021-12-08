@@ -9,7 +9,7 @@ include_once dirname(__DIR__, 1).DIRECTORY_SEPARATOR.'./partials/_header.view.ph
     <div class="momo__">
         <img src="<?= S_ASSETS?>images/img/Orange-Money.png" alt="mtn mobile money logo" style="width: 30%; height: 30%">
         <div class="momo_price">
-            <p class="strong"><?= array_sum($_SESSION["somme"]).' US$'?></p>
+            <p class="strong"><?= Functions::soe()?></p>
 
             <div class="momo__form">
                 <form class="form-group" method="post">

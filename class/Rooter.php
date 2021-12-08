@@ -94,6 +94,7 @@ class Rooter
                         "jxPanelSrch"       => ["api"   => "AjaxApiRes",  "method" => "jxPanelSrch"],
                         "jxHomeRange"       => ["api"   => "AjaxApiRes",  "method" => "jxHomeRange"],
                         'jxchat'            => ["api"   => "AjaxApiRes",  "method" => "jxchat"],
+                        'jxrC'              => ["api"   => "AjaxApiRes",  "method" => "jxrC"],
 
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],

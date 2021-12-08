@@ -219,7 +219,7 @@ class Index {
             success: function(response){
                 if(response["response_code"] === 200 && response["res_id"] === 1009){
                     let pttl = context.getAttribute('data-qte') * response['message'][0]['price'];
-                    context.innerHTML = pttl.toFixed(2)+" "+response['message'][1]['currency'];
+                    context.innerHTML = pttl.toFixed(2) + " " + response['message'][1]['currency'];
                 }// check cart price
                 if(response["response_code"] === 200 && response["res_id"] === 1005){
                     response['message'].forEach((item) =>{
@@ -411,6 +411,10 @@ class Index {
                     $('.load').hide();
                     new Index().lbmAlert(response["message"])
                 }// setting
+                if(response["response_code"] === 200 && response["res_id"] === 11){
+                    $('.btn_t').text(response["message"]+' '+context);
+                    new Index().lbmAlert('Convert');
+                }// checkcart reconvert tt
             }
         });
     }

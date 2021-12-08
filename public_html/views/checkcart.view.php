@@ -17,19 +17,19 @@ $title = 'Check Cart';
             <div class="optdiv">
                 <p class="text-uppercase font-weight-bold">Convert total In</p>
                 <ul>
-                    <li>
+                    <li data-cy="CFA">
                          CFA
                     </li>
-                    <li>
+                    <li data-cy="&euro;">
                         EURO
                     </li>
-                    <li>
+                    <li data-cy="US&dollar;">
                         US DOLLAR
                     </li>
-                    <li>
+                    <li data-cy="&pound;">
                         POUND
                     </li>
-                    <li>
+                    <li data-cy="&yen;">
                         YEN
                     </li>
                 </ul>

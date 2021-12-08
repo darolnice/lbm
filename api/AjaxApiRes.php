@@ -5,7 +5,11 @@ class AjaxApiRes
 {
     private $HTTP_OK = 200;
     private $HTTP_BAD_REQUEST = 400;
-
+    private $DOLLAR = 550;
+    private $EURO = 100;
+    private $POUND = 100;
+    private $YEN = 50;
+    private $CFA = 650;
 
     /**
      *
@@ -438,6 +442,11 @@ class AjaxApiRes
         return false;
     }
 
+    /**
+     * @param $acc
+     * @param $curr
+     * @return mixed
+     */
     function prod_sum($acc, $curr){
          return  $acc + $curr;
     }
@@ -486,8 +495,7 @@ class AjaxApiRes
 
             }else {
                 $_SESSION['somme'] = [];
-                array_push( $_SESSION['somme'], json_decode($_POST['value'])->price * json_decode($_POST['value'])->quantity);
-
+                $this->convertCurrency(json_decode($_POST['value'])->currency);
                 $_SESSION['cart'][0] = [$_POST['key'] => $_POST['value']];
                 $_SESSION['val'] = [$_POST['value']];
                 $this->response($this->HTTP_OK, 'Product Add', 878);
@@ -495,6 +503,55 @@ class AjaxApiRes
 
         }else{
             $this->response($this->HTTP_BAD_REQUEST, "Some one is wrong", 485);
+        }
+    }
+
+    /**
+     * @param string $currency
+     */
+    function convertCurrency (string $currency){
+        if($currency === 'CFA'){
+            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price / $this->DOLLAR) * json_decode($_POST['value'])->quantity, 2));
+        }elseif($currency === '<pre>&euro;</pre>'){
+            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price - $this->EURO) * json_decode($_POST['value'])->quantity, 2));
+        }elseif($currency === '<pre>&pound;</pre>'){
+            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price + $this->POUND) * json_decode($_POST['value'])->quantity, 2));
+        }elseif($currency === '<pre>&yen;</pre>'){
+            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price + $this->YEN) * json_decode($_POST['value'])->quantity,2));
+        }else{
+            array_push($_SESSION['somme'],json_decode($_POST['value'])->price * json_decode($_POST['value'])->quantity);
+        }
+    }
+
+
+    function jxrC(){
+        session_start();
+        if(!empty($_POST['data'])){
+            if($_POST['data'][0] === 'CFA'){
+                $r = round(array_sum($_SESSION['somme'])*$this->DOLLAR,2);
+                $_SESSION['soe'] = [$r.' CFA', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '€'){
+                $r = round(array_sum($_SESSION['somme'])+$this->EURO,2);
+                $_SESSION['soe'] = [$r.' €', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '£'){
+                $r = round(array_sum($_SESSION['somme'])+$this->POUND,2);
+                $_SESSION['soe'] = [$r.' £', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '¥'){
+                $r = round(array_sum($_SESSION['somme'])+$this->YEN,2);
+                $_SESSION['soe'] = [$r.' ¥', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }else{
+                $r = round(array_sum($_SESSION['somme']),2);
+                $_SESSION['soe'] = [$r.' US$', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+            }
         }
     }
 

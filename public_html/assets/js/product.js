@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                      prod_name:p_name,
                      color:'', size:'',
                      price:prix.innerHTML,
+                     currency:prix.nextElementSibling.innerHTML,
                      quantity:''
     }
 

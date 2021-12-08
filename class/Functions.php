@@ -506,7 +506,16 @@ class Functions extends Navigation
          return strtolower($arr[1]);
      }
 
-
+    /**
+     * @return float|int|mixed
+     */
+     public static function soe(){
+         if(isset($_SESSION['soe'])){
+             return $_SESSION['soe'][0];
+         }else{
+             return array_sum($_SESSION['somme']);
+         }
+     }
 
 
 

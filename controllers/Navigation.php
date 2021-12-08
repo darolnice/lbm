@@ -566,11 +566,11 @@ class Navigation
                     $_SESSION['TI'] = [
                         "Items"=>$_SESSION['cart'],
                         'Somme'=>$_SESSION['somme'],
-                        'User info'=>[strip_tags($_POST["firstname"]),
-                                      strip_tags($_POST["lastname"]),
-                                      strip_tags($_POST["email"]),
-                                      strip_tags($_POST["phn"])],
-                        'Shipping info'=>[strip_tags($_POST["country"]),
+                        'User info'   =>[  strip_tags($_POST["firstname"]),
+                                           strip_tags($_POST["lastname"]),
+                                           strip_tags($_POST["email"]),
+                                           strip_tags($_POST["phn"])],
+                        'Shipping info'=>[ strip_tags($_POST["country"]),
                             strip_tags($_POST["city"]),
                             strip_tags($_POST["quartier"]),
                             strip_tags($_POST["appart"])
@@ -661,7 +661,7 @@ class Navigation
         }
 
         $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['name']);
-        setcookie('curr', $this->shopPref[0]['currency'], time()+60*24);
+        setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
 
         include_once S_VIEWS.'/shop.view.php';
         $this->getData();
