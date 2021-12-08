@@ -172,8 +172,8 @@ $title = "Product"
 
                         <b class="sub_nm"><?= $this->getData()[$i]['prod_name'];?></b>
 
-                        <p class="sub_prc"><?= $this->getData()[$i]['price'].'$';?>
-                            <del class="sub_prom"><?= $this->getData()[$i]['promo'].'$';?></del>
+                        <p class="sub_prc"><?= $this->getData()[$i]['price'].$this->getShopPref()[0]['currency'];?>
+                            <del class="sub_prom"><?= $this->getData()[$i]['promo'].$this->getShopPref()[0]['currency'];?></del>
                         </p>
 
                         <span class="sub_r_span">

@@ -9,7 +9,33 @@ $title = 'Check Cart';
 <body class="user-select-none">
     <section class="chkcrt_table container jumbotron mt-5" id="chkcrt_tabl">
         <table class="tab-content mt-5">
-            <thead><h4 class="ml user-select-none">CHECK YOUR CART</h4></thead>
+            <thead><h4 class="ml user-select-none">
+                CHECK YOUR CART
+                <img class="cart_more_option" src="<?= S_ASSETS ?>images/svg/more_black_24dp.svg" alt="more options">
+            </h4>
+
+            <div class="optdiv">
+                <p class="text-uppercase font-weight-bold">Convert total In</p>
+                <ul>
+                    <li>
+                         CFA
+                    </li>
+                    <li>
+                        EURO
+                    </li>
+                    <li>
+                        US DOLLAR
+                    </li>
+                    <li>
+                        POUND
+                    </li>
+                    <li>
+                        YEN
+                    </li>
+                </ul>
+            </div>
+
+            </thead>
 
             <p class="user-select-none" id="shop_name"></p>
                 <tr class="tl">
