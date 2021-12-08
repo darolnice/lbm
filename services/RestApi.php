@@ -383,7 +383,14 @@ class RestApi extends Database
         try {
             $p = parent::getDb()->prepare("SELECT price FROM $shopName WHERE id = $pid");
             $p->execute();
-            return $p->fetch(PDO::FETCH_ASSOC);
+            $d1 = $p->fetch(PDO::FETCH_ASSOC);
+
+            $d = parent::getDb()->prepare("SELECT currency FROM sallers WHERE shop_name = :shopName");
+            $d->execute(['shopName'=>$shopName]);
+            $d2 = $d->fetch(PDO::FETCH_ASSOC);
+
+            return [$d1, $d2];
+
         }catch (PDOException $e){
             return $e->getMessage();
         }

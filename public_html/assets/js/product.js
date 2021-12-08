@@ -11,8 +11,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let p_name = document.querySelector('.p_nm').innerHTML;
     let comp = 0;
 
-    let prix = document.querySelector('.p_pce a').innerHTML;
-    var cart_data = {prod_id:id, shop_name:sphn, prod_name:p_name, color:'', size:'', price:prix, quantity:''}
+    let prix = document.querySelector('.p_pce a');
+    var cart_data = {prod_id:id,
+                     shop_name:sphn,
+                     prod_name:p_name,
+                     color:'', size:'',
+                     price:prix.innerHTML,
+                     quantity:''
+    }
 
     const cont = document.querySelectorAll(".sub_cont");
     for (i=0; i<cont.length; i++){

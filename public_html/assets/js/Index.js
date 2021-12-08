@@ -218,10 +218,9 @@ class Index {
             data: {data: data},
             success: function(response){
                 if(response["response_code"] === 200 && response["res_id"] === 1009){
-                    let pttl = context.getAttribute('data-qte') * response['message']['price'];
-                    context.innerHTML = pttl.toFixed(2)+" US$";
-
-                }
+                    let pttl = context.getAttribute('data-qte') * response['message'][0]['price'];
+                    context.innerHTML = pttl.toFixed(2)+" "+response['message'][1]['currency'];
+                }// check cart price
                 if(response["response_code"] === 200 && response["res_id"] === 1005){
                     response['message'].forEach((item) =>{
                         let ent = context.parentNode.childNodes[3].childNodes[1].nextSibling.nextSibling.childNodes[3];
@@ -250,7 +249,7 @@ class Index {
                         context.style.display = 'none';
                         context.parentNode.childNodes[3].style.display = 'flex';
                     });
-                }
+                }// search
                 if(response["response_code"] === 200 && response["res_id"] === 1919){
                     if (response['message'] === 'Your reclamation add successfully'){
                         let slct = '#'+context.id+" input";
@@ -265,7 +264,7 @@ class Index {
                     if (response['message'] === 'Bad data please check your transaction informations'){
                         new Index().lbmAlert(response["message"], 'danger');
                     }
-                }
+                }// reclamation sent rec
                 if(response["response_code"] === 200 && response["res_id"] === 929){
                     if (response['message'] === 'Your alert sent succesfully'){
                         document.querySelectorAll("#alert_form_id input").forEach(item =>{
@@ -278,7 +277,7 @@ class Index {
                     }else {
                         new Index().lbmAlert(response["message"], 'danger');
                     }
-                }
+                }// reclamation sent alert
                 if(response["response_code"] === 200 && response["res_id"] === 106){
                     if (response['message'] === 'Your alert sent succesfully'){
                         document.querySelectorAll("#aboutiss_id input").forEach(item =>{
@@ -291,7 +290,7 @@ class Index {
                     }else {
                         new Index().lbmAlert(response["message"], 'danger');
                     }
-                }
+                }// reclamation sent end rec
                 if(response["response_code"] === 200 && response["res_id"] === 110){
                     new Index().scrollTo(0);
                     $('.rec_choose').fadeOut(300);
@@ -300,7 +299,7 @@ class Index {
                     }else {
                         new Index().lbmAlert(response["message"], 'danger');
                     }
-                }
+                }// faq
                 if(response["response_code"] === 200 && response["res_id"] === 603){
                     if (response['message'] === 'Post add successfully'){
                         $('.blog_post___').fadeOut(350);
@@ -308,7 +307,7 @@ class Index {
                     }else {
                         new Index().lbmAlert(response["message"], 'info');
                     }
-                }
+                }// forum
                 if(response["response_code"] === 200 && response["res_id"] === 1030){
                     if (response['message'] === 'Comment Add'){
                         let ck = new Index().getCookie('cookies_u_data');
@@ -321,7 +320,7 @@ class Index {
                     }else {
                         new Index().lbmAlert(response["message"], 'info');
                     }
-                }
+                }// forum || ad
                 if(response["response_code"] === 200 && response["res_id"] === 107){
                     if (response['message'] === 'ok'){
                         context.children[1].value = '';
@@ -341,7 +340,7 @@ class Index {
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
-                }
+                }// admin dashboard
                 if(response["response_code"] === 200 && response["res_id"] === 202){
                     if (response['message'] === 'true'){
                         $('.mrinf').fadeOut(200);
@@ -349,7 +348,7 @@ class Index {
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
-                }
+                }// add prod
                 if(response["response_code"] === 200 && response["res_id"] === 10){
                     if (response['message'] === true){
                         $('.___mrinf').fadeOut(200);
@@ -357,7 +356,7 @@ class Index {
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
-                }
+                }// admin resquect to check or advanced
                 if(response["response_code"] === 200 && response["res_id"] === 1012){
                     if (response['message']){
                         let link = 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/'+response['message'][0]['profil_image'];
@@ -378,7 +377,7 @@ class Index {
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
-                }
+                }// admin get data
                 if(response["response_code"] === 200 && response["res_id"] === 1808){
                     if (response['message'] === "next"){
                         let imgData = [];
@@ -395,23 +394,23 @@ class Index {
                     }else {
                         new Index().lbmAlert('Faill', 'danger');
                     }
-                }
+                }// admin upload images
                 if(response["response_code"] === 200 && response["res_id"] === 45){
                     if (response['message'] === 'true'){
                        location.reload();
                     }
-                }
+                }// range price
                 if(response["response_code"] === 200 && response["res_id"] === 106){
                     let id = '#'+context;
                     document.querySelector(id).previousElementSibling.previousElementSibling.style.display = 'none';
                     $(id).fadeOut();
                     $('.load').hide();
                     new Index().lbmAlert(response["message"]);
-                }
+                }// setting
                 if(response["response_code"] === 200 && response["res_id"] === 166){
                     $('.load').hide();
                     new Index().lbmAlert(response["message"])
-                }
+                }// setting
             }
         });
     }
