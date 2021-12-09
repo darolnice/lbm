@@ -17,10 +17,9 @@ $title = "Business accoumpt";
 
             <label>Country <mark style="color: red">*</mark>
                 <select id="s_country" required="required" name="country">
-                    <option value="USA">USA</option>
-                    <option value="Canada">Canada</option>
-                    <option value="France">France</option>
-                    <option value="Cameroun">Cameroon</option>
+                    <?php foreach(parent::getCountry() as $country): ?>
+                        <option value="<?= $country?>"> <?= $country?> </option>
+                    <?php endforeach;?>
                 </select>
             </label>
 

@@ -17,10 +17,9 @@ $title = "Sign up";
 
             <label>Country <mark style="color: red">*</mark>
                 <select id="country" required="required" name="country">
-                    <option value="USA">USA</option>
-                    <option value="CANADA">CANADA</option>
-                    <option value="FRANCE">FRANCE</option>
-                    <option value="CAMEROON">CAMEROON</option>
+                    <?php foreach(parent::getCountry() as $country): ?>
+                        <option value="<?= $country?>"> <?= $country?> </option>
+                    <?php endforeach;?>
                 </select>
             </label>
 

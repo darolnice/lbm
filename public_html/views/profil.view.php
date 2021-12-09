@@ -25,7 +25,7 @@
 
             <div class="reveal-3" id="pre_encaiss_div">
                 <button class="btn-lg" id="sec1_pre_btn_subs">Get Discount</button>
-                <button class="btn-lg" id="sec1_pre_btn_cont">Contact us</button>
+                <button class="btn-lg" id="sec1_pre_btn_cont">View Shop</button>
             </div>
         </div>
     </section>

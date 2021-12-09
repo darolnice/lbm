@@ -46,5 +46,13 @@ $(document).ready(function () {
         new Index().jxPostData('jxProfmail', this, this['name'].value, this['email'].value, this['subject'].value, this['message'].value, email);
     });
 
+    document.querySelectorAll('#ct1, #ct2, #ct3').forEach(btn =>{
+        btn.addEventListener('click', ()=>{new Index().scrollTo(3000)})
+    });
+
+    document.querySelector("#sec1_pre_btn_cont").addEventListener('click', ()=>{
+          let target = new URLSearchParams(window.location.search)
+          open('shop?name='+target.get('name'), '_parent');
+    });
 
 });

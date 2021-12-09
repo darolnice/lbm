@@ -70,4 +70,8 @@ $(document).ready(function () {
         }
     }
 
+    document.querySelectorAll('#___nav ul li').forEach(item =>{
+        item.classList.contains('active') ? item.classList.remove('cool') : null
+    });
+
 });

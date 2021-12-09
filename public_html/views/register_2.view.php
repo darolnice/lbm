@@ -19,24 +19,19 @@ $title = "Business accoumpt /2";
         </label>
 
         <label>City <mark style="color: red">*</mark>
-            <select id="s_country_2" type="text" required="required" name="city">
-                <option value="new york">NEW YORK</option>
-                <option value="otawa">OTAWA</option>
-                <option value="paris">PARIS</option>
-                <option value="douala">DOUALA</option>
-            </select>
+            <input type="text" name="city" id="sh_city">
         </label>
 
         <label>Activity<mark style="color: red">*</mark>
-            <select id="s_civility_2" type="text" required="required" name="activity">
-                <option value="general market">GENERAL MARKET</option>
-                <option value="electronic">ELECTRONIC</option>
-                <option value="fast food">FAST FOOD</option>
+            <select id="s_civility_2" required="required" name="activity">
+                <?php foreach(parent::getActivity() as $activity): ?>
+                    <option value="<?= $activity?>"> <?= $activity?> </option>
+                <?php endforeach;?>
             </select>
         </label>
 
         <label>Description <mark style="color: red">*</mark>
-            <textarea id="s_ph_nmb_2" type="text" required="required" name="description" cols="30" rows="10"></textarea>
+            <textarea id="s_ph_nmb_2" required="required" name="description" cols="30" rows="10"></textarea>
         </label>
 
         <label>Matricul<mark style="color: red">*</mark>

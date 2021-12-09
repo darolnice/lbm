@@ -10,6 +10,23 @@
 
 class Navigation
 {
+    private $country = ['USA', 'Cameroon', 'france', 'Italia', 'Canada', 'Gabon',
+                        'Congo brazaville', 'Ivoire coast', 'Tchad', 'Algeria'
+    ];
+    public function getCountry(): array
+    {
+        return $this->country;
+    }
+
+    private $activity = ['General Market store', 'Electronic store',
+                         'Health store', 'Sport store', 'Children store', 'Foot store'
+    ];
+    public function getActivity(): array
+    {
+        return $this->activity;
+    }
+
+
     private $data;
     private $shopProdData;
     private $shop_data;
@@ -44,7 +61,6 @@ class Navigation
     private $totalSu;
     private $totalBuActif;
     private $totalSuActif;
-
     private $totalMenSallers;
     private $totalWomanSallers;
     private $totalMenUsers;
@@ -59,415 +75,207 @@ class Navigation
 
 
 
-
-
-
-
-
-
-
-
-    /**
-     * @return mixed
-     */
     public function getShopPref()
     {
         return $this->shopPref;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSData()
     {
         return $this->s_Data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getShoplist()
     {
         return $this->shoplist;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSuClient()
     {
         return $this->SuClient;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBusiClient()
     {
         return $this->BusiClient;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalMenSallers()
     {
         return $this->totalMenSallers;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalWomanSallers()
     {
         return $this->totalWomanSallers;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalMenUsers()
     {
         return $this->totalMenUsers;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalWomanUsers()
     {
         return $this->totalWomanUsers;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalBuActif()
     {
         return $this->totalBuActif;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalSuActif()
     {
         return $this->totalSuActif;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalBu()
     {
         return $this->totalBu;
     }
-
-    /**
-     * @return mixed
-     */
     public function getTotalSu()
     {
         return $this->totalSu;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAllinplan()
     {
         return $this->allinplan;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAllplan()
     {
         return $this->allplan;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAllinFaq()
     {
         return $this->allinFaq;
     }
-
-    /**
-     * @return mixed
-     */
     public function getPromoClient()
     {
         return $this->promoClient;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAllinpromo()
     {
         return $this->allinpromo;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSpecialPromoData()
     {
         return $this->specialPromoData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getProfilData()
     {
         return $this->profilData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBlogShowAll()
     {
         return $this->blogShowAll;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBlogData()
     {
         return $this->blogData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getFaq()
     {
         return $this->faq;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBestShop()
     {
         return $this->bestShop;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBestSaling()
     {
         return $this->bestSaling;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSplbm()
     {
         return $this->splbm;
     }
-
-    /**
-     * @return mixed
-     */
     public function getBusiProd()
     {
         return $this->busiProd;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSearchProdShop()
     {
         return $this->searchProdShop;
     }
-
-    /**
-     * @return mixed
-     */
     public function getPromoFindprod()
     {
         return $this->promoFindprod;
     }
-
-    /**
-     * @param mixed $ctn_name
-     */
-    public function setCtnName($ctn_name): void
-    {
-        $this->ctn_name = $ctn_name;
-    }
-
-    /**
-     * @param mixed $ctn_subject
-     */
-    public function setCtnSubject($ctn_subject): void
-    {
-        $this->ctn_subject = $ctn_subject;
-    }
-
-    /**
-     * @param mixed $ctn_mail
-     */
-    public function setCtnMail($ctn_mail): void
-    {
-        $this->ctn_mail = $ctn_mail;
-    }
-
-    /**
-     * @param mixed $ctn_msg
-     */
-    public function setCtnMsg($ctn_msg): void
-    {
-        $this->ctn_msg = $ctn_msg;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCtnName()
     {
         return $this->ctn_name;
     }
-
-    /**
-     * @return mixed
-     */
     public function getCtnSubject()
     {
         return $this->ctn_subject;
     }
-
-    /**
-     * @return mixed
-     */
     public function getCtnMail()
     {
         return $this->ctn_mail;
     }
-
-    /**
-     * @return mixed
-     */
     public function getCtnMsg()
     {
         return $this->ctn_msg;
     }
-
-    /**
-     * @return mixed
-     */
     public function getCurrentSuData()
     {
         return $this->current_su_data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getShopCatSort()
     {
         return $this->shopCatSort;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAnnonceData()
     {
         return $this->annonceData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getProdArray()
     {
         return $this->prodArray;
     }
-
-    /**
-     * @return mixed
-     */
     public function getPromoFindCat()
     {
         return $this->promoFindCat;
     }
-
-    /**
-     * @return mixed
-     */
     public function getLbmFindCat()
     {
         return $this->lbmFindCat;
     }
-
-    /**
-     * @return mixed
-     */
     public function getLbmProdData()
     {
         return $this->lbmProdData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSubAdminData()
     {
         return $this->sub_admin_data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getSallerData()
     {
         return $this->saller_data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getShopData()
     {
         return $this->shop_data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getShopProdData()
     {
         return $this->shopProdData;
     }
-
-    /**
-     * @return mixed
-     */
     public function getData()
     {
         return $this->data;
     }
-
-    /**
-     * @return mixed
-     */
     public function getAnnonceD()
     {
         return $this->annonceD;
     }
 
-
+    public function setCtnName($ctn_name): void
+    {
+        $this->ctn_name = $ctn_name;
+    }
+    public function setCtnSubject($ctn_subject): void
+    {
+        $this->ctn_subject = $ctn_subject;
+    }
+    public function setCtnMail($ctn_mail): void
+    {
+        $this->ctn_mail = $ctn_mail;
+    }
+    public function setCtnMsg($ctn_msg): void
+    {
+        $this->ctn_msg = $ctn_msg;
+    }
 
 
 
@@ -664,6 +472,7 @@ class Navigation
         setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
 
         include_once S_VIEWS.'/shop.view.php';
+
         $this->getData();
         $this->getShopCatSort();
         $this->getSearchProdShop();
