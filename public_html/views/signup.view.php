@@ -9,23 +9,22 @@ $title = "Sign up";
 <body>
 
     <section id="sec1_signin">
-        <img class="signup__img" src="<?= S_ASSETS?>images/btc.jpg" alt="cover image">
+        <img class="signup__img" src="<?= S_ASSETS?>images/img/btc.jpg" alt="cover image">
 
         <form id="signin_form_div" method="POST">
 
             <div class="ttl">SIGN UP</div>
 
             <label>Country <mark style="color: red">*</mark>
-                <select id="country" type="text" required="required" name="country">
-                    <option value="USA">USA</option>
-                    <option value="CANADA">CANADA</option>
-                    <option value="FRANCE">FRANCE</option>
-                    <option value="CAMEROON">CAMEROON</option>
+                <select id="country" required="required" name="country">
+                    <?php foreach(parent::getCountry() as $country): ?>
+                        <option value="<?= $country?>"> <?= $country?> </option>
+                    <?php endforeach;?>
                 </select>
             </label>
 
             <label>City <mark style="color: red">*</mark>
-                <select id="country" type="text" required="required" name="city">
+                <select id="country" required="required" name="city">
                     <option value="DOUALA">DOUALA</option>
                     <option value="QUEBEC">QUEBEC</option>
                     <option value="PARIS">PARIS</option>
@@ -34,7 +33,7 @@ $title = "Sign up";
             </label>
 
             <label>Genre<mark style="color: red">*</mark>
-                <select id="civility" type="text" required="required" name="civility">
+                <select id="civility" required="required" name="civility">
                     <option value="Men">Men</option>
                     <option value="Woman">Woman</option>
                 </select>
@@ -63,7 +62,7 @@ $title = "Sign up";
                        name="password_confirm">
             </label>
 
-            <a id="already" href="business">Already account!</a>
+            <a id="already" href="login">Already account!</a>
 
             <label>
                 <input name="soumettre" id="cnnct_sign" type="submit" value="SUBMIT">

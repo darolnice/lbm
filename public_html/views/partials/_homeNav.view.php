@@ -1,7 +1,7 @@
 <?php //use Lbm\Functions\Functions; ?>
 <link rel="stylesheet" href="<?= S_ASSETS?>css/partials/homeNav.css">
 
-<nav class="nav-bar" id="">
+<nav class="nav-bar" id="--nav">
 
     <ul>
         <li class="cool <?= Functions::setActive('');?><?= Functions::setActive('home');?>" id="home">
