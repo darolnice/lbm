@@ -53,15 +53,17 @@ $title = 'Check Cart';
 
                         <td id="crt_qte">
                             <button class="minus"
+                                    data-lim ="<?= json_decode($v_)->stock?>"
                                     data-crr ="<?= json_decode($v_)->currency?>"
                                     data-pu ="<?= json_decode($v_)->price?>"
-                                    data-id="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">-
+                                    data-id ="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">-
                             </button>
                                 <?= json_decode($v_)->quantity?>
                             <button class="plus"
+                                    data-lim ="<?= json_decode($v_)->stock?>"
                                     data-crr ="<?= json_decode($v_)->currency?>"
                                     data-pu ="<?= json_decode($v_)->price?>"
-                                    data-id="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">+
+                                    data-id ="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">+
                             </button>
                         </td>
 
@@ -80,7 +82,7 @@ $title = 'Check Cart';
         <div class="sub">
             <form method="post" class="form-group">
                 <div class="cc_pi mb-3">
-                    <p class="mb-1">Personal informations</p>
+                    <p class="mb-1">Personnal informations</p>
                     <input type="text" name="firstname" placeholder="FIRST NAME" required>
                     <input type="text" name="lastname" class="float-right" placeholder="LAST NAME" required>
                     <input type="email" name="email" placeholder="EMAIL" required>
