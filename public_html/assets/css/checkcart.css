@@ -109,6 +109,22 @@ table tr td{
     border-radius: 1px;
 }
 
+#crt_qte{
+    position: relative;
+}
+
+#crt_qte button{
+    /* position: absolute; */
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    font-size: 13px;
+    background-color: aliceblue;
+    margin-right: 8px;
+    border: none;
+    outline: none!important;
+}
+
 .ml{
     margin-left: 13%;
 }

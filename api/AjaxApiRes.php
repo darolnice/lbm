@@ -523,7 +523,9 @@ class AjaxApiRes
         }
     }
 
-
+    /**
+     *
+     */
     function jxrC(){
         session_start();
         if(!empty($_POST['data'])){
@@ -1063,7 +1065,19 @@ class AjaxApiRes
     }
 
 
+    public function jxUDCart(){
+        session_start();
+        $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
 
+        foreach($_SESSION['cart'] as $k => $v){
+            if(isset($v[$post[0]])){
+                $updateArry [] = json_decode($v[$post[0]], true);
+                $updateArry[0]['quantity'] = $post[1];
+                $_SESSION['cart'][$k][$post[0]] = json_encode($updateArry[0]);
+                $this->response($this->HTTP_OK, $post[1], 13);
+            }
+        }
+    }
 
 
 
