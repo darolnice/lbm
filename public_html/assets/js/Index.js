@@ -415,6 +415,11 @@ class Index {
                     $('.btn_t').text(response["message"]+' '+context);
                     new Index().lbmAlert('Convert');
                 }// checkcart reconvert tt
+                if(response["response_code"] === 200 && response["res_id"] === 13){
+                    let cp = context.parentNode.parentNode.children[4];
+                    cp.innerHTML = (response['message'][0]*data[2]).toFixed(2)+ ' '+data[3]
+                    $('.btn_t').text(response['message'][1]+' US$');
+                }// checkcart update price
             }
         });
     }

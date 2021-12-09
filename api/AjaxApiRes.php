@@ -451,109 +451,6 @@ class AjaxApiRes
          return  $acc + $curr;
     }
 
-    /**
-     *
-     */
-    public function saveCart() {
-        session_start();
-        if($_POST['key'] !== '' && $_POST['value'] !== ''){
-            if (isset($_SESSION['cart'])){
-                $tab = $_SESSION['cart'];
-
-                //price sum
-                array_push( $_SESSION['somme'], json_decode($_POST['value'])->price * json_decode($_POST['value'])->quantity);
-
-                //update
-                if($this->forUpdate($_SESSION['cart']) !== false){
-                    $v = [$_POST['value']];
-                    unset($_SESSION['cart'][$this->forUpdate($_SESSION['cart'])]);
-                    array_push($_SESSION['cart'], $v);
-                    $this->response($this->HTTP_OK, 'Product Update', 878);
-                    return null;
-                }
-
-                //already in cart
-                if (in_array($_POST['value'], $_SESSION['val'])){
-                    $this->response($this->HTTP_OK, 'Already In Cart', 878);
-                    return null;
-                }
-
-                // Add in cart
-                foreach ($_SESSION['cart'] as $k => $v){
-                    foreach ($v as $k_ => $v_){
-                        array_push($tab, [$_POST['key'] => $_POST['value']]);
-                        $_SESSION['cart'] = $tab;
-
-                        $chk = $_SESSION['val'];
-                        array_push($chk, $_POST['value']);
-                        $_SESSION['val'] = $chk;
-
-                        $this->response($this->HTTP_OK, 'Product Add', 878);
-                        return null;
-                    }
-                }
-
-            }else {
-                $_SESSION['somme'] = [];
-                $this->convertCurrency(json_decode($_POST['value'])->currency);
-                $_SESSION['cart'][0] = [$_POST['key'] => $_POST['value']];
-                $_SESSION['val'] = [$_POST['value']];
-                $this->response($this->HTTP_OK, 'Product Add', 878);
-            }
-
-        }else{
-            $this->response($this->HTTP_BAD_REQUEST, "Some one is wrong", 485);
-        }
-    }
-
-    /**
-     * @param string $currency
-     */
-    function convertCurrency (string $currency){
-        if($currency === 'CFA'){
-            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price / $this->DOLLAR) * json_decode($_POST['value'])->quantity, 2));
-        }elseif($currency === '<pre>&euro;</pre>'){
-            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price - $this->EURO) * json_decode($_POST['value'])->quantity, 2));
-        }elseif($currency === '<pre>&pound;</pre>'){
-            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price + $this->POUND) * json_decode($_POST['value'])->quantity, 2));
-        }elseif($currency === '<pre>&yen;</pre>'){
-            array_push($_SESSION['somme'], round((json_decode($_POST['value'])->price + $this->YEN) * json_decode($_POST['value'])->quantity,2));
-        }else{
-            array_push($_SESSION['somme'],json_decode($_POST['value'])->price * json_decode($_POST['value'])->quantity);
-        }
-    }
-
-
-    function jxrC(){
-        session_start();
-        if(!empty($_POST['data'])){
-            if($_POST['data'][0] === 'CFA'){
-                $r = round(array_sum($_SESSION['somme'])*$this->DOLLAR,2);
-                $_SESSION['soe'] = [$r.' CFA', $r];
-                $this->response($this->HTTP_OK, $r, 11);
-
-            }elseif($_POST['data'][0] === '€'){
-                $r = round(array_sum($_SESSION['somme'])+$this->EURO,2);
-                $_SESSION['soe'] = [$r.' €', $r];
-                $this->response($this->HTTP_OK, $r, 11);
-
-            }elseif($_POST['data'][0] === '£'){
-                $r = round(array_sum($_SESSION['somme'])+$this->POUND,2);
-                $_SESSION['soe'] = [$r.' £', $r];
-                $this->response($this->HTTP_OK, $r, 11);
-
-            }elseif($_POST['data'][0] === '¥'){
-                $r = round(array_sum($_SESSION['somme'])+$this->YEN,2);
-                $_SESSION['soe'] = [$r.' ¥', $r];
-                $this->response($this->HTTP_OK, $r, 11);
-
-            }else{
-                $r = round(array_sum($_SESSION['somme']),2);
-                $_SESSION['soe'] = [$r.' US$', $r];
-                $this->response($this->HTTP_OK, $r, 11);
-            }
-        }
-    }
 
     /**
      *
@@ -1027,7 +924,9 @@ class AjaxApiRes
     }
 
     /**
-     *
+     * Cette methode gere les mise à jours de certainces
+     * options d'administrateur dans la page setting
+     * Notemment: Le upload des images
      */
     public function ftcSetD(){
         session_start();
@@ -1063,7 +962,146 @@ class AjaxApiRes
     }
 
 
+    /**
+     * Cette methode gere l'ajout ou la mise à jour
+     * d'un produit dans le panier
+     */
+    public function saveCart() {
+        session_start();
+        if($_POST['key'] !== '' && $_POST['value'] !== ''){
+            if (isset($_SESSION['cart'])){
+                $tab = $_SESSION['cart'];
 
+                // Update
+                if($this->forUpdate($_SESSION['cart']) !== false){
+                    $v = [$_POST['value']];
+                    unset($_SESSION['cart'][$this->forUpdate($_SESSION['cart'])]);
+                    array_push($_SESSION['cart'], $v);
+                    $this->response($this->HTTP_OK, 'Product Update', 878);
+                    return null;
+                }
+
+                // Already in cart
+                if (in_array($_POST['value'], $_SESSION['val'])){
+                    $this->response($this->HTTP_OK, 'Already In Cart', 878);
+                    return null;
+                }
+
+                // Add in cart
+                foreach ($_SESSION['cart'] as $k => $v){
+                    foreach ($v as $k_ => $v_){
+                        array_push($tab, [$_POST['key'] => $_POST['value']]);
+                        $_SESSION['cart'] = $tab;
+
+                        $chk = $_SESSION['val'];
+                        array_push($chk, $_POST['value']);
+                        $_SESSION['val'] = $chk;
+
+                        // Price sum
+                        $this->convertCurrency(json_decode($_POST['value'])->currency,
+                                               json_decode($_POST['value'])->price,
+                                               json_decode($_POST['value'])->quantity,
+                                               $_POST['key']
+                        );
+
+                        $this->response($this->HTTP_OK, 'Product Add', 878);
+                        return null;
+                    }
+                }
+
+            }else {
+                $_SESSION['somme'] = [];
+                $this->convertCurrency(json_decode($_POST['value'])->currency,
+                    json_decode($_POST['value'])->price,
+                    json_decode($_POST['value'])->quantity,
+                    $_POST['key']
+                );
+                $_SESSION['cart'][0] = [$_POST['key'] => $_POST['value']];
+                $_SESSION['val'] = [$_POST['value']];
+                $this->response($this->HTTP_OK, 'Product Add', 878);
+            }
+
+        }else{
+            $this->response($this->HTTP_BAD_REQUEST, "Some one is wrong", 485);
+        }
+    }
+
+    /**
+     * Cette methode Converti en dollar toutes les devises et stoque
+     * le resultat dans array somme
+     * @param string $currency
+     * @param $price
+     * @param $qte
+     * @param $pid
+     */
+    function convertCurrency (string $currency, $price, $qte, $pid){
+        if($currency === 'CFA'){
+            $_SESSION['somme'][$pid] = round(($price / $this->DOLLAR) * $qte, 2);
+        }elseif($currency === '€'){
+            $_SESSION['somme'][$pid] = round(($price - $this->EURO) * $qte, 2);
+        }elseif($currency === '£'){
+            $_SESSION['somme'][$pid] = round(($price + $this->POUND) * $qte, 2);
+        }elseif($currency === '¥'){
+            $_SESSION['somme'][$pid] = round(($price + $this->YEN) * $qte,2);
+        }else{
+            $_SESSION['somme'][$pid] = round($price * $qte, 2);
+        }
+    }
+
+    /**
+     * Cette methode Recupere les prix en $ dans array somme et retour
+     * la somme converti en la monaie demandé
+     */
+    function jxrC(){
+        session_start();
+        if(!empty($_POST['data'])){
+            if($_POST['data'][0] === 'CFA'){
+                $r = round(array_sum($_SESSION['somme'])*$this->DOLLAR,2);
+                $_SESSION['soe'] = [$r.' CFA', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '€'){
+                $r = round(array_sum($_SESSION['somme'])+$this->EURO,2);
+                $_SESSION['soe'] = [$r.' €', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '£'){
+                $r = round(array_sum($_SESSION['somme'])+$this->POUND,2);
+                $_SESSION['soe'] = [$r.' £', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }elseif($_POST['data'][0] === '¥'){
+                $r = round(array_sum($_SESSION['somme'])+$this->YEN,2);
+                $_SESSION['soe'] = [$r.' ¥', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+
+            }else{
+                $r = round(array_sum($_SESSION['somme']),2);
+                $_SESSION['soe'] = [$r.' US$', $r];
+                $this->response($this->HTTP_OK, $r, 11);
+            }
+        }
+    }
+
+    /**
+     *  Cette methode met à jour le prix d'un produit
+     *  en fonction de la nouvelle quantité
+     */
+    public function jxUDCart(){
+        session_start();
+        $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+        foreach($_SESSION['cart'] as $k => $v){
+            if(isset($v[$post[0]])){
+                $updateArry [] = json_decode($v[$post[0]], true);
+                $updateArry[0]['quantity'] = $post[1];
+                $_SESSION['cart'][$k][$post[0]] = json_encode($updateArry[0]);
+                $this->convertCurrency($post[3],$post[2]*$post[1],1, $post[0]);
+                $sm = array_sum($_SESSION['somme']);
+                $this->response($this->HTTP_OK, [$post[1], $sm], 13);
+            }
+        }
+    }
 
 
 
@@ -1076,6 +1114,7 @@ class AjaxApiRes
      * @param $response_code
      * @param $message
      * @param null $res_id
+     * Cette methode le statu d'une requete et le renvoi des reponses
      */
     public function response($response_code, $message, $res_id = null){
         header('content-type: application/json');

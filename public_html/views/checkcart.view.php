@@ -9,48 +9,64 @@ $title = 'Check Cart';
 <body class="user-select-none">
     <section class="chkcrt_table container jumbotron mt-5" id="chkcrt_tabl">
         <table class="tab-content mt-5">
-            <thead><h4 class="ml user-select-none">
-                CHECK YOUR CART
-                <img class="cart_more_option" src="<?= S_ASSETS ?>images/svg/more_black_24dp.svg" alt="more options">
-            </h4>
+            <thead>
+                <h4 class="ml user-select-none">
+                    CHECK YOUR CART
+                    <img class="cart_more_option" src="<?= S_ASSETS ?>images/svg/more_black_24dp.svg" alt="more options">
+                </h4>
 
-            <div class="optdiv">
-                <p class="text-uppercase font-weight-bold">Convert total In</p>
-                <ul>
-                    <li data-cy="CFA">
-                         CFA
-                    </li>
-                    <li data-cy="&euro;">
-                        EURO
-                    </li>
-                    <li data-cy="US&dollar;">
-                        US DOLLAR
-                    </li>
-                    <li data-cy="&pound;">
-                        POUND
-                    </li>
-                    <li data-cy="&yen;">
-                        YEN
-                    </li>
-                </ul>
-            </div>
-
+                <div class="optdiv">
+                    <p class="text-uppercase font-weight-bold">Convert total In</p>
+                    <ul>
+                        <li data-cy="CFA">
+                             CFA
+                        </li>
+                        <li data-cy="&euro;">
+                            EURO
+                        </li>
+                        <li data-cy="US&dollar;">
+                            US DOLLAR
+                        </li>
+                        <li data-cy="&pound;">
+                            POUND
+                        </li>
+                        <li data-cy="&yen;">
+                            YEN
+                        </li>
+                    </ul>
+                </div>
             </thead>
 
             <p class="user-select-none" id="shop_name"></p>
-                <tr class="tl">
-                    <td style="font-weight: 400; width: 110px">PRODUCT</td>
-                    <td style="font-weight: 400; width: 40px">QUANTITY</td>
-                    <td style="font-weight: 400; width: 80px">COLOR</td>
-                    <td style="font-weight: 400; width: 50px">SIZE</td>
-                    <td style="font-weight: 400; width: 110px">PRICE TTC</td>
-                </tr>
+            <tr class="tl">
+                <td style="font-weight: 400; width: 110px">PRODUCT</td>
+                <td style="font-weight: 400; width: 40px">QUANTITY</td>
+                <td style="font-weight: 400; width: 80px">COLOR</td>
+                <td style="font-weight: 400; width: 50px">SIZE</td>
+                <td style="font-weight: 400; width: 110px">PRICE TTC</td>
+            </tr>
 
             <?php foreach ($_SESSION['cart'] as $k => $v): ?>
                 <?php foreach ($v as $k_ => $v_): ?>
                     <tr class="tl_v">
                         <td id="crt_name"><?= json_decode($v_)->prod_name?></td>
-                        <td id="crt_qte"><?= json_decode($v_)->quantity?></td>
+
+                        <td id="crt_qte">
+                            <button class="minus"
+                                    data-lim ="<?= json_decode($v_)->stock?>"
+                                    data-crr ="<?= json_decode($v_)->currency?>"
+                                    data-pu ="<?= json_decode($v_)->price?>"
+                                    data-id ="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">-
+                            </button>
+                                <?= json_decode($v_)->quantity?>
+                            <button class="plus"
+                                    data-lim ="<?= json_decode($v_)->stock?>"
+                                    data-crr ="<?= json_decode($v_)->currency?>"
+                                    data-pu ="<?= json_decode($v_)->price?>"
+                                    data-id ="<?= json_decode($v_)->prod_id.json_decode($v_)->shop_name?>">+
+                            </button>
+                        </td>
+
                         <td id="crt_clr"><?= json_decode($v_)->color?></td>
                         <td id="crt_sze"><?= json_decode($v_)->size?></td>
                         <td id="crt_price"
@@ -66,7 +82,7 @@ $title = 'Check Cart';
         <div class="sub">
             <form method="post" class="form-group">
                 <div class="cc_pi mb-3">
-                    <p class="mb-1">Personal informations</p>
+                    <p class="mb-1">Personnal informations</p>
                     <input type="text" name="firstname" placeholder="FIRST NAME" required>
                     <input type="text" name="lastname" class="float-right" placeholder="LAST NAME" required>
                     <input type="email" name="email" placeholder="EMAIL" required>
