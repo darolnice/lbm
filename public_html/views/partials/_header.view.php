@@ -23,7 +23,7 @@
 
 <?php
         include_once S_VIEWS.'partials/_fragment.view.php';
-        $tab = ['setting', 'signup', 'register', 'business', 'register_2', 'om',
+        $tab = ['setting', 'signup', 'register', 'business', 'register_2', 'om', 'forget',
                'login', 'checkcart', 'panel', 'dashboard', 'plans', 'profil', 'momo'
         ];
 

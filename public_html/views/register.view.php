@@ -16,7 +16,7 @@ $title = "Business accoumpt";
             </div>
 
             <label>Country <mark style="color: red">*</mark>
-                <select id="s_country" type="text" required="required" name="country">
+                <select id="s_country" required="required" name="country">
                     <option value="USA">USA</option>
                     <option value="Canada">Canada</option>
                     <option value="France">France</option>
@@ -25,7 +25,7 @@ $title = "Business accoumpt";
             </label>
 
             <label>Genre<mark style="color: red">*</mark>
-                <select id="s_civility" type="text" required="required" name="civility">
+                <select id="s_civility" required="required" name="civility">
                     <option value="Men">Men</option>
                     <option value="Woman">Woman</option>
                 </select>
@@ -54,7 +54,7 @@ $title = "Business accoumpt";
                        name="password_confirm">
             </label>
 
-            <a id="s_already" href="../../index.php">Already account!</a>
+            <a id="s_already" href="business">Already account!</a>
 
             <label>
                 <input name="soumettre" id="s_cnnct_sign" type="submit" value="NEXT">

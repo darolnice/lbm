@@ -5,7 +5,7 @@
 <body>
 
 <section id="sec1_signin">
-    <img class="signup__img" src="<?= S_ASSETS?>images/btc.jpg" alt="cover image">
+    <img class="signup__img" src="<?= S_ASSETS?>images/img/btc.jpg" alt="cover image">
 
     <div id="signin_form_div">
         <form method="POST">
@@ -20,7 +20,7 @@
             </label>
         </form>
 
-        <a id="already" href="../../index.php">CANCEL</a>
+        <a id="already" href="login">CANCEL</a>
     </div>
 </section>
 

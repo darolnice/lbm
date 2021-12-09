@@ -20,7 +20,7 @@ $title = "Product"
 
             <fieldset class="">
                 <legend class="small">Post</legend>
-                <textarea id="blogPostcmt" type="text" name="post" rows="6" required="required"></textarea>
+                <textarea id="blogPostcmt" name="post" rows="6" required="required"></textarea>
                 <input id="add_blog_post" class="btn btn-primary text-center" type="submit" name="sbt" value="POST">
             </fieldset>
         </div>
@@ -84,9 +84,9 @@ $title = "Product"
            </p>
 
            <p class="p_rt">
-            <?php for ($m_=0; $m_<$this->getShopProdData()->rating; $m_++): ?>
-                                        <a data-count= "<?= $this->getShopProdData()->rating;?>" style="color: #ec6206; text-decoration:none!important;">&starf;</a> 
-                                                                          <?php endfor ?>
+                <?php for ($m_=0; $m_<$this->getShopProdData()->rating; $m_++): ?>
+                      <a data-count= "<?= $this->getShopProdData()->rating;?>" style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                <?php endfor ?>
             </p>
            <p class="p_qte"><?= $this->getShopProdData()->quantity;?></p>
            <p class="p_typ"><?= $this->getShopProdData()->quality;?></p>
@@ -122,7 +122,7 @@ $title = "Product"
 
                <div class="qte__">
                    <button type="button" class="rem_prd">-</button>
-                   <input  class="prd_count" type="button" name="prdQte" value="0">
+                   <input  class="prd_count" type="text" name="prdQte" value="0">
                    <button type="button" class="add_prd">+</button>
                </div>
            </form>

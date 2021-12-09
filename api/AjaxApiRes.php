@@ -1097,7 +1097,7 @@ class AjaxApiRes
                 $updateArry[0]['quantity'] = $post[1];
                 $_SESSION['cart'][$k][$post[0]] = json_encode($updateArry[0]);
                 $this->convertCurrency($post[3],$post[2]*$post[1],1, $post[0]);
-                $sm = array_sum($_SESSION['somme']);
+                $sm = round(array_sum($_SESSION['somme']), 2);
                 $this->response($this->HTTP_OK, [$post[1], $sm], 13);
             }
         }
