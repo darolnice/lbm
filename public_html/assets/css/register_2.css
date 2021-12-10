@@ -58,24 +58,22 @@ mark{
     font-size: 13px;
 }
 
-
 #s_signin_form_div_2{
-    border: 1px solid rgba(213, 211, 211, 0.79);
+    border: 1px solid rgba(194, 192, 192, 0.79);
     position: absolute;
-    top: 0;
-    max-width: 27%;
+    max-width: 50%;
     width: auto;
     min-height: 85%;
     height: auto;
-    margin-top: 10px;
+    margin-top: 30px;
     display: block;
     justify-content: center;
     align-items: center;
-    transform: translateX(130%);
+    margin-left: 5%;
     background-color: transparent;
     border-radius: 4px;
-    padding-top: 3%;
-    padding-left: 5%;
+    padding-top: 5%;
+    padding-left: 10%;
 }
 
 #s_pw_2:hover, #s_pw_c_2:hover{
@@ -85,10 +83,11 @@ mark{
 }
 
 #s_sec1_signin_2{
-    /*border: 1px solid #0f7a84;*/
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: 100vh;
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
 }
 .s_signup__img_2{
     width: 100%;
@@ -129,3 +128,69 @@ mark{
     border: none;
     color: white;
 }
+
+#s_pw_2{
+    border: none;
+    margin-top: 5px;
+    height: 27px;
+    font-size: 11px;
+    color: black;
+}
+#s_pw_2:hover {
+    background-color: white;
+    color: black;
+}
+
+
+
+.smartbtn{
+    border: none;
+    width: 105%;
+    background-color: cadetblue;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 8px;
+    outline: none!important;
+}
+
+
+.cni-img-div{
+    display: block;
+    position: absolute;
+    /*border: 1px solid coral;*/
+    width: 57%;
+    top: 0;
+    margin-left: 90%;
+}
+.cni-img-div img{
+    /* FONT-WEIGHT: 100; */
+    /*border: 1px solid coral;*/
+    width: 100%;
+    height: 15%;
+    margin-left: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.reg-2Form_div{
+    width: 60%;
+    height: auto;
+    float: left;
+    background-color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+}
+
+.regComm{
+    width: 40%;
+    height: auto;
+    padding: 10px;
+    background-color: #1d1d1d;
+    color: white;
+    font-size: 11px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+

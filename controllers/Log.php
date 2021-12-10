@@ -199,49 +199,58 @@ class Log extends Navigation
         session_start();
         Functions::Auth_UserIS();
 
-        include_once S_VIEWS.'/register_2.view.php';
+        if ($_SESSION['c_name']){
+            $F = new Functions();
+            $mgrUser = new MgrUser();
 
-//        if ($_SESSION['c_name']){
-//            $F = new Functions();
-//
-//
-//            $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-//            $shop_name = $post['shop_name'];
-//            $city = $post['city'];
-//            $activity = $post['activity'];
-//            $description = $post['description'];
-//            $matricule = $post['matricul'];
-//            $shop_key = $post['shop_key'];
-//            $current_plan = $post['current_plan'];
-//
-//            $data = [$shop_name, $city, $activity, $description, $matricule, $shop_key, $current_plan];
-//            $errors = [];
-//
-//            if(isset($_POST['submit'])){
-//                if (!$F->not_empty([$shop_name, $city, $activity, $description, $matricule, $shop_key, $current_plan])){
-//                    if (mb_strlen($shop_name) < 3) {
-//                        $errors[] = "- Your shop name is short, minimun 3 chars";
-//                    }
-//
-//                    if(!(new MgrUser)->is_already_in_User( 'sallers','matricule', $matricule)){
-//                        $errors[] = "- This matricul is already in use";
-//                    }
-//
-//                    $F->notif_errors([$errors]);
-//
-//                }else {
-//                    $errors[] = "- Please complete all forms";
-//                    $F->notif_errors([$errors]);
-//                }
-//
-//                if(count($errors) === 0){
-//                    (new MgrLogin)->register_step2($data);
-//                }
-//            }
-//
-//        }else{
-//            Functions::redir('register');
-//        }
+            include_once S_VIEWS.'/register_2.view.php';
+
+            $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $shop_name = $post['shop_name'];
+            $city = $post['city'];
+            $activity = $post['activity'];
+            $description = $post['description'];
+            $matricule = $post['matricul'];
+            $shop_key = $post['shop_key'];
+            $current_plan = $post['current_plan'];
+
+            $data = [$shop_name, $city, $activity, $description, $matricule, $shop_key, $current_plan];
+            $errors = [];
+
+            if(isset($_POST['submit'])){
+                if (!$F->not_empty([$shop_name, $city, $activity, $description, $shop_key, $current_plan])){
+
+                    if(empty($_FILES['name']['CardIdface1']) || empty($_FILES['name']['CardIdface2'])){
+                        $errors[] = "- Please Add Card Id Images";
+                    }
+
+                    if (mb_strlen($shop_name) < 3) {
+                        $errors[] = "- Your shop name is short, minimun 3 chars";
+                    }
+
+                    if(!$mgrUser->is_already_in_User('sallers','shop_name', $shop_name)){
+                        $errors[] = "- This shop name is already in use";
+                    }
+
+                    if(!$mgrUser->is_already_in_User('sallers','matricule', $matricule)){
+                        $errors[] = "- This matricul is already in use";
+                    }
+
+                    $F->notif_errors([$errors]);
+
+                }else {
+                    $errors[] = "- Please complete all forms";
+                    $F->notif_errors([$errors]);
+                }
+
+                if(count($errors) === 0){
+                    (new MgrLogin)->register_step2($data);
+                }
+            }
+
+        }else{
+            Functions::redir('register');
+        }
     }
 
     public function showForget(){

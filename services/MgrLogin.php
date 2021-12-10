@@ -195,8 +195,8 @@ class MgrLogin extends Database
      */
     public function register_step2(array $data = []): string {
         $F = new Functions();
-        $_SESSION['tkn'] = sha1($_POST['shop_name'].$_POST['shop_key']);
-        $_SESSION['shop_name'] = $_POST['shop_name'];
+        $_SESSION['tkn'] = sha1($data[0].$data[5]);
+        $_SESSION['shop_name'] = $data[0];
 
         ob_start();
         require(S_VIEWS.'/partials/tmpl/saller_activation_mail_tmpl.view.php');
@@ -212,14 +212,15 @@ class MgrLogin extends Database
                                                              current_plan = :current_plan                                                  
                                                              WHERE username= :username'
             );
-            $qry->bindValue('username', $_SESSION['c_name'], PDO::PARAM_STR);
-            $qry->bindValue('shop_name', $data[0], PDO::PARAM_STR);
-            $qry->bindValue('city', $data[1], PDO::PARAM_STR);
-            $qry->bindValue('activity', $data[2], PDO::PARAM_STR);
-            $qry->bindValue('description', $data[3], PDO::PARAM_STR);
-            $qry->bindValue('matricule', $data[4], PDO::PARAM_STR);
-            $qry->bindValue('shop_key', $data[5], PDO::PARAM_STR);
-            $qry->bindValue('current_plan', $data[6], PDO::PARAM_STR);
+
+            $qry->bindParams('username', $_SESSION['c_name'], PDO::PARAM_STR);
+            $qry->bindParams('shop_name', $data[0], PDO::PARAM_STR);
+            $qry->bindParams('city', $data[1], PDO::PARAM_STR);
+            $qry->bindParams('activity', $data[2], PDO::PARAM_STR);
+            $qry->bindParams('description', $data[3], PDO::PARAM_STR);
+            $qry->bindParams('matricule', $data[4], PDO::PARAM_STR);
+            $qry->bindParams('shop_key', $data[5], PDO::PARAM_STR);
+            $qry->bindParams('current_plan', $data[6], PDO::PARAM_STR);
 
             if ($qry->execute()){
                 (new MgrProducts)->createShop($_POST['shop_name'], $content);
@@ -253,12 +254,12 @@ class MgrLogin extends Database
                                                                    :shop)'
             );
 
-            $qr->bindValue('right', $data[0], PDO::PARAM_STR_CHAR);
-            $qr->bindValue('name', $data[1], PDO::PARAM_STR_CHAR);
-            $qr->bindValue('email', $data[2], PDO::PARAM_STR_CHAR);
-            $qr->bindValue('phone', $data[3], PDO::PARAM_STR_CHAR);
-            $qr->bindValue('password', password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR_CHAR);
-            $qr->bindValue('shop', $_SESSION["shop_name"], PDO::PARAM_STR_CHAR);
+            $qr->bindParams('right', $data[0], PDO::PARAM_STR_CHAR);
+            $qr->bindParams('name', $data[1], PDO::PARAM_STR_CHAR);
+            $qr->bindParams('email', $data[2], PDO::PARAM_STR_CHAR);
+            $qr->bindParams('phone', $data[3], PDO::PARAM_STR_CHAR);
+            $qr->bindParams('password', password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR_CHAR);
+            $qr->bindParams('shop', $_SESSION["shop_name"], PDO::PARAM_STR_CHAR);
 
             if ($qr->execute()){
                 $qr->closeCursor();
