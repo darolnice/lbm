@@ -786,6 +786,8 @@ document.addEventListener('DOMContentLoaded', function () {
      * register 2 start
      */
     if (document.querySelector('#s_usrn_2')){
+        let shopname = '';
+
         $('#s_usrn_2').on('change', function () {
             $.ajax({
                 type:'POST',
@@ -793,18 +795,97 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: {prop: this.value},
                 success:function (response) {
                     if (response["message"] !== 'free'){
+                        shopname = 'free';
                         $('#s_usrn_2').css('border-color', 'red');
                     }else {
+                        shopname = 'not free';
                         $('#s_usrn_2').css('border-color', 'green');
                     }
                 }
             });
         });
 
-        const defbtn = document.querySelector('#s_pw_2');
-        const custbtn = document.querySelector(".smartbtn");
-        custbtn.addEventListener('click', uploadcard1)
-        function uploadcard1() {defbtn.click()}
+        const defbtn1 = document.querySelector('#s_cni_1');
+        const defbtn2 = document.querySelector('#s_cni_2');
+
+        const custbtn = document.querySelectorAll(".smartbtn");
+        custbtn.forEach(element => {
+             element.addEventListener('click', ()=>{
+                 let prv_id = element.previousElementSibling.previousElementSibling.getAttribute('id');
+
+                 if(prv_id === 's_cni_1'){
+                    uploadcard1();
+                 }else{
+                    uploadcard2();
+                 }
+             })
+        });
+       
+        function uploadcard1() {defbtn1.click();}
+        function uploadcard2() {defbtn2.click();}
+        
+        document.querySelectorAll('#s_cni_1, #s_cni_2').forEach(item =>{
+            item.addEventListener('input', ()=>{
+                if(item.getAttribute('id') === 's_cni_1'){
+                    let file = defbtn1.files[0];
+                    if(file){
+                        const reader = new FileReader();
+                        reader.addEventListener('load', ()=>{
+                            document.querySelector('.thumb1').setAttribute('src', reader.result)
+                        });
+                        reader.readAsDataURL(file)
+                    }  
+
+                }else{
+                    let file2 = defbtn2.files[0];
+                    if(file2){
+                        const reader = new FileReader();
+                        reader.addEventListener('load', ()=>{
+                            document.querySelector('.thumb2').setAttribute('src', reader.result)
+                        });
+                        reader.readAsDataURL(file2)
+                    } 
+                } 
+            })
+        });
+        
+        document.forms["reg2_form"].addEventListener('submit', function(e){
+            inputs = this;
+            let data = [];
+            index = new Index();
+            
+            if(inputs){
+                e.preventDefault();
+                if(shopname === 'free'){
+                    if(defbtn1.files[0] && defbtn2.files[0]){
+                        for(let i=0; i<inputs.length; i++){
+                            if(inputs[i].value !== null ){
+                                data.push(inputs[i].value);
+    
+                            }else{
+                                index.lbmAlert('Please complete all forms', "danger")
+                            }
+                        }
+                        
+                        let fd = new FormData();
+                        fd.append('cni-img1', defbtn1.files[0]);
+                        fd.append('cni-img2', defbtn2.files[0]);
+                        
+                        let newtab = data.slice(0, 5)
+                        newtab.push(fd)
+                        index.jxPostData('jxregist2', this, newtab);
+    
+                    }else{
+                        index.lbmAlert('Please upload all card id image', "danger")
+                    }
+                }else{
+                    index.lbmAlert('Please Enter available Shop name', 'danger');
+                }
+                
+            }
+        });
+
+        
 
 
     }
@@ -864,6 +945,7 @@ document.addEventListener('DOMContentLoaded', function () {
              }
          });
          f_name.addEventListener('keyup', function () {
+            
              if (f_name.value === ''){
                  f_name.style.backgroundColor = 'transparent';
                  f_name.style.boxShadow = '0 0 6px #fff';

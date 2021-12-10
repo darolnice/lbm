@@ -9,7 +9,7 @@ $title = "Business accoumpt /2";
 
 <section id="s_sec1_signin_2">
     <div class="reg-2Form_div">
-        <form id="s_signin_form_div_2" method="POST">
+        <form class="s_signin_form_div_2" name="reg2_form" method="POST">
 
             <div class="s_ttl_2">CREATE <strong>LBM</strong> BUSINESS ACCOUNT
                 <P>Step 2</P>
@@ -20,7 +20,7 @@ $title = "Business accoumpt /2";
             </label>
 
             <label>City <mark style="color: red">*</mark>
-                <input type="text" name="city" id="sh_city">
+                <input type="text" name="city" id="sh_city" require>
             </label>
 
             <label>Activity<mark style="color: red">*</mark>
@@ -40,14 +40,15 @@ $title = "Business accoumpt /2";
             </label>
 
             <div class="cni-img-div">
-                <label> Card id face 1 <mark style="color: red">*</mark>
-                    <input id="s_pw_2" type="file" required="required" name="CardIdface1" hidden>
-                    <img src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="first face card id">
+                <label>Card id face 1 <mark style="color: red">*</mark>
+                    <input id="s_cni_1" type="file" required="required" name="CardIdface1" hidden>
+                    <img class="thumb1" src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="first face card id">
                     <button type="button" class="smartbtn">Upload</button>
                 </label>
-                <label> Card id face 2 <mark style="color: red">*</mark>
-                    <input class="d-none" hidden id="s_pw_2" type="file" required="required" name="CardIdface2">
-                    <img src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="seconde face card id">
+
+                <label>Card id face 2 <mark style="color: red">*</mark>
+                    <input id="s_cni_2" type="file" required="required" name="CardIdface2" hidden>
+                    <img class="thumb2" src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="seconde face card id">
                     <button type="button" class="mb-2 smartbtn">Upload</button>
                 </label>
             </div>
@@ -59,7 +60,7 @@ $title = "Business accoumpt /2";
             </label>
 
             <label>
-                <input name="submit" id="s_cnnct_sign_2" type="submit" value="SUBMIT">
+                <input name="sbmt" id="s_cnnct_sign_2" type="submit" value="SUBMIT">
             </label>
         </form>
     </div>

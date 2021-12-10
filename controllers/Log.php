@@ -199,7 +199,7 @@ class Log extends Navigation
         session_start();
         Functions::Auth_UserIS();
 
-        if ($_SESSION['c_name']){
+        if (!$_SESSION['c_name']){
             $F = new Functions();
             $mgrUser = new MgrUser();
 
@@ -217,12 +217,13 @@ class Log extends Navigation
             $data = [$shop_name, $city, $activity, $description, $matricule, $shop_key, $current_plan];
             $errors = [];
 
-            if(isset($_POST['submit'])){
-                if (!$F->not_empty([$shop_name, $city, $activity, $description, $shop_key, $current_plan])){
+            if(isset($_POST['sbmt'])){
 
-                    if(empty($_FILES['name']['CardIdface1']) || empty($_FILES['name']['CardIdface2'])){
+                 if (!$F->not_empty([$shop_name, $city, $activity, $description, $shop_key, $current_plan])){
+
+                 /*    if(empty($_FILES['name']['CardIdface1']) || empty($_FILES['name']['CardIdface2'])){
                         $errors[] = "- Please Add Card Id Images";
-                    }
+                    } */
 
                     if (mb_strlen($shop_name) < 3) {
                         $errors[] = "- Your shop name is short, minimun 3 chars";
@@ -241,7 +242,7 @@ class Log extends Navigation
                 }else {
                     $errors[] = "- Please complete all forms";
                     $F->notif_errors([$errors]);
-                }
+                } 
 
                 if(count($errors) === 0){
                     (new MgrLogin)->register_step2($data);
@@ -250,7 +251,7 @@ class Log extends Navigation
 
         }else{
             Functions::redir('register');
-        }
+        } 
     }
 
     public function showForget(){

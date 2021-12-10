@@ -1104,6 +1104,9 @@ class AjaxApiRes
     }
 
 
+    public function jxregist2(){
+        
+    }
 
 
 

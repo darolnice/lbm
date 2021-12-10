@@ -58,7 +58,7 @@ mark{
     font-size: 13px;
 }
 
-#s_signin_form_div_2{
+.s_signin_form_div_2{
     border: 1px solid rgba(194, 192, 192, 0.79);
     position: absolute;
     max-width: 50%;
@@ -159,17 +159,16 @@ mark{
 .cni-img-div{
     display: block;
     position: absolute;
-    /*border: 1px solid coral;*/
+    /* border: 1px solid coral; */
     width: 57%;
     top: 0;
     margin-left: 90%;
 }
 .cni-img-div img{
-    /* FONT-WEIGHT: 100; */
-    /*border: 1px solid coral;*/
-    width: 100%;
+    /* border: 1px solid coral; */
+    width: 105%;
     height: 15%;
-    margin-left: 10px;
+    margin-left: 0;
     border-radius: 5px;
     margin-bottom: 10px;
 }

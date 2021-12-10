@@ -890,9 +890,7 @@ class Navigation
 
 
 
-//        echo'<pre>';
-//            var_dump();
-//        echo '</pre>';
+
     }
 
     public function showPanel(){
@@ -921,10 +919,7 @@ class Navigation
         include_once S_VIEWS.'/forum.view.php';
         $this->getBlogData();
         $this->getBlogShowAll();
-//
-//        echo '<pre>';
-//            var_dump($_GET['page']);
-//        echo '</pre>';
+
 
         return $this->getBlogShowAll();
     }
@@ -1033,7 +1028,7 @@ class Navigation
 
         include S_VIEWS.'/profil.view.php';
         $this->getProfilData();
-//        var_dump($this->getProfilData()[0]['email']);
+
     }
 
     public function showService(){
@@ -1061,13 +1056,7 @@ class Navigation
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();
 
-//        $country = [];
-//        foreach($this->getShoplist() as $value){
-//            array_push($country, $value['country']);
-//        }
-//        echo '<pre>';
-//            var_dump(array_unique($country));
-//        echo '</pre>';
+
     }
 
 }

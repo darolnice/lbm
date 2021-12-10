@@ -96,6 +96,7 @@ class Rooter
                         'jxchat'            => ["api"   => "AjaxApiRes",  "method" => "jxchat"],
                         'jxrC'              => ["api"   => "AjaxApiRes",  "method" => "jxrC"],
                         'jxUDCart'          => ["api"   => "AjaxApiRes",  "method" => "jxUDCart"],
+                        'jxregist2'         => ["api"   => "AjaxApiRes",  "method" => "jxregist2"],
 
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
