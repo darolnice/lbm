@@ -805,7 +805,7 @@ class AjaxApiRes
      * @return bool|string
      */
     public function jxUploadImage($img_name, $img_path, $columb, $table = null, $old_image = null, $code = null){
-        $allowed_exs = array("jpg", "png", "jpeg");
+        $allowed_exs = array("jpg", "png", "jpeg", "jfif");
         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
         $img_ex_lc = strtolower($img_ex);
 

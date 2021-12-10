@@ -800,6 +800,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+
+        const defbtn = document.querySelector('#s_pw_2');
+        const custbtn = document.querySelector(".smartbtn");
+        custbtn.addEventListener('click', uploadcard1)
+        function uploadcard1() {defbtn.click()}
+
+
     }
     /**
      * register 2 end
