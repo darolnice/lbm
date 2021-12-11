@@ -39,7 +39,7 @@ $title = 'Login';
             <button class="btntwr">Signin with Twitter</button>
         </span>
 
-        <input type="button" class="s_signup_a" value="BUSINESS ACCOUNT">
+        <input type="button" id="bs_account" class="s_signup_a" value="BUSINESS ACCOUNT">
         <img class="imgbusi" src="<?= S_ASSETS ?>images/svg/business_black_24dp.svg" alt="">
 
 

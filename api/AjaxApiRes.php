@@ -1106,7 +1106,45 @@ class AjaxApiRes
 
     public function jxregist2(){
         
-    }
+        if(isset($_POST['inputs'])){
+            $post = json_decode($_POST['inputs'], true);
+        
+            (!empty($post["Shopname"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop name', null); return;
+            (!empty($post["City"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop location', null); return;
+            (!empty($post["Activity"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop principal activity', null); return;
+            (!empty($post["Description"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop description', null); return;
+
+            (!empty($_FILES['CardIdface1'])) ? : $this->response($this->HTTP_Ok, 'PLease upload card id face 1', null); return;
+            (!empty($_FILES['CardIdface2'])) ? : $this->response($this->HTTP_Ok, 'PLease upload card id face 2', null); return;
+
+
+
+            $cni1 = $_FILES['CardIdface1']['name'];
+            $cni1_Tmp = $_FILES['CardIdface1']['tmp_name'];
+            $cni1_Size = $_FILES['CardIdface1']['size'];
+
+            $cni2 = $_FILES['CardIdface2']['name'];
+            $cni2_Tmp = $_FILES['CardIdface2']['tmp_name'];
+            $cni2_Size = $_FILES['CardIdface2']['size'];
+
+            if($cni1_Size > 100000 || $cni2_Size > 100000){
+                $this->response($this->HTTP_OK, 'Image is too large', null);
+
+            }else{
+                $this->jxUploadImage($cni1, $cni1_Tmp, 'cni_f1', "sallers", null, null);
+                $this->jxUploadImage($cni2, $cni2_Tmp, 'cni_f2', "sallers", null, null);
+
+                
+                $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
+                         strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"])                      
+                ];
+
+                $r = (new MgrLogin)->register_step2($data);
+                if($r === 'ok'){Functions::redir('setting');}
+            }
+        }
+    } 
+  
 
 
 

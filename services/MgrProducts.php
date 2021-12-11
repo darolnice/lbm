@@ -186,29 +186,31 @@ class MgrProducts extends Database
     public function createShop($shop_name, $message): bool {
         try {
             $q = parent::getDb()->prepare("CREATE TABLE $shop_name (id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
-                                                                              shop_name VARCHAR(255)NOT NULL,
-                                                                              prod_name VARCHAR(255)NOT NULL,
-                                                                              add_by VARCHAR(255)NOT NULL,
-                                                                              category VARCHAR(255)NOT NULL,
-                                                                              quality VARCHAR(255)NOT NULL,
-                                                                              sub_category VARCHAR(255)NOT NULL,
-                                                                              price VARCHAR(255)NOT NULL,
-                                                                              promo VARCHAR(255)NOT NULL,
-                                                                              rating INT(255)NOT NULL,
-                                                                              rater INT(255)NOT NULL,
-                                                                              checked TINYINT(1) NOT NULL,
-                                                                              color VARCHAR(255)NOT NULL,
-                                                                              size VARCHAR(255)NOT NULL,
-                                                                              proprities VARCHAR(1000)NOT NULL,
-                                                                              quantity INT(255)NOT NULL,
-                                                                              description TEXT(255)NOT NULL,
-                                                                              img1 VARCHAR(255)NOT NULL,
-                                                                              img2 VARCHAR(255)NOT NULL,
-                                                                              img3 VARCHAR(255)NOT NULL,
-                                                                              img4 VARCHAR(255)NOT NULL,
-                                                                              img5 VARCHAR(255)NOT NULL,
-                                                                              add_at datetime(6) DEFAULT CURRENT_TIMESTAMP)
-                                                                              ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8");
+                                                                    shop_name VARCHAR(255)NOT NULL,
+                                                                    prod_name VARCHAR(255)NOT NULL,
+                                                                    add_by VARCHAR(255)NOT NULL,
+                                                                    category VARCHAR(255)NOT NULL,
+                                                                    quality VARCHAR(255)NOT NULL,
+                                                                    sub_category VARCHAR(255)NOT NULL,
+                                                                    price VARCHAR(255)NOT NULL,
+                                                                    promo VARCHAR(255)NOT NULL,
+                                                                    rating INT(255)NOT NULL,
+                                                                    rater INT(255)NOT NULL,
+                                                                    checked TINYINT(1) NOT NULL,
+                                                                    color VARCHAR(255)NOT NULL,
+                                                                    size VARCHAR(255)NOT NULL,
+                                                                    proprities VARCHAR(1000)NOT NULL,
+                                                                    quantity INT(255)NOT NULL,
+                                                                    description TEXT(255)NOT NULL,
+                                                                    img1 VARCHAR(255)NOT NULL,
+                                                                    img2 VARCHAR(255)NOT NULL,
+                                                                    img3 VARCHAR(255)NOT NULL,
+                                                                    img4 VARCHAR(255)NOT NULL,
+                                                                    img5 VARCHAR(255)NOT NULL,
+                                                                    add_at datetime(6) DEFAULT CURRENT_TIMESTAMP)
+                                                                    ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8"
+            );
+            
             if($q->execute()) {
                 $subject = SITE_NAME. " - Account activation";
                 Functions::lbmSendMail($_SESSION['saller_mail'], $subject, $message);

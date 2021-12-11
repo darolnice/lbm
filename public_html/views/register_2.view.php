@@ -35,7 +35,7 @@ $title = "Business accoumpt /2";
                 <textarea id="s_ph_nmb_2" required="required" name="description" cols="30" rows="10"></textarea>
             </label>
 
-            <label>Matricul<mark style="color: red"></mark>
+            <label>Matricul (optionnal)<mark style="color: red"></mark>
                 <input id="s_mail_2" type="text" name="matricul" >
             </label>
 
@@ -54,9 +54,14 @@ $title = "Business accoumpt /2";
             </div>
 
             <label>
-                <input id="s_pw_c_2" type="button" required="required" autocomplete="off"
-                       value="CHOOSE PLAN"
-                       name="current_plan">
+                <input class="text-center d-none mt-2" id="tknsh1" type="text" autocomplete="off"
+                       placeholder="Enter your plan code"
+                       name="plan">
+            </label>
+
+            <label>
+                <input id="s_pw_c_2" type="button" autocomplete="off"
+                       value="CHOOSE PLAN" name="current_plan">
             </label>
 
             <label>

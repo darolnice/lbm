@@ -219,8 +219,7 @@ class MgrLogin extends Database
             $qry->bindParams('activity', $data[2], PDO::PARAM_STR);
             $qry->bindParams('description', $data[3], PDO::PARAM_STR);
             $qry->bindParams('matricule', $data[4], PDO::PARAM_STR);
-            $qry->bindParams('shop_key', $data[5], PDO::PARAM_STR);
-            $qry->bindParams('current_plan', $data[6], PDO::PARAM_STR);
+            $qry->bindParams('current_plan', $data[5], PDO::PARAM_STR);
 
             if ($qry->execute()){
                 (new MgrProducts)->createShop($_POST['shop_name'], $content);

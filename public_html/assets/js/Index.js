@@ -456,13 +456,21 @@ class Index {
 
     /**
      *
-     * @param target
+     * @param btn_id
      * @param link
+     * @param target
      */
-    openLink(target, link){
-        target.addEventListener('click', function () {
-            location.replace(link, '_parent');
-        });
+    openLink(btn_id, link, target = null){
+        if(target === null){
+            $('#'+btn_id).on('click', function () {
+                window.open(link);
+            });
+
+        }else{
+            $('#'+btn_id).on('click', function () {
+                window.open(link, '_parent');
+            });
+        }
     }
 
     /**
@@ -626,6 +634,19 @@ class Index {
         }
     }
 
+    /**
+     * 
+     */
+    register2Fetch(url, context = null, value = []){
+        fetch(url, {
+            method: 'POST',
+            body: value
+        }).then(dta =>{
+                console.log(dta)
+            })
+            
+    }
+
 }
 
 
@@ -643,13 +664,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     *   sign up 1 start
+     *   login  start
      */
     if (document.querySelector('.s_signup_a')){
-        new Index().openLink(document.querySelector('.s_signup_a'), 'business');
+        new Index().openLink('bs_account', 'business', '_parent');
     }
     /**
-     *   sign up 1end
+     *   login 1end
      */
 
 
@@ -787,6 +808,8 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     if (document.querySelector('#s_usrn_2')){
         let shopname = '';
+        index = new Index();
+        const planBtn = document.querySelector('#tknsh1');
 
         $('#s_usrn_2').on('change', function () {
             $.ajax({
@@ -795,15 +818,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: {prop: this.value},
                 success:function (response) {
                     if (response["message"] !== 'free'){
-                        shopname = 'free';
+                        shopname = 'not free';
                         $('#s_usrn_2').css('border-color', 'red');
                     }else {
-                        shopname = 'not free';
+                        shopname = 'free';
                         $('#s_usrn_2').css('border-color', 'green');
                     }
                 }
             });
         });
+
+
+        if(planBtn.classList.contains("d-none")){
+            function plcMgr(){
+                if(index.getCookie('thkp')){
+                    $('#s_pw_c_2').hide();
+                    planBtn.classList.remove('d-none');
+                    
+                }else{
+                     console.log('actif')
+                    requestAnimationFrame(plcMgr);
+                }
+            }
+        }else{cancelAnimationFrame(plcMgr)}
+        requestAnimationFrame(plcMgr)
+    
 
         const defbtn1 = document.querySelector('#s_cni_1');
         const defbtn2 = document.querySelector('#s_cni_2');
@@ -851,30 +890,42 @@ document.addEventListener('DOMContentLoaded', function () {
         
         document.forms["reg2_form"].addEventListener('submit', function(e){
             inputs = this;
-            let data = [];
-            index = new Index();
-            
+            let data = {
+                    Shopname: '',
+                    City: '',
+                    Activity: '',
+                    Description: '',
+                    Matricule: '', 
+                    Plan: ''
+            }
+
             if(inputs){
                 e.preventDefault();
                 if(shopname === 'free'){
-                    if(defbtn1.files[0] && defbtn2.files[0]){
+                    if(defbtn1.files[0] !== null && defbtn2.files[0] !== null){
                         for(let i=0; i<inputs.length; i++){
-                            if(inputs[i].value !== null ){
-                                data.push(inputs[i].value);
-    
-                            }else{
-                                index.lbmAlert('Please complete all forms', "danger")
+                            if(inputs[i].value === ""){
+                                index.lbmAlert('Please complete all forms', "danger");
+                                return 
                             }
                         }
+                    
+                        data.Shopname = inputs['shop_name'].value;
+                        data.City = inputs['city'].value;
+                        data.Activity = inputs['activity'].value
+                        data.Description = inputs['description'].value;
+                        data.Matricule = inputs['matricul'].value;
+                        data.Plan = inputs['matricul'].plan;
+
+
+                        let formData = new FormData();
+            
+                        formData.append('inputs', JSON.stringify(data));
+                        formData.append('cni-img1', defbtn1.files[0]);
+                        formData.append('cni-img2', defbtn2.files[0]);
                         
-                        let fd = new FormData();
-                        fd.append('cni-img1', defbtn1.files[0]);
-                        fd.append('cni-img2', defbtn2.files[0]);
-                        
-                        let newtab = data.slice(0, 5)
-                        newtab.push(fd)
-                        index.jxPostData('jxregist2', this, newtab);
-    
+                        index.register2Fetch('jxregist2', this, formData);
+   
                     }else{
                         index.lbmAlert('Please upload all card id image', "danger")
                     }
@@ -883,11 +934,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 
             }
+            
         });
 
-        
-
-
+        index.openLink('s_pw_c_2', 'plans', null);
     }
     /**
      * register 2 end
