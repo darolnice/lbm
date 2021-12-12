@@ -60,8 +60,10 @@
         <?php if (!$_SESSION["saller_id"]): ?>
             <div class="inf_ans" style="display: none">
                 LOGIN FOR ANSWER IF YOU ALREADY HAVE ACCOUNT, ELSE CREATE YOUR BUSINESS ACCOUNT
-                <button id="bcs__" class="becom_saler">SIGN UP</button>
-                <button id="lg__" class="log__">LOGIN</button>
+                <div class="inf_ans_btn">
+                    <button id="bcs__" class="becom_saler">SIGN UP</button>
+                    <button id="lg__" class="log__">LOGIN</button>
+                </div>
             </div>
 
             <button id="add_ann_btn__">ADD YOUR ANNONCES</button>
@@ -71,69 +73,74 @@
             <div class="__annonce">
                 <div class="personnal_ann_info">
                     <div class="annc_im_div">
-                        <img src="<?= S_ASSETS?>images/svg/user.png" alt="user image">
-                        <b>Add at</b>
+                        <img src="<?= S_ASSETS?>images/svg/person_black_24dp.svg" alt="user image">
                     </div>
 
                     <p class="annc_name"><?= $this->getAnnonceData()[$i]->user_name?></p>
                     <?php if ($_SESSION["saller_id"]): ?>
                         <p class="annc_phone"><?= $this->getAnnonceData()[$i]->phone_number?></p>
-                        <p class="annc_mail"><?= $this->getAnnonceData()[$i]->email?></p>
+                        <strong class="annc_mail"><?= $this->getAnnonceData()[$i]->email?></strong>
+                        <strong class="annc_city"><?= $this->getAnnonceData()[$i]->country?></strong>
+                        <strong class="annc_country"><?= $this->getAnnonceData()[$i]->city?></strong>
+                    <?php else:?>
+                        <p class="annc_phone"><?= '69**********'?></p>
+                        <p class="annc_mail"><?= '***@mail.com'?></p>
+                        <p class="annc_mail"><?= $this->getAnnonceData()[$i]->country?></p>
+                        <p class="annc_mail"><?= $this->getAnnonceData()[$i]->city?></p>
                     <?php endif;?>
 
+                    <b>Add at</b>
+                    <b class="annc_add_at"> <?= $this->getAnnonceData()[$i]->add_at?></b>
 
-                    <p class="annc_add_at">
-                        <?= $this->getAnnonceData()[$i]->add_at?>
-                    </p>
-                    <button id="res_ann" class="small">ANSWER / VIEW RESPONSES</button>
+                    <button id="res_ann" class="small">ANSWER</button>
                 </div>
 
-                <div class="annc_prod_info">
-                    <div>
-                        <table class="tab-content">
-                            <tr>
-                                <td class="annc_prod_name">
-                                    <b>Product name</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->prod_name?></h6>
-                                </td>
+                <div class="ann__details">
+                   <b class="ml-1" style="color: white">About product</b>
+                    <ul class="tab-content">
+                        <li class="annc_prod_name">
+                            <b>Product name :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->prod_name?></h6>
+                        </li>
 
-                                <td class="annc_price">
-                                    <b>Price</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->price .'$'?></h6>
-                                </td>
+                        <li class="annc_price">
+                            <b>Price :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->price .'$'?></h6>
+                        </li>
 
-                                <td class="annc_qte">
-                                    <b>Qte</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->quantity?></h6>
-                                </td>
+                        <li class="annc_qte">
+                            <b>Quantity :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->quantity?></h6>
+                        </li>
 
-                                <td class="annc_size">
-                                    <b>Size</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->size?></h6>
-                                </td>
+                        <li class="annc_size">
+                            <b>Size :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->size?></h6>
+                        </li>
 
-                                <td class="couleur">
-                                    <b>Color</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->color?></h6>
-                                </td>
+                        <li class="couleur">
+                            <b>Color :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->color?></h6>
+                        </li>
 
-                                <td class="annc_nature">
-                                    <b>Quality</b><br>
-                                    <h6><?= $this->getAnnonceData()[$i]->quality?></h6>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                        <li class="annc_nature">
+                            <b>Quality :</b><br>
+                            <h6><?= $this->getAnnonceData()[$i]->quality?></h6>
+                        </li>
+                    </ul>
+                </div>
 
+                <div class="img__block">
+                    <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
+                    <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
+                </div>
+
+                <div class="resBlock">
                     <div class="responses">
                         <b id="res_ttl">Responses</b>
                         <ul class="res_ul">
-                            <div class="down_arrow">
-                                <img src="<?= S_ASSETS?>images/svg/down-arrow.png" alt="down image">
-                            </div>
-
                             <?php
-                                $responses = array_reverse((new MgrAnnonces)->showResponses($this->getAnnonceData()[$i]->id, $this->getAnnonceData()[$i]->user_name));
+                            $responses = array_reverse((new MgrAnnonces)->showResponses($this->getAnnonceData()[$i]->id, $this->getAnnonceData()[$i]->user_name));
                             ?>
                             <?php for($r=0; $r<count($responses); $r++):?>
                                 <li id="res_li">
@@ -146,7 +153,7 @@
                     </div>
 
                     <?php if ($_SESSION["saller_id"]): ?>
-                        <form id="answer_form" method="post" class="form-group" style="display: none">
+                        <form id="answer_form" method="post" class="form-group">
                             <input class="c_id"
                                    style="display: none"
                                    type="hidden"
@@ -160,13 +167,21 @@
                                    value="<?= $this->getAnnonceData()[$i]->id?>">
 
                             <label for="answer"></label>
-                            <textarea id="answer" type="text" name="answer" rows="3" maxlength="120" required></textarea>
-                            <input type="submit"
-                                   id="post__res__"
-                                   name="answer_btn"
-                                   data-annonce_id="<?= $this->getAnnonceData()[$i]->id?>"
-                                   data-annonceur="<?= $this->getAnnonceData()[$i]->user_name?>"
-                                   value="ANSWER">
+
+                            <div class="d-block position-relative">
+                                <textarea id="answer"
+                                          name="answer"
+                                          rows="3" maxlength="120"
+                                          placeholder="Your response..."
+                                          required></textarea>
+
+                                <button type="submit"
+                                        id="post__res__"
+                                        name="answer_btn"
+                                        data-annonce_id="<?= $this->getAnnonceData()[$i]->id?>"
+                                        data-annonceur="<?= $this->getAnnonceData()[$i]->user_name?>">>>
+                                </button>
+                            </div>
                         </form>
                     <?php endif;?>
                 </div>

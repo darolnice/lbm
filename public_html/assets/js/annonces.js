@@ -1,29 +1,18 @@
 $(document).ready(function () {
 
-    document.querySelectorAll('.down_arrow img').forEach(item =>{
-        item.addEventListener('click', function () {
-            if (item.parentNode.parentNode.parentElement.getAttribute('class') === 'responses'){
-                item.parentNode.parentNode.parentElement.classList.add('res_act');
-                item.parentElement.classList.add('res_img');
-                this.classList.add('res_act');
-
-            }else {
-                item.parentNode.parentNode.parentElement.classList.remove('res_act');
-                item.parentElement.classList.remove('res_img');
-                this.classList.remove('res_act');
-            }
-        });
-    });
-
-    document.querySelectorAll('#res_ann').forEach(res=>{
+    document.querySelectorAll('#res_ann').forEach(res =>{
         res.addEventListener('click', function () {
-            if (document.querySelector('#answer_form')){
-                if (res.parentNode.parentNode.children[1].children[2].style.display === 'none'){
-                    res.parentNode.parentNode.children[1].children[1].style.display = 'none';
-                    res.parentNode.parentNode.children[1].children[2].style.display = 'block';
-                }else{
-                    res.parentNode.parentNode.children[1].children[2].style.display = 'none';
-                    res.parentNode.parentNode.children[1].children[1].style.display = 'flex';
+
+            if (document.getElementById('answer_form')){
+                if (!res.parentNode.parentNode.children[3].children[0].children[1].classList.contains("JS_res_ul")){
+                    res.parentNode.parentNode.children[3].children[0].children[1].classList.replace("res_ul", "JS_res_ul")
+                    res.parentNode.parentNode.children[3].children[1].style.display = 'block';
+                    res.innerHTML = 'HIDE';
+                }
+                else{
+                    res.parentNode.parentNode.children[3].children[0].children[1].classList.replace( "JS_res_ul", "res_ul",)
+                    res.parentNode.parentNode.children[3].children[1].style.display = 'none';
+                    res.innerHTML = 'ANSWER';
                 }
             }else {
                 new Index().scrollTo(0);

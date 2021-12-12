@@ -222,34 +222,29 @@ class Index {
                     context.innerHTML = pttl.toFixed(2) + " " + response['message'][1]['currency'];
                 }// check cart price
                 if(response["response_code"] === 200 && response["res_id"] === 1005){
-                    response['message'].forEach((item) =>{
-                        let ent = context.parentNode.childNodes[3].childNodes[1].nextSibling.nextSibling.childNodes[3];
-                        if (ent === undefined ){
-                            let li = document.createElement('li');
-                            li.setAttribute('id', 'res_li');
-                            let a = document.createElement("a");
-                            a.setAttribute('style', 'margin-right:5px;')
-                            a.setAttribute('href', "shop?name="+item['shop_name']);
-                            a.innerHTML = item['shop_name'];
-                            let b = document.createElement('b');
-                            b.innerHTML = item['add_at'];
-                            let h = document.createElement('h6');
-                            h.innerHTML = item['response'];
-                            li.appendChild(a);
-                            li.appendChild(b);
-                            li.appendChild(h);
-                            context.parentNode.childNodes[3].childNodes[3].prepend(li);
+                    if (response['message'] === 'success'){
 
-                        }else {
-                            ent.childNodes[1].setAttribute('href', "shop?name="+item['shop_name']);
-                            ent.childNodes[3].innerHTML = item['add_at'];
-                            ent.childNodes[5].innerHTML = item['response'];
-                        }
-                        context.innerHTML = '';
-                        context.style.display = 'none';
-                        context.parentNode.childNodes[3].style.display = 'flex';
-                    });
-                }// search
+                        console.log(data)
+                        let li = document.createElement('li');
+                        li.setAttribute('id', 'res_li');
+                        let a = document.createElement("a");
+                        a.setAttribute('style', 'margin-right:5px;')
+                        a.setAttribute('href', "shop?name="+ new Index().getCookie(''));
+                        a.innerHTML = data['shop_name'];
+                        let b = document.createElement('b');
+                        b.innerHTML = date();
+                        let h = document.createElement('h6');
+                        h.innerHTML = data[2];
+                        li.appendChild(a);
+                        li.appendChild(b);
+                        li.appendChild(h);
+                        context.parentNode.parentNode.children[0].childNodes[3].append(li);
+
+
+                        // context.firstElementchild.innerHTML = '';
+                    }
+
+                }// Annonces
                 if(response["response_code"] === 200 && response["res_id"] === 1919){
                     if (response['message'] === 'Your reclamation add successfully'){
                         let slct = '#'+context.id+" input";
@@ -428,7 +423,7 @@ class Index {
                     formData.append('cni-img1', img1);
                     formData.append('cni-img2', img2);
                     new Index().UP_post_asyn_fetch("jxregist2", this, formData);
-                }
+                }// register 2
             }
         });
     }

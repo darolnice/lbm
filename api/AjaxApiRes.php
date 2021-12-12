@@ -464,7 +464,7 @@ class AjaxApiRes
     }
 
     /**
-     *
+     * annonces
      */
     public function jxAnPsCmt(){
         session_start();

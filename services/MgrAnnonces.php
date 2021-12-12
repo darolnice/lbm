@@ -68,7 +68,7 @@ class MgrAnnonces extends Database
     public function showAnnonces(string $city = null, string $name = null): array {
         try {
             if ($city !== null){
-                $sh = $this->getDb()->prepare("SELECT * FROM annonces WHERE city = :city");
+                $sh = $this->getDb()->prepare("SELECT * FROM annonces ORDER BY city = :city");
                 $sh->execute(['city'=>$city]);
                 return $sh->fetchAll(PDO::FETCH_OBJ);
 

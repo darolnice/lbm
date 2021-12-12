@@ -381,9 +381,9 @@ class RestApi extends Database
      * @param $annonce_id
      * @param string $annoncer
      * @param $comment
-     * @return array
+     * @return bool|string
      */
-    public function postAndGetcomment($annonce_id, string $annoncer, $comment): array {
+    public function postAndGetcomment($annonce_id, string $annoncer, $comment){
         try {
             $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id, annoncer, shop_name, response)
                                                     VALUES (:annonce_id, :annoncer, :shop_name, :response)"
@@ -398,14 +398,12 @@ class RestApi extends Database
             $pc->closeCursor();
 
             if ($pc->rowCount() === 1){
-                $sh = $this->getDb()->prepare("SELECT * FROM responses WHERE annonce_id = :annonce_id AND annoncer = :annoncer");
-                $sh->execute(['annonce_id'=>$annonce_id, 'annoncer'=>$annoncer]);
-                return $sh->fetchAll(PDO::FETCH_ASSOC);
+                return "success";
             }
         }catch (PDOException $e){
-            return [$e->getMessage()];
+            return $e->getMessage();
         }
-        return [];
+        return false;
     }
 
     /**
