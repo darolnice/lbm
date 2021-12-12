@@ -12,13 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/Functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/Log.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Log.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/annonces.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/annonces.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/js/annonces.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/annonces.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/annonces.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/annonces.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/MgrLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrLogin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -431,7 +425,7 @@
       <workItem from="1639300513645" duration="44000" />
       <workItem from="1639300567397" duration="54542000" />
       <workItem from="1639300596826" duration="2787000" />
-      <workItem from="1639302894848" duration="9363000" />
+      <workItem from="1639302894848" duration="10814000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>

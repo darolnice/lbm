@@ -4,13 +4,16 @@ $(document).ready(function () {
         res.addEventListener('click', function () {
 
             if (document.getElementById('answer_form')){
-                if (!res.parentNode.parentNode.children[3].children[0].children[1].classList.contains("JS_res_ul")){
-                    res.parentNode.parentNode.children[3].children[0].children[1].classList.replace("res_ul", "JS_res_ul")
+
+                if (!res.parentNode.parentNode.children[3].children[0].children[2].classList.contains("JS_res_ul")){
+
+                    res.parentNode.parentNode.children[3].children[0].children[2].classList.replace("res_ul", "JS_res_ul");
                     res.parentNode.parentNode.children[3].children[1].style.display = 'block';
                     res.innerHTML = 'HIDE';
+
                 }
                 else{
-                    res.parentNode.parentNode.children[3].children[0].children[1].classList.replace( "JS_res_ul", "res_ul",)
+                    res.parentNode.parentNode.children[3].children[0].children[2].classList.replace( "JS_res_ul", "res_ul",)
                     res.parentNode.parentNode.children[3].children[1].style.display = 'none';
                     res.innerHTML = 'ANSWER';
                 }
