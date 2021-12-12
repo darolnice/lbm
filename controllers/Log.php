@@ -126,8 +126,8 @@ class Log extends Navigation
             (new Functions)->redir('business');
         }else{
             session_unset();
-            unset($_COOKIE['cookies_u_data']);
-            setcookie('cookies_u_data', '', time() - 10);
+            unset($_COOKIE['cud']);
+            setcookie('cud', '', time() - 10);
             (new Functions)->redir('login');
         }
     }

@@ -8,66 +8,74 @@
 
 
 <body>
-    <section id="add_ann_sec" class="container" style="display: none">
-        <form method="post" class="form-group" id="post_ann_form">
-            <p>Personnal informations</p>
-            <input type="text" name="name" required value="<?= $_SESSION['username']?>" placeholder="Name">
-            <input type="text" name="phone" required value="<?= $_SESSION['phone']?>" placeholder="Phone number">
-            <input type="text" name="email"  required value="<?= $_SESSION['email']?>" placeholder="E-mail">
-            <select type="text" name="city" required>
-                <option value="NEW YORK">Douala</option>
-                <option value="NEW YORK"><?= $_SESSION['city']?></option>
-            </select><br>
+    <?php if ($_SESSION["current_user_id"]): ?>
+        <section id="add_ann_sec" class="container" style="display: none">
+            <form method="post" class="form-group" id="post_ann_form">
+                <p>Personnal informations</p>
+                <input type="text" name="name" required value="<?= $_SESSION['username']?>" placeholder="Name">
+                <input type="text" name="phone" required value="<?= $_SESSION['phone']?>" placeholder="Phone number">
+                <input type="text" name="email"  required value="<?= $_SESSION['email']?>" placeholder="E-mail">
+                <select type="text" name="city" required>
+                    <option value="NEW YORK">Douala</option>
+                    <option value="NEW YORK"><?= $_SESSION['city']?></option>
+                </select><br>
 
-            <p>Products informations</p>
-            <label for="ann_prod_name">Name
-                <input type="text" name="ann_prod_name" id="ann_prod_name" required>
-            </label>
+                <p>Products informations</p>
+                <label for="ann_prod_name">Name
+                    <input type="text" name="ann_prod_name" id="ann_prod_name" required>
+                </label>
 
-            <label for="ann_prod_qte">Quantity
-                <input type="number" name="ann_prod_qte" id="ann_prod_qte" required>
-            </label>
+                <label for="ann_prod_qte">Quantity
+                    <input type="number" name="ann_prod_qte" id="ann_prod_qte" required>
+                </label>
 
-            <label for="ann_prod_price">Unit price
-                <input type="text" name="ann_prod_price" id="ann_prod_price" required>
-            </label>
+                <label for="ann_prod_price">Unit price
+                    <input type="text" name="ann_prod_price" id="ann_prod_price" required>
+                </label>
 
-            <label for="ann_prod_qly">Quality
-                <select type="text" name="ann_prod_qly" id="ann_prod_qly" required>
-                    <option value="New">NEW</option>
-                    <option value="Occasion">OCCASION</option>
-                </select>
-            </label>
+                <label for="ann_prod_qly">Quality
+                    <select type="text" name="ann_prod_qly" id="ann_prod_qly" required>
+                        <option value="New">NEW</option>
+                        <option value="Occasion">OCCASION</option>
+                    </select>
+                </label>
 
-            <label for="ann_prod_color">Color
-                <input type="text" name="ann_prod_color" id="ann_prod_color" required>
-            </label>
+                <label for="ann_prod_color">Color
+                    <input type="text" name="ann_prod_color" id="ann_prod_color" required>
+                </label>
 
-            <label for="ann_prod_size">Size
-                <input type="text" name="ann_prod_size" id="ann_prod_size" required>
-            </label>
+                <label for="ann_prod_size">Size
+                    <input type="text" name="ann_prod_size" id="ann_prod_size" required>
+                </label>
 
-            <label for="ann_prod_cmt">Other comment's
-                <textarea type="text" name="ann_prod_cmt" id="ann_prod_cmt" rows="4"></textarea>
-            </label>
+                <label for="ann_prod_cmt">Other comment's
+                    <textarea type="text" name="ann_prod_cmt" id="ann_prod_cmt" rows="4"></textarea>
+                </label>
 
-            <button type="button" id="ann_cancel_btn">&times</button>
-            <button type="submit" id="ann_post_btn" name="add_annonce">POST</button>
-        </form>
-    </section>
+                <button type="button" id="ann_cancel_btn">&times</button>
+                <button type="submit" id="ann_post_btn" name="add_annonce">POST</button>
+            </form>
+        </section>
+    <?php endif;?>
 
     <section id="res_ann_sec" class="container" style="display: block">
+        <h2>Welcome, Post and Get any thing you want here</h2>
         <?php if (!$_SESSION["saller_id"]): ?>
-            <div class="inf_ans" style="display: none">
+            <div class="inf_ans">
                 LOGIN FOR ANSWER IF YOU ALREADY HAVE ACCOUNT, ELSE CREATE YOUR BUSINESS ACCOUNT
                 <div class="inf_ans_btn">
                     <button id="bcs__" class="becom_saler">SIGN UP</button>
                     <button id="lg__" class="log__">LOGIN</button>
                 </div>
             </div>
-
-            <button id="add_ann_btn__">ADD YOUR ANNONCES</button>
         <?php endif;?>
+
+        <div class="annc-search <?php ($_SESSION['saller_id']) ? print '__desc' : null?>">
+            <form method="GET" name="ann_sch" class="form-group fg_ann">
+                <input type="text" name="Search" class="form-control" placeholder="Search">
+            </form>
+            <button id="add_ann_btn__">Post Your Ad</button>
+        </div>
 
         <?php for ($i=0; $i<count($this->getAnnonceData()); $i++): ?>
             <div class="__annonce">
@@ -138,14 +146,19 @@
                 <div class="resBlock">
                     <div class="responses">
                         <b id="res_ttl">Responses</b>
-                        <ul class="res_ul">
-                            <?php
+                        <?php
                             $responses = array_reverse((new MgrAnnonces)->showResponses($this->getAnnonceData()[$i]->id, $this->getAnnonceData()[$i]->user_name));
-                            ?>
+                        ?>
+
+                        <div class="resCont"><?=count($responses)?></div>
+
+                        <ul class="res_ul">
                             <?php for($r=0; $r<count($responses); $r++):?>
                                 <li id="res_li">
-                                    <a href="shop?name=<?= $responses[$r]['shop_name']?>"><?= $responses[$r]['shop_name']?></a>
-                                    <b><?= $responses[$r]['add_at']?></b>
+                                    <p class="res-p">
+                                        <a href="shop?name=<?=$responses[$r]['shop_name']?>"><?='Shop : '.$responses[$r]['shop_name']?></a>
+                                    </p>
+                                    <b class="anc__dte"><?= $responses[$r]['add_at']?></b>
                                     <h6><?= $responses[$r]['response']?></h6>
                                 </li>
                             <?php endfor;?>

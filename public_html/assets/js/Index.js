@@ -223,25 +223,33 @@ class Index {
                 }// check cart price
                 if(response["response_code"] === 200 && response["res_id"] === 1005){
                     if (response['message'] === 'success'){
+                        let shopname = new Index().getCookie('cookies_u_data').split('"')[9];
 
-                        console.log(data)
                         let li = document.createElement('li');
                         li.setAttribute('id', 'res_li');
+
                         let a = document.createElement("a");
-                        a.setAttribute('style', 'margin-right:5px;')
-                        a.setAttribute('href', "shop?name="+ new Index().getCookie(''));
-                        a.innerHTML = data['shop_name'];
+                        a.setAttribute('href', "shop?name="+shopname);
+                        a.innerHTML = "Shop : "+shopname;
+
+                        let p = document.createElement("p");
+                        p.setAttribute('class', "res-p");
+                        p.appendChild(a)
+
                         let b = document.createElement('b');
-                        b.innerHTML = date();
+                        b.innerHTML = 'Now';
+
                         let h = document.createElement('h6');
                         h.innerHTML = data[2];
-                        li.appendChild(a);
+
+                        li.appendChild(p);
                         li.appendChild(b);
                         li.appendChild(h);
+
                         context.parentNode.parentNode.children[0].childNodes[3].append(li);
-
-
-                        // context.firstElementchild.innerHTML = '';
+                        var ulclass = context.parentNode.parentNode.children[0].childNodes[3];
+                        ulclass.scrollTo({top:1000, behavior:"smooth"});
+                        context.children[0].value = '';
                     }
 
                 }// Annonces

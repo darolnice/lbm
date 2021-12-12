@@ -378,14 +378,16 @@ class Functions extends Navigation
     }
 
     /**
-     * @param string $first_name
-     * @param string $city
+     * @param $ckn
+     * @param string $name
      * @param string $phone_number
+     * @param string $city
      * @param string $email
+     * @param string|null $shopname
      */
-    public static function save_in_cookies(string $name = "", string $phone_number = "", string $city = "", string $email = "") {
-        $values = serialize([$name, $phone_number, $city, $email]);
-        setcookie('cookies_u_data', $values, time()+60*24);
+    public static function save_in_cookies($ckn, string $name, string $phone_number, string $city, string $email, string $shopname = null) {
+        $values = serialize([$name, $phone_number, $city, $email, $shopname]);
+        setcookie($ckn, $values, time()+60*24);
     }
 
     /**

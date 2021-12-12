@@ -16,10 +16,8 @@ $(document).ready(function () {
                 }
             }else {
                 new Index().scrollTo(0);
-                document.querySelector('.inf_ans').style.display = 'block'
-                setTimeout(function () {
-                    document.querySelector('.inf_ans').style.display = 'none';
-                }, 10000);
+                $("h2").hide()
+                document.querySelector('.inf_ans').style.visibility = 'visible';
             }
         });
     });
@@ -33,8 +31,14 @@ $(document).ready(function () {
     }
 
     $('#add_ann_btn__').on('click', function () {
-        $('#res_ann_sec').fadeOut(600);
-        $('#add_ann_sec').fadeIn(900);
+        let idx = new Index()
+        if (idx.getCookie('cud')){
+            $('#res_ann_sec').fadeOut(600);
+            $('#add_ann_sec').fadeIn(900);
+        }else {
+            idx.lbmAlert("Login please", "info");
+        }
+
     });
 
     $('#ann_cancel_btn').on('click', function () {
