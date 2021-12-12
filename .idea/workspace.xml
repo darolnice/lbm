@@ -10,7 +10,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop" />
+    <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/lebolma.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrLogin.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +99,7 @@
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.postfix.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -113,13 +123,12 @@
       </CommandLine>
       <method v="2" />
     </configuration>
-    <configuration name="home.view.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/public_html/views/home.view.php">
+    <configuration name="home.view.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/public_html/views/home.view.php">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="PHP Script.Navigation.php" />
-        <item itemvalue="PHP Script.home.view.php" />
       </list>
     </recent_temporary>
   </component>
@@ -415,6 +424,13 @@
       <workItem from="1639062632604" duration="21671000" />
       <workItem from="1639276347223" duration="52000" />
       <workItem from="1639276768868" duration="29000" />
+      <workItem from="1639301135815" duration="29000" />
+      <workItem from="1639303296019" duration="292000" />
+      <workItem from="1639300006891" duration="13000" />
+      <workItem from="1639300031854" duration="15000" />
+      <workItem from="1639300315837" duration="164000" />
+      <workItem from="1639300513645" duration="44000" />
+      <workItem from="1639300567397" duration="4819000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -453,10 +469,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Theme shop" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="263" y="18" key="#CLI_Interpreters" timestamp="1637403007464">
+    <state x="263" y="18" key="#CLI_Interpreters" timestamp="1639301064046">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="263" y="18" key="#CLI_Interpreters/0.0.1366.728@0.0.1366.728" timestamp="1637403007464" />
+    <state x="263" y="18" key="#CLI_Interpreters/0.0.1366.728@0.0.1366.728" timestamp="1639301064046" />
     <state x="392" y="46" key="#Home.php" timestamp="1633627185782">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -525,10 +541,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1632777658791" />
-    <state x="199" y="3" width="1056" height="708" key="SettingsEditor" timestamp="1637941025409">
+    <state x="199" y="3" width="1056" height="708" key="SettingsEditor" timestamp="1639301496736">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="199" y="3" width="1056" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1637941025409" />
+    <state x="199" y="3" width="1056" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1639301496736" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1638372353111">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -557,10 +573,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="406" y="135" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1634125275472" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1638565861053">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1639301059207">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1638565861053" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1639301059207" />
     <state x="470" y="182" width="498" height="402" key="scopes" timestamp="1637409671077">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

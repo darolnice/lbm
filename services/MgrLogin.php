@@ -1,4 +1,5 @@
 <?php
+session_start();
 //namespace Lbm\Mgrlogin;
 //
 //use Lbm\Functions\Functions;
@@ -80,7 +81,6 @@ class MgrLogin extends Database
      */
     public function signUp(){
         $F = new Functions();
-        $pp = 'IMG-60c241dcc931a9.50161382.jpg';
 
         $_SESSION['tkn'] = sha1($_POST['user_name'].$_POST['email']);
         $_SESSION['new_user'] = $_POST['user_name'];
@@ -88,7 +88,7 @@ class MgrLogin extends Database
         $subject = SITE_NAME. " - Acoumpte activation";
 
         ob_start();
-        require(S_VIEWS.'/partials/tmpl/custumer_activation_mail_tmpl.view.php');
+        require(S_VIEWS.'partials/tmpl/custumer_activation_mail_tmpl.view.php');
         $content = ob_get_clean();
 
         try {
@@ -98,16 +98,15 @@ class MgrLogin extends Database
                                                                country,
                                                                email,
                                                                phone_number,
-                                                               password,
-                                                               profil_image)
+                                                               password)
+                                                              
                                                         VALUES(:username,
                                                                :genre,
                                                                :interest_by,
                                                                :country,
                                                                :email,
                                                                :phone,
-                                                               :password,
-                                                               :profil_image)');
+                                                               :password)');
 
             $qry->execute([
                 'username'       => $_POST['user_name'],
@@ -117,7 +116,6 @@ class MgrLogin extends Database
                 'email'          => $_POST['email'],
                 'phone'          => $_POST['phone_number'],
                 'password'       => password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => 12]),
-                'profil_image'   => $pp,
             ]);
 
             if ($qry->rowCount() === 1){
@@ -169,12 +167,9 @@ class MgrLogin extends Database
 
     /**
      * @param array $data
-     * @return string
      */
-    public function register_step2(array $data): string {
-        //session_start();
-        echo $_SESSION['tmp_name'];
-        die();
+    public function registerStep2(array $data){
+        session_start();
 
         $_SESSION['tkn'] = sha1($data[0].$data[5]);
         $_SESSION['shop_name'] = $data[0];
@@ -182,12 +177,13 @@ class MgrLogin extends Database
         ob_start();
         require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
         $content = ob_get_clean();
-        
+
         try {
             $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name, city = :city, activity = :activity,
-                                                             description = :description, matricule = :matricule, shop_key = :shop_key,
-                                                             current_plan = :current_plan  WHERE username= :username'
+                                                              description = :description, matricule = :matricule, shop_key = :shop_key,
+                                                              current_plan = :current_plan  WHERE username = :username'
             );
+
 
             $qry->bindParam('username', $_SESSION['tmp_name'], PDO::PARAM_STR);
             $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
@@ -198,17 +194,17 @@ class MgrLogin extends Database
             $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
 
             if ($qry->execute()){
-               
+                var_dump('ici');
+                //(new MgrProducts)->createShop($data[0], $content, [$data[6], $data[7], $data[8], $data[9]]);
 
-/*                 (new MgrProducts)->createShop($data[0], $content, [$data[6], $data[7], $data[8], $data[9]]);
- */            }else{
+            }else{
                 (new Functions)->notif_errors(['Someone is wrong please try again!!!']);
             }
 
         }catch (PDOException $e){
             return $e->getMessage();
         }
-       
+       return false;
     }
 
     /**
@@ -225,7 +221,8 @@ class MgrLogin extends Database
             $qr->bindParam('name', $data[1], PDO::PARAM_STR_CHAR);
             $qr->bindParam('email', $data[2], PDO::PARAM_STR_CHAR);
             $qr->bindParam('phone', $data[3], PDO::PARAM_STR_CHAR);
-            $qr->bindParam('password', password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR_CHAR);
+            $password_hash = password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]);
+            $qr->bindParam('password', $password_hash, PDO::PARAM_STR_CHAR);
             $qr->bindParam('shop', $_SESSION["shop_name"], PDO::PARAM_STR_CHAR);
 
             if ($qr->execute()){

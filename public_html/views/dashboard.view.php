@@ -121,7 +121,7 @@
         <section class="row pt-5">
             <div class="add">
                 <div class="search">
-                    <img class="bck___hm" src="<?= S_ASSETS?>images/svg/arrow.png" alt="back to home">
+                    <img class="bck___hm" id="bck__hm" src="<?= S_ASSETS?>images/svg/arrow.png" alt="back to home">
 
                     <form class="sch__form form-group" method="get">
                         <label>

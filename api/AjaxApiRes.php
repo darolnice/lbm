@@ -327,9 +327,6 @@ class AjaxApiRes
                 $this->response($this->HTTP_BAD_REQUEST, $r, 488);
             }
         }
-
-
-
     }
 
     /**
@@ -790,7 +787,7 @@ class AjaxApiRes
                 'profil_image',
                 'sallers',
                 $_SESSION['old_pp'],
-                htmlentities($_COOKIE['dxa']),
+                htmlentities($_COOKIE['dxa'])
             );
         }
     }
@@ -1118,8 +1115,7 @@ class AjaxApiRes
     /**
      * 
      */
-    public function jxregist2(){ 
-        
+    public function jxregist2(){
         $post = json_decode($_POST['inputs'], true);
         $cni1 = $_FILES['cni-img1']['name'];
         $cni1_Tmp = $_FILES['cni-img1']['tmp_name'];
@@ -1133,15 +1129,12 @@ class AjaxApiRes
             $this->response($this->HTTP_OK, 'Image is too large', null);
 
         }else{
-            
             $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
-                     strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"]),
-                     strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)   
-                                       
+                     strip_tags($post["Description"]), strip_tags($post["Matricule"]), strip_tags($post["Plan"]),
+                     strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)
             ];
-            (new MgrLogin)->register_step2($data);
+            (new MgrLogin)->registerStep2($data);
         }
-        
     } 
   
 

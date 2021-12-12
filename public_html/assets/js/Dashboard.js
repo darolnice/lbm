@@ -331,7 +331,7 @@ $(document).ready(function () {
         }
     }
 
-    new Index().openLink(document.querySelector('.bck___hm'), "./");
+    new Index().openLink('bck__hm', "./", '_parent');
     $('.bck').on('click', function () {
         $('.titll__p').fadeIn();
         $('.image, .name__, .mail__, .phn__, .passw__, .city__').fadeOut();
@@ -405,7 +405,7 @@ $(document).ready(function () {
     });
     document.querySelectorAll('.setRight').forEach(setR =>{
         setR.addEventListener('click', function () {
-            let right = '';
+            let right;
             if (setR.getAttribute('data-type') === 'Limited'){
                 right = 'Full'
             }else {
@@ -588,7 +588,7 @@ $(document).ready(function () {
     document.forms["ed_prod_from"].addEventListener('submit', function (e) {
         e.preventDefault();
         let arr = [];
-        var inputs = this;
+        const inputs = this;
 
         for (let e_=0; e_<inputs.length; e_++){
             arr.push(inputs[e_].value);
@@ -599,7 +599,7 @@ $(document).ready(function () {
 
     document.forms["add_new_prod_from"].addEventListener('submit', function (e) {
         let arr = [];
-        var inputs = this;
+        const inputs = this;
         for (let q_=0; q_<inputs.length; q_++){
             if (!inputs[q_].value){
                 new Index().lbmAlert('Please complete all forms', 'info');
@@ -855,7 +855,7 @@ $(document).ready(function () {
             $('.___mrinf').fadeOut(300);
         });
         if (document.querySelector(".____promBtnsdel")){
-            document.querySelector(".____promBtnsdel").addEventListener('click', function (e) {
+            document.querySelector(".____promBtnsdel").addEventListener('click', function () {
                 $('.___mrinf').fadeOut(300);
             });
         }

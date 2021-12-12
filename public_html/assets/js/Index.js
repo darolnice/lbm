@@ -641,7 +641,9 @@ class Index {
         fetch(url, {
             method: 'POST',
             body: value
-        })        
+        }).then(response =>{
+            console.log(response['message'])
+        })
     }
 
 }
