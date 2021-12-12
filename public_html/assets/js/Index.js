@@ -903,11 +903,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 if(shopname === 'free'){
                     if(defbtn1.files[0] !== null && defbtn2.files[0] !== null){
-                        for(let i=0; i<inputs.length; i++){
-                            if(inputs[i].value === ""){
-                                index.lbmAlert('Please complete all forms', "danger");
-                                return 
-                            }
+                        if(!inputs['shop_name'].value || !inputs['city'].value ||
+                           !inputs['activity'].value  || !inputs['description'].value){
+                               
+                            index.lbmAlert('Please complete all forms', "danger");
+                            return 
                         }
                     
                         data.Shopname = inputs['shop_name'].value;
@@ -915,8 +915,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         data.Activity = inputs['activity'].value
                         data.Description = inputs['description'].value;
                         data.Matricule = inputs['matricul'].value;
-                        data.Plan = inputs['matricul'].plan;
-
+                        data.Plan = inputs['plan'].value;
 
                         let formData = new FormData();
             

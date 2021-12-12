@@ -812,14 +812,22 @@ class AjaxApiRes
         if (in_array($img_ex_lc, $allowed_exs)){
             if($columb === 'snd_img'){
                 $new_img_name = uniqid("SI-", true).'.'.$img_ex_lc;
+
             }elseif($columb === 'ceo_img'){
                 $new_img_name = uniqid("CEO-", true).'.'.$img_ex_lc;
+
             }elseif($columb === 'col_1_img'){
                 $new_img_name = uniqid("CI1-", true).'.'.$img_ex_lc;
+
             }elseif($columb === 'col_2_img'){
                 $new_img_name = uniqid("CI2-", true).'.'.$img_ex_lc;
+
             }elseif($columb === 'cover_image'){
                 $new_img_name = uniqid("CI-", true).'.'.$img_ex_lc;
+
+            }elseif($columb === 'cni_f1' || $columb === 'cni_f2'){
+                $new_img_name = uniqid("CNI-", true).'.'.$img_ex_lc;
+
             }else{
                 $new_img_name = uniqid("PP-", true).'.'.$img_ex_lc;
             }
@@ -828,11 +836,13 @@ class AjaxApiRes
             $img_upload_path = 'public_html/assets/images/upload/'.$new_img_name;
             if($table === 'sallers'){
                 if($columb === 'cover_image' || $columb === 'snd_img' || $columb === 'ceo_img' ||
-                    $columb === 'col_1_img' || $columb === 'col_2_img'){
-                    $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], $columb, $new_img_name);
+                   $columb === 'col_1_img' || $columb === 'col_2_img' || $columb === 'cni_f1' || $columb === 'cni_f2')
+                {
+                   $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], $columb, $new_img_name);
                 }
 
-                else{
+                else
+                {
                     $r = (new RestApi)->jxUV($columb, $new_img_name, (int)$code);
                 }
 
@@ -840,14 +850,15 @@ class AjaxApiRes
                     if($old_image !== ""){
                         try {
                             unlink('public_html/assets/images/upload/'.$old_image);
+                            unset($_SESSION['old_pp']);
                         }catch(Exception $e){
                             return $e->getMessage();
                         }
                     }
+
                     move_uploaded_file($img_path, $img_upload_path);
                 }
-
-                if($old_image !== ""){unset($_SESSION['old_pp']);}
+             
                 $this->response($this->HTTP_OK, $r, 20);
             }
 
@@ -1104,45 +1115,30 @@ class AjaxApiRes
     }
 
 
-    public function jxregist2(){
-        
-        if(isset($_POST['inputs'])){
-            $post = json_decode($_POST['inputs'], true);
-        
-            (!empty($post["Shopname"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop name', null); return;
-            (!empty($post["City"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop location', null); return;
-            (!empty($post["Activity"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop principal activity', null); return;
-            (!empty($post["Description"])) ?  : $this->response($this->HTTP_Ok, 'PLease enter shop description', null); return;
+    public function jxregist2(){ 
+        $post = json_decode($_POST['inputs'], true);
+        $cni1 = $_FILES['cni-img1']['name'];
+        $cni1_Tmp = $_FILES['cni-img1']['tmp_name'];
+        $cni1_Size = $_FILES['cni-img1']['size'];
 
-            (!empty($_FILES['CardIdface1'])) ? : $this->response($this->HTTP_Ok, 'PLease upload card id face 1', null); return;
-            (!empty($_FILES['CardIdface2'])) ? : $this->response($this->HTTP_Ok, 'PLease upload card id face 2', null); return;
+        $cni2 = $_FILES['cni-img2']['name'];
+        $cni2_Tmp = $_FILES['cni-img2']['tmp_name'];
+        $cni2_Size = $_FILES['cni-img2']['size'];
 
+        if($cni1_Size > 100000 || $cni2_Size > 100000){
+            $this->response($this->HTTP_OK, 'Image is too large', null);
 
+        }else{
+            $this->jxUploadImage($cni1, $cni1_Tmp, 'cni_f1', "sallers", null, null);
+            $this->jxUploadImage($cni2, $cni2_Tmp, 'cni_f2', "sallers", null, null);
+            
+            $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
+                        strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"])                      
+            ];
 
-            $cni1 = $_FILES['CardIdface1']['name'];
-            $cni1_Tmp = $_FILES['CardIdface1']['tmp_name'];
-            $cni1_Size = $_FILES['CardIdface1']['size'];
-
-            $cni2 = $_FILES['CardIdface2']['name'];
-            $cni2_Tmp = $_FILES['CardIdface2']['tmp_name'];
-            $cni2_Size = $_FILES['CardIdface2']['size'];
-
-            if($cni1_Size > 100000 || $cni2_Size > 100000){
-                $this->response($this->HTTP_OK, 'Image is too large', null);
-
-            }else{
-                $this->jxUploadImage($cni1, $cni1_Tmp, 'cni_f1', "sallers", null, null);
-                $this->jxUploadImage($cni2, $cni2_Tmp, 'cni_f2', "sallers", null, null);
-
-                
-                $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
-                         strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"])                      
-                ];
-
-                $r = (new MgrLogin)->register_step2($data);
-                if($r === 'ok'){Functions::redir('setting');}
-            }
+            (new MgrLogin)->register_step2($data);
         }
+        
     } 
   
 

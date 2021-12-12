@@ -137,51 +137,27 @@ class MgrLogin extends Database
     /**
      *
      */
-    public function register(){
-        $pp = 'IMG-60c241dcc931a9.50161382.jpg';
+    public function register(array $data){
         try {
 
-            $qr = parent::getDb()->prepare('INSERT INTO sallers
-                                                        (username,
-                                                         genre,
-                                                         interest_by,
-                                                         country,
-                                                         email,
-                                                         phone_number,
-                                                         saller_password,
-                                                         profil_image,
-                                                         actived)
-                                             VALUES(:username,
-                                                          :genre,
-                                                          :interest_by,
-                                                          :country,
-                                                          :email,
-                                                          :phone_number,
-                                                          :saller_password,
-                                                          :profil_image,
-                                                          :actived)'
+            $qr = parent::getDb()->prepare('INSERT INTO sallers (username, genre, country, email, phone_number, saller_password)
+                                            VALUES(:username, :genre, :country, :email, :phone_number, :saller_password)'
             );
-
-            $qr->execute([
-                'username'          => $_POST['user_name'],
-                'genre'             => $_POST['civility'],
-                'interest_by'       => '',
-                'country'           => $_POST['country'],
-                'email'             => $_POST['email'],
-                'phone_number'      => $_POST['phone_number'],
-                'saller_password'   => password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => 12]),
-                'profil_image'      => $pp,
-                'actived'           => '0'
-            ]);
-
-            if ($qr->rowCount() === 1){
-                $_SESSION['c_name'] = $_POST['user_name'];
-                $_SESSION['saller_mail'] = $_POST['email'];
+                                                         
+            $qr->bindParam('username', $data[0], PDO::PARAM_STR);
+            $qr->bindParam('genre', $data[1], PDO::PARAM_STR);
+            $qr->bindParam('country', $data[2], PDO::PARAM_STR);
+            $qr->bindParam('email', $data[3], PDO::PARAM_STR);
+            $qr->bindParam('phone_number', $data[4], PDO::PARAM_STR);
+            $qr->bindParam('saller_password', password_hash($data[5], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR);
+            
+            if ($qr->execute()){
+                $_SESSION['saller_id'] = $qr->getLastInsertId();
+                $_SESSION['saller_mail'] = $data[3];
                 Functions::redir('register_2');
 
             }else{
                 (new Functions)->notif_errors(['Something is wrong']);
-                return;
             }
 
         }catch (PDOException $e){
@@ -194,7 +170,6 @@ class MgrLogin extends Database
      * @return string
      */
     public function register_step2(array $data = []): string {
-        $F = new Functions();
         $_SESSION['tkn'] = sha1($data[0].$data[5]);
         $_SESSION['shop_name'] = $data[0];
 
@@ -213,18 +188,18 @@ class MgrLogin extends Database
                                                              WHERE username= :username'
             );
 
-            $qry->bindParams('username', $_SESSION['c_name'], PDO::PARAM_STR);
-            $qry->bindParams('shop_name', $data[0], PDO::PARAM_STR);
-            $qry->bindParams('city', $data[1], PDO::PARAM_STR);
-            $qry->bindParams('activity', $data[2], PDO::PARAM_STR);
-            $qry->bindParams('description', $data[3], PDO::PARAM_STR);
-            $qry->bindParams('matricule', $data[4], PDO::PARAM_STR);
-            $qry->bindParams('current_plan', $data[5], PDO::PARAM_STR);
+            $qry->bindParam('username', $_SESSION['c_name'], PDO::PARAM_STR);
+            $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
+            $qry->bindParam('city', $data[1], PDO::PARAM_STR);
+            $qry->bindParam('activity', $data[2], PDO::PARAM_STR);
+            $qry->bindParam('description', $data[3], PDO::PARAM_STR);
+            $qry->bindParam('matricule', $data[4], PDO::PARAM_STR);
+            $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
 
             if ($qry->execute()){
-                (new MgrProducts)->createShop($_POST['shop_name'], $content);
+                (new MgrProducts)->createShop($data[0], $content);
             }else{
-                $F->notif_errors(['Someone is wrong please check your network!!!']);
+                (new Functions)->notif_errors(['Someone is wrong please check your network!!!']);
             }
 
         }catch (PDOException $e){

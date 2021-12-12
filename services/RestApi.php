@@ -175,13 +175,11 @@ class RestApi extends Database
 
         if ($data["auth_code"] == $code){
             $qr = parent::getDb()->prepare("UPDATE sallers SET $columb = :newValue, auth_code = :empty WHERE id = :id");
-            $qr->execute([
-                         "newValue" => $newValue,
-                         "id" => $_SESSION['saller_id'],
-                         "empty" => ''
-            ]);
-            $_SESSION[$columb] = $newValue;
-            return $newValue;
+            if($qr->execute(["newValue" => $newValue, "id" => $_SESSION['saller_id'], "empty" => ''])){
+                $_SESSION[$columb] = $newValue;
+                return $newValue;
+            };  
+            
         }else{
             $errors [] = 'User not found';
             (new Functions)->notif_errors($errors);
@@ -202,25 +200,8 @@ class RestApi extends Database
      */
     public function jxNewSa($right, $name, $email, $phone, $pass, $img, $busi){
         try {
-            $qr = parent::getDb()->prepare('INSERT INTO sub_admin (name,
-                                                                            email,
-                                                                            phone,
-                                                                            image,
-                                                                            password,
-                                                                            auth_code,
-                                                                            shop,
-                                                                            right_)
-
-                                                            VALUES(:name,
-                                                                   :email,
-                                                                   :phone,
-                                                                   :image,
-                                                                   :password,
-                                                                   :auth_code,
-                                                                   :shop,
-                                                                   :right
-                                                            )'
-
+            $qr = parent::getDb()->prepare('INSERT INTO sub_admin (name, email, phone, image, password, auth_code, shop, right_)
+                                            VALUES(:name, :email, :phone, :image, :password, :auth_code, :shop, :right)'
             );
 
             $qr->execute([
@@ -333,8 +314,8 @@ class RestApi extends Database
                                                                       price,
                                                                       color,
                                                                       size,
-                                                                      comment_s,
-                                                                      add_at)
+                                                                      comment_s)
+                                                                     
                                                 VALUES  (
                                                          :user_name,
                                                          :phone_number,
@@ -346,8 +327,8 @@ class RestApi extends Database
                                                          :price,
                                                          :color,
                                                          :size,
-                                                         :comment_s,
-                                                         :add_at)"
+                                                         :comment_s)"
+                                                         
             );
             $ann_qry->execute([
                 'user_name' => $_SESSION['username'],
@@ -360,8 +341,7 @@ class RestApi extends Database
                 'price' => $f->e($items[2]),
                 'color' => $f->e($items[4]),
                 'size' => $f->e($items[5]),
-                'comment_s' => $f->e($items[6]),
-                'add_at' => date("Y-M-D H:i:s")
+                'comment_s' => $f->e($items[6])
             ]);
             $ann_qry->closeCursor();
             if ($ann_qry->rowCount() == 1){
@@ -405,16 +385,15 @@ class RestApi extends Database
      */
     public function postAndGetcomment($annonce_id, string $annoncer, $comment): array {
         try {
-            $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id, annoncer, shop_name, response, add_at)
-                                                    VALUES (:annonce_id, :annoncer, :shop_name, :response, :add_at)"
+            $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id, annoncer, shop_name, response)
+                                                    VALUES (:annonce_id, :annoncer, :shop_name, :response)"
             );
 
             $pc->execute([
                 'annonce_id'=>$annonce_id,
                 'annoncer' => $annoncer,
                 'shop_name'=>$_SESSION['shop_name'],
-                'response'=> (new Functions())->e($comment),
-                'add_at'=> date("Y-M-D H:i:s")
+                'response'=> (new Functions())->e($comment)    
             ]);
             $pc->closeCursor();
 
@@ -553,8 +532,7 @@ class RestApi extends Database
                            'img2'         => $data["data"][19],
                            'img3'         => $data["data"][20],
                            'img4'         => $data["data"][21],
-                           'img5'         => $data["data"][22],
-                           'add_at'       => $data["data"][16]
+                           'img5'         => $data["data"][22]
             ]];
 
             $q->bindValue("prod_data", json_encode($nv), PDO::PARAM_STR_CHAR);

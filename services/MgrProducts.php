@@ -65,46 +65,46 @@ class MgrProducts extends Database
                                                             img2 = :img2, img3 = :img3, img4 = :img4, img5 = :img5
                                                      WHERE  id = $prod_id");
 
-            $q->bindValue('prod_name',    $data[0], PDO::PARAM_STR_CHAR);
-            $q->bindValue('category',     $data[1], PDO::PARAM_STR_CHAR);
-            $q->bindValue('sub_category', $data[2], PDO::PARAM_STR_CHAR);
-            $q->bindValue('quality',      $data[3], PDO::PARAM_STR_CHAR);
-            $q->bindValue('price',        $data[4], PDO::PARAM_STR_CHAR);
-            $q->bindValue('promo',        $data[5], PDO::PARAM_STR_CHAR);
-            $q->bindValue('color',        $data[6], PDO::PARAM_STR_CHAR);
-            $q->bindValue('size',         $data[7], PDO::PARAM_STR_CHAR);
-            $q->bindValue('proprities',   $data[8], PDO::PARAM_STR);
-            $q->bindValue('quantity',     $data[9], PDO::PARAM_INT);
-            $q->bindValue('description',  $data[10], PDO::PARAM_STR);
+            $q->bindParam('prod_name',    $data[0], PDO::PARAM_STR_CHAR);
+            $q->bindParam('category',     $data[1], PDO::PARAM_STR_CHAR);
+            $q->bindParam('sub_category', $data[2], PDO::PARAM_STR_CHAR);
+            $q->bindParam('quality',      $data[3], PDO::PARAM_STR_CHAR);
+            $q->bindParam('price',        $data[4], PDO::PARAM_STR_CHAR);
+            $q->bindParam('promo',        $data[5], PDO::PARAM_STR_CHAR);
+            $q->bindParam('color',        $data[6], PDO::PARAM_STR_CHAR);
+            $q->bindParam('size',         $data[7], PDO::PARAM_STR_CHAR);
+            $q->bindParam('proprities',   $data[8], PDO::PARAM_STR);
+            $q->bindParam('quantity',     $data[9], PDO::PARAM_INT);
+            $q->bindParam('description',  $data[10], PDO::PARAM_STR);
 
             if($data[11] !== ""){
-                $q->bindValue('img1',         $data[11], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img1',         $data[11], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindValue('img1',         $vall["img1"], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img1',         $vall["img1"], PDO::PARAM_STR_CHAR);
             }
 
             if($data[12] !== ""){
-                $q->bindValue('img2',         $data[12], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img2',         $data[12], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindValue('img2',         $vall["img2"], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img2',         $vall["img2"], PDO::PARAM_STR_CHAR);
             }
 
             if($data[13] !== ""){
-                $q->bindValue('img3',         $data[13], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img3',         $data[13], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindValue('img3',         $vall["img3"], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img3',         $vall["img3"], PDO::PARAM_STR_CHAR);
             }
 
             if($data[14] !== ""){
-                $q->bindValue('img4',         $data[14], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img4',         $data[14], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindValue('img4',         $vall["img4"], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img4',         $vall["img4"], PDO::PARAM_STR_CHAR);
             }
 
             if($data[15] !== ""){
-                $q->bindValue('img5',         $data[15], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img5',         $data[15], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindValue('img5',         $vall["img5"], PDO::PARAM_STR_CHAR);
+                $q->bindParam('img5',         $vall["img5"], PDO::PARAM_STR_CHAR);
             }
 
             if($q->execute()){return 1;}
@@ -133,26 +133,26 @@ class MgrProducts extends Database
                                                  :quantity, :description, :img1, :img2, :img3, :img4, :img5
                                           )"
             );
-            $q->bindValue("shop_name",    $_SESSION['shop_name'], PDO::PARAM_STR_CHAR);
-            $q->bindValue("prod_name",    $data[0], PDO::PARAM_STR_CHAR);
-            $q->bindValue("add_by",       $add_by, PDO::PARAM_STR_CHAR);
-            $q->bindValue("category",     $data[1], PDO::PARAM_STR_CHAR);
-            $q->bindValue("quality",      $data[2], PDO::PARAM_STR_CHAR);
-            $q->bindValue("price",        number_format($data[3], 2), PDO::PARAM_STR_CHAR);
-            $q->bindValue("promo",        number_format($data[4], 2), PDO::PARAM_STR_CHAR);
-            $q->bindValue("color",        $data[5], PDO::PARAM_STR_CHAR);
-            $q->bindValue("size",         $data[10], PDO::PARAM_STR_CHAR);
-            $q->bindValue("proprities",   $data[7], PDO::PARAM_STR_CHAR);
-            $q->bindValue("quantity",     $data[9], PDO::PARAM_INT);
-            $q->bindValue("description",  $data[6], PDO::PARAM_STR_CHAR);
-            $q->bindValue("img1",         $data[11], PDO::PARAM_STR_CHAR);
-            $q->bindValue("img2",         $data[12], PDO::PARAM_STR_CHAR);
-            $q->bindValue("img3",         $data[13], PDO::PARAM_STR_CHAR);
-            $q->bindValue("img4",         $data[14], PDO::PARAM_STR_CHAR);
-            $q->bindValue("img5",         $data[15], PDO::PARAM_STR_CHAR);
-            $q->bindValue("rating",      1, PDO::PARAM_INT);
-            $q->bindValue("rater",       1, PDO::PARAM_INT);
-            $q->bindValue("sub_category", $data[8], PDO::PARAM_STR_CHAR);
+            $q->bindParam("shop_name",    $_SESSION['shop_name'], PDO::PARAM_STR_CHAR);
+            $q->bindParam("prod_name",    $data[0], PDO::PARAM_STR_CHAR);
+            $q->bindParam("add_by",       $add_by, PDO::PARAM_STR_CHAR);
+            $q->bindParam("category",     $data[1], PDO::PARAM_STR_CHAR);
+            $q->bindParam("quality",      $data[2], PDO::PARAM_STR_CHAR);
+            $q->bindParam("price",        number_format($data[3], 2), PDO::PARAM_STR_CHAR);
+            $q->bindParam("promo",        number_format($data[4], 2), PDO::PARAM_STR_CHAR);
+            $q->bindParam("color",        $data[5], PDO::PARAM_STR_CHAR);
+            $q->bindParam("size",         $data[10], PDO::PARAM_STR_CHAR);
+            $q->bindParam("proprities",   $data[7], PDO::PARAM_STR_CHAR);
+            $q->bindParam("quantity",     $data[9], PDO::PARAM_INT);
+            $q->bindParam("description",  $data[6], PDO::PARAM_STR_CHAR);
+            $q->bindParam("img1",         $data[11], PDO::PARAM_STR_CHAR);
+            $q->bindParam("img2",         $data[12], PDO::PARAM_STR_CHAR);
+            $q->bindParam("img3",         $data[13], PDO::PARAM_STR_CHAR);
+            $q->bindParam("img4",         $data[14], PDO::PARAM_STR_CHAR);
+            $q->bindParam("img5",         $data[15], PDO::PARAM_STR_CHAR);
+            $q->bindParam("rating",       1, PDO::PARAM_INT);
+            $q->bindParam("rater",        1, PDO::PARAM_INT);
+            $q->bindParam("sub_category", $data[8], PDO::PARAM_STR_CHAR);
 
             if($q->execute()){
                 $q->closeCursor();

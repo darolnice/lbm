@@ -188,10 +188,8 @@ class Log extends Navigation
             }
 
             if(count($errors) === 0){
-                $r = new MgrLogin();
-                $r->register();
+                (new MgrLogin)->register([$saller_name, $civility, $country, $email, $phone_number, $password]);
             }
-
         }
 
     }
@@ -199,7 +197,7 @@ class Log extends Navigation
         session_start();
         Functions::Auth_UserIS();
 
-        if (!$_SESSION['c_name']){
+        if ($_SESSION['c_name']){
             $F = new Functions();
             $mgrUser = new MgrUser();
 
