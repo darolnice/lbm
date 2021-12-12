@@ -137,7 +137,7 @@ class Log extends Navigation
         $F = new Functions();
 
         include_once S_VIEWS.'/register.view.php';
-
+       
         $country = $_POST['country'];
         $civility = $_POST['civility'];
         $saller_name = $_POST['user_name'];
@@ -197,7 +197,7 @@ class Log extends Navigation
         session_start();
         Functions::Auth_UserIS();
 
-        if ($_SESSION['c_name']){
+        if ($_SESSION['tmp_name']){
             $F = new Functions();
             $mgrUser = new MgrUser();
 
@@ -218,10 +218,6 @@ class Log extends Navigation
             if(isset($_POST['sbmt'])){
 
                  if (!$F->not_empty([$shop_name, $city, $activity, $description, $shop_key, $current_plan])){
-
-                 /*    if(empty($_FILES['name']['CardIdface1']) || empty($_FILES['name']['CardIdface2'])){
-                        $errors[] = "- Please Add Card Id Images";
-                    } */
 
                     if (mb_strlen($shop_name) < 3) {
                         $errors[] = "- Your shop name is short, minimun 3 chars";

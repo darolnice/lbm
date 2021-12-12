@@ -167,7 +167,7 @@ class MgrUser extends Database
      * @param string $columb
      * @param $sallerData
      */
-    public function updateSallerData($sallerId, string $columb, $sallerData)
+    public function updateSallerData($saller_name, string $columb, $sallerData)
     {
         try {
             if($columb === 'shop_name'){
@@ -180,9 +180,9 @@ class MgrUser extends Database
                     $g->bindValue('shop_name', $sallerData, PDO::PARAM_STR);
                     if($g->execute()){
 
-                        $y = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
+                        $y = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE username = :saller_n");
                         $y->bindValue('data', $sallerData, PDO::PARAM_STR);
-                        $y->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
+                        $y->bindValue('saller_n', $saller_name, PDO::PARAM_INT);
                         if($y->execute()){
                             $y->closeCursor();
                             $_SESSION['shop_name'] = $sallerData;
@@ -192,9 +192,9 @@ class MgrUser extends Database
                 }
             }
 
-            $n = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE id = :sallerId");
-            $n->bindValue('data', $sallerData, PDO::PARAM_STR);
-            $n->bindValue('sallerId', (int)$sallerId, PDO::PARAM_INT);
+            $n = parent::getDb()->prepare("UPDATE sallers SET $columb = :data WHERE username = :saller_name");
+            $n->bindParam('data', $sallerData, PDO::PARAM_STR);
+            $n->bindParam('saller_name', $saller_name, PDO::PARAM_STR);
             if($n->execute()){
                 $n->closeCursor();
                 return 'Update successfully';

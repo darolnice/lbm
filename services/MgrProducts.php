@@ -183,7 +183,7 @@ class MgrProducts extends Database
      * @param $message
      * @return bool|string
      */
-    public function createShop($shop_name, $message): bool {
+    public function createShop($shop_name, $message, array $imgData): bool {
         try {
             $q = parent::getDb()->prepare("CREATE TABLE $shop_name (id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
                                                                     shop_name VARCHAR(255)NOT NULL,
@@ -212,10 +212,18 @@ class MgrProducts extends Database
             );
             
             if($q->execute()) {
+                $jx = new AjaxApiRes();
+
                 $subject = SITE_NAME. " - Account activation";
-                Functions::lbmSendMail($_SESSION['saller_mail'], $subject, $message);
+                Functions::lbmSendMail($_SESSION['tmp_email'], $subject, $message);
+
+                unset($_SESSION['tmp_name']);
+                unset($_SESSION['tmp_email']);
+
+                $jx->jxUploadImage($imgData[0], $imgData[1], 'cni_f1', "sallers", null, null);
+                $jx->jxUploadImage($imgData[2], $imgData[3], 'cni_f2', "sallers", null, null);
+
                 (new Functions)->set_flash_tab(["Activation mail sent!"], 'info');
-                unset($_SESSION['c_name']);
                 Functions::redir('business');
             }
         }catch(PDOException $e){

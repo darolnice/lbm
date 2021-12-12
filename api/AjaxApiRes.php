@@ -805,6 +805,7 @@ class AjaxApiRes
      * @return bool|string
      */
     public function jxUploadImage($img_name, $img_path, $columb, $table = null, $old_image = null, $code = null){
+        session_start();
         $allowed_exs = array("jpg", "png", "jpeg", "jfif");
         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
         $img_ex_lc = strtolower($img_ex);
@@ -838,7 +839,7 @@ class AjaxApiRes
                 if($columb === 'cover_image' || $columb === 'snd_img' || $columb === 'ceo_img' ||
                    $columb === 'col_1_img' || $columb === 'col_2_img' || $columb === 'cni_f1' || $columb === 'cni_f2')
                 {
-                   $r = (new MgrUser)->updateSallerData($_SESSION['saller_id'], $columb, $new_img_name);
+                   $r = (new MgrUser)->updateSallerData($_SESSION['tmp_name'], $columb, $new_img_name);
                 }
 
                 else
@@ -847,7 +848,7 @@ class AjaxApiRes
                 }
 
                 if($r !== 'Auth code is wrong'){
-                    if($old_image !== ""){
+                    if($old_image !== null){
                         try {
                             unlink('public_html/assets/images/upload/'.$old_image);
                             unset($_SESSION['old_pp']);
@@ -1114,8 +1115,11 @@ class AjaxApiRes
         }
     }
 
-
+    /**
+     * 
+     */
     public function jxregist2(){ 
+        
         $post = json_decode($_POST['inputs'], true);
         $cni1 = $_FILES['cni-img1']['name'];
         $cni1_Tmp = $_FILES['cni-img1']['tmp_name'];
@@ -1129,13 +1133,12 @@ class AjaxApiRes
             $this->response($this->HTTP_OK, 'Image is too large', null);
 
         }else{
-            $this->jxUploadImage($cni1, $cni1_Tmp, 'cni_f1', "sallers", null, null);
-            $this->jxUploadImage($cni2, $cni2_Tmp, 'cni_f2', "sallers", null, null);
             
             $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
-                        strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"])                      
+                     strip_tags($post["Description"]), strip_tags($post["Matricul"]), strip_tags($post["Plan"]),
+                     strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)   
+                                       
             ];
-
             (new MgrLogin)->register_step2($data);
         }
         

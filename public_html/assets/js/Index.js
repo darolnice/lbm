@@ -641,10 +641,7 @@ class Index {
         fetch(url, {
             method: 'POST',
             body: value
-        }).then(dta =>{
-                console.log(dta)
-            })
-            
+        })        
     }
 
 }

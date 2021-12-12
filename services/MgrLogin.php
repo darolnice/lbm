@@ -140,20 +140,22 @@ class MgrLogin extends Database
     public function register(array $data){
         try {
 
-            $qr = parent::getDb()->prepare('INSERT INTO sallers (username, genre, country, email, phone_number, saller_password)
-                                            VALUES(:username, :genre, :country, :email, :phone_number, :saller_password)'
+            $qr = parent::getDb()->prepare("INSERT INTO sallers (username, genre, country, email, phone_number, saller_password)
+                                            VALUES(:username, :genre, :country, :email, :phone_number, :saller_password)"
             );
-                                                         
-            $qr->bindParam('username', $data[0], PDO::PARAM_STR);
-            $qr->bindParam('genre', $data[1], PDO::PARAM_STR);
-            $qr->bindParam('country', $data[2], PDO::PARAM_STR);
-            $qr->bindParam('email', $data[3], PDO::PARAM_STR);
-            $qr->bindParam('phone_number', $data[4], PDO::PARAM_STR);
-            $qr->bindParam('saller_password', password_hash($data[5], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR);
+
+            $f_pass = password_hash($data[5], PASSWORD_DEFAULT, ['cost' => 12]);                                   
             
-            if ($qr->execute()){
-                $_SESSION['saller_id'] = $qr->getLastInsertId();
-                $_SESSION['saller_mail'] = $data[3];
+            $qr->bindParam(':username', $data[0], PDO::PARAM_STR);
+            $qr->bindParam(':genre', $data[1], PDO::PARAM_STR);
+            $qr->bindParam(':country', $data[2], PDO::PARAM_STR);
+            $qr->bindParam(':email', $data[3], PDO::PARAM_STR);
+            $qr->bindParam(':phone_number', $data[4], PDO::PARAM_STR);
+            $qr->bindParam(':saller_password', $f_pass, PDO::PARAM_STR_CHAR);
+
+            if ($qr->execute()){     
+                $_SESSION['tmp_name'] = $data[0];
+                $_SESSION['tmp_email'] = $data[3];
                 Functions::redir('register_2');
 
             }else{
@@ -169,26 +171,25 @@ class MgrLogin extends Database
      * @param array $data
      * @return string
      */
-    public function register_step2(array $data = []): string {
+    public function register_step2(array $data): string {
+        //session_start();
+        echo $_SESSION['tmp_name'];
+        die();
+
         $_SESSION['tkn'] = sha1($data[0].$data[5]);
         $_SESSION['shop_name'] = $data[0];
 
         ob_start();
-        require(S_VIEWS.'/partials/tmpl/saller_activation_mail_tmpl.view.php');
+        require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
         $content = ob_get_clean();
-
+        
         try {
-            $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name,
-                                                             city = :city,
-                                                             activity = :activity,
-                                                             description = :description,
-                                                             matricule = :matricule,
-                                                             shop_key = :shop_key,
-                                                             current_plan = :current_plan                                                  
-                                                             WHERE username= :username'
+            $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name, city = :city, activity = :activity,
+                                                             description = :description, matricule = :matricule, shop_key = :shop_key,
+                                                             current_plan = :current_plan  WHERE username= :username'
             );
 
-            $qry->bindParam('username', $_SESSION['c_name'], PDO::PARAM_STR);
+            $qry->bindParam('username', $_SESSION['tmp_name'], PDO::PARAM_STR);
             $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
             $qry->bindParam('city', $data[1], PDO::PARAM_STR);
             $qry->bindParam('activity', $data[2], PDO::PARAM_STR);
@@ -197,15 +198,17 @@ class MgrLogin extends Database
             $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
 
             if ($qry->execute()){
-                (new MgrProducts)->createShop($data[0], $content);
-            }else{
-                (new Functions)->notif_errors(['Someone is wrong please check your network!!!']);
+               
+
+/*                 (new MgrProducts)->createShop($data[0], $content, [$data[6], $data[7], $data[8], $data[9]]);
+ */            }else{
+                (new Functions)->notif_errors(['Someone is wrong please try again!!!']);
             }
 
         }catch (PDOException $e){
             return $e->getMessage();
         }
-        return false;
+       
     }
 
     /**
@@ -214,26 +217,16 @@ class MgrLogin extends Database
      */
     public function createSubUser(array $data){
         try {
-            $qr = parent::getDb()->prepare('INSERT INTO sub_admin (right_,
-                                                                            name,
-                                                                            email,
-                                                                            phone,
-                                                                            password,
-                                                                            shop)
-                                                            VALUES(:right,
-                                                                   :name,
-                                                                   :email,
-                                                                   :phone,
-                                                                   :password,
-                                                                   :shop)'
+            $qr = parent::getDb()->prepare('INSERT INTO sub_admin (right_, name, email, phone, password, shop)
+                                            VALUES(:right, :name, :email, :phone, :password, :shop)'                               
             );
 
-            $qr->bindParams('right', $data[0], PDO::PARAM_STR_CHAR);
-            $qr->bindParams('name', $data[1], PDO::PARAM_STR_CHAR);
-            $qr->bindParams('email', $data[2], PDO::PARAM_STR_CHAR);
-            $qr->bindParams('phone', $data[3], PDO::PARAM_STR_CHAR);
-            $qr->bindParams('password', password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR_CHAR);
-            $qr->bindParams('shop', $_SESSION["shop_name"], PDO::PARAM_STR_CHAR);
+            $qr->bindParam('right', $data[0], PDO::PARAM_STR_CHAR);
+            $qr->bindParam('name', $data[1], PDO::PARAM_STR_CHAR);
+            $qr->bindParam('email', $data[2], PDO::PARAM_STR_CHAR);
+            $qr->bindParam('phone', $data[3], PDO::PARAM_STR_CHAR);
+            $qr->bindParam('password', password_hash($data[4], PASSWORD_DEFAULT, ['cost' => 12]), PDO::PARAM_STR_CHAR);
+            $qr->bindParam('shop', $_SESSION["shop_name"], PDO::PARAM_STR_CHAR);
 
             if ($qr->execute()){
                 $qr->closeCursor();

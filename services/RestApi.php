@@ -174,8 +174,8 @@ class RestApi extends Database
         $data = $q->fetch(PDO::FETCH_ASSOC);
 
         if ($data["auth_code"] == $code){
-            $qr = parent::getDb()->prepare("UPDATE sallers SET $columb = :newValue, auth_code = :empty WHERE id = :id");
-            if($qr->execute(["newValue" => $newValue, "id" => $_SESSION['saller_id'], "empty" => ''])){
+            $qr = parent::getDb()->prepare("UPDATE sallers SET $columb = :newValue, auth_code = :empty_ WHERE username = :user_n");
+            if($qr->execute(["newValue" => $newValue, "user_n" => $_SESSION['username'], "empty_" => ''])){
                 $_SESSION[$columb] = $newValue;
                 return $newValue;
             };  
