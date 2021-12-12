@@ -59,21 +59,53 @@ section{
 
 #add_ann_sec{
     border: 1px solid rgba(255, 255, 255, 0);
-    /*border-bottom: none;*/
-    width: 50%!important;
+    /* border-bottom: none; */
+    width: 90%!important;
     margin-bottom: 100px;
     height: auto;
-    background: #e5e3e3;
+    /* background: #e5e2e2; */
+    /* box-shadow: 1px 1px 4px 1px #aba4a4; */
     align-items: center;
     justify-content: center;
 }
 
 #post_ann_form{
-    width: 250px;
-    /*border: 1px solid rgba(186, 186, 186, 0.67);*/
-    margin-left: 31%;
-    margin-top: 50px;
+    width: 350px;
+    margin-left: 0;
+    margin-top: 100px;
+    background-color: #28a7454a;
+    padding: 8px;
+    border-radius: 8px;
 }
+
+.ann_pst_img{
+    position: absolute;
+    margin-left: 30%;
+    width: 250px;
+    height: auto;
+    top: 25%;
+    display: block;
+    box-sizing: border-box;
+    /*border: 1px solid coral;*/
+}
+.ann_pst_img img{
+    width: 100%;
+    border: 1px solid rgba(206, 206, 206, 0.73);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    height: auto;
+}
+.ann_pst_img button{
+    background-color: #626262;
+    color: white;
+    width: 100%;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    outline: none;
+}
+
 
 #post_ann_form input, textarea, select{
     outline: none!important;
@@ -85,6 +117,7 @@ section{
     background-color: white;
     border-radius: 3px;
     padding-left: 5px;
+    box-shadow: 1px 1px 2px 1px #838383;
 }
 
 #post_ann_form input::placeholder{
@@ -121,8 +154,8 @@ label{
     outline: none!important;
     font-size: 12px;
     float: right;
-    margin-top:  -61%;
-    margin-left: 31%;
+    margin-top: -65%;
+    right: 115px;
     position: absolute;
 }
 

@@ -10,15 +10,15 @@
 <body>
     <?php if ($_SESSION["current_user_id"]): ?>
         <section id="add_ann_sec" class="container" style="display: none">
+            <h2>Add your ad here !!!</h2>
+
             <form method="post" class="form-group" id="post_ann_form">
                 <p>Personnal informations</p>
-                <input type="text" name="name" required value="<?= $_SESSION['username']?>" placeholder="Name">
-                <input type="text" name="phone" required value="<?= $_SESSION['phone']?>" placeholder="Phone number">
-                <input type="text" name="email"  required value="<?= $_SESSION['email']?>" placeholder="E-mail">
-                <select type="text" name="city" required>
-                    <option value="NEW YORK">Douala</option>
-                    <option value="NEW YORK"><?= $_SESSION['city']?></option>
-                </select><br>
+                <input type="text" name="name" required value="<?= unserialize($_COOKIE['cud'])[0]?>" placeholder="Name">
+                <input type="text" name="phone" required value="<?= unserialize($_COOKIE['cud'])[2]?>" placeholder="Phone number">
+                <input type="text" name="email" required value="<?= unserialize($_COOKIE['cud'])[3]?>" placeholder="E-mail">
+                <input type="text" name="country" required value="<?= unserialize($_COOKIE['cud'])[5]?>" placeholder="Country">
+                <input type="text" name="city" required value="<?= unserialize($_COOKIE['cud'])[1]?>" placeholder="City">
 
                 <p>Products informations</p>
                 <label for="ann_prod_name">Name
@@ -37,6 +37,7 @@
                     <select type="text" name="ann_prod_qly" id="ann_prod_qly" required>
                         <option value="New">NEW</option>
                         <option value="Occasion">OCCASION</option>
+                        <option value="both">OCCASION or NEW</option>
                     </select>
                 </label>
 
@@ -51,6 +52,16 @@
                 <label for="ann_prod_cmt">Other comment's
                     <textarea type="text" name="ann_prod_cmt" id="ann_prod_cmt" rows="4"></textarea>
                 </label>
+
+                <div class="ann_pst_img">
+                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" alt="">
+                    <input type="file" name="ann_img_1" id="" hidden>
+                    <button type="button" class="ann_img_1 mb-3">Upload first image</button>
+
+                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" alt="">
+                    <input type="file" name="ann_img_2" id="" hidden>
+                    <button type="button" class="ann_img_2">Upload second image</button>
+                </div>
 
                 <button type="button" id="ann_cancel_btn">&times</button>
                 <button type="submit" id="ann_post_btn" name="add_annonce">POST</button>
