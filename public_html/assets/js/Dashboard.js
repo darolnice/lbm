@@ -50,7 +50,7 @@ class Dashboard {
                     formData.append('img4', imgData[3]);
                     formData.append('img5', imgData[4]);
 
-                    new Index().UP_post_asyn_fetch(this, formData);
+                    new Index().UP_post_asyn_fetch('jxEditProd', this, formData);
                 }
             }
         });

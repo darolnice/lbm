@@ -1116,25 +1116,34 @@ class AjaxApiRes
      * 
      */
     public function jxregist2(){
-        $post = json_decode($_POST['inputs'], true);
-        $cni1 = $_FILES['cni-img1']['name'];
-        $cni1_Tmp = $_FILES['cni-img1']['tmp_name'];
-        $cni1_Size = $_FILES['cni-img1']['size'];
+        $regi = new MgrLogin();
 
-        $cni2 = $_FILES['cni-img2']['name'];
-        $cni2_Tmp = $_FILES['cni-img2']['tmp_name'];
-        $cni2_Size = $_FILES['cni-img2']['size'];
-
-        if($cni1_Size > 100000 || $cni2_Size > 100000){
-            $this->response($this->HTTP_OK, 'Image is too large', null);
-
-        }else{
+        if (isset($_POST['data'][0])){
+            $post = json_decode($_POST['inputs'], true);
             $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
                      strip_tags($post["Description"]), strip_tags($post["Matricule"]), strip_tags($post["Plan"]),
-                     strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)
             ];
-            (new MgrLogin)->registerStep2($data);
+            $r = $regi->registerStep2($data, 'txt_data');
+            $this->response($this->HTTP_OK, $r, null);
+
+        }else{
+            $cni1 = $_FILES['cni-img1']['name'];
+            $cni1_Tmp = $_FILES['cni-img1']['tmp_name'];
+            $cni1_Size = $_FILES['cni-img1']['size'];
+
+            $cni2 = $_FILES['cni-img2']['name'];
+            $cni2_Tmp = $_FILES['cni-img2']['tmp_name'];
+            $cni2_Size = $_FILES['cni-img2']['size'];
+
+            if($cni1_Size > 100000 || $cni2_Size > 100000){
+                $this->response($this->HTTP_OK, 'Image is too large', null);
+
+            }else{
+                $data = [strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)];
+                $regi->registerStep2($data, '');
+            }
         }
+
     } 
   
 

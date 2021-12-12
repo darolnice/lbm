@@ -548,15 +548,20 @@ class Index {
 
 
     /**
+     *
+     * @param url_
      * @param context
      * @param value
      * @constructor
      */
-    UP_post_asyn_fetch(context = null, value){
-        fetch('jxEditProd', {method: "post", body: value}).then(res => res.json().then(dta => {
+    UP_post_asyn_fetch(url_, context = null, value){
+        fetch(url_, {method: "post", body: value}
+        ).then(res => res.json().then(dta => {
             if (dta['res_id'] === 49){
                 new Index().lbmAlert('Product update successfully');
                 new Dashboard().closeElemet('.edit__prod');
+            }else {
+
             }
         }));
     }
@@ -634,17 +639,6 @@ class Index {
         }
     }
 
-    /**
-     * 
-     */
-    register2Fetch(url, context = null, value = []){
-        fetch(url, {
-            method: 'POST',
-            body: value
-        }).then(response =>{
-            console.log(response['message'])
-        })
-    }
 
 }
 
@@ -660,7 +654,6 @@ document.addEventListener('DOMContentLoaded', function () {
             $(".notifdiv__").toggle(500);
         });
     }
-
 
     /**
      *   login  start
@@ -806,10 +799,16 @@ document.addEventListener('DOMContentLoaded', function () {
      * register 2 start
      */
     if (document.querySelector('#s_usrn_2')){
-        let shopname = '';
-        index = new Index();
+        let shopname;
+        var index = new Index();
         const planBtn = document.querySelector('#tknsh1');
+        const defbtn1 = document.querySelector('#s_cni_1');
+        const defbtn2 = document.querySelector('#s_cni_2');
+        const custbtn = document.querySelectorAll(".smartbtn");
 
+        index.openLink('s_pw_c_2', 'plans', null);
+
+        //
         $('#s_usrn_2').on('change', function () {
             $.ajax({
                 type:'POST',
@@ -827,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-
+        //
         if(planBtn.classList.contains("d-none")){
             function plcMgr(){
                 if(index.getCookie('thkp')){
@@ -841,12 +840,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }else{cancelAnimationFrame(plcMgr)}
         requestAnimationFrame(plcMgr)
-    
 
-        const defbtn1 = document.querySelector('#s_cni_1');
-        const defbtn2 = document.querySelector('#s_cni_2');
-
-        const custbtn = document.querySelectorAll(".smartbtn");
+        //
         custbtn.forEach(element => {
              element.addEventListener('click', ()=>{
                  let prv_id = element.previousElementSibling.previousElementSibling.getAttribute('id');
@@ -858,10 +853,12 @@ document.addEventListener('DOMContentLoaded', function () {
                  }
              })
         });
-       
+
+        //
         function uploadcard1() {defbtn1.click();}
         function uploadcard2() {defbtn2.click();}
-        
+
+        //
         document.querySelectorAll('#s_cni_1, #s_cni_2').forEach(item =>{
             item.addEventListener('input', ()=>{
                 if(item.getAttribute('id') === 's_cni_1'){
@@ -886,7 +883,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 } 
             })
         });
-        
+
+        //
         document.forms["reg2_form"].addEventListener('submit', function(e){
             inputs = this;
             let data = {
@@ -918,11 +916,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         let formData = new FormData();
             
-                        formData.append('inputs', JSON.stringify(data));
                         formData.append('cni-img1', defbtn1.files[0]);
                         formData.append('cni-img2', defbtn2.files[0]);
                         
-                        index.register2Fetch('jxregist2', this, formData);
+                        index.jxPostData('jxregist2', this, JSON.stringify(data));
    
                     }else{
                         index.lbmAlert('Please upload all card id image', "danger")
@@ -935,7 +932,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
         });
 
-        index.openLink('s_pw_c_2', 'plans', null);
     }
     /**
      * register 2 end
@@ -1004,9 +1000,6 @@ document.addEventListener('DOMContentLoaded', function () {
     /**
      * sign up end
      */
-
-
-
 
 });
 

@@ -124,12 +124,12 @@ class MgrProducts extends Database
     public function addProd($current_shop, $add_by, array $data){
         try {
             $q = parent::getDb()->prepare("INSERT INTO $current_shop (shop_name, prod_name, add_by, category,
-                                                                                quality, sub_category, price, promo, rating,
-                                                                                rater, color, size, proprities, quantity, description,
+                                                                                quality, sub_category, price, promo, color, size,
+                                                                                proprities, quantity, description,
                                                                                 img1, img2, img3, img4, img5)
 
                                           VALUES(:shop_name, :prod_name, :add_by, :category, :quality, :sub_category,
-                                                 :price, :promo, :rating, :rater, :color, :size, :proprities,
+                                                 :price, :promo, :color, :size, :proprities,
                                                  :quantity, :description, :img1, :img2, :img3, :img4, :img5
                                           )"
             );
@@ -138,8 +138,10 @@ class MgrProducts extends Database
             $q->bindParam("add_by",       $add_by, PDO::PARAM_STR_CHAR);
             $q->bindParam("category",     $data[1], PDO::PARAM_STR_CHAR);
             $q->bindParam("quality",      $data[2], PDO::PARAM_STR_CHAR);
-            $q->bindParam("price",        number_format($data[3], 2), PDO::PARAM_STR_CHAR);
-            $q->bindParam("promo",        number_format($data[4], 2), PDO::PARAM_STR_CHAR);
+            $number_format = number_format($data[3], 2);
+            $q->bindParam("price", $number_format, PDO::PARAM_STR_CHAR);
+            $number_format1 = number_format($data[4], 2);
+            $q->bindParam("promo", $number_format1, PDO::PARAM_STR_CHAR);
             $q->bindParam("color",        $data[5], PDO::PARAM_STR_CHAR);
             $q->bindParam("size",         $data[10], PDO::PARAM_STR_CHAR);
             $q->bindParam("proprities",   $data[7], PDO::PARAM_STR_CHAR);
@@ -150,8 +152,6 @@ class MgrProducts extends Database
             $q->bindParam("img3",         $data[13], PDO::PARAM_STR_CHAR);
             $q->bindParam("img4",         $data[14], PDO::PARAM_STR_CHAR);
             $q->bindParam("img5",         $data[15], PDO::PARAM_STR_CHAR);
-            $q->bindParam("rating",       1, PDO::PARAM_INT);
-            $q->bindParam("rater",        1, PDO::PARAM_INT);
             $q->bindParam("sub_category", $data[8], PDO::PARAM_STR_CHAR);
 
             if($q->execute()){
@@ -183,7 +183,7 @@ class MgrProducts extends Database
      * @param $message
      * @return bool|string
      */
-    public function createShop($shop_name, $message, array $imgData): bool {
+    public function createShop($shop_name, $message, array $imgTabDAta): bool {
         try {
             $q = parent::getDb()->prepare("CREATE TABLE $shop_name (id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
                                                                     shop_name VARCHAR(255)NOT NULL,
@@ -194,8 +194,8 @@ class MgrProducts extends Database
                                                                     sub_category VARCHAR(255)NOT NULL,
                                                                     price VARCHAR(255)NOT NULL,
                                                                     promo VARCHAR(255)NOT NULL,
-                                                                    rating INT(255)NOT NULL,
-                                                                    rater INT(255)NOT NULL,
+                                                                    rating INT(255)DEFAULT 1,
+                                                                    rater INT(255)DEFAULT 1,
                                                                     checked TINYINT(1) NOT NULL,
                                                                     color VARCHAR(255)NOT NULL,
                                                                     size VARCHAR(255)NOT NULL,
@@ -212,18 +212,16 @@ class MgrProducts extends Database
             );
             
             if($q->execute()) {
-                $jx = new AjaxApiRes();
-
                 $subject = SITE_NAME. " - Account activation";
                 Functions::lbmSendMail($_SESSION['tmp_email'], $subject, $message);
+                $jx = new AjaxApiRes();
 
                 unset($_SESSION['tmp_name']);
                 unset($_SESSION['tmp_email']);
 
-                $jx->jxUploadImage($imgData[0], $imgData[1], 'cni_f1', "sallers", null, null);
-                $jx->jxUploadImage($imgData[2], $imgData[3], 'cni_f2', "sallers", null, null);
+                $jx->jxUploadImage($imgTabDAta[0], $imgTabDAta[1], 'sallers', 'cni_f1', null, null);
+                $jx->jxUploadImage($imgTabDAta[2], $imgTabDAta[3], 'sallers', 'cni_f2', null, null);
 
-                (new Functions)->set_flash_tab(["Activation mail sent!"], 'info');
                 Functions::redir('business');
             }
         }catch(PDOException $e){

@@ -168,43 +168,47 @@ class MgrLogin extends Database
     /**
      * @param array $data
      */
-    public function registerStep2(array $data){
-        session_start();
+    public function registerStep2(array $data, $indice){
+        if ($indice === 'txt_data'){
+            $_SESSION['tkn'] = sha1($data[0].$data[5]);
+            $_SESSION['shop_name'] = $data[0];
 
-        $_SESSION['tkn'] = sha1($data[0].$data[5]);
-        $_SESSION['shop_name'] = $data[0];
-
-        ob_start();
-        require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
-        $content = ob_get_clean();
-
-        try {
-            $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name, city = :city, activity = :activity,
+            try {
+                $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name, city = :city, activity = :activity,
                                                               description = :description, matricule = :matricule, shop_key = :shop_key,
                                                               current_plan = :current_plan  WHERE username = :username'
-            );
+                );
 
+                $qry->bindParam('username', $_SESSION['tmp_name'], PDO::PARAM_STR);
+                $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
+                $qry->bindParam('city', $data[1], PDO::PARAM_STR);
+                $qry->bindParam('activity', $data[2], PDO::PARAM_STR);
+                $qry->bindParam('description', $data[3], PDO::PARAM_STR);
+                $qry->bindParam('matricule', $data[4], PDO::PARAM_STR);
+                $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
 
-            $qry->bindParam('username', $_SESSION['tmp_name'], PDO::PARAM_STR);
-            $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
-            $qry->bindParam('city', $data[1], PDO::PARAM_STR);
-            $qry->bindParam('activity', $data[2], PDO::PARAM_STR);
-            $qry->bindParam('description', $data[3], PDO::PARAM_STR);
-            $qry->bindParam('matricule', $data[4], PDO::PARAM_STR);
-            $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
+                if ($qry->execute()){
+                    return 'ok';
+                }
 
-            if ($qry->execute()){
-                var_dump('ici');
-                //(new MgrProducts)->createShop($data[0], $content, [$data[6], $data[7], $data[8], $data[9]]);
-
-            }else{
-                (new Functions)->notif_errors(['Someone is wrong please try again!!!']);
+            }catch (PDOException $e){
+                return $e->getMessage();
             }
 
-        }catch (PDOException $e){
-            return $e->getMessage();
+        }else{
+            ob_start();
+            require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
+            $content = ob_get_clean();
+
+            try {
+                (new MgrProducts)->createShop($data[0], $content, [$data[0], $data[1], $data[2], $data[3]]);
+
+            }catch (PDOException $e){
+                return $e->getMessage();
+            }
         }
-       return false;
+
+        return false;
     }
 
     /**
