@@ -113,6 +113,7 @@
     border-top: 10px solid #078677;
     width: 40px;
     height: 40px;
+    z-index: 999999;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     margin-left: 640px;
@@ -207,8 +208,28 @@
     height: 18px;
 }
 
+.lbm_a_success{
+    position: absolute;
+    background: #00ff7d91;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    top: 3px;
+    left: 25%;
+    width: 50%;
+    min-height: 60px;
+    height: auto;
+    z-index: 9999999999;
+}
 
-
+.lbm_a_success button{
+    outline: none;
+    margin-top: -11px;
+    /* margin-left: 10px; */
+    font-size: 18px;
+}
 
 
 

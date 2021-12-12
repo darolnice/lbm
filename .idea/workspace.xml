@@ -11,14 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/lebolma.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/MgrLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrLogin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +96,7 @@
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.postfix.templates" />
+    <property name="settings.editor.selected.configurable" value="SQL Dialects" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -430,7 +427,7 @@
       <workItem from="1639300031854" duration="15000" />
       <workItem from="1639300315837" duration="164000" />
       <workItem from="1639300513645" duration="44000" />
-      <workItem from="1639300567397" duration="4819000" />
+      <workItem from="1639300567397" duration="18876000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -477,10 +474,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="392" y="46" key="#Home.php/0.0.1366.728@0.0.1366.728" timestamp="1633627185782" />
-    <state x="309" y="42" key="#Inspections" timestamp="1636102472499">
+    <state x="309" y="42" key="#Inspections" timestamp="1639303147551">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="309" y="42" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1636102472499" />
+    <state x="309" y="42" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1639303147551" />
+    <state x="275" y="0" width="816" height="728" key="#Intentions" timestamp="1639299994437">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="0" width="816" height="728" key="#Intentions/0.0.1366.728@0.0.1366.728" timestamp="1639299994437" />
     <state x="421" y="72" key="#JavaScript" timestamp="1636102502893">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -489,6 +490,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="568" y="225" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1638709291877" />
+    <state x="59" y="205" key="#SQL_Dialects" timestamp="1639302190572">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="59" y="205" key="#SQL_Dialects/0.0.1366.728@0.0.1366.728" timestamp="1639302190572" />
+    <state x="123" y="219" key="#SQL_Resolution_Scopes" timestamp="1639303220750">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="123" y="219" key="#SQL_Resolution_Scopes/0.0.1366.728@0.0.1366.728" timestamp="1639303220750" />
     <state x="429" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1637669360563">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -541,10 +550,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1632777658791" />
-    <state x="199" y="3" width="1056" height="708" key="SettingsEditor" timestamp="1639301496736">
+    <state x="199" y="3" width="1056" height="708" key="SettingsEditor" timestamp="1639303071285">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="199" y="3" width="1056" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1639301496736" />
+    <state x="199" y="3" width="1056" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1639303071285" />
+    <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1639303218814">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="200" height="441" key="SqlResolveConfigurable/0.0.1366.728@0.0.1366.728" timestamp="1639303218814" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1638372353111">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -581,10 +594,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="182" width="498" height="402" key="scopes/0.0.1366.728@0.0.1366.728" timestamp="1637409671077" />
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1639082913214">
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1639302842058">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1639082913214" />
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1639302842058" />
     <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1637142242088">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

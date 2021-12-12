@@ -92,10 +92,12 @@ class Functions extends Navigation
      * @param string $type
      */
     public static function set_flash_tab($messages = [] , $type = 'info'){
-        foreach ($messages as $message){
-            $_SESSION['lbmAlert']['message'] = $message;
-            $_SESSION['lbmAlert']['type'] = $type;
-        }
+        echo '<div class="lbm_a_success">
+        <button class="close" aria-hidden="true">&times;</button>';
+            foreach ($messages as $message){
+                echo $message.'<br/>';
+            }
+        echo '</div>';
     }
 
 
@@ -426,11 +428,11 @@ class Functions extends Navigation
     /**
      * @param string $adress
      * @param string $subject
-     * @param $content
+     * @param $message
      */
-    public static function lbmSendMail(string $adress, string $subject, $content){
+    public static function lbmSendMail(string $adress, string $subject, $message){
         $headers = "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-        mail($adress, $subject, $content, $headers);
+        mail($adress, $subject, $message, $headers);
     }
 
     /**

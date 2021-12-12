@@ -84,8 +84,8 @@ class Setting{
      */
      fetch_setting(url, context, data){
          fetch(url, {
-             method: 'POST',
-             body: data,
+               method: 'POST',
+               body: data,
          }).then(res => res.json()
              .then(val => {
                  $('.load').hide();

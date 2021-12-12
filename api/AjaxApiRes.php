@@ -823,9 +823,6 @@ class AjaxApiRes
             }elseif($columb === 'cover_image'){
                 $new_img_name = uniqid("CI-", true).'.'.$img_ex_lc;
 
-            }elseif($columb === 'cni_f1' || $columb === 'cni_f2'){
-                $new_img_name = uniqid("CNI-", true).'.'.$img_ex_lc;
-
             }else{
                 $new_img_name = uniqid("PP-", true).'.'.$img_ex_lc;
             }
@@ -833,10 +830,11 @@ class AjaxApiRes
 
             $img_upload_path = 'public_html/assets/images/upload/'.$new_img_name;
             if($table === 'sallers'){
-                if($columb === 'cover_image' || $columb === 'snd_img' || $columb === 'ceo_img' ||
-                   $columb === 'col_1_img' || $columb === 'col_2_img' || $columb === 'cni_f1' || $columb === 'cni_f2')
+                if($columb === 'cover_image' || $columb === 'snd_img' || $columb === 'ceo_img'
+                    || $columb === 'col_1_img' || $columb === 'col_2_img')
+
                 {
-                   $r = (new MgrUser)->updateSallerData($_SESSION['tmp_name'], $columb, $new_img_name);
+                   $r = (new MgrUser)->updateSallerData($_SESSION['username'], $columb, $new_img_name);
                 }
 
                 else
@@ -853,7 +851,6 @@ class AjaxApiRes
                             return $e->getMessage();
                         }
                     }
-
                     move_uploaded_file($img_path, $img_upload_path);
                 }
              
@@ -1119,12 +1116,13 @@ class AjaxApiRes
         $regi = new MgrLogin();
 
         if (isset($_POST['data'][0])){
-            $post = json_decode($_POST['inputs'], true);
+            $post = json_decode($_POST['data'][0], true);
+
             $data = [strip_tags($post["Shopname"]), strip_tags($post["City"]), strip_tags($post["Activity"]),
                      strip_tags($post["Description"]), strip_tags($post["Matricule"]), strip_tags($post["Plan"]),
             ];
             $r = $regi->registerStep2($data, 'txt_data');
-            $this->response($this->HTTP_OK, $r, null);
+            $this->response($this->HTTP_OK, $r, 103);
 
         }else{
             $cni1 = $_FILES['cni-img1']['name'];
@@ -1135,11 +1133,26 @@ class AjaxApiRes
             $cni2_Tmp = $_FILES['cni-img2']['tmp_name'];
             $cni2_Size = $_FILES['cni-img2']['size'];
 
+            $allowed_exs = array("jpg", "png", "jpeg", "jfif");
+            $img1_ex = pathinfo($cni1, PATHINFO_EXTENSION);
+            $img2_ex = pathinfo($cni2, PATHINFO_EXTENSION);
+            $img1_ex_lc = strtolower($img1_ex);
+            $img2_ex_lc = strtolower($img2_ex);
+
             if($cni1_Size > 100000 || $cni2_Size > 100000){
                 $this->response($this->HTTP_OK, 'Image is too large', null);
+                return;
 
-            }else{
-                $data = [strip_tags($cni1), strip_tags($cni1_Tmp), strip_tags($cni2), strip_tags($cni2_Tmp)];
+            }elseif (!in_array($img1_ex_lc, $allowed_exs) || !in_array($img2_ex_lc, $allowed_exs)){
+                $this->response($this->HTTP_OK, 'Image type extention not allowed', null);
+                return;
+            }
+
+            else{
+                $cni__1 = uniqid("CNI-", true).'.'.$img1_ex_lc;
+                $cni__2 = uniqid("CNI-", true).'.'.$img2_ex_lc;
+
+                $data = [strip_tags($cni__1), strip_tags($cni1_Tmp), strip_tags($cni__2), strip_tags($cni2_Tmp)];
                 $regi->registerStep2($data, '');
             }
         }

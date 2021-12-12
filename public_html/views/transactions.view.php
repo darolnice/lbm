@@ -52,7 +52,7 @@
                     </p>
                 </div>
                 <div class="tr_btn">
-                    <button class="rec" style="background-color: #0d9282">
+                    <button id="recbtn" class="rec" style="background-color: #0d9282">
                         <img alt="reclamations button" src="<?= S_ASSETS?>images/svg/warning_black_24dp.svg">
                         Reclamations</button>
                     <button class="ship" style="background-color: #99069e">
@@ -123,6 +123,7 @@
     <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
     <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
     <script src="<?= S_ASSETS?>js/transactions.js"></script>
+    <script src="<?= S_ASSETS?>js/Index.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFCtG_Lyb_Cnun3GqE3-TpNFg_3jx0RIk"></script>
     <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>
     <!-- scripts end -->

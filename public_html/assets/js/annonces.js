@@ -36,11 +36,11 @@ $(document).ready(function () {
     });
 
     if (document.querySelector('.becom_saler')){
-        new Index().openLink(document.querySelector('.becom_saler'), 'register');
+        new Index().openLink('bcs__','register','_parent');
     }
 
     if (document.querySelector('.log__')){
-        new Index().openLink(document.querySelector('.log__'), 'business');
+        new Index().openLink('lg__', 'business','_parent');
     }
 
     $('#add_ann_btn__').on('click', function () {

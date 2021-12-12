@@ -1,5 +1,4 @@
 <?php
-session_start();
 //namespace Lbm\Mgrlogin;
 //
 //use Lbm\Functions\Functions;
@@ -48,6 +47,7 @@ class MgrLogin extends Database
 
     /**
      * @param $password_login_sha1
+     * @return bool
      */
     public function current_user_log($password_login_sha1){
         try {
@@ -133,7 +133,7 @@ class MgrLogin extends Database
     }
 
     /**
-     *
+     * @param array $data
      */
     public function register(array $data){
         try {
@@ -167,28 +167,35 @@ class MgrLogin extends Database
 
     /**
      * @param array $data
+     * @param $indice
+     * @return bool|string
      */
     public function registerStep2(array $data, $indice){
+        session_start();
         if ($indice === 'txt_data'){
             $_SESSION['tkn'] = sha1($data[0].$data[5]);
             $_SESSION['shop_name'] = $data[0];
 
             try {
-                $qry = parent::getDb()->prepare('UPDATE sallers SET shop_name = :shop_name, city = :city, activity = :activity,
-                                                              description = :description, matricule = :matricule, shop_key = :shop_key,
-                                                              current_plan = :current_plan  WHERE username = :username'
+                $qry = parent::getDb()->prepare("UPDATE sallers SET shop_name = :_shopname,
+                                                                              city = :_city,
+                                                                              activity = :_activity,
+                                                                              description = :_description,
+                                                                              matricule = :_matricule,  
+                                                                              current_plan = :_current_plan
+                                                           WHERE username = :_username"
                 );
 
-                $qry->bindParam('username', $_SESSION['tmp_name'], PDO::PARAM_STR);
-                $qry->bindParam('shop_name', $data[0], PDO::PARAM_STR);
-                $qry->bindParam('city', $data[1], PDO::PARAM_STR);
-                $qry->bindParam('activity', $data[2], PDO::PARAM_STR);
-                $qry->bindParam('description', $data[3], PDO::PARAM_STR);
-                $qry->bindParam('matricule', $data[4], PDO::PARAM_STR);
-                $qry->bindParam('current_plan', $data[5], PDO::PARAM_STR);
+                $qry->bindParam(':_username', $_SESSION['tmp_name'], PDO::PARAM_STR);
+                $qry->bindParam(':_shopname', $data[0], PDO::PARAM_STR_CHAR);
+                $qry->bindParam(':_city', $data[1], PDO::PARAM_STR_CHAR);
+                $qry->bindParam(':_activity', $data[2], PDO::PARAM_STR_CHAR);
+                $qry->bindParam(':_description', $data[3], PDO::PARAM_STR_CHAR);
+                $qry->bindParam(':_matricule', $data[4], PDO::PARAM_STR_CHAR);
+                $qry->bindParam(':_current_plan', $data[5], PDO::PARAM_STR_CHAR);
 
                 if ($qry->execute()){
-                    return 'ok';
+                   return 'ok';
                 }
 
             }catch (PDOException $e){
@@ -196,12 +203,8 @@ class MgrLogin extends Database
             }
 
         }else{
-            ob_start();
-            require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
-            $content = ob_get_clean();
-
             try {
-                (new MgrProducts)->createShop($data[0], $content, [$data[0], $data[1], $data[2], $data[3]]);
+                (new MgrProducts)->createShop($_SESSION['shop_name'], [$data[0], $data[1], $data[2], $data[3]]);
 
             }catch (PDOException $e){
                 return $e->getMessage();

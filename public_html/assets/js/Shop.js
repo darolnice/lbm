@@ -70,7 +70,6 @@ $(document).ready(function () {
         document.querySelector('.messa__').style.marginLeft = '36.5%';
     }
 
-
     let tm = document.querySelector('.state_price_');
     let barr = document.querySelector('.barometre_');
     let cmm = new Index();

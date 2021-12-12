@@ -72,6 +72,11 @@ class MgrAnnonces extends Database
                 $sh->execute(['city'=>$city]);
                 return $sh->fetchAll(PDO::FETCH_OBJ);
 
+            }elseif ($city == ''){
+                $sh = $this->getDb()->prepare("SELECT * FROM annonces");
+                $sh->execute();
+                return $sh->fetchAll(PDO::FETCH_OBJ);
+
             }elseif ($name !== null){
                 $sh = $this->getDb()->prepare("SELECT * FROM annonces WHERE user_name = :name");
                 $sh->execute(['name'=>$name]);

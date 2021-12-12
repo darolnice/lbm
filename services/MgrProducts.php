@@ -180,12 +180,13 @@ class MgrProducts extends Database
 
     /**
      * @param $shop_name
-     * @param $message
-     * @return bool|string
+     * @param array $imgTabDAta
+     * @return bool
      */
-    public function createShop($shop_name, $message, array $imgTabDAta): bool {
+    public function createShop($shop_name, array $imgTabDAta): bool {
         try {
-            $q = parent::getDb()->prepare("CREATE TABLE $shop_name (id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+            $q = parent::getDb()->prepare("CREATE TABLE $shop_name 
+                                                                   (id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
                                                                     shop_name VARCHAR(255)NOT NULL,
                                                                     prod_name VARCHAR(255)NOT NULL,
                                                                     add_by VARCHAR(255)NOT NULL,
@@ -210,24 +211,41 @@ class MgrProducts extends Database
                                                                     add_at datetime(6) DEFAULT CURRENT_TIMESTAMP)
                                                                     ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8"
             );
-            
+
             if($q->execute()) {
+                ob_start();
+                require(S_VIEWS.'partials/tmpl/saller_activation_mail_tmpl.view.php');
+                $content = ob_get_clean();
                 $subject = SITE_NAME. " - Account activation";
-                Functions::lbmSendMail($_SESSION['tmp_email'], $subject, $message);
-                $jx = new AjaxApiRes();
 
-                unset($_SESSION['tmp_name']);
-                unset($_SESSION['tmp_email']);
+                $q = parent::getDb()->prepare("UPDATE sallers SET cni_f1 = :cni_f1, cni_f2 = :cni_f2
+                                                         WHERE username = :username"
+                );
 
-                $jx->jxUploadImage($imgTabDAta[0], $imgTabDAta[1], 'sallers', 'cni_f1', null, null);
-                $jx->jxUploadImage($imgTabDAta[2], $imgTabDAta[3], 'sallers', 'cni_f2', null, null);
+                $q->bindParam('cni_f1',$imgTabDAta[0],PDO::PARAM_STR_CHAR);
+                $q->bindParam('cni_f2',$imgTabDAta[2],PDO::PARAM_STR_CHAR);
+                $q->bindParam('username',$_SESSION['tmp_name'],PDO::PARAM_STR_CHAR);
 
-                Functions::redir('business');
+                if ($q->execute()){
+                    $img1_upload_path = 'public_html/assets/images/upload/'.$imgTabDAta[0];
+                    $img2_upload_path = 'public_html/assets/images/upload/'.$imgTabDAta[2];
+
+                    move_uploaded_file($imgTabDAta[1], $img1_upload_path);
+                    move_uploaded_file($imgTabDAta[3], $img2_upload_path);
+
+                    Functions::lbmSendMail((string)$_SESSION['tmp_email'], $subject, $content);
+
+                    unset($_SESSION['tmp_name']);
+                    unset($_SESSION['tmp_email']);
+                    unset($_SESSION['shop_name']);
+                    $_SESSION['reg2end'] = 'Activation mail sent please check your e-mail!';
+                    (new AjaxApiRes)->response(200, 'success');
+                }
             }
         }catch(PDOException $e){
-           echo $e->getMessage();
+            echo $e->getMessage();
         }
-       return false;
+        return false;
     }
 
     /**
@@ -370,6 +388,7 @@ class MgrProducts extends Database
 
     /**
      * @param array $values
+     * @return string
      */
     public function addAlert(array $values):string
     {
@@ -447,9 +466,9 @@ class MgrProducts extends Database
 
     /**
      * @param string $transactionId
-     * @return bool
+     * @return array|bool|string
      */
-    public function transaction_check(string $transactionId): array {
+    public function transaction_check(string $transactionId) {
         try {
             $q = parent::getDb()->prepare("SELECT * FROM transactions WHERE transaction_id = :tid");
             $q->bindValue('tid', $transactionId, PDO::PARAM_STR_CHAR);

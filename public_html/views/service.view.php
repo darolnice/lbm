@@ -269,7 +269,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__elec" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -282,7 +282,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__acce" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -295,7 +295,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__spor" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -308,7 +308,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__md" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -321,7 +321,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__men" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -334,7 +334,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__wmn" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -347,7 +347,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__chld" class="btn_primary">View shop list</button>
                         </div>
 
                         <div>
@@ -360,7 +360,7 @@ $title = "Store";
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Eligendi impedit iste, minus odio similique sunt.
                             </p>
-                            <button class="btn_primary">View shop list</button>
+                            <button id="__health" class="btn_primary">View shop list</button>
                         </div>
                     </div>
                 </div>

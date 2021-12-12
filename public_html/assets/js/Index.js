@@ -420,6 +420,15 @@ class Index {
                     cp.innerHTML = (response['message'][0]*data[2]).toFixed(2)+ ' '+data[3]
                     $('.btn_t').text(response['message'][1]+' US$');
                 }// checkcart update price
+                if(response['message'] === 'ok' && response['res_id'] === 103){
+                    let img1 = context.children[6].firstElementChild.children[1].files[0];
+                    let img2 = context.children[6].children[1].children[1].files[0];
+
+                    let formData = new FormData();
+                    formData.append('cni-img1', img1);
+                    formData.append('cni-img2', img2);
+                    new Index().UP_post_asyn_fetch("jxregist2", this, formData);
+                }
             }
         });
     }
@@ -551,19 +560,27 @@ class Index {
      *
      * @param url_
      * @param context
-     * @param value
+     * @param data
      * @constructor
      */
-    UP_post_asyn_fetch(url_, context = null, value){
-        fetch(url_, {method: "post", body: value}
-        ).then(res => res.json().then(dta => {
-            if (dta['res_id'] === 49){
-                new Index().lbmAlert('Product update successfully');
-                new Dashboard().closeElemet('.edit__prod');
-            }else {
+    UP_post_asyn_fetch(url_, context, data){
+        fetch(url_, {
+              method: "post",
+              body: data,
+            }).then(res => res.json()
+                .then(val => {
+                    if (val['res_id'] === 49){
+                        new Index().lbmAlert('Product update successfully');
+                        new Dashboard().closeElemet('.edit__prod');
+                    }else {
+                        if(val['message'] === 'success'){
+                            location.replace("business");
+                        }
+                    }
+                }
+            )
+        );
 
-            }
-        }));
     }
 
 
@@ -656,13 +673,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     *   login  start
+     *  login start
      */
     if (document.querySelector('.s_signup_a')){
         new Index().openLink('bs_account', 'business', '_parent');
     }
     /**
-     *   login 1end
+     *  login 1end
+     */
+
+
+    /**
+     *  business start
+     */
+    if (document.querySelector('#_busi_')){
+        setInterval(function () {
+            $(".lbm_a_success").fadeOut();
+        },8000);
+
+        $('.lbm_a_success button').on('click', function () {
+            $(".lbm_a_success").fadeOut();
+        });
+    }
+    /**
+     *  business end
      */
 
 
@@ -692,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     *   faq start
+     * faq start
     */
     if (document.querySelector("#satis")){
         $('#rec_cls').on('click', function () {
@@ -718,12 +752,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     /**
-     *  faq end
+     * faq end
     */
 
 
     /**
-     * partial best start
+     *  partial best start
      */
     if (document.querySelector('#_bslg_art_t1')){
         $('.__best__ button').on('click', function () {
@@ -759,12 +793,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     /**
-     * partial best end
+     *  partial best end
      */
 
 
     /**
-     * register 1 start
+     *  register 1 start
      */
     if (document.querySelector('#s_usrn')){
         const f_name = document.querySelector('#s_usrn');
@@ -791,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     /**
-     * register 1 end
+     *  register 1 end
      */
 
 
@@ -832,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if(index.getCookie('thkp')){
                     $('#s_pw_c_2').hide();
                     planBtn.classList.remove('d-none');
-                    
+
                 }else{
                      console.log('actif')
                     requestAnimationFrame(plcMgr);
@@ -901,8 +935,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if(shopname === 'free'){
                     if(defbtn1.files[0] !== null && defbtn2.files[0] !== null){
                         if(!inputs['shop_name'].value || !inputs['city'].value ||
-                           !inputs['activity'].value  || !inputs['description'].value){
-                               
+                           !inputs['activity'].value  || !inputs['description'].value)
+                        {
                             index.lbmAlert('Please complete all forms', "danger");
                             return 
                         }
@@ -914,13 +948,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         data.Matricule = inputs['matricul'].value;
                         data.Plan = inputs['plan'].value;
 
-                        let formData = new FormData();
-            
-                        formData.append('cni-img1', defbtn1.files[0]);
-                        formData.append('cni-img2', defbtn2.files[0]);
-                        
+                        index.lbmLoad('350px', '-32%');
                         index.jxPostData('jxregist2', this, JSON.stringify(data));
-   
+
                     }else{
                         index.lbmAlert('Please upload all card id image', "danger")
                     }
@@ -960,21 +990,21 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.preShop').fadeIn(1200);
         });
 
-        new Index().openLink(document.querySelector("#t_i_n"), "register");
+        new Index().openLink("t_i_n", "register", '_parent');
 
         document.querySelectorAll('#own_serv').forEach(item =>{
             let goto = item.getAttribute('data-goto');
             if (goto !== ""){
-                new Index().openLink(item, goto);
+                new Index().openLink(item.getAttribute('id'), goto,'_parent');
             }
         });
 
         document.querySelectorAll('.preShop div button').forEach(item =>{
-            new Index().openLink(item, "shoplist");
+            new Index().openLink(item.getAttribute('id'), "shoplist", '_parent');
         });
     }
     /**
-     *service end
+     * service end
      */
 
 

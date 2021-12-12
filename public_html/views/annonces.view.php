@@ -60,8 +60,8 @@
         <?php if (!$_SESSION["saller_id"]): ?>
             <div class="inf_ans" style="display: none">
                 LOGIN FOR ANSWER IF YOU ALREADY HAVE ACCOUNT, ELSE CREATE YOUR BUSINESS ACCOUNT
-                <button class="becom_saler">SIGN UP</button>
-                <button class="log__">LOGIN</button>
+                <button id="bcs__" class="becom_saler">SIGN UP</button>
+                <button id="lg__" class="log__">LOGIN</button>
             </div>
 
             <button id="add_ann_btn__">ADD YOUR ANNONCES</button>

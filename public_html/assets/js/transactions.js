@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     if (document.querySelector(".rec")){
-        new Index().openLink(document.querySelector(".rec"), 'reclamations');
+        new Index().openLink('recbtn', 'reclamations', '_parent');
         $('.back___').on('click', function () {
             $('.trans_opt').fadeIn(500);
             $('.recp_').fadeOut();

@@ -18,9 +18,6 @@ class Log extends Navigation
         return $this->current_user_data;
     }
 
-
-
-
     public function showSignup(){ 
         session_start();
         Functions::Auth_UserIS();
@@ -91,6 +88,12 @@ class Log extends Navigation
         session_start();
         Functions::Auth_UserIS();
         $F = new Functions();
+
+        if ($_SESSION['reg2end']){
+            $F->set_flash_tab([$_SESSION['reg2end']]);
+            unset($_SESSION['reg2end']);
+        }
+
         include_once S_VIEWS.'/saler.view.php';
 
         $errors = [];
@@ -113,7 +116,6 @@ class Log extends Navigation
                 $D->adminLog($u_pass);
             }
         }
-
     }
     public function showLogout(){
         session_start();
@@ -239,7 +241,7 @@ class Log extends Navigation
                 } 
 
                 if(count($errors) === 0){
-                    (new MgrLogin)->register_step2($data);
+                    (new MgrLogin)->registerStep2($data, '');
                 }
             }
 
@@ -263,7 +265,11 @@ class Log extends Navigation
             if (!$F->not_empty([$pf_un])){
 
                 if (filter_var($pf_un, FILTER_VALIDATE_EMAIL)){
-                    $rest->restPass_M($pf_un);
+                    try {
+                        $rest->restPass_M($pf_un);
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
                 }
                 if (filter_var($pf_un, FILTER_VALIDATE_INT) && mb_strlen($pf_un) >= 5){
                     $rest->restPass_P($pf_un);

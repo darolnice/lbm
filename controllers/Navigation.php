@@ -877,20 +877,6 @@ class Navigation
             $f->notif_errors($error__);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public function showPanel(){
