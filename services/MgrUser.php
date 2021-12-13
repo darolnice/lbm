@@ -427,9 +427,9 @@ class MgrUser extends Database
     /**
      * @return array
      */
-    public function AllItemsFromTable(): array {
+    public function getshoplist(): array {
         try {
-            $qr = parent::getDb()->prepare("SELECT * FROM sallers");
+            $qr = parent::getDb()->prepare("SELECT * FROM sallers WHERE actived = 2");
             $qr->execute();
             return $qr->fetchAll(PDO::FETCH_ASSOC);
         }catch (PDOException $e){
@@ -437,6 +437,22 @@ class MgrUser extends Database
         }
     }
 
+    /**
+     * @param $userTyp
+     * @param $id
+     */
+    public function getAllNotifs($userTyp, $id){
+        try {
+            $ql = parent::getDb()->prepare("SELECT notif FROM $userTyp WHERE id = :id ");
+            if ($ql->execute(["id"=>$id])){
+                $data = $ql->fetchAll(PDO::FETCH_ASSOC);
+                return json_decode($data[0]['notif'], true);
+            }
 
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
 
 }

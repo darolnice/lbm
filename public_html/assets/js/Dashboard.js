@@ -318,6 +318,14 @@ $(document).ready(function () {
     localStorage.setItem('current_user_name', $('.nam').text());
     localStorage.setItem('current_user_mail', $('#up___mail').val());
 
+    $('#notif_').on('click', function () {
+        if(document.querySelector('.notifdiv__').getAttribute('style') !== ''){
+            $('.notifdiv__').show();
+        }else {
+            document.querySelector('.notifdiv__').setAttribute('style', 'display:none!important')
+        }
+    });
+
     $('.admin_imag').on('click', function () {
         if (document.querySelector('.admin_stat_point').getAttribute('id') === 'online'){
             $('#admin_myDropdown').toggle(300);

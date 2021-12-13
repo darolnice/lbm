@@ -278,11 +278,12 @@ label{
     height: auto;
     font-size: 12px;
     line-height: 1.5;
-    max-width: 83%!important;
+    max-width: 99%!important;
     width: auto;
     color: black;
     display: block!important;
     padding-bottom: 2px;
+    /* padding-right: 5px!important; */
 }
 /****************************/
 h2{

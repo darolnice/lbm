@@ -297,6 +297,22 @@ body{
     margin-top: 16px;
 }
 
+.notCont{
+    position: absolute;
+    /* margin-left: 802px; */
+    float: right;
+    right: 75px;
+    margin-top: 8px;
+    background-color: blueviolet;
+    border-radius: 50%;
+    color: white;
+    line-height: 1.9;
+    text-align: center;
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 11px;
+}
+
 ._dpp{
     width: 12px;
     height: 12px;

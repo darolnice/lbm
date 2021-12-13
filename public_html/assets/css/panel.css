@@ -146,6 +146,35 @@ body{
     left: 71.5%;
     top: 5%;
 }
+
+#p_notif__, #p_messa__{
+    cursor: pointer;
+    z-index: 8888888889;
+}
+.notCont{
+    position: absolute;
+    /* margin-left: 802px; */
+    float: right;
+    right: -10px;
+    margin-top: -33px;
+    background-color: blueviolet;
+    border-radius: 50%;
+    color: white;
+    line-height: 1.8;
+    text-align: center;
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 11px;
+}
+.notifdiv__{
+    /* margin-left: 55px!important; */
+    margin-top: 22%;
+    margin-right: -65px;
+    /* font-weight: 900!important; */
+}
+.one_n a p{
+    font-weight: 500!important;
+}
 /******************************************** sec 2 end ********************************************/
 
 /*************************logout menu start*******/

@@ -84,7 +84,6 @@ $(document).ready(function () {
         })
     });
 
-
     if (document.querySelector('#ad-im1')){
         let img1 = document.querySelector('#ad-im1');
         let img2 = document.querySelector('#ad-im2');
@@ -110,9 +109,5 @@ $(document).ready(function () {
             }
         })
     }
-
-
-
-
 
 });

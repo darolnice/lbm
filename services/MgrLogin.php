@@ -17,8 +17,8 @@ class MgrLogin extends Database
 
         $q = parent::getDb()->prepare("SELECT * FROM sallers WHERE (username = :identifiant or email = :identifiant)AND actived = :actived");
         $q->execute([
-            'actived'        => '1',
-            'identifiant'    => $_POST['u_name'],
+            'actived'        => '2',
+            'identifiant'    => strip_tags($_POST['u_name']),
         ]);
         $data = $q->fetch(PDO::FETCH_OBJ);
 
@@ -51,7 +51,7 @@ class MgrLogin extends Database
      */
     public function current_user_log($password_login_sha1){
         try {
-            $q = parent::getDb()->prepare("SELECT * FROM users WHERE (username = :username or email = :username) AND actived = 1");
+            $q = parent::getDb()->prepare("SELECT * FROM users WHERE (username = :username or email = :username) AND actived = 2");
             $q->execute(['username' => $_POST['u_name']]);
             $data = current($q->fetchAll(PDO::FETCH_OBJ));
 

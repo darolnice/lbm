@@ -136,17 +136,49 @@ body{
 .admin_pers{
     width: 55px!important;
     height: 90%;
-    /*border: 1px solid crimson;*/
+    /* border: 1px solid crimson; */
     text-align: center;
     position: absolute;
-    margin-left: 76%!important;
-    padding-top: 18px;
+    margin-left: 77%!important;
+    padding-top: 17px;
+    /* padding-left: 0px; */
+    padding-right: 25px;
 }
 .notif_messa{
     position: absolute;
     float: right;
     margin-left: 72%;
     margin-top: 3px;
+}
+#notif_, #messa__{
+    cursor: pointer;
+    z-index: 8888888889;
+}
+
+.notCont{
+    position: absolute;
+    /* margin-left: 802px; */
+    float: right;
+    right: -10px;
+    margin-top: -33px;
+    background-color: blueviolet;
+    border-radius: 50%;
+    color: white;
+    line-height: 1.8;
+    text-align: center;
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 11px;
+}
+
+.notifdiv__{
+    /* margin-left: 55px!important; */
+    margin-top: 22%;
+    margin-right: -65px;
+    /* font-weight: 900!important; */
+}
+.one_n a p{
+    font-weight: 500!important;
 }
 
 .admin_imag{
@@ -163,7 +195,7 @@ body{
     background-color: #0cd93b;
     margin-top: -8%;
     position: absolute;
-    right: 5px!important;
+    right: 19px!important;
 }
 #admin_online{
     display: block!important;

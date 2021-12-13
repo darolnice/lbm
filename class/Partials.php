@@ -9,6 +9,10 @@
 class Partials
 {
 
+
+
+
+    private $notif;
     private $data;
 
     /**
@@ -19,6 +23,12 @@ class Partials
         return $this->data;
     }
 
+    public function getNotif()
+    {
+        return $this->notif;
+    }
+
+
 
     public static function showFooter(){
         include_once S_VIEWS.'partials/_footer.view.php';
@@ -26,20 +36,34 @@ class Partials
 
     public function showNav(){
         $this->data = ($db = new MgrShop)->showAllCategories();
-        include_once S_VIEWS.'partials/_nav.view.php';
 
+        if ($_SESSION['saller_id']){
+            $this->notif = (new MgrUser)->getAllNotifs('sallers', $_SESSION['saller_id']);
+        }else{
+            $this->notif = (new MgrUser)->getAllNotifs('users', $_SESSION['current_user_id']);
+        }
+
+        include_once S_VIEWS.'partials/_nav.view.php';
         $this->getData();
+        $this->getNotif();
+
     }
 
     public function showHomeNav(){
         session_start();
         $this->data = ($db = new MgrShop)->showAllCategories();
-        include_once S_VIEWS.'partials/_homeNav.view.php';
 
+        if ($_SESSION['saller_id']){
+            $this->notif = (new MgrUser)->getAllNotifs('sallers', $_SESSION['saller_id']);
+        }else{
+            $this->notif = (new MgrUser)->getAllNotifs('users', $_SESSION['current_user_id']);
+        }
+
+        include_once S_VIEWS.'partials/_homeNav.view.php';
+        $this->getNotif();
         $this->getData();
 
     }
-
 
 
 }

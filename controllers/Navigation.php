@@ -67,9 +67,17 @@ class Navigation
     private $shoplist;
     private $s_Data;
     private $shopPref;
+    private $notif;
 
 
 
+    /**
+     * @return mixed
+     */
+    public function getNotif()
+    {
+        return $this->notif;
+    }
 
 
     public function getShopPref()
@@ -278,6 +286,7 @@ class Navigation
     }
 
     public function showHome(){
+        session_start();
         $f = new Functions();
         $db = new MgrProducts();
         $db_ = new MgrShop();
@@ -303,8 +312,6 @@ class Navigation
             $this->specialPromoData = $db_->findCategorie('home_special_promo', $f->e($_GET['Search']));
             $this->lbmProdData = $db_->findCategorie('lbm', $f->e($_GET['Search']));
         }
-
-
 
         $this->bestSaling = $db->getAllItemsFromTable("best_saling", $primera, 10);
         $this->bestShop = $db->getAllItemsFromTable("best_shop", $primera, 10);
@@ -530,6 +537,8 @@ class Navigation
         $this->sub_admin_data = $d_->manageSubAdmin();
         $this->busiProd = $d->ProdSearch($_SESSION['shop_name'], $f->e($_GET['sp']));
 
+        $this->notif = json_decode($this->getSallerData()[0]['notif'], true);
+
         include_once S_VIEWS.'/dashboard.view.php';
         $this->getSallerData();
         $this->getShopData();
@@ -549,7 +558,7 @@ class Navigation
         $this->getTotalWomanSallers();
         $this->getBusiClient();
         $this->getSuClient();
-
+        $this->getNotif();
         /************************ VAR START *************************/
         $errors = [];
 
@@ -929,13 +938,17 @@ class Navigation
 
         $this->annonceD = $mgrA->showAnnonces(null, strtolower($_SESSION['username']));
         $this->current_su_data = $d->current_su_data($_SESSION["current_user_id"]);
+        $this->notif = json_decode($this->getCurrentSuData()->notif, true);
 
         include_once S_VIEWS.'/panel.view.php';
         $this->getCurrentSuData();
         $this->getAnnonceD();
+        $this->getNotif();
+
     }
 
     public function showForum(){
+        session_start();
         $this->blogShowAll = (new MgrProducts)->getAll('blog_post');
         if(!isset($_GET['page'])){
             $this->blogData = (new MgrProducts)->getAllItemsFromTable('blog_post', 0, 2);
@@ -1065,6 +1078,7 @@ class Navigation
     }
 
     public function showTransactions(){
+        session_start();
         include S_VIEWS.'/transactions.view.php';
 
         if(!empty($_POST['t_id'])){
@@ -1079,11 +1093,11 @@ class Navigation
     }
 
     public function showShopList(){
-        $this->shoplist = (new MgrUser)->AllItemsFromTable();
+        session_start();
+        $this->shoplist = (new MgrUser)->getshoplist();
 
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();
-
 
     }
 

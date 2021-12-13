@@ -112,26 +112,37 @@
                 <img class="mt-3" id="messa__" src="<?= S_ASSETS?>images/svg/email_black_24dp.svg" alt="user image">
             </li>
 
+            <?php if(count($this->getNotif()) > 0 ): ?>
+                <div class="notCont"><?= count($this->getNotif())?></div>
+            <?php endif;?>
+
             <li class="notif__">
                 <img class="mt-3" id="notif__" src="<?= S_ASSETS?>images/svg/notifications_active_black_24dp.svg" alt="user image">
             </li>
 
             <div class="row notifdiv__" style="display: none">
                 <h6 class="text-primary">Notifications</h6>
-                <?php for($m=0; $m<3; $m++): ?>
+                <?php if(count($this->getNotif()) > 0 ): ?>
+                    <?php for($m=0; $m<count($this->getNotif()); $m++): ?>
                     <div class="one_n">
-                        <p class="notif_date">Mercredi 7 janvier 2022 à 10:00:05</p>
-                        <p class="notif_message">Un produit qui pourrait vous interesser a été ajouté pret de chez vous, cliquez pour en savoir plus!</p>
-                        <div class="d-flex w-100 _bbo">
-                            <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                            <div class="w-75">
-                                <p class="notif_pn">Montre rolex en or</p>
-                                <p class="notif_pp">150.99$ <del class="text-danger ml-3">200.99$</del></p>
+                        <a class="text-decoration-none" href="<?= $this->getNotif()[$m]['link']?>">
+                            <p class="notif_date"><?= $this->getNotif()[$m]['date']?></p>
+                            <p class="notif_message"><?= $this->getNotif()[$m]['message']?></p>
+                            <div class="d-flex w-100 _bbo">
+                                <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
+                                <div class="w-75">
+                                    <p class="notif_pn"><?= $this->getNotif()[$m]['name']?></p>
+                                    <p class="notif_pp"><?= $this->getNotif()[$m]['price']?>
+                                        <del class="text-danger ml-3"><?php ($this->getNotif()[$m]['promo'] === '0') ? print_r('') : print_r($this->getNotif()[$m]['promo'])?>
+                                        </del>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <img class="del_notif" title="Delete this notification" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
+                            <img class="del_notif" title="Delete this notification" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
+                        </a>
                     </div>
                 <?php endfor;?>
+                <?php endif;?>
             </div>
         <?php endif;?>
 

@@ -10,6 +10,10 @@ section{
     padding-top: 1%;
 }
 
+.notifdiv__{
+    margin-top: 1.5%!important;
+}
+
 .shoplist_div{
     display: flex;
     /*border: 1px solid #320d95;*/

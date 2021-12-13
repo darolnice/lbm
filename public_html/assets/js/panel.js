@@ -119,6 +119,13 @@ $(document).ready(function () {
         }
     });
 
+    $('#p_notif__').on('click', function () {
+        if(document.querySelector('.notifdiv__').getAttribute('style') !== ''){
+            $('.notifdiv__').show();
+        }else {
+            document.querySelector('.notifdiv__').setAttribute('style', 'display:none!important')
+        }
+    });
 
     document.querySelector('.admin_imag').addEventListener("click", function () {
         $('#admin_myDropdown').toggle(300);
