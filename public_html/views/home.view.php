@@ -116,186 +116,65 @@ $title = "Home"
 
         <div class="hpro">
             <div class="promo">
-                <?php if (isset($_GET['sp'])): ?>
-                    <?php for ($x=0; $x<count($this->getPromoFindprod()); $x++): ?>
-                        <div class="hme_cont vu">
-                            <div class="hme_prd_img_div">
-                                <img class="hme_prd_image" src="<?= S_ASSETS?>images/img/caterpillar.jpeg" alt="product">
-                                <div class="hme_add">
-                                    <a href="<?= 'product?id='.$this->getPromoFindprod()[$x]['id']."&sub="."&shop=".$this->getPromoFindprod()[$x]['sub_category'].$this->getPromoFindprod()[$x]['shop_name']?>">View Product</a>
-                                </div>
-                            </div>
-                            <div class="hme_np">
-                                <h4 class="hme_nm"><?= $this->getPromoFindprod()[$x]['prod_name']?></h4>
-                                <p class="hme_prc"><?= '$'.$this->getPromoFindprod()[$x]['price']?>
-                                    <strong>
-                                        <del><?= '$'.$this->getPromoFindprod()[$x]['promo']?></del>
-                                    </strong>
-                                </p>
-                                <div class="prm_rating">
-                                    <p class="prm_rating_p">
-                                        <?php for ($o=0; $o<$this->getPromoFindprod()[$x]['rating']; $o++): ?>
-                                            <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
-                                        <?php endfor ?>
-                                    </p>
-                                    <b class="prm_rater" title="Rater"><?= 'raters '.$this->getPromoFindprod()[$x]['rater']?></b>
-                                    <?php (new Functions)->isChk_home($this->getPromoFindprod()[$x]['checked']);?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endfor; ?>
-
-                <?php elseif (isset($_GET['Search'])):?>
-                    <?php for ($i=0; $i<count($this->getPromoFindCat()); $i++): ?>
-                        <div class="hme_cont vu">
-                            <div class="hme_prd_img_div">
-                                <img class="hme_prd_image" src="<?= S_ASSETS?>images/img/pet_care.png" alt="product">
-                                <div class="hme_add">
-                                    <a href="<?= 'product?id='.$this->getPromoFindCat()[$i]['id']."&sub=".$this->getPromoFindCat()[$i]['sub_category']."&shop=".$this->getPromoFindCat()[$i]['shop_name']?>">View Product</a>
-                                </div>
-                            </div>
-                            <div class="hme_np">
-                                <h4 class="hme_nm"><?= $this->getPromoFindCat()[$i]['prod_name']?></h4>
-                                <p class="hme_prc"><?= '$'.$this->getPromoFindCat()[$i]['price']?>
-                                    <strong>
-                                        <del><?= '$'.$this->getPromoFindCat()[$i]['promo']?></del>
-                                    </strong>
-                                </p>
-                                <div class="hme_rating">
-                                    <p class="hme_rating_p">
-                                        <?php for ($o=0; $o<$this->getPromoFindCat()[$i]['rating']; $o++): ?>
-                                            <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
-                                        <?php endfor ?>
-                                    </p>
-                                    <b class="prm_rater" title="Rater"><?= 'raters '.$this->getPromoFindCat()[$i]['rater']?></b>
-                                    <?php ($chk = new Functions)->isChk_home($this->getPromoFindCat()[$i]['checked']);?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endfor; ?>
-
-                <?php else:?>
-                    <?php for ($i=0; $i<count($this->getSpecialPromoData()); $i++): ?>
-                        <div class="hme_cont vu">
-                            <div class="hme_prd_img_div">
-                                <img class="hme_prd_image" src="<?= S_ASSETS?>images/img/caterpillar.jpeg" alt="product">
-                                <div class="hme_add">
-                                    <a href="<?= 'product?id='.$this->getSpecialPromoData()[$i]['id']."&shop=".$this->getSpecialPromoData()[$i]['shop_name']?>">View Product</a>
-                                </div>
-                            </div>
-                            <div class="hme_np">
-                                <h4 class="hme_nm"><?= $this->getSpecialPromoData()[$i]['prod_name']?></h4>
-                                <p class="hme_prc"><?= '$'.$this->getSpecialPromoData()[$i]['price']?>
-                                    <strong>
-                                        <del><?= '$'.$this->getSpecialPromoData()[$i]['promo']?></del>
-                                    </strong>
-                                </p>
-                                <div class="prm_rating">
-                                    <p class="prm_rating_p">
-                                        <?php for ($h=0; $h<$this->getSpecialPromoData()[$i]['rating']; $h++): ?>
-                                            <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
-                                        <?php endfor ?>
-                                    </p>
-                                    <b class="prm_rater" title="Rater"><?= 'raters '.$this->getSpecialPromoData()[$i]['rater']?></b>
-                                    <?php ($chk = new Functions)->isChk_home($this->getSpecialPromoData()[$i]['checked']);?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endfor; ?>
-                <?php endif;?>
-            </div>
-
-            <div class="lbm_prod">
-                <?php if (isset($_GET['sp'])): ?>
-                    <?php for ($x=0; $x<count($this->getSplbm()); $x++): ?>
+                <?php for ($i=0; $i<count($this->getSpecialPromoData()); $i++): ?>
                     <div class="hme_cont vu">
                         <div class="hme_prd_img_div">
-                            <img class="hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getSplbm()[$x]['img1']?>" alt="product">
+                            <img class="hme_prd_image" src="<?= S_ASSETS?>images/img/caterpillar.jpeg" alt="product">
                             <div class="hme_add">
-                                <a href="<?= 'product?id='.$this->getSplbm()[$x]['id']."&sub=".$this->getSplbm()[$x]['sub_category']."&shop=".$this->getSplbm()[$x][' shop_name']?>">View Product</a>
+                                <a href="<?= 'product?id='.$this->getSpecialPromoData()[$i]['id']."&shop=".$this->getSpecialPromoData()[$i]['shop_name']?>">View Product</a>
                             </div>
                         </div>
                         <div class="hme_np">
-                            <h4 class="hme_nm"><?= $this->getSplbm()[$x]['prod_name']?></h4>
-                            <p class="hme_prc"><?= '$'.$this->getSplbm()[$x]['price']?>
+                            <h4 class="hme_nm"><?= $this->getSpecialPromoData()[$i]['prod_name']?></h4>
+                            <p class="hme_prc"><?= '$'.$this->getSpecialPromoData()[$i]['price']?>
                                 <strong>
-                                    <del><?= '$'.$this->getSplbm()[$x]['promo']?></del>
+                                    <del><?= '$'.$this->getSpecialPromoData()[$i]['promo']?></del>
                                 </strong>
                             </p>
                             <div class="prm_rating">
                                 <p class="prm_rating_p">
-                                    <?php for ($o=0; $o<$this->getSplbm()[$x]['rating']; $o++): ?>
+                                    <?php for ($h=0; $h<$this->getSpecialPromoData()[$i]['rating']; $h++): ?>
                                         <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
                                     <?php endfor ?>
                                 </p>
-                                <b class="prm_rater" title="Rater"><?= 'raters '.$this->getSplbm()[$x]['rater']?></b>
-                                <?php (new Functions)->isChk_home($this->getSplbm()[$x]['checked']);?>
+                                <b class="prm_rater" title="Rater"><?= 'raters '.$this->getSpecialPromoData()[$i]['rater']?></b>
+                                <?php ($chk = new Functions)->isChk_home($this->getSpecialPromoData()[$i]['checked']);?>
                             </div>
                         </div>
                     </div>
                 <?php endfor; ?>
+            </div>
 
-                <?php elseif (!isset($_GET['Search'])): ?>
-                    <?php for ($l=0; $l<count($this->getLbmProdData()); $l++): ?>
-                        <div class="lbm_hme_cont vu">
-                            <div class="lbm_hme_prd_img_div">
-                                <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getLbmProdData()[$l]['img1']?>" alt="product">
-                                <div class="lbm_hme_add vu">
-                                    <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".$this->getLbmProdData()[$l]['shop_name']?>">View Product</a>
-                                </div>
-                            </div>
-
-                            <div class="lbm_hme_np">
-                                <h4 class="lbm_hme_nm"><?= $this->getLbmProdData()[$l]['prod_name']?></h4>
-                                <p class="lbm_hme_prc"><?= '$'.$this->getLbmProdData()[$l]['price']?>
-                                    <strong>
-                                        <del><?= '$'.$this->getLbmProdData()[$l]['promo']?></del>
-                                    </strong>
-                                </p>
-
-                                <div class="lbm_rating">
-                                    <p class="lbm_rating_p">
-                                        <?php for ($r=0; $r<$this->getLbmProdData()[$l]['rating']; $r++): ?>
-                                            <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
-                                        <?php endfor ?>
-                                    </p>
-                                    <b class="lbm_rater" title="Rater">raters (<?= $this->getLbmProdData()[$l]['rater']?>)</b>
-                                    <?php (new Functions)->isChk_home($this->getLbmProdData()[$l]['checked']);?>
-                                </div>
+            <div class="lbm_prod">
+                <?php for ($l=0; $l<count($this->getLbmProdData()); $l++): ?>
+                    <div class="lbm_hme_cont vu">
+                        <div class="lbm_hme_prd_img_div">
+                            <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getLbmProdData()[$l]['img1']?>" alt="product">
+                            <div class="lbm_hme_add vu">
+                                <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".$this->getLbmProdData()[$l]['shop_name']?>">View Product</a>
                             </div>
                         </div>
-                    <?php endfor; ?>
-                <?php else:?>
-                    <?php for ($l=0; $l<count($this->getLbmFindCat()); $l++): ?>
-                        <div class="lbm_hme_cont vu">
-                            <div class="lbm_hme_prd_img_div">
-                                <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getLbmFindCat()[$l]['img1']?>" alt="product">
-                                <div class="lbm_hme_add">
-                                    <a href="<?= 'product?id='.$this->getLbmFindCat()[$l]['id']."&sub=".$this->getLbmFindCat()[$l]['sub_category']."&shop=".$this->getLbmFindCat()[$l]['shop_name']?>">View Product</a>
-                                </div>
-                            </div>
 
-                            <div class="lbm_hme_np">
-                                <h4 class="lbm_hme_nm"><?= $this->getLbmFindCat()[$l]['prod_name']?></h4>
-                                <p class="lbm_hme_prc"><?= '$'.$this->getLbmFindCat()[$l]['price']?>
-                                    <strong>
-                                        <del><?= '$'.$this->getLbmFindCat()[$l]['promo']?></del>
-                                    </strong>
+                        <div class="lbm_hme_np">
+                            <h4 class="lbm_hme_nm"><?= $this->getLbmProdData()[$l]['prod_name']?></h4>
+                            <p class="lbm_hme_prc"><?= '$'.$this->getLbmProdData()[$l]['price']?>
+                                <strong>
+                                    <del><?= '$'.$this->getLbmProdData()[$l]['promo']?></del>
+                                </strong>
+                            </p>
+
+                            <div class="lbm_rating">
+                                <p class="lbm_rating_p">
+                                    <?php for ($r=0; $r<$this->getLbmProdData()[$l]['rating']; $r++): ?>
+                                        <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
+                                    <?php endfor ?>
                                 </p>
-
-                                <div class="lbm_rating">
-                                    <p class="lbm_rating_p">
-                                        <?php for ($r=0; $r<$this->getLbmFindCat()[$l]['rating']; $r++): ?>
-                                            <a style="color: #ec6206; text-decoration:none!important;">&starf;</a>
-                                        <?php endfor ?>
-                                    </p>
-                                    <b class="lbm_rater" title="Rater"><?= $this->getLbmFindCat()[$l]['rater']?></b>
-                                    <?php (new Functions)->isChk_home($this->getLbmFindCat()[$l]['checked']);?>
-                                </div>
+                                <b class="lbm_rater" title="Rater">raters (<?= $this->getLbmProdData()[$l]['rater']?>)</b>
+                                <?php (new Functions)->isChk_home($this->getLbmProdData()[$l]['checked']);?>
                             </div>
                         </div>
-                    <?php endfor; ?>
-                <?php endif;?>
+                    </div>
+                <?php endfor; ?>
             </div>
 
             <form method="post" class="promo_nmber">

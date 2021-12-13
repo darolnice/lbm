@@ -12,7 +12,7 @@
         <section id="add_ann_sec" class="container" style="display: none">
             <h2>Add your ad here !!!</h2>
 
-            <form method="post" class="form-group" id="post_ann_form">
+            <form method="post" enctype="multipart/form-data" class="form-group" id="post_ann_form">
                 <p>Personnal informations</p>
                 <input type="text" name="name" required value="<?= unserialize($_COOKIE['cud'])[0]?>" placeholder="Name">
                 <input type="text" name="phone" required value="<?= unserialize($_COOKIE['cud'])[2]?>" placeholder="Phone number">
@@ -29,7 +29,7 @@
                     <input type="number" name="ann_prod_qte" id="ann_prod_qte" required>
                 </label>
 
-                <label for="ann_prod_price">Unit price
+                <label for="ann_prod_price">Price
                     <input type="text" name="ann_prod_price" id="ann_prod_price" required>
                 </label>
 
@@ -54,12 +54,12 @@
                 </label>
 
                 <div class="ann_pst_img">
-                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" alt="">
-                    <input type="file" name="ann_img_1" id="" hidden>
+                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" id="add_ad_im1" alt="">
+                    <input type="file" name="ann_img_1" id="ad-im1" hidden>
                     <button type="button" class="ann_img_1 mb-3">Upload first image</button>
 
-                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" alt="">
-                    <input type="file" name="ann_img_2" id="" hidden>
+                    <img src="<?= S_ASSETS ?>images/svg/image_noir.svg" id="add_ad_im2" alt="">
+                    <input type="file" name="ann_img_2" id="ad-im2" hidden>
                     <button type="button" class="ann_img_2">Upload second image</button>
                 </div>
 
@@ -69,7 +69,7 @@
         </section>
     <?php endif;?>
 
-    <section id="res_ann_sec" class="container" style="display: block">
+    <section id="res_ann_sec" class="container">
         <h2>Welcome, Post and Get any thing you want here</h2>
         <?php if (!$_SESSION["saller_id"]): ?>
             <div class="inf_ans">
@@ -83,7 +83,8 @@
 
         <div class="annc-search <?php ($_SESSION['saller_id']) ? print '__desc' : null?>">
             <form method="GET" name="ann_sch" class="form-group fg_ann">
-                <input type="text" name="Search" class="form-control" placeholder="Search">
+                <input id="ann_srh" type="text" name="Search" class="form-control" placeholder="Search" required>
+                <div class="annSearchDiv" style="display: none"></div>
             </form>
             <button id="add_ann_btn__">Post Your Ad</button>
         </div>

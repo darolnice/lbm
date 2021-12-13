@@ -37,7 +37,7 @@ class MgrLogin extends Database
                 $_SESSION['filter_user'] = 'username';
             }
 
-            Functions::save_in_cookies("cookies_u_data", $data->username, $data->city, $data->phone_number, $data->email, $data->shop_name);
+            Functions::save_in_cookies("cookies_u_data", $data->username, $data->city, $data->phone_number, $data->email, $data->country, $data->shop_name);
             Functions::redir('dashboard');
         }else{
             $errors[] = '- Password is wrong click on PASSWORD FORGET for reset your password or click on SIGNUP to create account';
@@ -64,7 +64,7 @@ class MgrLogin extends Database
                 $_SESSION['country'] = $data->country;
                 $_SESSION['profil_image'] = $data->profil_image;
 
-                Functions::save_in_cookies("cud", $data->username, $data->city, $data->phone_number, $data->email, null);
+                Functions::save_in_cookies("cud", $data->username, $data->city, $data->phone_number, $data->email, $data->country, null);
                 Functions::redir('panel');
             }else{
                 $errors[] = '- Password is wrong click on PASSWORD FORGET for reset your password or click on SIGNUP to create account';

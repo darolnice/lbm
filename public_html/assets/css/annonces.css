@@ -23,6 +23,9 @@ section{
     --table_title_clr: #f1eae7;
 }
 
+
+
+
 /*###****************** JS ADD ********************###*/
 .vue{
     display: block;
@@ -73,7 +76,7 @@ section{
     width: 350px;
     margin-left: 0;
     margin-top: 100px;
-    background-color: #28a7454a;
+    background-color: #dee5ea;
     padding: 8px;
     border-radius: 8px;
 }
@@ -94,6 +97,7 @@ section{
     margin-bottom: 10px;
     border-radius: 8px;
     height: auto;
+    max-height: 400px;
 }
 .ann_pst_img button{
     background-color: #626262;
@@ -104,6 +108,28 @@ section{
     border-radius: 4px;
     font-size: 11px;
     outline: none;
+}
+
+.annSearchDiv{
+    box-shadow: 1px 1px 1px 1px #f1e2e2;
+    background-color: white;
+    width: 76.5%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 8px;
+    min-height: 50px;
+    position: absolute;
+    padding: 10px;
+    display: block;
+}
+
+.JS-ann_a_res{
+    font-size: 12px;
+    color: black;
+    text-decoration: none!important;
+}
+.JS-ann_a_res:visited{
+    color: #8d05ad;
 }
 
 
@@ -587,6 +613,7 @@ strong{
     width: 50%;
     height: 100%;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .annc-search{
@@ -625,3 +652,5 @@ strong{
     min-height: 22px;
     font-size: 11px;
 }
+
+

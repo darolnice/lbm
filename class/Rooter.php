@@ -97,6 +97,7 @@ class Rooter
                         'jxrC'              => ["api"   => "AjaxApiRes",  "method" => "jxrC"],
                         'jxUDCart'          => ["api"   => "AjaxApiRes",  "method" => "jxUDCart"],
                         'jxregist2'         => ["api"   => "AjaxApiRes",  "method" => "jxregist2"],
+                        'jxadsrh'           => ["api"   => "AjaxApiRes",  "method" => "jxadsrh"],
 
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],

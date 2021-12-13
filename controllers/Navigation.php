@@ -34,18 +34,15 @@ class Navigation
     private $sub_admin_data;
     private $specialPromoData;
     private $lbmProdData;
-    private $lbmFindCat;
     private $promoFindCat;
     private $prodArray;
     private array $annonceData = [];
     private $shopCatSort;
     private $current_su_data;
     private $ctn_name, $ctn_subject, $ctn_mail, $ctn_msg;
-    private $promoFindprod;
     private $searchProdShop;
     private $annonceD;
     private $busiProd;
-    private $splbm;
     private $bestSaling;
     private $bestShop;
     private $faq;
@@ -175,10 +172,7 @@ class Navigation
     {
         return $this->bestSaling;
     }
-    public function getSplbm()
-    {
-        return $this->splbm;
-    }
+
     public function getBusiProd()
     {
         return $this->busiProd;
@@ -187,10 +181,7 @@ class Navigation
     {
         return $this->searchProdShop;
     }
-    public function getPromoFindprod()
-    {
-        return $this->promoFindprod;
-    }
+
     public function getCtnName()
     {
         return $this->ctn_name;
@@ -227,10 +218,7 @@ class Navigation
     {
         return $this->promoFindCat;
     }
-    public function getLbmFindCat()
-    {
-        return $this->lbmFindCat;
-    }
+
     public function getLbmProdData()
     {
         return $this->lbmProdData;
@@ -306,24 +294,24 @@ class Navigation
             $this->specialPromoData = $p->showDataWithPagination("home_special_promo", $_COOKIE['hsc'], $primera, 10);
             $this->lbmProdData = $p->showDataWithPagination('lbm', $_COOKIE['hsc'], $primera, 100);
         }
+        if ($_GET['sp']){
+            $this->specialPromoData = $db->ProdSearch('home_special_promo', $f->e($_GET['sp']));
+            $this->lbmProdData = $db->ProdSearch('lbm', $f->e($_GET['sp']));
+        }
 
-        $this->promoFindprod = $db->ProdSearch('home_special_promo', $f->e($_GET['sp']));
-        $this->promoFindCat = $db_->findCategorie('home_special_promo', $f->e($_GET['Search']));
+        if ($_GET['Search']){
+            $this->specialPromoData = $db_->findCategorie('home_special_promo', $f->e($_GET['Search']));
+            $this->lbmProdData = $db_->findCategorie('lbm', $f->e($_GET['Search']));
+        }
 
-        $this->splbm = $db->ProdSearch('lbm', $f->e($_GET['sp']));
-        $this->lbmFindCat = $db_->findCategorie('lbm', $f->e($_GET['Search']));
+
 
         $this->bestSaling = $db->getAllItemsFromTable("best_saling", $primera, 10);
         $this->bestShop = $db->getAllItemsFromTable("best_shop", $primera, 10);
 
         include_once S_VIEWS.'/home.view.php';
         $this->getSpecialPromoData();
-        $this->getPromoFindCat();
-        $this->getPromoFindprod();
-
         $this->getLbmProdData();
-        $this->getSplbm();
-        $this->getLbmFindCat();
 
         $this->getBestSaling();
         $this->getBestShop();
@@ -825,22 +813,51 @@ class Navigation
     public function showAnnonces(){
         session_start();
         $d = new MgrAnnonces();
-        $f = new Functions();
 
-        $this->annonceData = $d->showAnnonces($_SESSION['city'], null);
+        if (isset($_GET['Search'])){
+            $this->annonceData = $d->showAnnonces($_GET['Search'], $_SESSION['city'], null);
+        }else{
+            $this->annonceData = $d->showAnnonces(null, $_SESSION['city'], null);
+        }
 
         include_once S_VIEWS.'/annonces.view.php';
         $this->getAnnonceData();
-        $ann_prod_name = $_POST['ann_prod_name'];
-        $ann_prod_qte = $_POST['ann_prod_qte'];
-        $ann_prod_price = $_POST['ann_prod_price'];
-        $ann_prod_qly = $_POST['ann_prod_qly'];
-        $ann_prod_color = $_POST['ann_prod_color'];
-        $ann_prod_size = $_POST['ann_prod_size'];
+        $f = new Functions();
+
+        $name = $f->e($_POST['name']);
+        $phone = $f->e($_POST['phone']);
+        $mail = $f->e($_POST['email']);
+        $country = $f->e($_POST['country']);
+        $city = $f->e($_POST['city']);
+
+        $ann_prod_name = $f->e($_POST['ann_prod_name']);
+        $ann_prod_qte = $f->e($_POST['ann_prod_qte']);
+        $ann_prod_price = $f->e($_POST['ann_prod_price']);
+        $ann_prod_qly = $f->e($_POST['ann_prod_qly']);
+        $ann_prod_color = $f->e($_POST['ann_prod_color']);
+        $ann_prod_size = $f->e($_POST['ann_prod_size']);
+        $ann_prod_cmt = $f->e($_POST['ann_prod_cmt']);
 
         $error__ = [];
 
         if (isset($_POST['add_annonce'])){
+            if (empty($name) || mb_strlen($name) < 3){
+                $error__[] = '- PLease enter your name';
+            }
+            if (empty($phone) || $phone < 6){
+                $error__[] = '- PLease enter phone number';
+            }
+            if (empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL)){
+                $error__[] = '- PLease enter e-mail adress';
+            }
+            if (empty($country) || mb_strlen($country) < 3){
+                $error__[] = '- PLease enter your country';
+            }
+            if (empty($city) || mb_strlen($city) < 3){
+                $error__[] = '- PLease enter your city';
+            }
+
+
             if (empty($ann_prod_name) || mb_strlen($ann_prod_name) < 3){
                 $error__[] = '- PLease enter product name';
             }
@@ -861,8 +878,34 @@ class Navigation
                 $error__[] = '- PLease select product size';
             }
 
+            if ($_FILES){
+                $ex_allowes = ['jpg', 'jpeg', 'jfif', 'png'];
+                foreach ($_FILES as $k => $fv){
+                    $lower_ext = strtolower(pathinfo($fv['name'], PATHINFO_EXTENSION));
+                    if (!in_array($lower_ext, $ex_allowes)){
+                        $error__[] = 'Type files not allowed !!!';
+                    }
+                    if ($fv['size'] > 5500000){
+                        $error__[] = 'Image is too large, max size 1.5mo';
+                    }
+                }
+
+                $imdata = [
+                    'img1_name' => $_FILES['ann_img_1']['name'], 'img1_tmp' => $_FILES['ann_img_1']['tmp_name'],
+                    'img2_name' => $_FILES['ann_img_2']['name'], 'img2_tmp' => $_FILES['ann_img_2']['tmp_name']
+                ];
+            }
+
             if (count($error__) === 0){
-                $d->postAnnonce();
+                $data = [
+                    $name, $phone, $mail,
+                    $country, $city, $ann_prod_name,
+                    $ann_prod_qte, $ann_prod_price,
+                    $ann_prod_qly, $ann_prod_color,
+                    $ann_prod_size, $ann_prod_cmt, $imdata
+                ];
+
+                $d->postAnnonce($data);
             }
 
             $f->notif_errors($error__);
@@ -876,7 +919,6 @@ class Navigation
             }
             $f->notif_errors($error__);
         }
-
     }
 
     public function showPanel(){

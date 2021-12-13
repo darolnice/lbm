@@ -25,7 +25,6 @@ class Partials
     }
 
     public function showNav(){
-        session_start();
         $this->data = ($db = new MgrShop)->showAllCategories();
         include_once S_VIEWS.'partials/_nav.view.php';
 

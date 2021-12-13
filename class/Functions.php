@@ -383,10 +383,11 @@ class Functions extends Navigation
      * @param string $phone_number
      * @param string $city
      * @param string $email
+     * @param string $country
      * @param string|null $shopname
      */
-    public static function save_in_cookies($ckn, string $name, string $phone_number, string $city, string $email, string $shopname = null) {
-        $values = serialize([$name, $phone_number, $city, $email, $shopname]);
+    public static function save_in_cookies($ckn, string $name, string $phone_number, string $city, string $email, string $country, string $shopname = null) {
+        $values = serialize([$name, $phone_number, $city, $email, $shopname, $country]);
         setcookie($ckn, $values, time()+60*24);
     }
 

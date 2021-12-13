@@ -61,6 +61,55 @@ $(document).ready(function () {
         });
     });
 
+    const form = document.querySelector('#ann_srh')
+    form.addEventListener('input', (e)=>{
+         val = form.value;
+         if (val !== ''){
+             e.preventDefault();
+             new Index().jxAdsearch("jxadsrh", ".annSearchDiv", val);
+         }else {
+             document.querySelector('.annSearchDiv').style.display = 'none';
+         }
+    });
+
+    const btns = document.querySelectorAll('.ann_img_1, .ann_img_2');
+    btns.forEach(btn =>{
+        btn.addEventListener('click', function () {
+            if (btn.previousElementSibling.getAttribute('id') === 'ad-im1'){
+                document.querySelector('#ad-im1').click();
+
+            }else {
+                document.querySelector('#ad-im2').click();
+            }
+        })
+    });
+
+
+    let img1 = document.querySelector('#ad-im1');
+    let img2 = document.querySelector('#ad-im2');
+
+    img1.addEventListener('input', ()=>{
+        let file = img1.files[0];
+        if (file){
+            let reader = new FileReader();
+            reader.addEventListener('load', ()=>{
+                document.querySelector('#add_ad_im1').setAttribute("src", reader.result);
+            })
+            reader.readAsDataURL(file);
+        }
+    })
+    img2.addEventListener('input', ()=>{
+        let file = img2.files[0];
+        if (file){
+            let reader = new FileReader();
+            reader.addEventListener('load', ()=>{
+                document.querySelector('#add_ad_im2').setAttribute("src", reader.result);
+            })
+            reader.readAsDataURL(file);
+        }
+    })
+
+
 
 
 });

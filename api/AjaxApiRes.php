@@ -32,6 +32,11 @@ class AjaxApiRes
         (new RestApi)->ajaxHomeSearchApi();
     }
 
+    public function jxadsrh()
+    {
+        (new MgrAnnonces)->jxsearch();
+    }
+
     /**
      *  Recherche ajax, controle si un nom d'utilisateur est deja prix
      */

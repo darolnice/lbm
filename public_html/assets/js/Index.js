@@ -99,10 +99,10 @@ class Index {
                 d.innerHTML = '';
                 let i = 0;
                 while (i<data.length){
-                    let el = document.createElement('a');
-                    el.setAttribute('href', 'shop?name='+data[i]['shop_name']);
-                    el.innerHTML = data[i]['shop_name'];
-                    document.querySelector(resDiv).appendChild(el);
+                    let a = document.createElement('a');
+                    a.setAttribute('href', 'shop?name='+data[i]['shop_name']);
+                    a.innerHTML = data[i]['shop_name'];
+                    d.appendChild(a);
                     i++
 
                     $('.CountryList').css('visibility', 'hidden');
@@ -659,6 +659,32 @@ class Index {
         }
     }
 
+
+    jxAdsearch(url, res_div, r){
+        $.ajax({
+            type: 'GET',
+            url: url+'?Search='+r,
+            success: function(data){
+                let d = $(res_div);
+                d.text("");
+                let i = 0;
+                while (i < data.length){
+                    let a = document.createElement('a');
+                    let p = document.createElement('p');
+
+                    a.setAttribute('class', 'JS-ann_a_res');
+                    a.setAttribute('href', '?Search='+data[i]['prod_name']);
+                    a.innerHTML = data[i]['prod_name'];
+
+                    p.append(a);
+                    d.append(p);
+                    i++
+
+                    d.fadeIn(300);
+                }
+            }
+        });
+    }
 
 }
 
