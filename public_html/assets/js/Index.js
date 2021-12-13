@@ -246,9 +246,10 @@ class Index {
                         li.appendChild(b);
                         li.appendChild(h);
 
-                        context.parentNode.parentNode.children[0].childNodes[3].append(li);
-                        var ulclass = context.parentNode.parentNode.children[0].childNodes[3];
-                        ulclass.scrollTo({top:1000, behavior:"smooth"});
+                        context.parentNode.parentNode.children[0].children[2].append(li);
+                        var ulclass = context.parentNode.parentNode.children[0].children[2];
+
+                        ulclass.scrollTo({top:100000, behavior:"smooth"});
                         context.children[0].value = '';
                     }
 

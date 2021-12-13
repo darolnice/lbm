@@ -13,26 +13,26 @@ class MgrAnnonces extends Database
      */
     public function postAnnonce(array $data){
         try{
-            $ann_qry = parent::getDb()->prepare("INSERT INTO annonces (user_name, phone_number, email, country, city, prod_name, quantity,
-                                                                       quality, price, color, size, ad_img1, ad_img2 comment_s)
+            $ad_qry = parent::getDb()->prepare('INSERT INTO annonces (user_name, phone_number, email, country, city, prod_name, quantity,
+                                                                       quality, price, color, size, ad_img1, ad_img2, comment_s)
                                                            VALUES (:user_name, :phone_number, :email, :country, :city, :prod_name, :quantity,
                                                                     :quality, :price, :color, :size, :ad_img1, :ad_img2, :comment_s
-                                                           )"
+                                                           )'
 
             );
 
-            $ann_qry->bindParam('user_name', $data[0], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('phone_number', $data[1], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('email', $data[2], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('country', $data[3], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('city', $data[4], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('prod_name', $data[5], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('quantity', $data[6], PDO::PARAM_INT);
-            $ann_qry->bindParam('quality', $data[7], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('price', $data[8], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('color', $data[9], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('size', $data[10], PDO::PARAM_STR_CHAR);
-            $ann_qry->bindParam('comment_s', $data[11], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('user_name', $data[0], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('phone_number', $data[1], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('email', $data[2], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('country', $data[3], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('city', $data[4], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('prod_name', $data[5], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('quantity', $data[6], PDO::PARAM_INT);
+            $ad_qry->bindValue('quality', $data[7], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('price', $data[8], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('color', $data[9], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('size', $data[10], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('comment_s', $data[11], PDO::PARAM_STR_CHAR);
 
             if (!empty($data[12])){
                 $im1Ext = strtolower(pathinfo($data[12]['img1_name'], PATHINFO_EXTENSION));
@@ -44,15 +44,16 @@ class MgrAnnonces extends Database
                 $img1_def_path = 'public_html/assets/images/upload/'.$new_img1_name;
                 $img2_def_path = 'public_html/assets/images/upload/'.$new_img2_name;
 
-                $ann_qry->bindParam('ad_img1', $new_img1_name, PDO::PARAM_STR_CHAR);
-                $ann_qry->bindParam('ad_img2', $new_img2_name, PDO::PARAM_STR_CHAR);
+                $ad_qry->bindValue('ad_img1', $new_img1_name, PDO::PARAM_STR_CHAR);
+                $ad_qry->bindValue('ad_img2', $new_img2_name, PDO::PARAM_STR_CHAR);
             }else{
-                $ann_qry->bindValue('ad_img1', '', PDO::PARAM_STR_CHAR);
-                $ann_qry->bindValue('ad_img2', '', PDO::PARAM_STR_CHAR);
+                $ad_qry->bindValue('ad_img1', '', PDO::PARAM_STR_CHAR);
+                $ad_qry->bindValue('ad_img2', '', PDO::PARAM_STR_CHAR);
             }
 
-            if ($ann_qry->execute()){
-                $ann_qry->closeCursor();
+
+            if ($ad_qry->execute()){
+                $ad_qry->closeCursor();
 
                 move_uploaded_file($data[12]['img1_tmp'], $img1_def_path);
                 move_uploaded_file($data[12]['img2_tmp'], $img2_def_path);
@@ -118,11 +119,11 @@ class MgrAnnonces extends Database
                                                                        shop_name,
                                                                        response,
                                                                        add_at)
-                                                  VALUES (:annonce_id,
-                                                          :annoncer,
-                                                          :shop_name,
-                                                          :response,
-                                                          :add_at)");
+                                                     VALUES (:annonce_id,
+                                                             :annoncer,
+                                                             :shop_name,
+                                                             :response,
+                                                             :add_at)");
 
             $pc->execute([
                 'annonce_id'=>$annonce_id,

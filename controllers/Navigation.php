@@ -885,7 +885,7 @@ class Navigation
                     if (!in_array($lower_ext, $ex_allowes)){
                         $error__[] = 'Type files not allowed !!!';
                     }
-                    if ($fv['size'] > 5500000){
+                    if ($fv['size'] > 1500000){
                         $error__[] = 'Image is too large, max size 1.5mo';
                     }
                 }
@@ -900,8 +900,8 @@ class Navigation
                 $data = [
                     $name, $phone, $mail,
                     $country, $city, $ann_prod_name,
-                    $ann_prod_qte, $ann_prod_price,
-                    $ann_prod_qly, $ann_prod_color,
+                    $ann_prod_qte, $ann_prod_qly,
+                    $ann_prod_price, $ann_prod_color,
                     $ann_prod_size, $ann_prod_cmt, $imdata
                 ];
 

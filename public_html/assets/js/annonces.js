@@ -85,29 +85,32 @@ $(document).ready(function () {
     });
 
 
-    let img1 = document.querySelector('#ad-im1');
-    let img2 = document.querySelector('#ad-im2');
+    if (document.querySelector('#ad-im1')){
+        let img1 = document.querySelector('#ad-im1');
+        let img2 = document.querySelector('#ad-im2');
 
-    img1.addEventListener('input', ()=>{
-        let file = img1.files[0];
-        if (file){
-            let reader = new FileReader();
-            reader.addEventListener('load', ()=>{
-                document.querySelector('#add_ad_im1').setAttribute("src", reader.result);
-            })
-            reader.readAsDataURL(file);
-        }
-    })
-    img2.addEventListener('input', ()=>{
-        let file = img2.files[0];
-        if (file){
-            let reader = new FileReader();
-            reader.addEventListener('load', ()=>{
-                document.querySelector('#add_ad_im2').setAttribute("src", reader.result);
-            })
-            reader.readAsDataURL(file);
-        }
-    })
+        img1.addEventListener('input', ()=>{
+            let file = img1.files[0];
+            if (file){
+                let reader = new FileReader();
+                reader.addEventListener('load', ()=>{
+                    document.querySelector('#add_ad_im1').setAttribute("src", reader.result);
+                })
+                reader.readAsDataURL(file);
+            }
+        })
+        img2.addEventListener('input', ()=>{
+            let file = img2.files[0];
+            if (file){
+                let reader = new FileReader();
+                reader.addEventListener('load', ()=>{
+                    document.querySelector('#add_ad_im2').setAttribute("src", reader.result);
+                })
+                reader.readAsDataURL(file);
+            }
+        })
+    }
+
 
 
 

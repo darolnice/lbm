@@ -386,7 +386,7 @@ class RestApi extends Database
     public function postAndGetcomment($annonce_id, string $annoncer, $comment){
         try {
             $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id, annoncer, shop_name, response)
-                                                    VALUES (:annonce_id, :annoncer, :shop_name, :response)"
+                                                     VALUES (:annonce_id, :annoncer, :shop_name, :response)"
             );
 
             $pc->execute([

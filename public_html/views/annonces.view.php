@@ -37,7 +37,7 @@
                     <select type="text" name="ann_prod_qly" id="ann_prod_qly" required>
                         <option value="New">NEW</option>
                         <option value="Occasion">OCCASION</option>
-                        <option value="both">OCCASION or NEW</option>
+                        <option value="OCCASION or NEW">OCCASION or NEW</option>
                     </select>
                 </label>
 
@@ -118,7 +118,7 @@
                 <div class="ann__details">
                    <b class="ml-1" style="color: white">About product</b>
                     <ul class="tab-content">
-                        <li class="annc_prod_name">
+                        <li class="annc_prod_name" style="height: 80px">
                             <b>Product name :</b><br>
                             <h6><?= $this->getAnnonceData()[$i]->prod_name?></h6>
                         </li>
@@ -151,8 +151,8 @@
                 </div>
 
                 <div class="img__block">
-                    <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
-                    <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
+                    <img src="<?= S_ASSETS ?>images/upload/<?= $this->getAnnonceData()[$i]->ad_img1?>" alt="">
+                    <img src="<?= S_ASSETS ?>images/upload/<?= $this->getAnnonceData()[$i]->ad_img2?>" alt="">
                 </div>
 
                 <div class="resBlock">
