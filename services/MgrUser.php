@@ -440,6 +440,7 @@ class MgrUser extends Database
     /**
      * @param $userTyp
      * @param $id
+     * @return bool|mixed|string
      */
     public function getAllNotifs($userTyp, $id){
         try {
@@ -447,6 +448,32 @@ class MgrUser extends Database
             if ($ql->execute(["id"=>$id])){
                 $data = $ql->fetchAll(PDO::FETCH_ASSOC);
                 return json_decode($data[0]['notif'], true);
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+    /**
+     * @param $dest
+     * @return bool|mixed|string
+     */
+    public function getAllMess($dest, $indice = null){
+        try {
+
+            if ($indice === null){
+                $ql = parent::getDb()->prepare("SELECT * FROM message WHERE statu = 0 AND destinataire = :dest");
+                if ($ql->execute(["dest"=>$dest])){
+                    return  $ql->fetchAll(PDO::FETCH_ASSOC);
+                }
+            }else{
+
+                $ql = parent::getDb()->prepare("SELECT * FROM message WHERE destinataire = :dest");
+                if ($ql->execute(["dest"=>$dest])){
+                    return $ql->fetchAll(PDO::FETCH_ASSOC);
+                }
             }
 
         }catch (PDOException $e){

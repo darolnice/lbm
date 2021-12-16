@@ -873,8 +873,9 @@ class AjaxApiRes
      *
      */
     public function jxPanelSrch(){
+
        if(isset($_GET['search'])){
-           (new Pagination)->searchWithParams(htmlentities($_GET['search']), '');
+           (new Pagination)->searchWithParams(htmlentities($_GET['search']), htmlentities($_GET['option']));
        }
     }
 

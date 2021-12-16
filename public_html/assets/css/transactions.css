@@ -31,8 +31,12 @@ input::placeholder{
      text-align: center;
  }
 
-.notifdiv__{
+.notifdiv__, .notifmess{
     margin-top: 1.5%!important;
+}
+
+.notCont_mess, .notCont{
+    margin-right: 10px;
 }
 
 #titl{

@@ -188,7 +188,6 @@ body{
     height: 91%;
     text-align: center;
     width: 70px;
-    width: auto;
     /* border: 1px solid coral; */
     font-family: Tahoma, serif!important;
 }
@@ -242,13 +241,12 @@ body{
     border: none;
     text-align: justify-all;
     width: 100%;
-    padding: 5px;
     height: 100%;
     background: none;
     box-sizing: border-box;
     border-radius: 100%;
     justify-content: center;
-    padding-top: 5%;
+    padding: 5% 5px 5px;
     text-shadow:  0 1px 3px rgb(153, 152, 152) !important;
 }
 #notif_price input {
@@ -356,22 +354,6 @@ body{
     color: #5781ea!important;
 }
 /*********logout menu end*********/
-.notCont{
-    position: absolute;
-    /* margin-left: 802px; */
-    float: right;
-    right: 75px;
-    margin-top: 8px;
-    background-color: blueviolet;
-    border-radius: 50%;
-    color: white;
-    line-height: 1.9;
-    text-align: center;
-    min-width: 20px;
-    min-height: 20px;
-    font-size: 11px;
-}
-
 
 
 /************************individual hover end***************************/

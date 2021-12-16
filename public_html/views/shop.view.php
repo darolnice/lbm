@@ -357,7 +357,7 @@ $title = "Shop";?>
                         <h6>Darol</h6>
                         <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, porro.</h5>
                     <?php endfor;?>
-                    <button class="small">View all comment's</button>
+                    <button class="small" id="allcmt">View all comment's</button>
                 </div>
 
                 <div class="bshp_">

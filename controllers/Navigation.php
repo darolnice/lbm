@@ -68,7 +68,15 @@ class Navigation
     private $s_Data;
     private $shopPref;
     private $notif;
+    private $mess;
 
+    /**
+     * @return mixed
+     */
+    public function getMess()
+    {
+        return $this->mess;
+    }
 
 
     /**
@@ -326,6 +334,7 @@ class Navigation
     }
 
     public function showProduct(){
+        session_start();
         $d = new MgrProducts();
         $this->data = $d->showProdBycategory($_GET['shop'], $_GET['sub']);
         $f = new Functions();
@@ -448,6 +457,7 @@ class Navigation
     }
 
     public function showShop(){
+        session_start();
         $d = new MgrProducts();
         $f = new Functions();
         $current_business = $f->e($_GET['name']);
@@ -538,6 +548,7 @@ class Navigation
         $this->busiProd = $d->ProdSearch($_SESSION['shop_name'], $f->e($_GET['sp']));
 
         $this->notif = json_decode($this->getSallerData()[0]['notif'], true);
+        $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
 
         include_once S_VIEWS.'/dashboard.view.php';
         $this->getSallerData();
@@ -559,6 +570,8 @@ class Navigation
         $this->getBusiClient();
         $this->getSuClient();
         $this->getNotif();
+        $this->getMess();
+
         /************************ VAR START *************************/
         $errors = [];
 
@@ -939,12 +952,13 @@ class Navigation
         $this->annonceD = $mgrA->showAnnonces(null, strtolower($_SESSION['username']));
         $this->current_su_data = $d->current_su_data($_SESSION["current_user_id"]);
         $this->notif = json_decode($this->getCurrentSuData()->notif, true);
+        $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
 
         include_once S_VIEWS.'/panel.view.php';
         $this->getCurrentSuData();
         $this->getAnnonceD();
         $this->getNotif();
-
+        $this->getMess();
     }
 
     public function showForum(){

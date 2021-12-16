@@ -116,7 +116,7 @@ class Pagination extends Database
                 $qr->execute();
                 echo json_encode($qr->fetchAll(PDO::FETCH_ASSOC));
             }else{
-                $qr = parent::getDb()->prepare("SELECT shop_name FROM sallers WHERE shop_name LIKE :value");
+                $qr = parent::getDb()->prepare("SELECT shop_name FROM sallers WHERE actived = 2 AND shop_name LIKE :value");
                 $qr->bindValue('value', $value.'%', PDO::PARAM_STR_CHAR);
                 $qr->execute();
                 echo json_encode($qr->fetchAll(PDO::FETCH_ASSOC));

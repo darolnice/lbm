@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     document.querySelector('#sec4_stat').addEventListener('mouseover', function () {
         var act = document.querySelector('.progress-done')
         setTimeout(()=>{
@@ -19,6 +18,10 @@ $(document).ready(function () {
             act3.style.opacity = 1;
         }, 500);
     });
+
+    let idx = new Index();
+    (idx.getCookie('fsl') === 'xx-xs') ? idx.scrollTo(1600) : null;
+    idx.SetCookie('fsl', '', (new Date())-15)
 
     const ratio = .1;
     const option = {
@@ -47,7 +50,7 @@ $(document).ready(function () {
     });
 
     document.querySelectorAll('#ct1, #ct2, #ct3').forEach(btn =>{
-        btn.addEventListener('click', ()=>{new Index().scrollTo(3000)})
+        btn.addEventListener('click', ()=>{idx.scrollTo(3000)})
     });
 
     document.querySelector("#sec1_pre_btn_cont").addEventListener('click', ()=>{

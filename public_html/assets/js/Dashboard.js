@@ -319,10 +319,12 @@ $(document).ready(function () {
     localStorage.setItem('current_user_mail', $('#up___mail').val());
 
     $('#notif_').on('click', function () {
-        if(document.querySelector('.notifdiv__').getAttribute('style') !== ''){
-            $('.notifdiv__').show();
+        const n = $(".notifdiv__");
+        $(".notifmess").css('visibility', "hidden");
+        if(n.css("visibility") === 'hidden'){
+            n.css('visibility', "visible");
         }else {
-            document.querySelector('.notifdiv__').setAttribute('style', 'display:none!important')
+            n.css('visibility', "hidden");
         }
     });
 

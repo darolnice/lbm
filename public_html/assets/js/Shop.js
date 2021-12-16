@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    let params = new URLSearchParams(window.location.search);
+
     function createInput(in_var, in_typ, in_attr_styl, in_attr_typ, in_attr_name, in_attr_class, in_attr_value = ''){
         in_var = document.createElement(in_typ);
         in_var.setAttribute('type', in_attr_typ);
@@ -102,6 +104,11 @@ $(document).ready(function () {
             $('#home_ss_div_').hide();
             $('.srtby').css('visibility', 'visible');
         }
+    });
+
+    $('#allcmt').on('click', function () {
+        new Index().SetCookie('fsl','xx-xs');
+        open('profil?name='+params.get('name'), '_parent');
     });
 
 });

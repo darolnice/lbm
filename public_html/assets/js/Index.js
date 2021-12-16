@@ -696,11 +696,37 @@ document.addEventListener('DOMContentLoaded', function () {
         $(".alert_danger").fadeOut();
     },8000);
 
+    const n = $(".notifdiv__");
     if (document.querySelector("#notif__")){
         document.querySelector("#notif__").addEventListener("click", function () {
-            $(".notifdiv__").toggle(500);
+            $(".notifmess").css('visibility', "hidden");
+            if (n.css("visibility") === 'hidden'){
+                n.css('visibility', "visible");
+            }else {
+                n.css('visibility', "hidden");
+            }
         });
     }
+
+    if (document.querySelector("#messa__")){
+        document.querySelector("#messa__").addEventListener("click", function () {
+            n.css('visibility', "hidden");
+            const d = $(".notifmess");
+            if (d.css("visibility") === 'hidden'){
+                d.css('visibility', "visible");
+            }else {
+                d.css('visibility', "hidden");
+            }
+        });
+
+        document.querySelectorAll('.v__btn').forEach(btn =>{
+            btn.addEventListener('click', ()=>{
+                btn.style.display = 'none';
+                btn.nextElementSibling.style.display = 'block';
+            });
+        });
+    }
+
 
     /**
      *  login start

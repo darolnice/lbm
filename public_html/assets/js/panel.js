@@ -86,10 +86,17 @@ class Panel
                 d.innerHTML = '';
                 let i = 0;
                 while (i < data.length){
-                    let el = document.createElement('a');
-                    el.setAttribute('href', '?Search='+data[i][option]);
-                    el.innerHTML = data[i][option];
-                    document.querySelector('.p_serch_div').appendChild(el);
+                    let a = document.createElement('a');
+
+                    const p = document.createElement('p');
+                    if (option === 'shop_name'){
+                        a.setAttribute('href', 'shop?name='+data[i][option]);
+                    }
+
+                    a.innerHTML = data[i][option];
+
+                    p.append(a)
+                    document.querySelector('.p_serch_div').appendChild(p);
                     i++
 
                     $('.p_serch_div').fadeIn(300);
@@ -119,13 +126,32 @@ $(document).ready(function () {
         }
     });
 
-    $('#p_notif__').on('click', function () {
-        if(document.querySelector('.notifdiv__').getAttribute('style') !== ''){
-            $('.notifdiv__').show();
+
+    const n = $(".notifdiv__");
+    document.querySelector("#p_notif__").addEventListener("click", function () {
+        $(".notifmess").css('visibility', "hidden");
+        if (n.css("visibility") === 'hidden'){
+            n.css('visibility', "visible");
         }else {
-            document.querySelector('.notifdiv__').setAttribute('style', 'display:none!important')
+            n.css('visibility', "hidden");
         }
     });
+    document.querySelector("#p_messa__").addEventListener("click", function () {
+        n.css('visibility', "hidden");
+        const d = $(".notifmess");
+        if (d.css("visibility") === 'hidden'){
+            d.css('visibility', "visible");
+        }else {
+            d.css('visibility', "hidden");
+        }
+    });
+    document.querySelectorAll('.v__btn').forEach(btn =>{
+        btn.addEventListener('click', ()=>{
+            btn.style.display = 'none';
+            btn.nextElementSibling.style.display = 'block';
+        });
+    });
+
 
     document.querySelector('.admin_imag').addEventListener("click", function () {
         $('#admin_myDropdown').toggle(300);

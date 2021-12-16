@@ -154,14 +154,18 @@ body{
     cursor: pointer;
     z-index: 8888888889;
 }
-
+.notCont_mess{
+    margin-top: -34px;
+    line-height: 1.8;
+    right: 25px;
+}
 .notCont{
     position: absolute;
     /* margin-left: 802px; */
     float: right;
     right: -10px;
     margin-top: -33px;
-    background-color: blueviolet;
+    background-color: #2b56e2;
     border-radius: 50%;
     color: white;
     line-height: 1.8;
@@ -170,7 +174,6 @@ body{
     min-height: 20px;
     font-size: 11px;
 }
-
 .notifdiv__{
     /* margin-left: 55px!important; */
     margin-top: 22%;
@@ -179,6 +182,13 @@ body{
 }
 .one_n a p{
     font-weight: 500!important;
+}
+.notifmess{
+    margin-top: 22.5%;
+    margin-right: -65px;
+}
+#_message_, #_header_{
+    font-weight: 400!important;
 }
 
 .admin_imag{

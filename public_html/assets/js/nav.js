@@ -61,6 +61,7 @@ $(document).ready(function () {
         if (document.querySelector('.stat_point').getAttribute('id') === 'online'){
             $('#myDropdown').toggle(300);
         }else{
+            new Index().SetCookie('r', lk.split('/')[5]);
             window.open('login', '_parent');
         }
     });
