@@ -69,25 +69,31 @@ class Navigation
     private $shopPref;
     private $notif;
     private $mess;
+    private $h_shopPref;
+    private $specialOffer;
 
-    /**
-     * @return mixed
-     */
+
+
+
+
+
+
+    public function getSpecialOffer()
+    {
+        return $this->specialOffer;
+    }
+    public function getHShopPref()
+    {
+        return $this->h_shopPref;
+    }
     public function getMess()
     {
         return $this->mess;
     }
-
-
-    /**
-     * @return mixed
-     */
     public function getNotif()
     {
         return $this->notif;
     }
-
-
     public function getShopPref()
     {
         return $this->shopPref;
@@ -188,7 +194,6 @@ class Navigation
     {
         return $this->bestSaling;
     }
-
     public function getBusiProd()
     {
         return $this->busiProd;
@@ -197,7 +202,6 @@ class Navigation
     {
         return $this->searchProdShop;
     }
-
     public function getCtnName()
     {
         return $this->ctn_name;
@@ -321,16 +325,18 @@ class Navigation
             $this->lbmProdData = $db_->findCategorie('lbm', $f->e($_GET['Search']));
         }
 
+        $this->h_shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", 'lbm');
         $this->bestSaling = $db->getAllItemsFromTable("best_saling", $primera, 10);
         $this->bestShop = $db->getAllItemsFromTable("best_shop", $primera, 10);
+        $this->specialOffer = $db->getAllItemsFromTable("special_offer", 0, 10);
 
         include_once S_VIEWS.'/home.view.php';
         $this->getSpecialPromoData();
         $this->getLbmProdData();
-
+        $this->getSpecialOffer();
         $this->getBestSaling();
         $this->getBestShop();
-
+        $this->getHShopPref();
     }
 
     public function showProduct(){
@@ -458,30 +464,41 @@ class Navigation
 
     public function showShop(){
         session_start();
+        setcookie('ssc', serialize('add_at'), time()+60*24);
+        setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
         $d = new MgrProducts();
         $f = new Functions();
         $current_business = $f->e($_GET['name']);
-        setcookie('ssc', serialize('add_at'), time()+60*24);
 
         if($_COOKIE['spl']){
-            $this->data = (new Pagination)->showDataWithRange($current_business, (int)$_COOKIE['spl'], 0, 50);
-            $this->shopCatSort = (new MgrShop)->ShopFindByCategory($current_business, $f->e($_GET['search']));
-            $this->searchProdShop = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+            if ($_GET['Search']){
+                $this->data = (new MgrShop)->ShopFindByCategory($current_business, $f->e($_GET['Search']));
+            }
+            if ($_GET['sp']){
+                $this->data = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+            }
+            if (!isset($_GET['Search']) && !isset($_GET['sp'])){
+                $this->data = (new Pagination)->showDataWithRange($current_business, (int)$_COOKIE['spl'], 0, 50);
+            }
+
         }else{
-            $this->data = (new Pagination)->showDataWithPagination($current_business, "prod_name", 0,50);
-            $this->shopCatSort = (new MgrShop)->ShopFindByCategory($current_business, $f->e($_GET['search']));
-            $this->searchProdShop = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+            if($_GET['Search']){
+                $this->data = (new MgrShop)->ShopFindByCategory($current_business, $f->e($_GET['Search']));
+            }
+            if ($_GET['sp']){
+                $this->data = $d->ProdSearch($current_business, $f->e($_GET['sp']));
+            }
+            if (!isset($_GET['Search']) && !isset($_GET['sp'])){
+                $this->data = (new Pagination)->showDataWithPagination($current_business, "prod_name", 0,50);
+            }
         }
 
         $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['name']);
-        setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
 
         include_once S_VIEWS.'/shop.view.php';
-
         $this->getData();
-        $this->getShopCatSort();
-        $this->getSearchProdShop();
         $this->getShopPref();
+        $this->getData();
     }
 
     public function showSetting(){

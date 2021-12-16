@@ -48,26 +48,32 @@ class MgrShop extends Database
      * @return array
      */
     public function findCategorie(string $shop, string $category): array {
-        $q = $this->getDb()->prepare("SELECT * FROM $shop WHERE category = :category");
+        $q = parent::getDb()->prepare("SELECT * FROM $shop WHERE category = :category");
         $q->execute(['category'=> htmlentities($category)]);
         $data = $q->fetchAll(PDO::FETCH_ASSOC);
-        $q->closeCursor();
-
         return $data;
     }
 
     /**
      * @param string $shop
      * @param string $category
-     * @return array
+     * @return array|bool|string
      */
-    public function ShopFindByCategory(string $shop, string $category): array {
-        $q = $this->getDb()->prepare("SELECT * FROM $shop WHERE category = :category");
-        $q->execute(['category'=> htmlentities($category)]);
-        $data = $q->fetchAll(PDO::FETCH_ASSOC);
-        $q->closeCursor();
+    public function ShopFindByCategory(string $shop, string $category){
+        try {
+            $cat = strip_tags($category);
+            $shp = htmlentities($shop);
 
-        return $data;
+            $q = parent::getDb()->prepare("SELECT * FROM $shp WHERE category = :category");
+            $q->bindParam(":category", $cat, PDO::PARAM_STR_CHAR);
+            if ($q->execute()){
+                return $q->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
     }
 
     /**
@@ -80,8 +86,6 @@ class MgrShop extends Database
         $q = $this->getDb()->prepare("SELECT * FROM $shop WHERE category= :category AND sub_categories= :sub_categories");
         $q->execute(['category'=> htmlentities($category), 'sub_categories'=> htmlentities($subCategories)]);
         $data = $q->fetchAll(PDO::FETCH_ASSOC);
-        $q->closeCursor();
-
         return $data;
     }
 
@@ -92,8 +96,6 @@ class MgrShop extends Database
         $q = $this->getDb()->prepare("SELECT * FROM categories");
         $q->execute();
         $data = $q->fetchAll(PDO::FETCH_OBJ);
-        $q->closeCursor();
-
         return $data;
     }
 

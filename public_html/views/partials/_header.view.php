@@ -4,13 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="E-commerce" content="<?= "LBM GROUPE ALL RIGHT RESERVED" ?>">
+    <meta name="MARKET PLACE" content="<?= "LBM GROUPE ALL RIGHT RESERVED" ?>">
     <meta name="author">
 
     <title>
-        <?php
-            echo isset($title) ? SITE_NAME.' - '.$title  : SITE_NAME.'- The best!';
-        ?>
+        <?php echo isset($title) ? SITE_NAME.' - '.$title : SITE_NAME.'- Just for you!';?>
     </title>
 
     <!-- CSS -->

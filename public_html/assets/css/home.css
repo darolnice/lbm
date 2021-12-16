@@ -287,6 +287,30 @@ body{
     user-select: none!important;
 }
 
+.sp_of_li{
+    border: 1px solid rgba(219, 217, 216, 0.74) !important;
+    height: 290px;
+    display: table;
+    box-sizing: border-box;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+}
+.sp_of_li h6, .sp_of_li a{
+    width: 100%!important;
+    text-align: center!important;
+    margin-top: 1px!important;
+    margin-bottom: 5px!important;
+}
+.sp_of_li h6 span{color: #b3051a !important;}
+
+
+.sp_of_li img{
+    width: 100%;
+    height: 72%;
+    border-radius: 5px 5px 0 0;
+}
+
+
 .ul1{
     /*border: 1px solid coral;*/
     width: 100%;

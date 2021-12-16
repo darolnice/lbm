@@ -102,14 +102,22 @@ $title = "Home"
                     <P class="bshp_art_t1_vm">VIEW MORE</P>
                 </ul>
 
-                <a class="bst___art_t1">SPECIAL PROMO</a>
+                <a class="bst___art_t1">SPECIAL OFFER</a>
                 <ul class="ul1">
-                    <?php for ($i=0; $i<5; $i++): ?>
-                        <li>
-                            <a href="">Samsung glx n4</a>
+                    <?php for ($i=0; $i<count($this->getSpecialOffer()); $i++): ?>
+                        <li class="sp_of_li" style="width: 100%!important;">
+                            <img src="<?= S_ASSETS ?>images/upload/<?= $this->getSpecialOffer()[$i]['prod_img']?>" alt="">
+                            <h6>
+                                <a class="text-dark" href="<?= $this->getSpecialOffer()[$i]['link']?>"><?= $this->getSpecialOffer()[$i]['prod_name']?></a>
+                            </h6>
+                            <h6 class="text-primary"><?= $this->getSpecialOffer()[$i]['price']?>
+                                <span><?= $this->getSpecialOffer()[$i]['reduce']?></span>
+                            </h6>
+                            <h6 class="small" style="font-size: 11.5px; padding: 0 10px 0 10px; line-height: 1.3">
+                                <?= $this->getSpecialOffer()[$i]['message']?>
+                            </h6>
                         </li>
                     <?php endfor; ?>
-                    <P>VIEW MORE</P>
                 </ul>
             </div>
         </article>
@@ -157,9 +165,9 @@ $title = "Home"
 
                         <div class="lbm_hme_np">
                             <h4 class="lbm_hme_nm"><?= $this->getLbmProdData()[$l]['prod_name']?></h4>
-                            <p class="lbm_hme_prc"><?= '$'.$this->getLbmProdData()[$l]['price']?>
+                            <p class="lbm_hme_prc"><?= $this->getLbmProdData()[$l]['price'].$this->getHShopPref()[0]['currency']?>
                                 <strong>
-                                    <del><?= '$'.$this->getLbmProdData()[$l]['promo']?></del>
+                                    <del><?= $this->getLbmProdData()[$l]['promo'].$this->getHShopPref()[0]['currency']?></del>
                                 </strong>
                             </p>
 
