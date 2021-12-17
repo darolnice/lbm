@@ -98,8 +98,10 @@ $title = $_GET['name']." Shop";?>
                         <div class="lbm_hme_cont vu">
                             <div class="lbm_hme_prd_img_div">
                                 <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getData()[$z]['img1']?>" alt="product">
-                                <div class="lbm_hme_add">
-                                    <a href="<?= 'product?id='.$this->getData()[$z]['id']."&sub=".$this->getData()[$z]['sub_category']."&shop=".$_GET['name']?>">View Product</a>
+                                <div class="shop_v_p">
+                                    <p class="shop_v_p_lk">
+                                        <a href="<?= 'product?id='.$this->getData()[$z]['id']."&sub=".$this->getData()[$z]['sub_category']."&shop=".$_GET['name']?>">View Product</a>
+                                    </p>
                                 </div>
                             </div>
 

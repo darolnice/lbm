@@ -159,7 +159,9 @@ $title = "Home"
                         <div class="lbm_hme_prd_img_div">
                             <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getLbmProdData()[$l]['img1']?>" alt="product">
                             <div class="lbm_hme_add vu">
-                                <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".$this->getLbmProdData()[$l]['shop_name']?>">View Product</a>
+                                <p class="home_vp">
+                                    <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".$this->getLbmProdData()[$l]['shop_name']?>">View Product</a>
+                                </p>
                             </div>
                         </div>
 

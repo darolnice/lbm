@@ -92,12 +92,22 @@ class Functions extends Navigation
      * @param string $type
      */
     public static function set_flash_tab($messages = [] , $type = 'info'){
-        echo '<div class="lbm_a_success">
-        <button class="close" aria-hidden="true">&times;</button>';
-            foreach ($messages as $message){
-                echo $message.'<br/>';
-            }
-        echo '</div>';
+        if ($type === 'danger'){
+            echo '<div id="lbm_a_danger">
+                <button class="close" id="lbm_a_btn" aria-hidden="true">&times;</button>';
+                foreach ($messages as $message){
+                    echo $message.'<br/>';
+                }
+            echo '</div>';
+
+        }else{
+            echo '<div id="lbm_a_success">
+                <button class="close " id="lbm_a_btn" aria-hidden="true">&times;</button>';
+                foreach ($messages as $message){
+                    echo $message.'<br/>';
+                }
+            echo '</div>';
+        }
     }
 
 

@@ -175,4 +175,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    const __p = document.querySelectorAll('.lt span');
+    __p.forEach(item =>{
+        item.addEventListener('click', (e)=>{
+            $(".text, .p_s_p, .p_s_c").css('border', 'none');
+            item.style.borderBottom = '2px solid coral';
+            $(".pp_desc, .pp_p, .pp_c").css('display', 'none');
+            const clss = item.getAttribute("data-v");
+            if(clss === 'pp_c'){
+                $('.'+clss).css('display', 'flex');
+            }else {
+                $('.'+clss).fadeIn();
+            }
+        });
+    });
+
 });

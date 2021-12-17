@@ -28,18 +28,34 @@ class MgrProducts extends Database
     /**
      * @param $currentShop
      * @param $prod_id
-     * @return mixed
+     * @return bool|mixed|string
      */
     public function showProdDetails($currentShop, $prod_id){
         try {
-            $q = parent::getDb()->prepare("SELECT * FROM $currentShop WHERE id = :id");
-            $q->execute(["id" => $prod_id]);
-            $data = $q->fetch(PDO::FETCH_OBJ);
-            $q->closeCursor();
-            return  $data;
+            $_shop = strip_tags($currentShop);
+            $_id = strip_tags($prod_id);
+
+            $q = parent::getDb()->prepare("SELECT * FROM $_shop WHERE id = :id");
+            $q->bindParam('id', $_id, PDO::PARAM_STR_CHAR);
+
+            if ($q->execute()){
+                $data = $q->fetch(PDO::FETCH_OBJ);
+                $q->closeCursor();
+                return $data;
+
+            }else{
+                return false;
+            }
         }catch(PDOException $e){
-            return $e->getMessage();
+             if ($e->getCode() === '42S02'){
+                 $_SESSION['info'] = "SORRY SHOP NOT FOUND, SEARCH HERE !!!";
+                 Functions::redir('shoplist');
+
+             }else{
+                 return $e->getMessage();
+             }
         }
+        return false;
     }
 
     /**
@@ -203,6 +219,7 @@ class MgrProducts extends Database
                                                                     proprities VARCHAR(1000)NOT NULL,
                                                                     quantity INT(255)NOT NULL,
                                                                     description TEXT(255)NOT NULL,
+                                                                    comments JSON NOT NULL,
                                                                     img1 VARCHAR(255)NOT NULL,
                                                                     img2 VARCHAR(255)NOT NULL,
                                                                     img3 VARCHAR(255)NOT NULL,

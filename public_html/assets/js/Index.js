@@ -692,9 +692,21 @@ class Index {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const _btns = document.querySelectorAll('#lbm_a_btn');
+    _btns.forEach(btn =>{
+        btn.addEventListener('click', ()=>{
+            $("#lbm_danger").fadeOut();
+            $("#lbm_a_danger").fadeOut();
+        });
+    });
+
+
     setInterval(function () {
-        $(".alert_danger").fadeOut();
-    },8000);
+        $("#alert_danger").fadeOut();
+    },5000);
+    setInterval(function () {
+        $("#lbm_a_danger").fadeOut();
+    },5000);
 
     const n = $(".notifdiv__");
     if (document.querySelector("#notif__")){

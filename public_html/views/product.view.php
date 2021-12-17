@@ -11,24 +11,24 @@ $title = "Product"
     <section class="prd_im1">
         <?php if (isset($_SESSION['username'])):?>
             <div class="blog_post___">
-            <button class="close">&times;</button>
-            <fieldset class="">
-                <legend class="small">Personnals informations</legend>
-                <input id="post_pd_name" type="text" name="name" placeholder="Enter your name" required value="<?= $_SESSION['username']?>" disabled>
-                <input id="post_pd_mail" type="email" name="email" placeholder="Enter your e-mail" required value="<?= $_SESSION['email']?>" disabled>
-            </fieldset>
+                <button class="close">&times;</button>
+                <fieldset class="">
+                    <legend class="small">Personnals informations</legend>
+                    <input id="post_pd_name" type="text" name="name" placeholder="Enter your name" required value="<?= $_SESSION['username']?>" disabled>
+                    <input id="post_pd_mail" type="email" name="email" placeholder="Enter your e-mail" required value="<?= $_SESSION['email']?>" disabled>
+                </fieldset>
 
-            <fieldset class="">
-                <legend class="small">Post</legend>
-                <textarea id="blogPostcmt" name="post" rows="6" required="required"></textarea>
-                <input id="add_blog_post" class="btn btn-primary text-center" type="submit" name="sbt" value="POST">
-            </fieldset>
-        </div>
+                <fieldset class="">
+                    <legend class="small">Post</legend>
+                    <textarea id="blogPostcmt" name="post" rows="6" required="required"></textarea>
+                    <input id="add_blog_post" class="btn btn-primary text-center" type="submit" name="sbt" value="POST">
+                </fieldset>
+            </div>
         <?php endif;?>
 
         <div class="arbo">
             <a id="link__" href="<?= 'shop?name='.$_GET['shop']?>"><?= $_GET['shop']?></a>
-            <b style="margin-top: -4px;margin-left: 4px; color: black">&raquo;</b>
+            <b style="margin-top:-4px; margin-left:4px; color:black">&raquo;</b>
             <a id="arbo_pn"> Product name</a>
         </div>
 
@@ -90,7 +90,7 @@ $title = "Product"
             </p>
            <p class="p_qte"><?= $this->getShopProdData()->quantity;?></p>
            <p class="p_typ"><?= $this->getShopProdData()->quality;?></p>
-           <p class="p_carc"><?= $this->getShopProdData()->proprities;?></p>
+           <p class="p_carc"><?php ($this->getShopProdData()->checked == 1) ? print "Yes" : print "No";?></p>
 
            <form method="post">
                <input class="prod_data" type="hidden" name="prod_data">
@@ -135,10 +135,50 @@ $title = "Product"
     </section>
 
     <section class="container lg_details">
-        <p class="lt">
-           <b class="text text-dark">Description</b><br><br>
-           <?= $this->getShopProdData()->description;?>
-        </p><br>
+        <div class="lt">
+            <div class="pt_div">
+                <span class="text"  data-v="pp_desc">Description</span>
+                <span class="p_s_p" data-v="pp_p">Proprities</span>
+                <span class="p_s_c" data-v="pp_c">Comments</span><br><br>
+            </div>
+
+            <div class="dpc">
+                <p class="pp_desc">
+                    <?= $this->getShopProdData()->description;?>
+                </p>
+
+                <p class="pp_p">
+                    <?= $this->getShopProdData()->proprities;?>
+                </p>
+
+                <div class="pp_c">
+                    <?php if($this->getShopPref()[0]['comments'] !== null): ?>
+                        <?php for ($t=0; $t<count($this->getShopPref()); $t++):?>
+                            <?php $cmm_ = array_reverse(json_decode($this->getShopPref()[$t]['comments'], true))?>
+                            <?php foreach ($cmm_ as $cm):?>
+                                <div id="ctn">
+                                    <img id="res1_img" src="<?= S_ASSETS?>images/img/lite.jpg" alt="person">
+
+                                    <div class="prof_nm">
+                                        <p id="res1_name"><?= $cm['name']?></p>
+                                        <p id="res1_mail"><?= $cm['email']?></p>
+                                        <p id="res1_rate">Rate
+                                            <?php for ($u=0; $u<$cm['rate']; $u++):?>
+                                                <b class="strt ml-1" style="color: #ec6206">&starf;</b>
+                                            <?php endfor;?>
+                                        </p>
+                                    </div>
+
+                                    <div class="prof_cmt_rate">
+                                        <p id="res1_cmnt"><?= $cm['comment']?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
+                        <?php endfor;?>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div><br>
 
         <div class="same_sub_c">
             <?php if ($_GET['sub'] !== ''):?>
@@ -201,7 +241,6 @@ $title = "Product"
             <?php endfor ?>
             <?php endif;?>
         </div>
-
     </section>
 
     <div class="chat">

@@ -715,22 +715,32 @@ body{
     background: rgba(47, 46, 46, 0.52);
     padding-top: 3px;
     position: absolute;
+    /* position: relative; */
     margin-top: 17.7%;
     visibility: hidden;
     cursor: pointer;
     transition: .2s linear ease-in-out!important;
 }
-.lbm_hme_add a{
+.home_vp{
+    position: relative;
+    height: 100%;
+}
+.home_vp a{
+    position: absolute;
+    width: 100% !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 6px;
     text-decoration: none;
     color: white!important;
-    /*margin-top: -10px;*/
-    justify-content: center;
     border-radius: 0;
     border: none;
     font-size: 11px;
     height: 100%;
     background: transparent;
 }
+
 
 .vu:hover .lbm_hme_add{
     visibility: visible!important;

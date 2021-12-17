@@ -34,13 +34,9 @@ class Navigation
     private $sub_admin_data;
     private $specialPromoData;
     private $lbmProdData;
-    private $promoFindCat;
-    private $prodArray;
     private array $annonceData = [];
-    private $shopCatSort;
     private $current_su_data;
     private $ctn_name, $ctn_subject, $ctn_mail, $ctn_msg;
-    private $searchProdShop;
     private $annonceD;
     private $busiProd;
     private $bestSaling;
@@ -198,10 +194,6 @@ class Navigation
     {
         return $this->busiProd;
     }
-    public function getSearchProdShop()
-    {
-        return $this->searchProdShop;
-    }
     public function getCtnName()
     {
         return $this->ctn_name;
@@ -222,21 +214,9 @@ class Navigation
     {
         return $this->current_su_data;
     }
-    public function getShopCatSort()
-    {
-        return $this->shopCatSort;
-    }
     public function getAnnonceData()
     {
         return $this->annonceData;
-    }
-    public function getProdArray()
-    {
-        return $this->prodArray;
-    }
-    public function getPromoFindCat()
-    {
-        return $this->promoFindCat;
     }
 
     public function getLbmProdData()
@@ -343,10 +323,9 @@ class Navigation
         session_start();
         $d = new MgrProducts();
         $this->data = $d->showProdBycategory($_GET['shop'], $_GET['sub']);
-        $f = new Functions();
 
         if(empty($_GET['id']) && empty($_GET['name'])){
-            $f->redir('./shop?name='.$_GET['shop']);
+            Functions::redir('./shop?name='.$_GET['shop']);
         }else{
             $this->shopProdData = $d->showProdDetails($_GET['shop'], $_GET['id']);
             $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['shop']);
@@ -492,8 +471,12 @@ class Navigation
                 $this->data = (new Pagination)->showDataWithPagination($current_business, "prod_name", 0,50);
             }
         }
-
         $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['name']);
+
+        if ($_SESSION['info']){
+            Functions::set_flash_tab([$_SESSION['info']], 'danger');
+            unset($_SESSION['info']);
+        }
 
         include_once S_VIEWS.'/shop.view.php';
         $this->getData();
@@ -928,12 +911,12 @@ class Navigation
                         $error__[] = 'Image is too large, max size 1.5mo';
                     }
                 }
-
-                $imdata = [
-                    'img1_name' => $_FILES['ann_img_1']['name'], 'img1_tmp' => $_FILES['ann_img_1']['tmp_name'],
-                    'img2_name' => $_FILES['ann_img_2']['name'], 'img2_tmp' => $_FILES['ann_img_2']['tmp_name']
-                ];
             }
+
+            $imdata = [
+                'img1_name' => $_FILES['ann_img_1']['name'], 'img1_tmp' => $_FILES['ann_img_1']['tmp_name'],
+                'img2_name' => $_FILES['ann_img_2']['name'], 'img2_tmp' => $_FILES['ann_img_2']['tmp_name']
+            ];
 
             if (count($error__) === 0){
                 $data = [
@@ -1127,9 +1110,13 @@ class Navigation
         session_start();
         $this->shoplist = (new MgrUser)->getshoplist();
 
+        if($_SESSION['info']){
+            Functions::set_flash_tab([$_SESSION['info']], 'danger');
+            unset($_SESSION['info']);
+        }
+
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();
-
     }
 
 }

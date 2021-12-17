@@ -600,7 +600,7 @@ article{
     border-bottom: none;
     position: relative;
 }
-.vu:hover .lbm_hme_add{
+.vu:hover .shop_v_p{
     visibility: visible!important;
 }
 .vu:hover .hme_add{
@@ -620,29 +620,38 @@ article{
     width: 100%;
     height: 100%;
 }
-.lbm_hme_add{
+.shop_v_p{
     width: 100%;
     display: block;
     height: 33px!important;
     background: rgba(47, 46, 46, 0.52);
     position: absolute;
-    padding-top: 3px;
+    align-items: center!important;
+    vertical-align: middle!important;
+    justify-content: center!important;
     margin-top: 170px;
     visibility: hidden;
     cursor: pointer;
     transition: .2s linear ease-in-out!important;
     z-index: 99999;
 }
-.lbm_hme_add a{
+.shop_v_p_lk{
+    height: 100%;
+    position: relative;
+}
+
+.shop_v_p a{
     text-decoration: none;
     color: white!important;
-    /*margin-top: -10px;*/
-    justify-content: center;
+    position: absolute;
+    width: 100% !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 8px;
     border-radius: 0;
     border: none;
     font-size: 11px;
-    height: 100%;
-    background: transparent;
 }
 .lbm_hme_np{
     /*border: 1px solid #ba0964;*/
