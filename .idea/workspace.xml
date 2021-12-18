@@ -11,22 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/Log.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Log.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/Functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cron/CronJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/cron/CronJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/annonces.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/annonces.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/register_2.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/register_2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/product.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/product.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/register_2.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/register_2.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/shop.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/shop.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/home.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/shoplist.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/shoplist.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +436,7 @@
       <workItem from="1639454490405" duration="38365000" />
       <workItem from="1639720045684" duration="20450000" />
       <workItem from="1639731462260" duration="214000" />
-      <workItem from="1639731756477" duration="34177000" />
+      <workItem from="1639731756477" duration="42933000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -588,10 +579,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1638372353111" />
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1639843458069">
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1639854856839">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1639843458069" />
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1639854856839" />
     <state x="485" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638811807829">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

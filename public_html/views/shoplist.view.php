@@ -50,11 +50,11 @@ $title = "Shop list";
                     <div class="allcustlist">
                         <ul>
                             <?php for($li=0; $li<count($this->getShoplist()); $li++): ?>
-                                <li data-spn="<?= $this->getShoplist()[$li]['shop_name']?>"
+                                <li data-spn="<?= str_replace("_",' ', $this->getShoplist()[$li]['shop_name'])?>"
                                     style="cursor: pointer"
                                     class="list-group-item shp__list">
                                     <span>
-                                        <b>Name : </b><a><?= $this->getShoplist()[$li]['shop_name']?></a>
+                                        <b>Name : </b><a><?= str_replace("_",' ', $this->getShoplist()[$li]['shop_name'])?></a>
                                         <b>Country : </b><a><?= $this->getShoplist()[$li]['country']?></a>
                                         <b>Activity : </b><a><?= $this->getShoplist()[$li]['activity']?></a>
                                     </span>

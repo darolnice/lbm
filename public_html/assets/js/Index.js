@@ -940,20 +940,20 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        //
-        // if(planBtn.classList.contains("d-none")){
-        //     function plcMgr(){
-        //         if(index.getCookie('thkp')){
-        //             $('#s_pw_c_2').hide();
-        //             planBtn.classList.remove('d-none');
-        //
-        //         }else{
-        //              console.log('actif')
-        //             requestAnimationFrame(plcMgr);
-        //         }
-        //     }
-        // }else{cancelAnimationFrame(plcMgr)}
-        // requestAnimationFrame(plcMgr)
+
+        if(planBtn.classList.contains("d-none")){
+            function plcMgr(){
+                if(index.getCookie('thkp')){
+                    $('#s_pw_c_2').hide();
+                    planBtn.classList.remove('d-none');
+
+                }else{
+                     console.log('actif')
+                    requestAnimationFrame(plcMgr);
+                }
+            }
+        }else{cancelAnimationFrame(plcMgr)}
+        requestAnimationFrame(plcMgr)
 
         //
         custbtn.forEach(element => {

@@ -532,9 +532,13 @@ class Functions extends Navigation
          }
      }
 
+    public static function SNFormatBack(string  $shopname): string {
+        return str_replace(" ",'_', $shopname);
+    }
 
-
-
+    public static function SNFormatFront(string  $shopname): string {
+        return str_replace("_",' ', $shopname);
+    }
 
 
 

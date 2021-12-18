@@ -74,32 +74,46 @@ $title = "Home"
                 <ul class="ul1">
                     <?php for ($g=0; $g<count($this->getBestSaling()); $g++): ?>
                         <li>
-                            <a href="<?= 'product?id='.$this->getBestSaling()[$g]['id']."&shop=".$this->getBestSaling()[$g]['shop_name']?>"><?= $this->getBestSaling()[$g]['name']?></a>
-                            <div>
-                                <b style="margin-left: 50px; margin-right: 10px;"><?= $this->getBestSaling()[$g]['shop_name']?></b>
-                                <?php for ($p=0; $p<$this->getBestSaling()[$g]['rating']; $p++): ?>
-                                    <h6 class="strt" style="color: #ec6206">&starf;</h6>
-                                <?php endfor; ?>
-                            </div>
+                            <span>
+                                <p>
+                                     <a
+                                        href="<?= 'product?id='.$this->getBestSaling()[$g]['id']."&shop=".Functions::SNFormatFront($this->getBestSaling()[$g]['shop_name'])?>"><?= $this->getBestSaling()[$g]['name']?>
+                                     </a>
+                                </p>
+
+                                <b><?=$this->getBestShop()[$g]['name']?></b>
+
+                                <span class="strt">
+                                    <?php for ($p=0; $p<$this->getBestSaling()[$g]['rating']; $p++): ?>
+                                        <h6 style="color: #ec6206">&starf;</h6>
+                                    <?php endfor; ?>
+                                </span>
+                            </span>
                         </li>
                     <?php endfor; ?>
-                    <P id="_bslg_art_t1">VIEW MORE</P>
+                    <buttun id="_bslg_art_t1">VIEW MORE</buttun>
                 </ul>
 
                 <a class="bshp_art_t1">BEST SHOP</a>
                 <ul class="ul1">
                     <?php for ($b=0; $b<count($this->getBestShop()); $b++): ?>
                         <li>
-                            <a href="<?= 'shop?name='.$this->getBestShop()[$b]['name']?>"><?= $this->getBestShop()[$b]['name']?></a>
-                            <div>
-                                <b style="margin-left: 20px; margin-right: 30px;"><?=$this->getBestShop()[$b]['sale']?></b>
-                                <?php for ($b_=0; $b_<$this->getBestShop()[$b]['rating']; $b_++): ?>
-                                    <h6 class="strt" style="color: #ec6206">&starf;</h6>
-                                <?php endfor; ?>
-                            </div>
+                            <span>
+                                <p>
+                                    <a href="<?= 'shop?name='.Functions::SNFormatFront($this->getBestSaling()[$b]['name'])?>"><?= Functions::SNFormatFront($this->getBestSaling()[$b]['name'])?></a>
+                                </p>
+
+                                <b><?=$this->getBestShop()[$b]['sale']?></b>
+
+                                <span class="strt">
+                                    <?php for ($b_=0; $b_<$this->getBestShop()[$b]['rating']; $b_++): ?>
+                                        <h6 style="color: #ec6206">&starf;</h6>
+                                    <?php endfor; ?>
+                                </span>
+                            </span>
                         </li>
                     <?php endfor; ?>
-                    <P class="bshp_art_t1_vm">VIEW MORE</P>
+                    <buttun class="bshp_art_t1_vm">VIEW MORE</buttun>
                 </ul>
 
                 <a class="bst___art_t1">SPECIAL OFFER</a>

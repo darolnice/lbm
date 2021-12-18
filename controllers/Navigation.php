@@ -321,13 +321,14 @@ class Navigation
     public function showProduct(){
         session_start();
         $d = new MgrProducts();
-        $this->data = $d->showProdBycategory($_GET['shop'], $_GET['sub']);
+        $shop = Functions::SNFormatBack($_GET['shop']);
+        $this->data = $d->showProdBycategory($shop, $_GET['sub']);
 
         if(empty($_GET['id']) && empty($_GET['name'])){
-            Functions::redir('./shop?name='.$_GET['shop']);
+            Functions::redir('./shop?name='.$shop);
         }else{
-            $this->shopProdData = $d->showProdDetails($_GET['shop'], $_GET['id']);
-            $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['shop']);
+            $this->shopProdData = $d->showProdDetails($shop, $_GET['id']);
+            $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $shop);
 
             include_once S_VIEWS.'/product.view.php';
             $this->getShopProdData();
@@ -446,7 +447,7 @@ class Navigation
         setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
         $d = new MgrProducts();
         $f = new Functions();
-        $current_business = $f->e($_GET['name']);
+        $current_business = str_replace(" ",'_', $f->e($_GET['name']));
 
         if($_COOKIE['spl']){
             if ($_GET['Search']){
@@ -470,7 +471,7 @@ class Navigation
                 $this->data = (new Pagination)->showDataWithPagination($current_business, "prod_name", 0,50);
             }
         }
-        $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $_GET['name']);
+        $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $current_business);
 
         if ($_SESSION['info']){
             Functions::set_flash_tab([$_SESSION['info']], 'danger');
@@ -1116,6 +1117,10 @@ class Navigation
 
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();
+
+//        echo '<pre>';
+//            var_dump();
+//        echo '</pre>';
     }
 
 }
