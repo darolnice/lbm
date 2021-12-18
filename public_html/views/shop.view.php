@@ -154,10 +154,12 @@ $title = $_GET['name']." Shop";?>
 
                 <div class="avis">
                     <a>COMMENT'S</a>
-                    <?php for ($p=0; $p<4; $p++):?>
-                        <img src="<?= S_ASSETS?>images/img/lite.jpg" alt="lite">
-                        <h6>Darol</h6>
-                        <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, porro.</h5>
+                    <?php for ($p=0; $p<count(json_decode($this->getShopPref()[0]['comments'], true)); $p++):?>
+                        <div class="shp_cmt_div">
+                            <img src="<?= S_ASSETS?>images/img/lite.jpg" alt="lite">
+                            <h6><?= json_decode($this->getShopPref()[0]['comments'], true)[$p]['name']?></h6>
+                            <h5><?= json_decode($this->getShopPref()[0]['comments'], true)[$p]['comment']?></h5>
+                        </div>
                     <?php endfor;?>
                     <button class="small" id="allcmt">View all comment's</button>
                 </div>
@@ -167,15 +169,13 @@ $title = $_GET['name']." Shop";?>
                     <ul class="ul1">
                         <?php for ($i=0; $i<5; $i++): ?>
                             <li>
-                                <a href="">Samsung glx n4</a>
-                            </li>
-                        <?php endfor; ?>
-                        <P>VIEW MORE</P>
-                    </ul>
-                    <ul class="ul2">
-                        <?php for ($i=0; $i<5; $i++): ?>
-                            <li>
-                                <a href="">Samsung glx n4</a>
+                                <span>
+                                    <a href="">Samsung galaxy note 10</a>
+                                    <a>Sale (<?= 152?>)</a>
+                                    <?php for ($r=0; $r<4; $r++): ?>
+                                        <a style="color: #ec6206; text-decoration:none; margin-right: 2px">&starf;</a>
+                                    <?php endfor ?>
+                                </span>
                             </li>
                         <?php endfor; ?>
                     </ul>
@@ -184,17 +184,17 @@ $title = $_GET['name']." Shop";?>
                     <ul class="ul1">
                         <?php for ($i=0; $i<5; $i++): ?>
                             <li>
-                                <a href="">Samsung glx n4</a>
+                                <span>
+                                    <a href="">Iphone 13 pro max</a>
+                                    <a>Reserve (<?= 12?>)</a>
+                                    <a>Price <?= '7500 USD'?></a>
+                                </span>
                             </li>
                         <?php endfor; ?>
-                        <P>VIEW MORE</P>
-                    </ul>
-                    <ul class="ul2">
-                        <?php for ($i=0; $i<5; $i++): ?>
-                            <li>
-                                <a href="">Samsung glx n4</a>
-                            </li>
-                        <?php endfor; ?>
+                        <button class="btn btn-primary btn-sm w-50 text-sm-center"
+                                style="margin-left: -40px; font-size: 10px;">
+                            RESERVE NOW
+                        </button>
                     </ul>
                 </div>
             </article>

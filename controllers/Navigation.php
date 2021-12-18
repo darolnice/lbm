@@ -333,7 +333,6 @@ class Navigation
             $this->getShopProdData();
             $this->getShopPref();
         }
-
     }
 
     public function showCheckcart(){

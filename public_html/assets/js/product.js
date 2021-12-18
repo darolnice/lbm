@@ -166,14 +166,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.querySelector('#btn_s_m').addEventListener('click', (e)=>{
-        let ta = document.querySelector('#chatbtn_s_m_name_f');
-        let slr = document.querySelector('#slr');
-        if (ta.value !== ''){
-            e.preventDefault();
-            new Index().jxPostData("jxchat", this, ta.value, slr.value, 'PPC', 'http://localhost/projets/lebolma/');
-        }
-    });
+    // document.querySelector('#btn_s_m').addEventListener('click', (e)=>{
+    //     let ta = document.querySelector('#chatbtn_s_m_name_f');
+    //     let slr = document.querySelector('#slr');
+    //     if (ta.value !== ''){
+    //         e.preventDefault();
+    //         new Index().jxPostData("jxchat", this, ta.value, slr.value, 'PPC', 'http://localhost/projets/lebolma/');
+    //     }
+    // });
 
     const __p = document.querySelectorAll('.lt span');
     __p.forEach(item =>{

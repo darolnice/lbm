@@ -911,7 +911,18 @@ document.addEventListener('DOMContentLoaded', function () {
         index.openLink('s_pw_c_2', 'plans', null);
 
         //
-        $('#s_usrn_2').on('change', function () {
+        const frm = $("#s_usrn_2");
+        frm.on('input', function () {
+            const regExp = /[^a-z A-Z]/g;
+            if (regExp.test(frm.val())){
+                shopname = 'not allow';
+                $('#s_usrn_2').css('border-color', 'red');
+                index.lbmAlert('Character not allow', 'danger');
+            }
+        });
+
+        //
+        frm.on('change', function () {
             $.ajax({
                 type:'POST',
                 url:'ckReadyUse',
@@ -920,6 +931,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response["message"] !== 'free'){
                         shopname = 'not free';
                         $('#s_usrn_2').css('border-color', 'red');
+                        index.lbmAlert('Shop name all ready in use', 'danger');
                     }else {
                         shopname = 'free';
                         $('#s_usrn_2').css('border-color', 'green');
@@ -929,19 +941,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         //
-        if(planBtn.classList.contains("d-none")){
-            function plcMgr(){
-                if(index.getCookie('thkp')){
-                    $('#s_pw_c_2').hide();
-                    planBtn.classList.remove('d-none');
-
-                }else{
-                     console.log('actif')
-                    requestAnimationFrame(plcMgr);
-                }
-            }
-        }else{cancelAnimationFrame(plcMgr)}
-        requestAnimationFrame(plcMgr)
+        // if(planBtn.classList.contains("d-none")){
+        //     function plcMgr(){
+        //         if(index.getCookie('thkp')){
+        //             $('#s_pw_c_2').hide();
+        //             planBtn.classList.remove('d-none');
+        //
+        //         }else{
+        //              console.log('actif')
+        //             requestAnimationFrame(plcMgr);
+        //         }
+        //     }
+        // }else{cancelAnimationFrame(plcMgr)}
+        // requestAnimationFrame(plcMgr)
 
         //
         custbtn.forEach(element => {
@@ -1008,8 +1020,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             index.lbmAlert('Please complete all forms', "danger");
                             return 
                         }
+
+                        let nv = "";
+                        let reg2 = / /g
+                        nv = frm.val().replace(' ', '_');
+                        do {
+                            nv = nv.replace(' ', '_');
+                        }while (reg2.test(nv))
                     
-                        data.Shopname = inputs['shop_name'].value;
+                        data.Shopname = nv;
                         data.City = inputs['city'].value;
                         data.Activity = inputs['activity'].value
                         data.Description = inputs['description'].value;
@@ -1025,9 +1044,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }else{
                     index.lbmAlert('Please Enter available Shop name', 'danger');
                 }
-                
             }
-            
         });
 
     }

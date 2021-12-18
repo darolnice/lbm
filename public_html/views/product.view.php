@@ -243,21 +243,73 @@ $title = "Product"
         </div>
     </section>
 
-    <div class="chat">
-        <button class="close chat_close">&times;</button>
-        <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
-        <a>En ligne</a>
-        <div class="exchange">
-            <?php for($m=0; $m<1; $m++): ?>
-                <p class="from_me">wouerrr</p>
-            <?php endfor;?>
-        </div>
-        <form class="form-group" method="post">
-            <input id="slr" name="addby" type="hidden" value="<?= $this->getShopProdData()->add_by?>">
-            <textarea id="chatbtn_s_m_name_f" name="chat_name" maxlength="200" placeholder="Your Message..." required></textarea>
-            <button id="btn_s_m" type="submit">Send</button>
-        </form>
-    </div>
+<!--    <section style="background-color: #eee;">-->
+<!--        <div class="container py-5">-->
+<!---->
+<!--            <div class="row d-flex justify-content-center">-->
+<!--                <div class="col-md-8 col-lg-6 col-xl-4">-->
+<!---->
+<!--                    <div class="card" id="chat1" style="border-radius: 15px;">-->
+<!--                        <div-->
+<!--                                class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"-->
+<!--                                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">-->
+<!--                            <i class="fas fa-angle-left"></i>-->
+<!--                            <p class="mb-0 fw-bold">Live chat</p>-->
+<!--                            <i class="fas fa-times"></i>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!---->
+<!--                            <div class="d-flex flex-row justify-content-start mb-4">-->
+<!--                                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava1-bg.png" alt="avatar 1"-->
+<!--                                     style="width: 45px; height: 100%;">-->
+<!--                                <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">-->
+<!--                                    <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video below.</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="d-flex flex-row justify-content-end mb-4">-->
+<!--                                <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">-->
+<!--                                    <p class="small mb-0">Thank you, I really like your product.</p>-->
+<!--                                </div>-->
+<!--                                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava2-bg.png" alt="avatar 1"-->
+<!--                                     style="width: 45px; height: 100%;">-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="d-flex flex-row justify-content-start mb-4">-->
+<!--                                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava1-bg.png" alt="avatar 1"-->
+<!--                                     style="width: 45px; height: 100%;">-->
+<!--                                <div class="ms-3" style="border-radius: 15px;">-->
+<!--                                    <div class="bg-image">-->
+<!--                                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/screenshot1.png"-->
+<!--                                             style="border-radius: 15px;" alt="video">-->
+<!--                                        <a href="#!">-->
+<!--                                            <div class="mask"></div>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="d-flex flex-row justify-content-start mb-4">-->
+<!--                                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava1-bg.png" alt="avatar 1"-->
+<!--                                     style="width: 45px; height: 100%;">-->
+<!--                                <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">-->
+<!--                                    <p class="small mb-0">...</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="form-outline">-->
+<!--                                <textarea class="form-control" id="textAreaExample" rows="4"></textarea>-->
+<!--                                <label class="form-label" for="textAreaExample">Type your message</label>-->
+<!--                            </div>-->
+<!---->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
+<!--    </section>-->
 
     <!-- scripts start -->
     <script src="<?= S_ASSETS?>js/Index.js"></script>

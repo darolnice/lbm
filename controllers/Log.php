@@ -238,7 +238,7 @@ class Log extends Navigation
                 }else {
                     $errors[] = "- Please complete all forms";
                     $F->notif_errors([$errors]);
-                } 
+                }
 
                 if(count($errors) === 0){
                     (new MgrLogin)->registerStep2($data, '');
@@ -247,7 +247,7 @@ class Log extends Navigation
 
         }else{
             Functions::redir('register');
-        } 
+        }
     }
 
     public function showForget(){

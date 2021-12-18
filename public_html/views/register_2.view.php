@@ -16,11 +16,11 @@ $title = "Business accoumpt /2";
             </div>
 
             <label>Shop name <mark style="color: red">*</mark>
-                <input id="s_usrn_2" type="text" required="required" name="shop_name">
+                <input id="s_usrn_2" type="text" required="required" name="shop_name" maxlength="20" placeholder="20 characters max">
             </label>
 
             <label>City <mark style="color: red">*</mark>
-                <input type="text" name="city" id="sh_city" require>
+                <input type="text" name="city" id="sh_city" required>
             </label>
 
             <label>Activity<mark style="color: red">*</mark>
