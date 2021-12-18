@@ -7,7 +7,6 @@ $title = "Shop list";
 <link rel="stylesheet" href="<?= S_ASSETS?>css/shoplist.css">
 
 <body>
-
     <section class="container">
         <h4 class="text-left mt-2">Shop List</h4>
 
@@ -113,8 +112,6 @@ $title = "Shop list";
     </section>
 
     <!-- scripts start -->
-    <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
-    <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
     <script src="<?= S_ASSETS?>js/Index.js"></script>
     <script src="<?= S_ASSETS?>js/shoplist.js"></script>
     <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>

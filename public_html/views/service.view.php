@@ -241,11 +241,11 @@ $title = "Store";
                                     <li>Enter your business name</li>
                                     <li>Choose your city</li>
                                     <li>Choose type of your business</li>
-                                    <li>Enter your business desciption</li>
-                                    <li>Enter your official business id</li>
+                                    <li>Enter your business description</li>
+                                    <li>Enter your business id (Opitional)</li>
                                     <li>Generate one business key (Optional)</li>
-                                    <li>Choose your plan</li>
-                                    <li>Enter your cover image after this submit</li>
+                                    <li>Choose your plan (Optional)</li>
+                                    <li>Enter your card id image and submit</li>
                                 </ol>
                             </div>
 

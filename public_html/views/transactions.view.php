@@ -1,5 +1,5 @@
 <?php $title = "Transactions"?>
-<?php include(S_VIEWS.'partials/_header.view.php');?>
+<?php include_once S_VIEWS.'partials/_header.view.php';?>
 <link rel="stylesheet" href="<?= S_ASSETS?>css/transactions.css">
 
 <body>
@@ -120,8 +120,6 @@
     </section>
 
     <!-- scripts start -->
-    <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
-    <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
     <script src="<?= S_ASSETS?>js/transactions.js"></script>
     <script src="<?= S_ASSETS?>js/Index.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFCtG_Lyb_Cnun3GqE3-TpNFg_3jx0RIk"></script>

@@ -269,7 +269,6 @@ class Navigation
 
 
 
-
     public function session(){
         session_start();
         echo "<pre>";
@@ -334,6 +333,7 @@ class Navigation
             $this->getShopProdData();
             $this->getShopPref();
         }
+
     }
 
     public function showCheckcart(){

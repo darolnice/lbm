@@ -28,7 +28,6 @@ body{
     overflow: hidden;
     /*border: 1px solid coral;*/
 }
-
 .elements{
     position: relative;
     display:flex;
@@ -36,7 +35,6 @@ body{
     transition: 1.5s linear;
     /*background-color: royalblue;*/
 }
-
 .div_pub{
     width: 100%!important;
     height: 100.5%;
@@ -50,16 +48,12 @@ body{
     width: 100%!important;
     /*background-color: darkcyan;*/
 }
-
-
-
 .div_pub img{
     width: 100% !important;
     height: 100%;
     background:center center no-repeat;
     background-size: cover;
 }
-
 .caption{
     /*border: 1px solid coral;*/
     display: block;
@@ -74,7 +68,6 @@ body{
     background-color: rgba(174, 182, 181, 0.78);
     padding: 10px;
 }
-
 .caption h1{
     font-size: 25px!important;
     font-weight: bold;
@@ -82,7 +75,6 @@ body{
     text-transform: uppercase;
 
 }
-
 .caption p{
     font-size: 14px;
     text-align: justify-all;
@@ -90,7 +82,6 @@ body{
     color: #0e0d0d;
     font-weight: 600;
 }
-
 #nav_left, #nav_right{
     width: 25px;
     height: 25px;
@@ -119,13 +110,13 @@ body{
 }
 
 
-
+/*************************************************************************/
 .scn2{
     /*border: 1px solid rgba(108, 2, 72, 0.66);*/
     height: auto;
     width: 100%;
     margin-left: 0;
-    margin-bottom: 500px;
+    /*margin-bottom: 200px;*/
     margin-top: 40%;
     display: flex;
     position: static;
@@ -140,7 +131,6 @@ body{
     height: auto;
     position: relative;
 }
-
 
 .scn2 article{
     border: 1px solid rgba(186, 183, 183, 0.66);
@@ -548,12 +538,12 @@ body{
     text-align: left!important;
 }
 
-
 .promo_nmber{
     /*border: 1px solid rgba(15, 57, 141, 0.66);*/
     font-size: 14px;
     height: 35px!important;
     position: absolute;
+    /* padding-top: 15px; */
     top: 100%;
     width: 100%;
     margin-top: 0;
@@ -591,7 +581,7 @@ body{
     flex-wrap: wrap;
     margin-bottom: 150px!important;
 }
-/******************************/
+
 .lbm_hme_cont{
     /*border: 1px solid rgba(208, 207, 207, 0.41);*/
     width: 16%;
@@ -667,7 +657,6 @@ body{
     cursor: default;
     letter-spacing: 0;
 }
-
 
 .lbm_rating{
     /*border: 1px solid rgba(12, 173, 6, 0.66);*/

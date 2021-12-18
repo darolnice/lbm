@@ -204,7 +204,7 @@
         </li>
     </ul>
 </nav>
-<!-- scripts start -->
+<!-- scripts  -->
 <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
 <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
 <script src="<?= S_ASSETS?>js/Navhome.js"></script>

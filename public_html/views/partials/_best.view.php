@@ -3,7 +3,6 @@
 
 <div class="__best__ row-cols-md-1" style="display: none;">
 
-
     <h4 class="best__ttl">Best</h4>
     <button class="close small">&times</button>
 

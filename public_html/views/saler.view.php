@@ -12,13 +12,23 @@
             BUSINESS ACCOUNT LOGIN</div>
 
         <form method="post" class="form-group">
+            <input type="text"
+                   name="u_name"
+                   placeholder="Name"
+                   value="<?php (isset($_COOKIE['rmbs'])) ? print_r(unserialize($_COOKIE['rmbs'])[0]) : null?>"
+                   required="required">
 
-            <input type="text" name="u_name" placeholder="Name" required="required">
-
-            <input type="password" name="passw" placeholder="Password" required="required">
+            <input type="password"
+                   name="passw"
+                   placeholder="Password"
+                   value="<?php (isset($_COOKIE['rmbs'])) ? print_r(unserialize($_COOKIE['rmbs'])[1]) : null?>"
+                   required="required">
 
             <span class="forg_rem">
-                <input type="checkbox" id="remenber">
+                <input type="checkbox"
+                        name="ckb_rm_s"
+                        <?php (isset($_COOKIE['rmbs'])) ? print_r('checked'): null?>
+                        id="remenber">
                 <label for="remenber">Remenber me</label>
 
                 <a href="forget">Password forget</a>

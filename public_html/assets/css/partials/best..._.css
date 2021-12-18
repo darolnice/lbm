@@ -13,7 +13,7 @@ body{
     margin-left: 25%;
     height: auto;
     display: flex;
-    margin-bottom: 100vh;
+    /* margin-bottom: 100vh; */
     padding-left: 0;
 }
 

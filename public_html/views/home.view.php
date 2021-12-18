@@ -3,7 +3,7 @@
 //use Lbm\Partials\Partials;
 $title = "Home"
 ?>
-<?php include('partials/_header.view.php');?>
+<?php include_once 'partials/_header.view.php';?>
 <link rel="stylesheet" href="<?= S_ASSETS?>css/home.css">
 
 
@@ -209,11 +209,8 @@ $title = "Home"
     </section>
 
     <!-- scripts start -->
-    <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
-    <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
     <script src="<?= S_ASSETS?>js/Index.js"></script>
     <script src="<?= S_ASSETS?>js/Home.js"></script>
-    <script src="<?= S_ASSETS?>js/navhome.js"></script>
     <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>
     <!-- scripts end -->
 </body>

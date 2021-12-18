@@ -10,9 +10,9 @@
 class MgrLogin extends Database
 {
     /**
-     * @param $password_login_sha1
+     * @param $password
      */
-    public function adminLog($password_login_sha1){
+    public function adminLog($password){
         $errors = [];
 
         $q = parent::getDb()->prepare("SELECT * FROM sallers WHERE (username = :identifiant or email = :identifiant)AND actived = :actived");
@@ -22,7 +22,7 @@ class MgrLogin extends Database
         ]);
         $data = $q->fetch(PDO::FETCH_OBJ);
 
-        if (password_verify($password_login_sha1, $data->saller_password)){
+        if (password_verify($password, $data->saller_password)){
             $_SESSION['saller_id'] = $data->id;
             $_SESSION['username'] = $data->username;
             $_SESSION['shop_name'] = $data->shop_name;
@@ -38,6 +38,15 @@ class MgrLogin extends Database
             }
 
             Functions::save_in_cookies("cookies_u_data", $data->username, $data->city, $data->phone_number, $data->email, $data->country, $data->shop_name);
+
+            if ($_POST['ckb_rm_s'] === 'on'){
+                $ds = serialize([$data->username, $password]);
+                setcookie("rmbs",  $ds);
+            }else{
+                unset($_COOKIE['rmbs']);
+                setcookie("rmbs",  "", time()-10);
+            }
+
             (!empty($_COOKIE['r'])) ? Functions::redir($_COOKIE['r']) : Functions::redir('dashboard');
 
         }else{
@@ -47,16 +56,16 @@ class MgrLogin extends Database
     }
 
     /**
-     * @param $password_login_sha1
+     * @param $password
      * @return bool
      */
-    public function current_user_log($password_login_sha1){
+    public function current_user_log($password){
         try {
             $q = parent::getDb()->prepare("SELECT * FROM users WHERE (username = :username or email = :username) AND actived = 2");
             $q->execute(['username' => $_POST['u_name']]);
             $data = current($q->fetchAll(PDO::FETCH_OBJ));
 
-            if (password_verify($password_login_sha1, $data->password)){
+            if (password_verify($password, $data->password)){
                 $_SESSION['current_user_id'] = $data->id;
                 $_SESSION['city'] = $data->city;
                 $_SESSION['email'] = $data->email;
@@ -65,7 +74,18 @@ class MgrLogin extends Database
                 $_SESSION['country'] = $data->country;
                 $_SESSION['profil_image'] = $data->profil_image;
 
+                $_SESSION['llst'] = time();
+
                 Functions::save_in_cookies("cud", $data->username, $data->city, $data->phone_number, $data->email, $data->country, null);
+
+                if ($_POST['ckb_rm'] === 'on'){
+                    $ds = serialize([$data->username, $password]);
+                    setcookie("rmb",  $ds);
+                }else{
+                    unset($_COOKIE['rmb']);
+                    setcookie("rmb",  "", time()-10);
+                }
+
                 (!empty($_COOKIE['r'])) ? Functions::redir($_COOKIE['r']) : Functions::redir('panel');
             }else{
                 $errors[] = '- Password is wrong click on PASSWORD FORGET for reset your password or click on SIGNUP to create account';

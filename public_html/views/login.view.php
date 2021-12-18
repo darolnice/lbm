@@ -15,13 +15,21 @@ $title = 'Login';
 
     <form method="post" class="form-group">
 
-        <input type="text" name="u_name" placeholder="Name" required="required">
+        <input type="text"
+               name="u_name"
+               placeholder="Name"
+               value="<?php (isset($_COOKIE['rmb'])) ? print_r(unserialize($_COOKIE['rmb'])[0]) : null?>"
+               required="required">
 
-        <input type="password" name="passw" placeholder="Password" required="required">
+        <input type="password"
+               name="passw"
+               placeholder="Password"
+               value="<?php (isset($_COOKIE['rmb'])) ? print_r(unserialize($_COOKIE['rmb'])[1]) : null?>"
+               required="required">
 
         <span class="forg_rem">
-            <input type="checkbox" id="remenber">
-            <label for="remenber">Remenber me</label>
+            <input type="checkbox" name="ckb_rm" id="remenber" <?php (isset($_COOKIE['rmb'])) ? print_r('checked'): null?> >
+            <label for="remenber" title="Your browser will remember you during 1 week">Remenber me</label>
 
             <a href="forget">Password forget</a>
         </span>

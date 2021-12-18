@@ -212,8 +212,6 @@ $title = "Forum"
 
         </section>
 <!--         scripts start -->
-        <script src="<?= S_ASSETS?>js/jquery.min.js"></script>
-        <script src="<?= S_ASSETS?>js/bootstrap.min.js"></script>
         <script src="<?= S_ASSETS?>js/forum.js"></script>
         <script src="<?= S_ASSETS?>js/Index.js"></script>
         <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>

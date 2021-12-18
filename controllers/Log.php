@@ -339,6 +339,7 @@ class Log extends Navigation
     public function showLogin(){
         session_start();
         Functions::Auth_UserIS();
+
         include_once S_VIEWS.'/login.view.php';
 
         $errors = [];
