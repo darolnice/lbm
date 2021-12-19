@@ -168,7 +168,7 @@
                             <?php for($r=0; $r<count($responses); $r++):?>
                                 <li id="res_li">
                                     <p class="res-p">
-                                        <a href="shop?name=<?=$responses[$r]['shop_name']?>"><?='Shop : '.$responses[$r]['shop_name']?></a>
+                                        <a href="shop?name=<?= Functions::SNFormatFront($responses[$r]['shop_name'])?>"><?='Shop : '.Functions::SNFormatFront($responses[$r]['shop_name'])?></a>
                                     </p>
                                     <b class="anc__dte"><?= $responses[$r]['add_at']?></b>
                                     <h6><?= $responses[$r]['response']?></h6>

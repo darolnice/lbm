@@ -532,15 +532,19 @@ class Functions extends Navigation
          }
      }
 
-    public static function SNFormatBack(string  $shopname): string {
+     public static function SNFormatBack(string  $shopname): string {
         return str_replace(" ",'_', $shopname);
     }
 
-    public static function SNFormatFront(string  $shopname): string {
-        return str_replace("_",' ', $shopname);
-    }
+     public static function SNFormatFront(string  $shopname): string {
+         return str_replace("_",' ', $shopname);
+     }
 
 
+     public static function getCurrency(string $shopname): string {
+         $data = (new MgrUser)->getAllfromAnyBusiUser("sallers", $shopname);
+         return $data[0]['currency'];
+     }
 
 
 

@@ -85,6 +85,7 @@ class RestApi extends Database
 
     /**
      * @param $clientName
+     * @return string
      */
     public function jxCheckDuplicateShop($clientName): string {
         try {
@@ -100,6 +101,7 @@ class RestApi extends Database
 
     /**
      * @param $clientName
+     * @return string
      */
     public function AjaxCheckDuplicateName($clientName): string {
         try {
@@ -125,6 +127,7 @@ class RestApi extends Database
     /**
      * @param $current_shop
      * @param $prod_id
+     * @return array
      */
     public function jxProdData($current_shop, $prod_id) {
         $f = parent::getDb()->prepare("SELECT * FROM $current_shop WHERE id = :id");
@@ -137,7 +140,8 @@ class RestApi extends Database
 
 
     /**
-     * @throws \Exception
+     * @return bool
+     * @throws Exception
      */
     public function jxSendAuthCode(): bool {
         $F = new Functions();
@@ -178,13 +182,14 @@ class RestApi extends Database
             if($qr->execute(["newValue" => $newValue, "user_n" => $_SESSION['username'], "empty_" => ''])){
                 $_SESSION[$columb] = $newValue;
                 return $newValue;
-            };  
-            
+            }
+
         }else{
             $errors [] = 'User not found';
             (new Functions)->notif_errors($errors);
             return 'Auth code is wrong';
         }
+        return false;
     }
 
 
@@ -194,9 +199,9 @@ class RestApi extends Database
      * @param $email
      * @param $phone
      * @param $pass
-     * @param null $img
+     * @param $img
      * @param $busi
-     *
+     * @return bool
      */
     public function jxNewSa($right, $name, $email, $phone, $pass, $img, $busi){
         try {
@@ -231,6 +236,7 @@ class RestApi extends Database
     /**
      * @param $saller_id
      * @param $item
+     * @return bool
      */
     public function jxNewSCAT($saller_id, $item): bool {
         try{
@@ -358,6 +364,7 @@ class RestApi extends Database
     /**
      * @param $shopName
      * @param $pid
+     * @return array|string
      */
     public function jxGetPriceFromDb($shopName, $pid){
         try {
@@ -444,16 +451,16 @@ class RestApi extends Database
     /**
      * @param string $table
      * @param array $values
-     * @return array
+     * @return string
      */
     public function genericShopInsert(string $table, array $values): string {
         try {
             $pc = $this->getDb()->prepare("INSERT INTO $table (shop_name, prod_name, add_by, category, quality, sub_category,
                                                                           price, promo, rating, rater, checked, color, size, proprities,
-                                                                          quantity, description, img1, img2, img3, img4, img5)                                     
+                                                                          quantity, description, img1, img2, img3, img4, img5, prod_id)                                     
                                                      VALUES(:shop_name, :prod_name, :add_by, :category, :quality, :sub_category,
                                                         :price, :promo, :rating, :rater, :checked, :color, :size, :proprities,
-                                                        :quantity, :description, :img1, :img2, :img3, :img4, :img5
+                                                        :quantity, :description, :img1, :img2, :img3, :img4, :img5, :prod_id
                                                      )"
             );
 
@@ -478,6 +485,7 @@ class RestApi extends Database
             $pc->bindValue("img3", $values[19], PDO::PARAM_STR_CHAR);
             $pc->bindValue("img4", $values[20], PDO::PARAM_STR_CHAR);
             $pc->bindValue("img5", $values[21], PDO::PARAM_STR_CHAR);
+            $pc->bindValue("prod_id", $values[22], PDO::PARAM_INT);
 
             $pc->execute();
             $pc->closeCursor();
@@ -571,7 +579,8 @@ class RestApi extends Database
 
     /**
      * @param string $table
-     * @param string $message
+     * @param string $data
+     * @param string $topic
      * @param $id
      * @return bool|string
      */

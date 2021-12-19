@@ -6,9 +6,9 @@ class Dashboard {
 
     addinpromo(){
         document.querySelectorAll('.addinpromo').forEach(item =>{
-            this.showElemet(".p__list");
             item.style.visibility = 'visible';
         });
+        this.showElemet(".p__list");
     }
 
     /**
@@ -848,7 +848,21 @@ $(document).ready(function () {
             $('#_pr_prp-').text(e.target.getAttribute('data-prop'));
             $('#_pr_qty-').text(e.target.getAttribute('data-quantity'));
             $('#_pr_dsc-').text(e.target.getAttribute('data-desc'));
+            $('#_-pid-_').text(e.target.getAttribute('data-id'));
 
+
+            let path = 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/';
+            document.querySelector('.cndprom_img1').setAttribute('src', path+e.target.getAttribute('data-img1'));
+            document.querySelector('.cndprom_img2').setAttribute('src', path+e.target.getAttribute('data-img2'));
+            document.querySelector('.cndprom_img3').setAttribute('src', path+e.target.getAttribute('data-img3'));
+            document.querySelector('.cndprom_img4').setAttribute('src', path+e.target.getAttribute('data-img4'));
+            document.querySelector('.cndprom_img5').setAttribute('src', path+e.target.getAttribute('data-img5'));
+            document.querySelectorAll('.other__img img').forEach(img =>{
+                if (img.getAttribute('src').split('/')[9] === ''){
+                    img.style.display = 'none';
+                }
+            });
+            new Index().scrollTo(0);
             $('#_pr_adt-').text(e.target.getAttribute('data-add_at'));
             $('.mrinf').css('display', 'flex');
         });
@@ -907,11 +921,13 @@ $(document).ready(function () {
                 $('#_pr_adt-').text(),
                 $('#_pr_qty-').text(),
 
-                $('#_pr_img1-').text(),
-                $('#_pr_img2-').text(),
-                $('#_pr_img3-').text(),
-                $('#_pr_img4-').text(),
-                $('#_pr_img5-').text(),
+                document.querySelector('.cndprom_img1').getAttribute('src').split('/')[9],
+                document.querySelector('.cndprom_img2').getAttribute('src').split('/')[9],
+                document.querySelector('.cndprom_img3').getAttribute('src').split('/')[9],
+                document.querySelector('.cndprom_img4').getAttribute('src').split('/')[9],
+                document.querySelector('.cndprom_img5').getAttribute('src').split('/')[9],
+
+                $('#_-pid-_').text()
             );
         });
     }
@@ -941,7 +957,21 @@ $(document).ready(function () {
             $('#_pr_qty-').text(e.target.getAttribute('data-quantity'));
             $('#_pr_dsc-').text(e.target.getAttribute('data-desc'));
 
+            let path = 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/';
+            document.querySelector('.f_img1').setAttribute('src', path+e.target.getAttribute('data-img1'));
+            document.querySelector('.f_img2').setAttribute('src', path+e.target.getAttribute('data-img2'));
+            document.querySelector('.f_img3').setAttribute('src', path+e.target.getAttribute('data-img3'));
+            document.querySelector('.f_img4').setAttribute('src', path+e.target.getAttribute('data-img4'));
+            document.querySelector('.f_img5').setAttribute('src', path+e.target.getAttribute('data-img5'));
+
+            document.querySelectorAll('.other__img img').forEach(img =>{
+               if (img.getAttribute('src').split('/')[9] === ''){
+                   img.style.display = 'none';
+               }
+            });
+
             $('#_pr_adt-').text(e.target.getAttribute('data-add_at'));
+            new Index().scrollTo(0);
             $('.___mrinf').css('display', 'flex');
         });
     });
@@ -982,11 +1012,12 @@ $(document).ready(function () {
                 $('#_pr_aby_').text(),
                 $('#_pr_adt-').text(),
                 $('#_pr_qty-').text(),
-                $('#_pr_img1-').text(),
-                $('#_pr_img2-').text(),
-                $('#_pr_img3-').text(),
-                $('#_pr_img4-').text(),
-                $('#_pr_img5-').text(),
+
+                document.querySelector('.f_img1').getAttribute('src').split('/')[9],
+                document.querySelector('.f_img2').getAttribute('src').split('/')[9],
+                document.querySelector('.f_img3').getAttribute('src').split('/')[9],
+                document.querySelector('.f_img4').getAttribute('src').split('/')[9],
+                document.querySelector('.f_img5').getAttribute('src').split('/')[9],
             );
         });
     }
@@ -1073,6 +1104,7 @@ $(document).ready(function () {
         document.querySelectorAll(".allcustlist ul li").forEach(obj =>{
             obj.addEventListener("click", function () {
                 let id = obj.getAttribute('data-pid');
+                new Index().scrollTo(0);
                 new Index().jxPostData('jxAbtCust', this, 'sallers', id);
             });
         });

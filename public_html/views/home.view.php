@@ -81,7 +81,7 @@ $title = "Home"
                                      </a>
                                 </p>
 
-                                <b><?=$this->getBestShop()[$g]['name']?></b>
+                                <b><?= Functions::SNFormatFront($this->getBestSaling()[$g]['name'])?></b>
 
                                 <span class="strt">
                                     <?php for ($p=0; $p<$this->getBestSaling()[$g]['rating']; $p++): ?>
@@ -100,7 +100,7 @@ $title = "Home"
                         <li>
                             <span>
                                 <p>
-                                    <a href="<?= 'shop?name='.Functions::SNFormatFront($this->getBestSaling()[$b]['name'])?>"><?= Functions::SNFormatFront($this->getBestSaling()[$b]['name'])?></a>
+                                    <a href="<?= 'shop?name='.Functions::SNFormatFront($this->getBestShop()[$b]['name'])?>"><?= Functions::SNFormatFront($this->getBestShop()[$b]['name'])?></a>
                                 </p>
 
                                 <b><?=$this->getBestShop()[$b]['sale']?></b>
@@ -122,7 +122,7 @@ $title = "Home"
                         <li class="sp_of_li" style="width: 100%!important;">
                             <img src="<?= S_ASSETS ?>images/upload/<?= $this->getSpecialOffer()[$i]['prod_img']?>" alt="">
                             <h6>
-                                <a class="text-dark" href="<?= $this->getSpecialOffer()[$i]['link']?>"><?= $this->getSpecialOffer()[$i]['prod_name']?></a>
+                                <a class="text-dark" href="<?= Functions::SNFormatFront($this->getSpecialOffer()[$i]['link'])?>"><?= $this->getSpecialOffer()[$i]['prod_name']?></a>
                             </h6>
                             <h6 class="text-primary"><?= $this->getSpecialOffer()[$i]['price']?>
                                 <span><?= $this->getSpecialOffer()[$i]['reduce']?></span>
@@ -141,16 +141,18 @@ $title = "Home"
                 <?php for ($i=0; $i<count($this->getSpecialPromoData()); $i++): ?>
                     <div class="hme_cont vu">
                         <div class="hme_prd_img_div">
-                            <img class="hme_prd_image" src="<?= S_ASSETS?>images/img/caterpillar.jpeg" alt="product">
+                            <img class="hme_prd_image" src="<?= S_ASSETS?>images/upload/<?= $this->getSpecialPromoData()[$i]['img1']?>" alt="product">
                             <div class="hme_add">
-                                <a href="<?= 'product?id='.$this->getSpecialPromoData()[$i]['id']."&shop=".$this->getSpecialPromoData()[$i]['shop_name']?>">View Product</a>
+                                <a href="<?= 'product?id='.$this->getSpecialPromoData()[$i]['prod_id']."&shop=".Functions::SNFormatFront($this->getSpecialPromoData()[$i]['shop_name'])?>">View Product</a>
                             </div>
                         </div>
                         <div class="hme_np">
                             <h4 class="hme_nm"><?= $this->getSpecialPromoData()[$i]['prod_name']?></h4>
-                            <p class="hme_prc"><?= '$'.$this->getSpecialPromoData()[$i]['price']?>
+                            <p class="hme_prc"><?= $this->getSpecialPromoData()[$i]['price'].Functions::getCurrency($this->getSpecialPromoData()[$i]['shop_name'])?>
                                 <strong>
-                                    <del><?= '$'.$this->getSpecialPromoData()[$i]['promo']?></del>
+                                    <del>
+                                        <?=$this->getSpecialPromoData()[$i]['promo'].Functions::getCurrency($this->getSpecialPromoData()[$i]['shop_name'])?>
+                                    </del>
                                 </strong>
                             </p>
                             <div class="prm_rating">
@@ -174,7 +176,7 @@ $title = "Home"
                             <img class="lbm_hme_prd_image" src="<?= S_ASSETS.'images/upload/'.$this->getLbmProdData()[$l]['img1']?>" alt="product">
                             <div class="lbm_hme_add vu">
                                 <p class="home_vp">
-                                    <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".$this->getLbmProdData()[$l]['shop_name']?>">View Product</a>
+                                    <a href="<?= 'product?id='.$this->getLbmProdData()[$l]['id']."&sub=".$this->getLbmProdData()[$l]['sub_category']."&shop=".Functions::SNFormatFront($this->getLbmProdData()[$l]['shop_name'])?>">View Product</a>
                                 </p>
                             </div>
                         </div>

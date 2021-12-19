@@ -61,8 +61,15 @@ class Pagination extends Database
                 return $q->fetchAll(PDO::FETCH_ASSOC);
             }
         }catch(PDOException $e){
-            return [$e->getMessage()];
+            if ($e->getCode() === '42S02'){
+                $_SESSION['info'] = "SORRY SHOP NOT FOUND, SEARCH HERE !!!";
+                Functions::redir('shoplist');
+
+            }else{
+                return [$e->getMessage()];
+            }
         }
+        return [];
     }
 
     /**

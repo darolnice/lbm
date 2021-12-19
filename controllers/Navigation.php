@@ -67,13 +67,15 @@ class Navigation
     private $mess;
     private $h_shopPref;
     private $specialOffer;
+    private $all_readyin_p =[];
 
 
 
 
-
-
-
+    public function getAllReadyinP(): array
+    {
+        return $this->all_readyin_p;
+    }
     public function getSpecialOffer()
     {
         return $this->specialOffer;
@@ -550,6 +552,14 @@ class Navigation
         $this->notif = json_decode($this->getSallerData()[0]['notif'], true);
         $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
 
+
+        foreach($this->promoClient as $prd){
+            $id = json_decode($prd['prod_data'], true);
+            foreach ($id as $item){
+                $this->all_readyin_p [] = $item['prod_id'];
+            }
+        }
+
         include_once S_VIEWS.'/dashboard.view.php';
         $this->getSallerData();
         $this->getShopData();
@@ -571,6 +581,12 @@ class Navigation
         $this->getSuClient();
         $this->getNotif();
         $this->getMess();
+        $this->getAllReadyinP();
+
+
+
+
+
 
         /************************ VAR START *************************/
         $errors = [];

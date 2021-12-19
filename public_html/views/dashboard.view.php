@@ -60,7 +60,10 @@
                         <img class="mt-3 i_size" id="notif__" src="<?= S_ASSETS?>images/svg/turned_in_white_24dp.svg" alt="user image">
                         PROMO <b class="float-right mr-1">&blacktriangledown;</b></p>
                     <button data-view="all_promo">On Line</button>
-                    <button data-view="promo_candidate">A Wait</button>
+                    <button data-view="">Standby</button>
+                    <button data-view="">Working</button>
+                    <button data-view="">Allow</button>
+                    <button data-view="promo_candidate">View all</button>
                 </div>
 
                 <div id="d12" class="mb-2">
@@ -725,7 +728,7 @@
                                                            value="View More"
                                                            id="prom_more"
                                                            data-prom_id="<?= $this->getPromoClient()[$q]['id']?>"
-                                                           data-id="<?= $itm['id'];?>"
+                                                           data-id="<?= $itm['prod_id'];?>"
                                                            data-shopname="<?= $itm['shop_name'];?>"
                                                            data-prodname="<?= $itm['prod_name'];?>"
                                                            data-addby="<?= $itm['add_by'];?>"
@@ -807,6 +810,10 @@
                                                    <a>Statu :</a>
                                                    <a id="_pr_st" style="margin-left: 32px;"></a>
                                                </span>
+                                        </li>
+
+                                        <li class="hide">
+                                               <h3 id="_-pid-_" style="display: none;"></h3>
                                         </li>
                                     </ul>
                                     <div class="prombtndiv">
@@ -948,12 +955,14 @@
                                     </ul>
 
                                     <div class="prod_img__prom">
-                                        <div class="f_img"><img src="<?= S_ASSETS ?>images/lite.jpg" alt="first product image"></div>
+                                        <div class="f_img">
+                                            <img class="cndprom_img1" src="" alt="first product image">
+                                        </div>
                                         <div class="rows row-cols-sm-3 other__img">
-                                            <img src="<?= S_ASSETS ?>images/lite.jpg" alt="second product image">
-                                            <img src="<?= S_ASSETS ?>images/lite.jpg" alt="third product image">
-                                            <img src="<?= S_ASSETS ?>images/lite.jpg" alt="four product image">
-                                            <img src="<?= S_ASSETS ?>images/lite.jpg" alt="figth product image">
+                                            <img class="cndprom_img2" src="" alt="second product image">
+                                            <img class="cndprom_img3" src="" alt="third product image">
+                                            <img class="cndprom_img4" src="" alt="four product image">
+                                            <img class="cndprom_img5" src="" alt="figth product image">
                                         </div>
                                     </div>
                                 </div>
@@ -1337,7 +1346,7 @@
                             <?php for ($q=0; $q<count($this->getPromoClient()); $q++): ?>
                                 <?php $tabl = json_decode($this->getPromoClient()[$q]['prod_data'], true);?>
                                 <?php foreach($tabl as $item):?>
-                                    <?php if($item['shop_name'] === $_SESSION['shop_name']):?>
+                                    <?php if(Functions::SNFormatFront($item['shop_name']) === Functions::SNFormatFront($_SESSION['shop_name'])):?>
                                         <ul class="promo_c_list_ul">
                                             <li>
                                                 <div class="__promo_c_prd____">
@@ -1450,14 +1459,8 @@
                             <?php for ($i=0; $i<count($this->getShopData()); $i++): ?>
                                 <ul class="p__list_ul">
                                     <li>
-                                        <?php
-                                            foreach($this->getPromoClient() as $prd){
-                                                $id = json_decode($prd['prod_data'], true);
-                                            }
-                                        ?>
-                                        <?php foreach($id as $item): ?>
-                                            <?php if($item['prod_id'] !== $this->getShopData()[$i]['id']): ?>
-                                                <button class="small addinpromo"
+                                        <?php if(!in_array($this->getShopData()[$i]['id'], $this->getAllReadyinP())): ?>
+                                            <button class="small addinpromo"
                                                     data-pid="<?= $this->getShopData()[$i]['id'];?>"
                                                     data-prodname="<?= $this->getShopData()[$i]['prod_name'];?>"
                                                     data-addby="<?= $this->getShopData()[$i]['add_by'];?>"
@@ -1483,8 +1486,7 @@
                                                     data-add_at="<?= $this->getShopData()[$i]['add_at'];?>">
                                                 &plus;
                                             </button>
-                                            <?php endif;?>
-                                        <?php endforeach;?>
+                                        <?php endif;?>
 
                                         <div class="prd____">
                                             <div class="nme_n_price">
@@ -1733,12 +1735,14 @@
                                     </ul>
 
                                     <div class="prod_img__prom">
-                                        <div class="f_img"><img src="<?= S_ASSETS ?>images/img/lite.jpg" alt=""></div>
+                                        <div class="f_img">
+                                            <img class="f_img1" src="" alt="">
+                                        </div>
                                         <div class="rows row-cols-sm-3 other__img">
-                                            <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
-                                            <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
-                                            <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
-                                            <img src="<?= S_ASSETS ?>images/img/lite.jpg" alt="">
+                                            <img class="f_img2" src="" alt="">
+                                            <img class="f_img3" src="" alt="">
+                                            <img class="f_img4" src="" alt="">
+                                            <img class="f_img5" src="" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -1774,54 +1778,54 @@
                             <a><b class="text-primary" style="font-size: 16px;"><?= count($this->getMess())?></b> Unread message</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">05</b> Reclamations non traités</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Reclamations non traités</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">10</b> Produits en rupture de stock</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Produits en rupture de stock</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">03</b> Produits sponsorisés</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Produits sponsorisés</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">33%</b> Product is check</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00%</b> Product is check</a>
                         </div>
                     </div>
 
                     <div class="elbi">
                         <p>Shop</p>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">03</b> Livraisons en cour</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Livraisons en cour</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">28</b> Livraisons en Attentes</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Livraisons en Attentes</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">02</b> New comments</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> New comments</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">13</b> Reservations</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Reservations</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">258</b> Followers</a>
+                            <a><b class="text-primary" style="font-size: 16px;">01</b> Followers</a>
                         </div>
                         <div class="msg">
-                            <a>J- <b class="text-primary" style="font-size: 14px;">2</b> Renew your subcription</a>
+                            <a>J- <b class="text-primary" style="font-size: 14px;">30</b> Renew your subcription</a>
                         </div>
                     </div>
 
                     <div class="elbi">
                         <p>Statistiques</p>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">115</b> Visites</a>
+                            <a><b class="text-primary" style="font-size: 16px;">01</b> Visites</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">80%</b> Visites from Facebook</a>
+                            <a><b class="text-primary" style="font-size: 16px;">01%</b> Visites from Facebook</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">28%</b> Taux de rebond</a>
+                            <a><b class="text-primary" style="font-size: 16px;">99%</b> Taux de rebond</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">65%</b> Visites from Canada</a>
+                            <a><b class="text-primary" style="font-size: 16px;">0%</b> Visites from Canada</a>
                         </div>
                     </div>
                 </div>
