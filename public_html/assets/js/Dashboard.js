@@ -32,28 +32,26 @@ class Dashboard {
     /**
      *
      */
-    ajxEditProd (...data){
-        $.ajax({
-            type: 'POST',
-            url: 'jxEditProd',
-            data: {data},
-            dataType: 'json',
-            success: function (response) {
-                if (response['message'] === 'next'){
-                    let imgData = [];
-                    let formData = new FormData();
-
-                    document.querySelectorAll('#ed___im').forEach(item =>{imgData.push(item.files[0])});
-                    formData.append('img1', imgData[0]);
-                    formData.append('img2', imgData[1]);
-                    formData.append('img3', imgData[2]);
-                    formData.append('img4', imgData[3]);
-                    formData.append('img5', imgData[4]);
-
-                    new Index().UP_post_asyn_fetch('jxEditProd', this, formData);
-                }
+    FtchEditProd (link, context,  data){
+        let idx = new Index();
+        fetch(link, {
+            method: 'POST',
+            url: link,
+            body: data
+        }).then(res => res.json().then(dta =>{
+            if (dta['message'] !== 'Update successfully'){
+                idx.lbmAlert(dta['message'], 'dange');
+            }else {
+                idx.SetCookie('_SETIM_', '', new Date() -10)
+                document.querySelector(".edim1").value = "";
+                document.querySelector(".edim2").value = '';
+                document.querySelector(".edim3").value = '';
+                document.querySelector(".edim4").value = '';
+                document.querySelector(".edim5").value = '';
+                this.showElemet('.p__list');
+                idx.lbmAlert(dta['message'])
             }
-        });
+        }))
     }
 
     /**
@@ -269,6 +267,12 @@ class Dashboard {
         $("#nw__Color").val(data["message"][0]['color']);
         $("#nw__Size").val(data["message"][0]['size']);
         $("#nw__stock").val(data["message"][0]['quantity']);
+
+        document.querySelector(".edim1").setAttribute("data-old", data["message"][0]['img1']);
+        document.querySelector(".edim2").setAttribute("data-old", data["message"][0]['img2']);
+        document.querySelector(".edim3").setAttribute("data-old", data["message"][0]['img3']);
+        document.querySelector(".edim4").setAttribute("data-old", data["message"][0]['img4']);
+        document.querySelector(".edim5").setAttribute("data-old", data["message"][0]['img5']);
 
         sessionStorage.setItem('pid', data["message"][0]['id']);
         this.showElemet('.edit__prod');
@@ -588,23 +592,47 @@ $(document).ready(function () {
         });
     });
 
-    let img_at_change = [];
-    document.querySelectorAll("#ed___im").forEach(item =>{
-        item.addEventListener('input', function () {
-            let p = item.getAttribute('value');
-            img_at_change.push(p);
-        });
-    });
+
+    let oldimage = [];
+    document.querySelectorAll('#ed___im').forEach(item =>{
+       item.addEventListener('input', ()=>{
+           oldimage.push(item.getAttribute('data-old'));
+       });
+    })
     document.forms["ed_prod_from"].addEventListener('submit', function (e) {
         e.preventDefault();
-        let arr = [];
-        const inputs = this;
+        let arr = {name: '', category: '', sub_category: '', quality: '', price: '', promo: '',
+                   description: '', proprities: '', color: '', size: '', quantity: '', id:''
+        };
 
-        for (let e_=0; e_<inputs.length; e_++){
-            arr.push(inputs[e_].value);
-        }
-        arr.push(sessionStorage.getItem('pid'));
-        new Dashboard().ajxEditProd(arr, img_at_change);
+        const inputs = this;
+        arr.name = inputs['ed__name'].value;
+        arr.category = inputs['ed__cat_'].value;
+        arr.sub_category = inputs['ed_sub_cat'].value;
+        arr.quality = inputs['ed_qly'].value;
+        arr.price = inputs['ed__price_'].value;
+        arr.promo = inputs['ed__prom_pr'].value;
+        arr.description = inputs['ed__desc1'].value;
+        arr.proprities = inputs['ed__prop'].value;
+        arr.color = inputs['ed__Color'].value;
+        arr.size = inputs['ed__Size'].value;
+        arr.quantity = inputs['ed__stock'].value;
+        arr.id = sessionStorage.getItem('pid');
+
+        let imgData = [];
+        let formData = new FormData();
+
+        document.querySelectorAll('#ed___im').forEach(item =>{imgData.push(item.files[0])});
+
+        formData.append('txtdata', JSON.stringify(arr));
+        formData.append('img1', imgData[0]);
+        formData.append('img2', imgData[1]);
+        formData.append('img3', imgData[2]);
+        formData.append('img4', imgData[3]);
+        formData.append('img5', imgData[4]);
+
+        new Index().SetCookie('_SETIM_', JSON.stringify(oldimage));
+        new Dashboard().FtchEditProd('jxEditProd', this, formData);
     });
 
     document.forms["add_new_prod_from"].addEventListener('submit', function (e) {

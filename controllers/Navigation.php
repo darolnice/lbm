@@ -1095,7 +1095,7 @@ class Navigation
         if (!isset($_GET['name']) || $_GET['name'] === ''){
             (new Functions)->redir('./');
         }
-        $this->profilData = $d->getAllfromAnyBusiUser("sallers", $_GET['name']);
+        $this->profilData = $d->getAllfromAnyBusiUser("sallers", Functions::SNFormatBack($_GET['name']));
 
         include S_VIEWS.'/profil.view.php';
         $this->getProfilData();

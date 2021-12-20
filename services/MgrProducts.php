@@ -62,7 +62,7 @@ class MgrProducts extends Database
      * @param $current_shop
      * @param $prod_id
      * @param array $data
-     * @return bool|int|string
+     * @return array|bool|string
      */
     public function UpdateProd($current_shop, $prod_id, array $data = []){
         try {
@@ -93,37 +93,44 @@ class MgrProducts extends Database
             $q->bindParam('quantity',     $data[9], PDO::PARAM_INT);
             $q->bindParam('description',  $data[10], PDO::PARAM_STR);
 
-            if($data[11] !== ""){
-                $q->bindParam('img1',         $data[11], PDO::PARAM_STR_CHAR);
-            }else{
-                $q->bindParam('img1',         $vall["img1"], PDO::PARAM_STR_CHAR);
+            $imgToSet = [];
+            foreach ($data[11] as $keys => $value){
+                array_push($imgToSet, $keys);
             }
 
-            if($data[12] !== ""){
-                $q->bindParam('img2',         $data[12], PDO::PARAM_STR_CHAR);
+            if (in_array('img1', $imgToSet)){
+                $q->bindValue('img1', $data[11]['img1'], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindParam('img2',         $vall["img2"], PDO::PARAM_STR_CHAR);
+                $q->bindValue('img1', $vall[0]['img1'], PDO::PARAM_STR);
             }
 
-            if($data[13] !== ""){
-                $q->bindParam('img3',         $data[13], PDO::PARAM_STR_CHAR);
+            if (in_array('img2', $imgToSet)){
+                $q->bindValue('img2', $data[11]['img2'], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindParam('img3',         $vall["img3"], PDO::PARAM_STR_CHAR);
+                $q->bindValue('img2', $vall[0]['img2'], PDO::PARAM_STR);
             }
 
-            if($data[14] !== ""){
-                $q->bindParam('img4',         $data[14], PDO::PARAM_STR_CHAR);
+            if (in_array('img3', $imgToSet)){
+                $q->bindValue('img3', $data[11]['img3'], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindParam('img4',         $vall["img4"], PDO::PARAM_STR_CHAR);
+                $q->bindValue('img3', $vall[0]['img3'], PDO::PARAM_STR);
             }
 
-            if($data[15] !== ""){
-                $q->bindParam('img5',         $data[15], PDO::PARAM_STR_CHAR);
+            if (in_array('img4', $imgToSet)){
+                $q->bindValue('img4', $data[11]['img4'], PDO::PARAM_STR_CHAR);
             }else{
-                $q->bindParam('img5',         $vall["img5"], PDO::PARAM_STR_CHAR);
+                $q->bindValue('img4', $vall[0]['img4'], PDO::PARAM_STR);
             }
 
-            if($q->execute()){return 1;}
+            if (in_array('img5', $imgToSet)){
+                $q->bindValue('img5', $data[11]['img5'], PDO::PARAM_STR_CHAR);
+            }else{
+                $q->bindValue('img5', $vall[0]['img5'], PDO::PARAM_STR);
+            }
+
+            if($q->execute()){
+                return true;
+            }
 
         }catch(PDOException $e){
             return $e->getMessage();

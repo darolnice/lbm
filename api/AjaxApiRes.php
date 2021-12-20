@@ -77,96 +77,88 @@ class AjaxApiRes
     public function jxEditProd()
     {
         session_start();
-        if($_POST['data']) {
-            $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            if(empty($post['data'][0][3])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product name can not to be empty");
+        if($_POST['txtdata']) {
+            $post = filter_var_array(json_decode($_POST['txtdata'], true), FILTER_SANITIZE_SPECIAL_CHARS);
+            if(empty($post['name'])) {
+                $this->response($this->HTTP_OK, "Sorry product name can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][0])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product categorie can not to be empty");
+            if(empty($post['category'])) {
+                $this->response($this->HTTP_OK, "Sorry product category can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][2])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product quality can not to be empty");
+            if(empty($post['quality'])) {
+                $this->response($this->HTTP_OK, "Sorry product quality can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][4])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product price can not to be empty");
+            if(empty($post['price'])) {
+                $this->response($this->HTTP_OK, "Sorry product price can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][6])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product description can not to be empty");
+            if(empty($post['description'])) {
+                $this->response($this->HTTP_OK, "Sorry product description can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][7])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product proprites can not to be empty");
+            if(empty($post['proprities'])) {
+                $this->response($this->HTTP_OK, "Sorry product proprities can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][8])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product color can not to be empty");
+            if(empty($post['color'])) {
+                $this->response($this->HTTP_OK, "Sorry product color can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][9])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product size can not to be empty");
+            if(empty($post['size'])) {
+                $this->response($this->HTTP_OK, "Sorry product size can not to be empty");
                 return null;
             }
-            if(empty($post['data'][0][10])) {
-                $this->response($this->HTTP_BAD_REQUEST, "Sorry product stock can not to be empty");
+            if(empty($post['quantity'])) {
+                $this->response($this->HTTP_OK, "Sorry product stock can not to be empty");
+                return null;
+            }
+            if(empty($post['id'])) {
+                $this->response($this->HTTP_OK, "Sorry some is wrong please try again");
                 return null;
             }
 
-            $data = [$post['data'][0][3], $post['data'][0][0], $post['data'][0][1],
-                $post['data'][0][2], $post['data'][0][4], $post['data'][0][5],
-                ucwords($post['data'][0][8]), $post['data'][0][9], $post['data'][0][7],
-                $post['data'][0][10], $post['data'][0][6]
+            $dta = [];
+            $_SESSION['img_to_set'] = [];
+            if(!empty($_FILES)){
+                foreach($_FILES as $key => $value) {
+                    if(Functions::checkImg($_FILES[$key])) {
+                        $uniq = uniqid("PRD-", true).'.'.strtolower(Functions::imgExtention($value['type']));
+                    }
+
+                    $dta[$key] = $uniq;
+                    array_push($_SESSION['img_to_set'], [$value['tmp_name'] => $uniq]);
+                }
+            }
+
+            $data = [$post['name'], $post['category'], $post['sub_category'],
+                $post['quality'], $post['price'], $post['promo'],
+                ucwords($post['color']), ucwords($post['size']), $post['proprities'],
+                $post['quantity'], $post['description'], $dta
             ];
 
-            if(!empty($_FILES)){
-                $_SESSION['img_to_set'] = array_unique($_POST['data'][1]);
-            }
-
-            $_SESSION['ed_prod_array'] = $data;
-            $_SESSION['tmp_pid'] = $post['data'][0][18];
-            $this->response($this->HTTP_OK, 'next', 1);
-
-        }else {
-
-            $dta = $_SESSION['ed_prod_array'];
-            if(!empty($_FILES)){
-                $img_to_update = $_SESSION['img_to_set'];
-
-                //push new data in final array
-                foreach($_FILES as $key => $value) {
-                    $uniq = uniqid("PRD-", true).'.'.Functions::imgExtention($value['type']);
-                    if(Functions::checkImg($_FILES[$key])) {
-                        array_push($dta, $uniq);
-                        Functions::moveUloadImage($value['tmp_name'], $uniq);
+            $r = (new MgrProducts)->UpdateProd($_SESSION['shop_name'], $post['id'], $data);
+            if ($r){
+                // move new image
+                foreach ($_SESSION['img_to_set'] as $key => $value){
+                    foreach ($value as $item => $v){
+                        Functions::moveUloadImage($item, $v);
                     }
                 }
-            }
 
-            $r = (new MgrProducts)->UpdateProd($_SESSION['shop_name'], $_SESSION['tmp_pid'], $dta);
-            if($r === 1) {
                 //delete old files
-                if(isset($img_to_update)){
-                    foreach($img_to_update as $tdl) {
-                        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.$tdl;
-                        try{
-                            unlink($path);
-                        }catch(Exception $e){
-                            return $e->getMessage();
-                        }
+                foreach(json_decode($_COOKIE['_SETIM_']) as $tdl) {
+                    if ($tdl !== ""){
+                        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'public_html'.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.$tdl;
+                        unlink($path);
                     }
-
-                    //unsent vars
-                    unset($_SESSION['ed_prod_array']);
-                    unset($_SESSION['tmp_pid']);
-                    unset($_SESSION['img_to_set']);
                 }
 
-                //sent res
-                $this->response($this->HTTP_OK, $r, 49);
+                //unsent vars
+                unset($_SESSION['img_to_set']);
+                $this->response($this->HTTP_OK, 'Update successfully', null);
             }
         }
         return false;

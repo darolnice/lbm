@@ -11,18 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/Functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/product.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/images/upload/AD-61b710781e7d57.61155307.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/images/upload/CI-61b5c68b414047.69100443.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/annonces.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/annonces.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/home.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/Pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/RestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/RestApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/product.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/product.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrProducts.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -442,7 +441,8 @@
       <workItem from="1639720045684" duration="20450000" />
       <workItem from="1639731462260" duration="214000" />
       <workItem from="1639731756477" duration="46564000" />
-      <workItem from="1639883601818" duration="23059000" />
+      <workItem from="1639883601818" duration="41243000" />
+      <workItem from="1639944826195" duration="14291000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -513,10 +513,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="123" y="219" key="#SQL_Resolution_Scopes/0.0.1366.728@0.0.1366.728" timestamp="1639303220750" />
-    <state x="429" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1637669360563">
+    <state x="429" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1639989717851">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="429" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1637669360563" />
+    <state x="429" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1639989717851" />
     <state x="511" y="206" key="#com.intellij.ide.actions.DebugLogConfigureAction" timestamp="1636096916744">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

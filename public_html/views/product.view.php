@@ -52,7 +52,7 @@ $title = "Product"
            </div>
 
            <?php if (isset($_SESSION['username'])):?>
-                <div id="options__"><img src="<?= S_ASSETS?>images/img/more-options.svg" alt=""></div>
+                <div id="options__"><img src="<?= S_ASSETS?>images/svg/more-options.svg" alt=""></div>
            <?php endif;?>
 
            <div id="nav_left_"><img src="<?= S_ASSETS?>images/svg/left-arrow.png" alt=""></div>

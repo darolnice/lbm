@@ -225,9 +225,9 @@
                         <h6 id="ed_prod_name"></h6>
 
                         <div class="edit__formm">
-                            <form method="post" name="ed_prod_from">
+                            <form method="post" name="ed_prod_from" enctype="multipart/form-data">
                                 <label for="ed__cat" class="ed__cat_lab"></label>
-                                <select id="ed__cat" name="ed__cat">
+                                <select id="ed__cat" name="ed__cat_">
                                     <option value="Mode">Mode</option>
                                     <option value="Automobile">Automobile</option>
                                     <option value="Electronic">Electronic</option>
@@ -252,27 +252,24 @@
 
                                 <label for="ed__name"></label>
                                 <input id="ed__name" type="text" name="ed__name"
-                                       value=""
                                        placeholder="Enter name">
 
                                 <label for="ed__price"></label>
-                                <input id="ed__price" type="text" name="ed__price"
-                                       value=""
+                                <input id="ed__price" type="text" name="ed__price_"
                                        placeholder="Enter price">
 
                                 <label for="ed__price"></label>
                                 <input id="ed__price" class="ed__prom_pr" type="text" name="ed__prom_pr"
-                                       value=""
                                        placeholder="Enter promo price">
 
                                 <label for="ed__desc1"></label>
                                 <textarea id="ed__desc1" name="ed__desc1"
-                                          rows="10"
-                                          placeholder="Long description (50 words max)"></textarea>
+                                          rows="10" maxlength="250"
+                                          placeholder="Long description (250 words max)"></textarea>
 
                                 <label for="nw__prop"></label>
                                 <textarea id="nw__prop" name="ed__prop" rows="4"
-                                          placeholder="Enter proprities (60 words max)"></textarea>
+                                          placeholder="Enter proprities (160 words max)"></textarea>
 
 
                                 <label for="nw__Color"></label>
@@ -291,19 +288,19 @@
                                        value="">
 
                                 <label for="ed___im"></label>
-                                <input id="ed___im" type="file" name="ed__im1" class="edim1" data-img="img1">
+                                <input id="ed___im" type="file" name="ed__im1" class="edim1" data-old="">
 
                                 <label for="ed___im"></label>
-                                <input id="ed___im" type="file" name="ed__im2" class="edim2" data-img="img2">
+                                <input id="ed___im" type="file" name="ed__im2" class="edim2" data-old="">
 
                                 <label for="ed___im"></label>
-                                <input id="ed___im" type="file" name="ed__im3" class="edim3"  data-img="img3">
+                                <input id="ed___im" type="file" name="ed__im3" class="edim3" data-old="">
 
                                 <label for="ed___im"></label>
-                                <input id="ed___im" type="file" name="ed__im4" class="edim4"  data-img="img4">
+                                <input id="ed___im" type="file" name="ed__im4" class="edim4" data-old="">
 
                                 <label for="ed___im"></label>
-                                <input id="ed___im" type="file" name="ed__im5" class="edim5" data-img="img5">
+                                <input id="ed___im" type="file" name="ed__im5" class="edim5" data-old="">
 
                                 <input type="hidden" name="c_ProdId" value="">
                                 <input class="ed__sbmt" type="submit" name="ed__sbmt_btn" value="UPDATE">
