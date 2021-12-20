@@ -18,7 +18,7 @@ body{
     border: none;
     z-index: 99999;
     position: absolute;
-    /*border: 1px solid coral;*/
+    /* border: 1px solid coral; */
 }
 
 .diapo{
@@ -112,11 +112,11 @@ body{
 
 /*************************************************************************/
 .scn2{
-    /*border: 1px solid rgba(108, 2, 72, 0.66);*/
+    /* border: 1px solid rgba(108, 2, 72, 0.66); */
     height: auto;
     width: 100%;
     margin-left: 0;
-    /*margin-bottom: 200px;*/
+    /* margin-bottom: 200px; */
     margin-top: 40%;
     display: flex;
     position: static;
@@ -303,6 +303,7 @@ body{
     display: block;
     margin-top: 1px;
     overflow: hidden;
+    /* margin-bottom: 150px; */
 }
 
 #_bslg_art_t1, .bshp_art_t1_vm{

@@ -12,16 +12,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/Rooter.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Rooter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/images/upload/AD-61b710781e7d57.61155307.jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/images/upload/CI-61b5c68b414047.69100443.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/product.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/product.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/MgrProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrProducts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/partials/best..._.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/best.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/home.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/partials/_best.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/_best.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,16 +103,16 @@
     <property name="settings.editor.selected.configurable" value="SQL Dialects" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\projets\lebolma\assets\images\svg" />
-      <recent name="C:\xampp\htdocs\projets\lebolma\assets\images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projets\lebolma\public_html\views" />
+      <recent name="C:\xampp\htdocs\projets\lebolma\public_html\assets\css" />
       <recent name="C:\xampp\htdocs\projets\lebolma\public_html" />
       <recent name="C:\xampp\htdocs\projets\lebolma\views" />
       <recent name="C:\xampp\htdocs\projets\lebolma\assets\images\upload\sallers" />
-      <recent name="C:\xampp\htdocs\projets\lebolma\assets\images\upload" />
-      <recent name="C:\xampp\htdocs\projets\lebolma" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projets\lebolma\assets\images\svg" />
+      <recent name="C:\xampp\htdocs\projets\lebolma\assets\images" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.home.view.php">
@@ -442,7 +441,8 @@
       <workItem from="1639731462260" duration="214000" />
       <workItem from="1639731756477" duration="46564000" />
       <workItem from="1639883601818" duration="41243000" />
-      <workItem from="1639944826195" duration="14291000" />
+      <workItem from="1639944826195" duration="21221000" />
+      <workItem from="1640018986891" duration="384000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -521,10 +521,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="511" y="206" key="#com.intellij.ide.actions.DebugLogConfigureAction/0.0.1366.728@0.0.1366.728" timestamp="1636096916744" />
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1639912132108">
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1640013236778">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1639912132108" />
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1640013236778" />
     <state x="404" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1639745472308">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

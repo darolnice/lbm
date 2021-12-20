@@ -9,10 +9,8 @@ body{
 .__best__{
     /*border: 1px solid royalblue;*/
     position: absolute!important;
-    width: 75% !important;
-    margin-left: 25%;
     height: auto;
-    display: flex;
+    display: block;
     /* margin-bottom: 100vh; */
     padding-left: 0;
 }
@@ -20,6 +18,8 @@ body{
 .best__ttl{
     font-weight: 400!important;
     color: #0a7f75;
+    margin-bottom: 25px;
+    margin-top: 30px;
     margin-left: 8px;
     /*border: 1px solid royalblue;*/
 }
@@ -35,11 +35,11 @@ body{
     margin-top: -35px;
 }
 
-.best_p, .best_s{
-    /*border: 1px solid #c43f0a;*/
+.best_p{
+    /* border: 1px solid #c43f0a; */
     display: flex;
     height: auto;
-    width: 100%;
+    width: 100% !important;
     box-sizing: border-box;
     flex-wrap: wrap;
 }

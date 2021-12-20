@@ -72,19 +72,19 @@ $title = "Home"
             <div class="bshp_">
                 <a class="bslg_art_t1">BEST SELLING</a>
                 <ul class="ul1">
-                    <?php for ($g=0; $g<count($this->getBestSaling()); $g++): ?>
+                    <?php for ($g=0; $g<count($this->getHbest()); $g++): ?>
                         <li>
                             <span>
                                 <p>
                                      <a
-                                        href="<?= 'product?id='.$this->getBestSaling()[$g]['id']."&shop=".Functions::SNFormatFront($this->getBestSaling()[$g]['shop_name'])?>"><?= $this->getBestSaling()[$g]['name']?>
+                                        href="<?= 'product?id='.$this->getHbest()[$g]['id']."&shop=".Functions::SNFormatFront($this->getHbest()[$g]['shop_name'])?>"><?= $this->getHbest()[$g]['name']?>
                                      </a>
                                 </p>
 
-                                <b><?= Functions::SNFormatFront($this->getBestSaling()[$g]['name'])?></b>
+                                <b><?= Functions::SNFormatFront($this->getHbest()[$g]['name'])?></b>
 
                                 <span class="strt">
-                                    <?php for ($p=0; $p<$this->getBestSaling()[$g]['rating']; $p++): ?>
+                                    <?php for ($p=0; $p<$this->getHbest()[$g]['rating']; $p++): ?>
                                         <h6 style="color: #ec6206">&starf;</h6>
                                     <?php endfor; ?>
                                 </span>
@@ -96,17 +96,17 @@ $title = "Home"
 
                 <a class="bshp_art_t1">BEST SHOP</a>
                 <ul class="ul1">
-                    <?php for ($b=0; $b<count($this->getBestShop()); $b++): ?>
+                    <?php for ($b=0; $b<count($this->getSbest()); $b++): ?>
                         <li>
                             <span>
                                 <p>
-                                    <a href="<?= 'shop?name='.Functions::SNFormatFront($this->getBestShop()[$b]['name'])?>"><?= Functions::SNFormatFront($this->getBestShop()[$b]['name'])?></a>
+                                    <a href="<?= 'shop?name='.Functions::SNFormatFront($this->getSbest()[$b]['name'])?>"><?= Functions::SNFormatFront($this->getSbest()[$b]['name'])?></a>
                                 </p>
 
-                                <b><?=$this->getBestShop()[$b]['sale']?></b>
+                                <b><?=$this->getSbest()[$b]['sale']?></b>
 
                                 <span class="strt">
-                                    <?php for ($b_=0; $b_<$this->getBestShop()[$b]['rating']; $b_++): ?>
+                                    <?php for ($b_=0; $b_<$this->getSbest()[$b]['rating']; $b_++): ?>
                                         <h6 style="color: #ec6206">&starf;</h6>
                                     <?php endfor; ?>
                                 </span>
@@ -221,7 +221,6 @@ $title = "Home"
             </form>
         </div>
 
-        <?php include_once S_VIEWS.'partials/_best.view.php'?>
     </section>
 
     <!-- scripts start -->

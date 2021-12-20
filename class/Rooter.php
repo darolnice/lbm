@@ -36,7 +36,7 @@ class Rooter
                         "homePagination"    => ["controllers" => "navigation",  "method"  => "pagination"],
                         "transactions"      => ["controllers" => "navigation",  "method" => "showTransactions"],
                         "shoplist"          => ["controllers" => "navigation",  "method" => "showShopList"],
-
+                        "best"              => ["controllers" => "navigation",  "method" => "showBest"],
 
                         "login"             => ["controllers" => "log", "method"  => "showLogin"],
                         "business"          => ["controllers" => "log", "method"  => "showBusinessLogin"],

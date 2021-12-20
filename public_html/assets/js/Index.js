@@ -825,47 +825,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     *  partial best start
-     */
-    if (document.querySelector('#_bslg_art_t1')){
-        $('.__best__ button').on('click', function () {
-            $('.__best__').fadeOut(400);
-            $(".promo, .lbm_prod").fadeIn(700);
-        });
-
-        /**
-         * show best salling
-         */
-        $('#_bslg_art_t1').on('click', function () {
-            $(".best__ttl").text('Best Selling');
-
-            $('.best_s').fadeOut();
-            $(".promo, .lbm_prod").fadeOut(300);
-
-            $('.best_p').fadeIn(310);
-            $(".__best__").attr('style', 'display:block');
-        });
-
-        /**
-         * show best shop
-         */
-        $('.bshp_art_t1_vm').on('click', function () {
-            $(".best__ttl").text('Best shop');
-
-            $('.best_p').fadeOut();
-            $(".promo, .lbm_prod").fadeOut(300);
-
-            $('.best_s').fadeIn(310);
-            $(".__best__").attr('style', 'display:block');
-
-        });
-    }
-    /**
-     *  partial best end
-     */
-
-
-    /**
      *  register 1 start
      */
     if (document.querySelector('#s_usrn')){

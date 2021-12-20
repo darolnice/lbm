@@ -39,8 +39,7 @@ class Navigation
     private $ctn_name, $ctn_subject, $ctn_mail, $ctn_msg;
     private $annonceD;
     private $busiProd;
-    private $bestSaling;
-    private $bestShop;
+    private $best;
     private $faq;
     private $blogData;
     private $blogShowAll;
@@ -68,10 +67,22 @@ class Navigation
     private $h_shopPref;
     private $specialOffer;
     private $all_readyin_p =[];
+    private $hbest;
+    private $sbest;
 
 
 
 
+
+
+    public function getHbest()
+    {
+        return $this->hbest;
+    }
+    public function getSbest()
+    {
+        return $this->sbest;
+    }
     public function getAllReadyinP(): array
     {
         return $this->all_readyin_p;
@@ -184,13 +195,10 @@ class Navigation
     {
         return $this->faq;
     }
-    public function getBestShop()
+
+    public function getBest()
     {
-        return $this->bestShop;
-    }
-    public function getBestSaling()
-    {
-        return $this->bestSaling;
+        return $this->best;
     }
     public function getBusiProd()
     {
@@ -306,18 +314,19 @@ class Navigation
             $this->lbmProdData = $db_->findCategorie('lbm', $f->e($_GET['Search']));
         }
 
+        $this->hbest = $db->getAllItemsFromTable("best_saling", 0, 5);
+        $this->sbest = $db->getAllItemsFromTable("best_shop", 0, 5);
         $this->h_shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", 'lbm');
-        $this->bestSaling = $db->getAllItemsFromTable("best_saling", $primera, 10);
-        $this->bestShop = $db->getAllItemsFromTable("best_shop", $primera, 10);
         $this->specialOffer = $db->getAllItemsFromTable("special_offer", 0, 10);
+
 
         include_once S_VIEWS.'/home.view.php';
         $this->getSpecialPromoData();
         $this->getLbmProdData();
         $this->getSpecialOffer();
-        $this->getBestSaling();
-        $this->getBestShop();
         $this->getHShopPref();
+        $this->getHbest();
+        $this->getSbest();
     }
 
     public function showProduct(){
@@ -1133,6 +1142,27 @@ class Navigation
 
         include_once S_VIEWS.'/shoplist.view.php';
         $this->getShoplist();
+
+//        echo '<pre>';
+//            var_dump();
+//        echo '</pre>';
+    }
+
+    public function showBest(){
+        session_start();
+        $db = new MgrProducts();
+
+        if ($_GET['f'] === 'sale'){
+            $this->best = $db->getAllItemsFromTable("best_saling", 0, 50);
+        }
+
+        if ($_GET['f'] === 'shop'){
+            $this->best = $db->getAllItemsFromTable("best_shop", 0, 50);
+        }
+
+        include_once S_VIEWS.'/_best.view.php';
+        $this->getBest();
+
 
 //        echo '<pre>';
 //            var_dump();

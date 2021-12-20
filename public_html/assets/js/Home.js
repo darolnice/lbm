@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // new Index().wsEventsLarge();
 
-    $("#main__footer").css("margin-top", '450vh');
+    $("#main__footer").css("margin-top", '50vh');
 
     let timer, elements, slides, slidesWidth;
     let compter = 0;
@@ -49,8 +49,6 @@ $(document).ready(function () {
         timer = setInterval(slideright, 8000);
     }
 
-
-
     let tm = document.querySelector('.state_price');
     let barr = document.querySelector('.barometre');
     let cmm = new Index();
@@ -88,7 +86,23 @@ $(document).ready(function () {
 
 
 
+    /**
+     *  partial best start
+     */
 
+    $('#_bslg_art_t1').on('click', function () {
+        window.open('best?f=sale', '_parent')
+    });
+
+    /**
+     * show best shop
+     */
+    $('.bshp_art_t1_vm').on('click', function () {
+        window.open('best?f=shop', '_parent')
+    });
+    /**
+     *  partial best end
+     */
 
 
 
