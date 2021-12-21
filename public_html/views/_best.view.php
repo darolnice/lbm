@@ -8,10 +8,28 @@ $title = "Best"
 
     <body>
         <div class="__best__">
+            <article class="row bst_art">
+                <a class="bst___art_t1">SPECIAL OFFER</a>
+                <ul class="ul1">
+                    <?php for ($i=0; $i<count($this->getSpecialOffer()); $i++): ?>
+                        <li class="sp_of_li" style="width: 100%!important;">
+                            <img src="<?= S_ASSETS ?>images/upload/<?= $this->getSpecialOffer()[$i]['prod_img']?>" alt="">
+                            <h6>
+                                <a class="text-dark" href="<?= Functions::SNFormatFront($this->getSpecialOffer()[$i]['link'])?>"><?= $this->getSpecialOffer()[$i]['prod_name']?></a>
+                            </h6>
+                            <h6 class="text-primary"><?= $this->getSpecialOffer()[$i]['price']?>
+                                <span><?= $this->getSpecialOffer()[$i]['reduce']?></span>
+                            </h6>
+                            <h6 class="small">
+                                <?= $this->getSpecialOffer()[$i]['message']?>
+                            </h6>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </article>
 
             <div class="best_p">
-                <h4 class="best__ttl">Best</h4>
-
+                <h1 class="bttl">Best</h1>
                 <?php for ($v=0; $v<count($this->getBest()); $v++): ?>
                     <div class="best_cont vu">
                         <div class="best_prd_img_div">
@@ -43,6 +61,7 @@ $title = "Best"
                     </div>
                 <?php endfor; ?>
             </div>
+
         </div>
 
         <!-- scripts start -->

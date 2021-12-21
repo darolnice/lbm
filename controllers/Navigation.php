@@ -1152,6 +1152,9 @@ class Navigation
         session_start();
         $db = new MgrProducts();
 
+        if (!isset($_GET['f'])){Functions::redir('./');}
+        if ($_GET['f'] !== 'sale' && $_GET['f'] !== 'shop'){Functions::redir('./');}
+
         if ($_GET['f'] === 'sale'){
             $this->best = $db->getAllItemsFromTable("best_saling", 0, 50);
         }
@@ -1160,9 +1163,11 @@ class Navigation
             $this->best = $db->getAllItemsFromTable("best_shop", 0, 50);
         }
 
+        $this->specialOffer = $db->getAllItemsFromTable("special_offer", 0, 10);
+
         include_once S_VIEWS.'/_best.view.php';
         $this->getBest();
-
+        $this->getHShopPref();
 
 //        echo '<pre>';
 //            var_dump();

@@ -12,15 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/Rooter.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Rooter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/partials/best..._.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/best.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/partials/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/home.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/partials/_best.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/_best.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/best.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/best.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/_best.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/_best.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -442,7 +436,7 @@
       <workItem from="1639731756477" duration="46564000" />
       <workItem from="1639883601818" duration="41243000" />
       <workItem from="1639944826195" duration="21221000" />
-      <workItem from="1640018986891" duration="384000" />
+      <workItem from="1640018986891" duration="6157000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -458,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639048090867</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ras">
+      <created>1640039769827</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640039769827</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +479,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Theme shop" />
-    <option name="LAST_COMMIT_MESSAGE" value="Theme shop" />
+    <MESSAGE value="ras" />
+    <option name="LAST_COMMIT_MESSAGE" value="ras" />
   </component>
   <component name="WindowStateProjectService">
     <state x="263" y="18" key="#CLI_Interpreters" timestamp="1639301064046">
