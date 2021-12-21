@@ -36,7 +36,7 @@ class MgrLogin extends Database
                 $_SESSION['client_order'] = 'statu';
                 $_SESSION['filter_user'] = 'username';
             }
-
+            $_SESSION['llst'] = time();
             Functions::save_in_cookies("cookies_u_data", $data->username, $data->city, $data->phone_number, $data->email, $data->country, $data->shop_name);
 
             if ($_POST['ckb_rm_s'] === 'on'){

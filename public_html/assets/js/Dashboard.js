@@ -398,13 +398,14 @@ $(document).ready(function () {
     });
     document.querySelectorAll('#delprod').forEach(del =>{
         del.addEventListener('click', function () {
+            let idx = new Index();
+            idx.scrollTo(0);
             let mess = 'Vous êtes sur le point de supprimer cet article,\n' +
                 '         il sera définitivement supprimer de votre liste d\'article.\n' +
                 '         êtes vous certain de vouloir le supprimer?';
 
             let ttl = 'DELETE: '+ del.getAttribute('data-prodName');
-            new Index().popup(ttl, mess, 'CANCEL', 'DELETE');
-            new Index().scrollTo(0);
+            idx.popup(ttl, mess, 'CANCEL', 'DELETE');
 
             $('#close_pop').on('click', function () {
                 $('.poppup').fadeOut(300);
@@ -430,9 +431,11 @@ $(document).ready(function () {
     });
     document.querySelectorAll('.adm_delsub').forEach(setR =>{
         setR.addEventListener('click', function () {
+            let idx = new Index();
+            idx.scrollTo(0);
             let msg = 'Vous êtes sur le point de supprimer un utilisateur, en êtes vous bien sûr?';
             let ttl = 'DELETE: '+setR.getAttribute('data-name');
-            new Index().popup(ttl, msg, 'CANCEL', 'DELETE');
+            idx.popup(ttl, msg, 'CANCEL', 'DELETE');
         });
         $('.opt2').on('click', function () {
             new Dashboard().ajxDelSA(setR.getAttribute('data-uid'));
@@ -452,6 +455,7 @@ $(document).ready(function () {
                     url: 'jxNewSCAT',
                     data: {
                         item: content,
+                        tab: 'business_sub_cat'
                     },
                     dataType: 'json',
                     success: function (response) {
@@ -477,12 +481,14 @@ $(document).ready(function () {
     });
     document.querySelectorAll('.cat__list_ button').forEach(itm =>{
         itm.addEventListener('click', function (e) {
+            let idx = new Index();
+            idx.scrollTo(0);
             e.preventDefault()
             if (itm.parentElement.firstElementChild.getAttribute('style') === null){
                 let ttl = 'DELETE: '+itm.getAttribute("data-item");
                 let msg = 'Vous êtes sur le point de supprimer cet élement de votre liste de categori,' +
                     ' voulez vous vraiment le faire?'
-                new Index().popup(ttl,msg,'CANCEL', 'DELETE');
+                idx.popup(ttl,msg,'CANCEL', 'DELETE');
                 options(itm.getAttribute("data-item"));
             }else {
                 if (itm.parentElement.firstElementChild.value !== ''){
@@ -502,14 +508,14 @@ $(document).ready(function () {
 
                                 itm.parentElement.parentElement.firstElementChild.innerHTML = itm.parentElement.firstElementChild.value.toUpperCase();
                                 itm.parentElement.firstElementChild.value = '';
-                                new Index().lbmAlert(response['message']);
+                                idx.lbmAlert(response['message']);
                             }else {
-                                new Index().lbmAlert('Fail please Try Again');
+                                idx.lbmAlert('Fail please Try Again');
                             }
                         }
                     });
                 }else {
-                    new Index().lbmAlert('Please Complete Form');
+                    idx.lbmAlert('Please Complete Form');
                 }
             }
         });
@@ -730,9 +736,10 @@ $(document).ready(function () {
         }
     });
 
-    $('#s_Add_cat').on('click', function () {
-        $('.cat__list_').fadeOut();
-        document.querySelector('#addCatForm').removeAttribute('hidden');
+    $('#s_Add_cat').on('click', function (e) {
+        (e.target.innerHTML === 'ADD NEW CATEGORY') ? e.target.innerHTML = 'BACK' : e.target.innerHTML = 'ADD NEW CATEGORY';
+        $('.cat__list_').toggle();
+        document.querySelector('#addCatForm').toggleAttribute('hidden');
     });
 
     $('#adm_mail_sbt').on('click', function (e) {
@@ -846,6 +853,35 @@ $(document).ready(function () {
             __srch.style.display = 'none';
         }else {
             new Index().jxSearch('#__srch', r);
+        }
+    });
+
+    document.querySelector('#ncat').addEventListener('click', function (e) {
+        e.preventDefault();
+        let content = document.querySelector('#ncat_ipt').value
+        if (content !== ''){
+            $.ajax({
+                type: 'POST',
+                url: 'jxNewSCAT',
+                data: {
+                    item: content,
+                    tab: 'business_categories'
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response['response_code'] === 200){
+                        document.querySelector('#ncat_ipt').value = '';
+                        $('#s_Add_cat').text('ADD NEW CATEGORY')
+                        $('.cat__list_').toggle();
+                        document.querySelector('#addCatForm').toggleAttribute('hidden');
+                        new Index().lbmAlert('Add successfully');
+                    }else {
+                        new Index().lbmAlert('Fail Add Please Try Again');
+                    }
+                }
+            });
+        }else {
+            new Index().lbmAlert('Please Complete Form');
         }
     });
 
@@ -1151,5 +1187,17 @@ $(document).ready(function () {
         });
     }
 
+    document.querySelectorAll('.inf__ button').forEach(btn =>{
+        btn.addEventListener('click', ()=>{
+            let idx = new Index();
+            var pid = btn.getAttribute('data-pid');
+            var p_name = btn.getAttribute('data-name');
+            if (pid !== '' && p_name !== ''){
+                idx.jxPostData("jxchkresq", btn, pid, p_name);
+            }else {
+                idx.lbmAlert('Someone is wrong please try again later');
+            }
+        });
+    })
 
 });

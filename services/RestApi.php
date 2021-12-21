@@ -234,21 +234,22 @@ class RestApi extends Database
 
 
     /**
+     * @param $table
      * @param $saller_id
      * @param $item
      * @return bool
      */
-    public function jxNewSCAT($saller_id, $item): bool {
+    public function jxNewSCAT($table, $saller_id, $item): bool {
         try{
-            $q = parent::getDb()->prepare("SELECT business_sub_cat FROM sallers WHERE id = $saller_id");
+            $q = parent::getDb()->prepare("SELECT $table FROM sallers WHERE id = $saller_id");
             $q->execute();
             $data = $q->fetch(PDO::FETCH_ASSOC);
 
-            $qr = parent::getDb()->prepare("UPDATE sallers SET business_sub_cat = :value WHERE id = $saller_id");
-            if ($data['business_sub_cat'] === ''){
-                $qr->execute(["value" => $item]);
+            $qr = parent::getDb()->prepare("UPDATE sallers SET $table = :val WHERE id = $saller_id");
+            if ($data[$table] === ''){
+                $qr->execute(["val" => $item]);
             }else{
-                $qr->execute(["value" => $data['business_sub_cat'].', '.$item]);
+                $qr->execute(["val" => $data[$table].', '.$item]);
             }
 
             return true;

@@ -356,14 +356,25 @@ class AjaxApiRes
     public function jxNewSCAT(){
         session_start();
         if (isset($_POST['item'])){
-            $r = (new RestApi())->jxNewSCAT($_SESSION['saller_id'], (new Functions())->e($_POST["item"]));
+            $r = (new RestApi)->jxNewSCAT($_POST['tab'], $_SESSION['saller_id'], (new Functions)->e($_POST["item"]));
 
-            if ($r === true){
+            if ($r){
                 $this->response($this->HTTP_OK, $r, 1584);
 
             }else{
                 $this->response($this->HTTP_BAD_REQUEST, false, 387);
             }
+        }
+    }
+
+
+    public function jxchkresq(){
+        session_start();
+        if ($_POST['data']){
+            $post = filter_var_array($_POST['data'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $link = 'product?id='.$post[0].'&shop='.$_SESSION['shop_name'];
+            $r = (new MgrProducts)->jxChkRes($post[0], $_SESSION['shop_name'], $post[1], $link);
+            ($r) ? $this->response($this->HTTP_OK, 'ok', 125): null;
         }
     }
 

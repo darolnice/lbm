@@ -650,8 +650,9 @@
                             <h6 class="small text-center ml-0 mb-3 mt-5">MANAGE CATEGORIES</h6>
                             <buttun class="btn btn-primary btn-sm small mb-3" id="s_Add_cat" style="font-size: 10px;">ADD NEW CATEGORY</buttun>
                             <form action="Dashboard" method="post" id="addCatForm" hidden>
-                                <input type="text" name="newCat" class="form-control" placeholder="Enter Category">
+                                <input type="text" name="newCat" id="ncat_ipt" class="form-control" placeholder="Enter Category">
                                 <button type="submit"
+                                        id="ncat"
                                         class="btn btn-primary btn-sm small w-50 mt-3 mb-3"
                                         style="font-size: 12px;">SUBMIT</button>
                             </form>
@@ -1445,7 +1446,20 @@
                                                     </p>
                                                 </div>
 
-                                                <button class="btn btn-primary btn-sm">CHECK</button>
+                                                <?php $__id = []?>
+                                                <?php
+                                                    foreach ($this->getReschk() as $item) {
+                                                       array_push($__id, $item['pid']);
+                                                    }
+                                                ?>
+
+                                                <?php if (!in_array($this->getShopData()[$g]['id'], $__id)): ?>
+                                                    <button class="btn btn-primary btn-sm"
+                                                            data-name="<?= $this->getShopData()[$g]['prod_name']?>"
+                                                            data-pid="<?= $this->getShopData()[$g]['id']?>">
+                                                        SEND
+                                                    </button>
+                                                <?php endif;?>
                                             </div>
                                     <?php endfor;?>
                             </div>

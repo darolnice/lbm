@@ -508,6 +508,30 @@ class MgrProducts extends Database
         return false;
     }
 
+    /**
+     * @param $pid
+     * @param $shopname
+     * @param $prodname
+     * @param $link
+     * @return bool|string
+     */
+    public function jxChkRes($pid, $shopname, $prodname, $link){
+        try {
+            $q = parent::getDb()->prepare("INSERT INTO checkResq (pid, shop_name, prod_name, link)
+                                                     VALUES (:pid, :shop_name, :prod_name, :link)");
+            $q->bindValue('pid', strip_tags($pid), PDO::PARAM_INT);
+            $q->bindValue('shop_name', $shopname, PDO::PARAM_STR_CHAR);
+            $q->bindValue('prod_name', strip_tags($prodname), PDO::PARAM_STR_CHAR);
+            $q->bindValue('link', strip_tags($link), PDO::PARAM_STR_CHAR);
 
+            if($q->execute()){
+                return true;
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
 
 }

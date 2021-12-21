@@ -13,10 +13,14 @@
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/Rooter.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Rooter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/MgrUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrLogin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrProducts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrShop.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrShop.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/RestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/RestApi.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -439,7 +443,8 @@
       <workItem from="1639731756477" duration="46564000" />
       <workItem from="1639883601818" duration="41243000" />
       <workItem from="1639944826195" duration="21221000" />
-      <workItem from="1640018986891" duration="16591000" />
+      <workItem from="1640018986891" duration="16837000" />
+      <workItem from="1640117563240" duration="8129000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -533,10 +538,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="511" y="206" key="#com.intellij.ide.actions.DebugLogConfigureAction/0.0.1366.728@0.0.1366.728" timestamp="1636096916744" />
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1640013236778">
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1640125274605">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1640013236778" />
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1640125274605" />
     <state x="404" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1639745472308">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -597,10 +602,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1638372353111" />
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1639904328862">
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1640119030313">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1639904328862" />
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1640119030313" />
     <state x="485" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638811807829">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

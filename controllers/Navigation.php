@@ -69,11 +69,19 @@ class Navigation
     private $all_readyin_p =[];
     private $hbest;
     private $sbest;
+    private $reschk;
 
 
 
 
 
+
+
+
+    public function getReschk()
+    {
+        return $this->reschk;
+    }
 
     public function getHbest()
     {
@@ -559,8 +567,8 @@ class Navigation
         $this->busiProd = $d->ProdSearch($_SESSION['shop_name'], $f->e($_GET['sp']));
 
         $this->notif = json_decode($this->getSallerData()[0]['notif'], true);
-        $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
-
+        $this->mess = $d_->getAllMess($_SESSION['username'], null);
+        $this->reschk = $d_->getAllfromAnyBusiUser('checkResq', $_SESSION['shop_name']);
 
         foreach($this->promoClient as $prd){
             $id = json_decode($prd['prod_data'], true);
@@ -591,6 +599,7 @@ class Navigation
         $this->getNotif();
         $this->getMess();
         $this->getAllReadyinP();
+        $this->getReschk();
 
 //        echo '<pre>';
 //            $tab = explode( ',', $this->saller_data[0]['business_categories']);

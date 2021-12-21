@@ -424,15 +424,27 @@ class Index {
                     cp.innerHTML = (response['message'][0]*data[2]).toFixed(2)+ ' '+data[3]
                     $('.btn_t').text(response['message'][1]+' US$');
                 }// checkcart update price
-                if(response['message'] === 'ok' && response['res_id'] === 103){
-                    let img1 = context.children[6].firstElementChild.children[1].files[0];
-                    let img2 = context.children[6].children[1].children[1].files[0];
+                if(response["response_code"] === 200 && response['res_id'] === 103){
+                    if (response['message'] === 'ok'){
+                        let img1 = context.children[6].firstElementChild.children[1].files[0];
+                        let img2 = context.children[6].children[1].children[1].files[0];
 
-                    let formData = new FormData();
-                    formData.append('cni-img1', img1);
-                    formData.append('cni-img2', img2);
-                    new Index().UP_post_asyn_fetch("jxregist2", this, formData);
+                        let formData = new FormData();
+                        formData.append('cni-img1', img1);
+                        formData.append('cni-img2', img2);
+                        new Index().UP_post_asyn_fetch("jxregist2", this, formData);
+                    }
+
                 }// register 2
+                if(response["response_code"] === 200 && response["res_id"] === 125){
+                    if (response['message'] === 'ok'){
+                        context.style.display = 'none';
+                        new Index().lbmAlert('Resquest sent successfully');
+                    }else {
+                        new Index().lbmAlert(response['message'], 'danger');
+                    }
+
+                }// dashboard send check resq
             }
         });
     }

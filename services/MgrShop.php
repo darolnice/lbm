@@ -20,23 +20,12 @@ class MgrShop extends Database
         ]);
         $cat->closeCursor();
     }
-    public function delCat(){
 
-
-    }
     public function editCat(){
 
 
     }
 
-    public function delSubCat(){
-
-
-    }
-    public function addSubcat(){
-
-
-    }
     public function editsubCat(){
 
 
@@ -118,7 +107,5 @@ class MgrShop extends Database
         }
         return false;
     }
-
-
 
 }
