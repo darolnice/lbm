@@ -592,9 +592,10 @@ class Navigation
         $this->getMess();
         $this->getAllReadyinP();
 
-
-
-
+//        echo '<pre>';
+//            $tab = explode( ',', $this->saller_data[0]['business_categories']);
+//            var_dump($tab[0]);
+//        echo '<pre>';
 
 
         /************************ VAR START *************************/

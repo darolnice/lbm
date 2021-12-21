@@ -374,7 +374,7 @@ class AjaxApiRes
         session_start();
         if (isset($_POST['action'])){
             $f = new Functions();
-            $r = (new RestApi())->jxMrgCAT($_POST['action'], $_SESSION['saller_id'], $f->e($_POST["item"]), $f->e($_POST["newVal"]));
+            $r = (new RestApi)->jxMrgCAT($_POST['action'], $_SESSION['saller_id'], $f->e($_POST["item"]), $f->e($_POST["newVal"]));
             $this->response($this->HTTP_OK, $r, 036);
         }
     }

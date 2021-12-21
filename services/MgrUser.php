@@ -31,7 +31,7 @@ class MgrUser extends Database
     public function current_saller_data($saller_id): array
     {
         try {
-            $d = parent::getDb()->prepare("SELECT * FROM sallers WHERE id= $saller_id");
+            $d = parent::getDb()->prepare("SELECT * FROM sallers WHERE id = $saller_id");
             $d->execute();
             return $d->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $e){

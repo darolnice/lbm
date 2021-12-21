@@ -12,9 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/css/best.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/best.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/_best.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/_best.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/dashboard.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/dashboard.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/MgrUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/RestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/RestApi.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +439,7 @@
       <workItem from="1639731756477" duration="46564000" />
       <workItem from="1639883601818" duration="41243000" />
       <workItem from="1639944826195" duration="21221000" />
-      <workItem from="1640018986891" duration="6157000" />
+      <workItem from="1640018986891" duration="16591000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -459,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640039769827</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ras">
+      <created>1640053002316</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1640053002316</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

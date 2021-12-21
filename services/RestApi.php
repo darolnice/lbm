@@ -272,12 +272,12 @@ class RestApi extends Database
                 $q = parent::getDb()->prepare("SELECT business_categories FROM sallers WHERE id = $saller_id");
                 $q->execute();
                 $data = $q->fetch(PDO::FETCH_ASSOC);
-                $tab = json_decode($data["business_categories"]);
+                $tab = explode(',', $data["business_categories"]);
                 $position = array_keys($tab, trim($item))[0];
-                $tab[$position] = '';
+                unset($tab[$position]);
 
-                $qr = parent::getDb()->prepare("UPDATE sallers SET business_categories = :value WHERE id = $saller_id");
-                $qr->execute(["value" => json_encode($tab)]);
+                $qr = parent::getDb()->prepare("UPDATE sallers SET business_categories = :val WHERE id = $saller_id");
+                $qr->execute(["val" => implode(',', $tab)]);
 
                 return $item.' '.'has been delete successfully';
 

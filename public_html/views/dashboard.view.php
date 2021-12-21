@@ -509,30 +509,35 @@
                         <?php endfor;?>
                     </div>
 
-                    <?php if ($this->getSubAdminData()): ?>
+                    <?php if (!empty($this->getSubAdminData())): ?>
                         <div class="allUsers" id="c_style" style="display: none">
                             <button class="close" id="clse">&times;</button>
-                            <?php for ($m=0; $m<count($this->getSubAdminData()); $m++): ?>
-                                <div class="sigl__user">
-                                    <div class="other__user__img">
-                                        <img src="<?= S_ASSETS?>images/svg/person_black_24dp.svg" alt="profil image">
+                                <?php for ($m=0; $m<count($this->getSubAdminData()); $m++): ?>
+                                    <div class="sigl__user">
+                                        <div class="other__user__img">
+                                            <img src="<?= S_ASSETS?>images/svg/person_black_24dp.svg" alt="profil image">
+                                        </div>
+                                        <div class="centr">
+                                            <p id="sa_name"><?= $this->getSubAdminData()[$m]['name'];?></p>
+                                            <p id="sa_mail"><?= $this->getSubAdminData()[$m]['email'];?></p>
+                                            <p class="<?= $this->getSubAdminData()[$m]['name'];?>" id="sa_right"><?= $this->getSubAdminData()[$m]['right_'];?></p>
+                                        </div>
+                                        <div class="bt__n">
+                                            <buttun class="setRight"
+                                                    data-name="<?= $this->getSubAdminData()[$m]['name'];?>"
+                                                    data-type="<?= $this->getSubAdminData()[$m]['right_'];?>"
+                                                    data-uid="<?= $this->getSubAdminData()[$m]['id'];?>">SET RIGHT</buttun>
+                                            <buttun class="adm_delsub"
+                                                    data-name="<?= $this->getSubAdminData()[$m]['name'];?>"
+                                                    data-uid="<?= $this->getSubAdminData()[$m]['id'];?>">DELETE</buttun>
+                                        </div>
                                     </div>
-                                    <div class="centr">
-                                        <p id="sa_name"><?= $this->getSubAdminData()[$m]['name'];?></p>
-                                        <p id="sa_mail"><?= $this->getSubAdminData()[$m]['email'];?></p>
-                                        <p class="<?= $this->getSubAdminData()[$m]['name'];?>" id="sa_right"><?= $this->getSubAdminData()[$m]['right_'];?></p>
-                                    </div>
-                                    <div class="bt__n">
-                                        <buttun class="setRight"
-                                                data-name="<?= $this->getSubAdminData()[$m]['name'];?>"
-                                                data-type="<?= $this->getSubAdminData()[$m]['right_'];?>"
-                                                data-uid="<?= $this->getSubAdminData()[$m]['id'];?>">SET RIGHT</buttun>
-                                        <buttun class="adm_delsub"
-                                                data-name="<?= $this->getSubAdminData()[$m]['name'];?>"
-                                                data-uid="<?= $this->getSubAdminData()[$m]['id'];?>">DELETE</buttun>
-                                    </div>
-                                </div>
-                            <?php endfor;?>
+                                <?php endfor;?>
+                        </div>
+                    <?php else:?>
+                        <div class="allUsers" id="c_style" style="display: none; background-color: #c69500!important;">
+                            <button class="close" id="clse">&times;</button>
+                            <h3 class="text-white">No user save</h3>
                         </div>
                     <?php endif;?>
 
@@ -617,16 +622,18 @@
                         </div>
                     </div>
 
-                    <?php if ($this->saller_data[0]['business_categories']): ?>
+
+                    <?php $tab = explode(',', $this->saller_data[0]['business_categories']);?>
+
+                    <?php if (count($tab) > 0): ?>
                         <div class="n_sub_cat" id="c_style" style="display: none">
                         <button class="close" id="clse">&times;</button>
                         <h6 class="small text-center ml-0 mb-3 mt-5">ADD SUB-CATEGORY</h6>
 
                         <div class="cat__list">
-                                <?php $tb = json_decode($this->saller_data[0]['business_categories']); ?>
-                                <?php for ($m=0; $m<count($tb); $m++): ?>
+                                <?php for ($g=0; $g<count($tab); $g++): ?>
                                     <div class= "cat_item_">
-                                        <b class="font-weight-lighter"><?= $tb[$m]?></b>
+                                        <b class="font-weight-lighter"><?= $tab[$g]?></b>
                                         <form method="post">
                                             <input id="ipt_new_sbc" type="text" name="sub" placeholder="Enter sub categorie(s) separate with coma">
                                             <button id="new_sub_cat" class="btn btn-primary btn-sm" type="submit">ENTER</button>
@@ -637,12 +644,18 @@
                     </div>
                     <?php endif;?>
 
-                    <?php if ($this->saller_data[0]['business_categories']): ?>
+                    <?php if (count($tab) > 0): ?>
                         <div class="mgr_cat" id="c_style" style="display: none">
                             <button class="close" id="clse">&times;</button>
                             <h6 class="small text-center ml-0 mb-3 mt-5">MANAGE CATEGORIES</h6>
+                            <buttun class="btn btn-primary btn-sm small mb-3" id="s_Add_cat" style="font-size: 10px;">ADD NEW CATEGORY</buttun>
+                            <form action="Dashboard" method="post" id="addCatForm" hidden>
+                                <input type="text" name="newCat" class="form-control" placeholder="Enter Category">
+                                <button type="submit"
+                                        class="btn btn-primary btn-sm small w-50 mt-3 mb-3"
+                                        style="font-size: 12px;">SUBMIT</button>
+                            </form>
                             <div class="cat__list_">
-                                    <?php $tab = json_decode($this->saller_data[0]['business_categories']); ?>
                                     <?php for ($m=0; $m<count($tab); $m++): ?>
                                         <div class= "cat_item_">
                                             <b class="font-weight-lighter"><?= $tab[$m]?></b>

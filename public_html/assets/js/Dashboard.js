@@ -529,6 +529,7 @@ $(document).ready(function () {
                         success: function (response) {
                             if (response['response_code'] === 200){
                                 itm.parentElement.parentElement.style.display = 'none';
+                                $('.poppup').fadeOut();
                                 new Index().lbmAlert(response['message']);
                             }else {
                                 new Index().lbmAlert('Fail please Try Again');
@@ -727,6 +728,11 @@ $(document).ready(function () {
             this.style.color = "rgb(10,10,10)";
             this.style.boxShadow = "0 0 6px rgb(151,150,150)";
         }
+    });
+
+    $('#s_Add_cat').on('click', function () {
+        $('.cat__list_').fadeOut();
+        document.querySelector('#addCatForm').removeAttribute('hidden');
     });
 
     $('#adm_mail_sbt').on('click', function (e) {
