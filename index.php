@@ -15,7 +15,7 @@ if (empty($request)) {
 
 
 if (isset($_SESSION['username']) && isset($_SESSION['llst'])){
-    if ((time() - $_SESSION['llst']) > 500){
+    if ((time() - $_SESSION['llst']) > 1000){
         (new Log)->showLogout();
     }else{
         $_SESSION['llst'] = time();

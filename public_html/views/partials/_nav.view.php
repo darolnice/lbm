@@ -38,15 +38,17 @@
                          src="<?= S_ASSETS?>images/svg/category_black_24dp.svg" alt="">
                     Category
                 </a>
-                <div class="sub-menu-2_">
-                    <ul class="row-cols-md-3" id="ul_2">
-                        <?php for ($i=0; $i<count($this->getData()); $i++): ?>
-                            <li id="cm_id">
-                                <a href="<?= Functions::catLink($this->getData()[$i]->categorie)?>"><?= $this->getData()[$i]->categorie?></a>
-                            </li>
-                        <?php endfor;?>
-                    </ul>
-                </div>
+                <?php if(count($this->getData()) > 1): ?>
+                    <div class="sub-menu-2_">
+                        <ul class="row-cols-md-3" id="ul_2">
+                            <?php for ($i=0; $i<count($this->getData()); $i++): ?>
+                                <li id="cm_id">
+                                    <a href="<?= Functions::catLink($this->getData()[$i])?>"><?= $this->getData()[$i]?></a>
+                                </li>
+                            <?php endfor;?>
+                        </ul>
+                    </div>
+                <?php endif;?>
             </li>
         <?php endif;?>
 
@@ -137,7 +139,7 @@
                 <h6 class="text-primary">Notifications</h6>
                 <?php if(count($this->getNotif()) > 0 ): ?>
                     <?php for($m=0; $m<count($this->getNotif()); $m++): ?>
-                    <div class="one_n">
+                        <div class="one_n">
                         <a class="text-decoration-none" href="<?= $this->getNotif()[$m]['link']?>">
                             <p class="notif_date"><?= $this->getNotif()[$m]['date']?></p>
                             <p class="notif_message"><?= $this->getNotif()[$m]['message']?></p>
@@ -154,7 +156,7 @@
                             <img class="del_notif" title="Delete this notification" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
                         </a>
                     </div>
-                <?php endfor;?>
+                    <?php endfor;?>
                 <?php endif;?>
             </div>
 

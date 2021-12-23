@@ -37,7 +37,7 @@
                     <ul class="row-cols-md-3" id="ul_2">
                         <?php for ($i=0; $i<count($this->getData()); $i++): ?>
                             <li id="cm_id">
-                                <a class="" href="?Search=<?= $this->getData()[$i]->categorie;?>"><?= $this->getData()[$i]->categorie;?></a>
+                                <a class="" href="?Search=<?= ltrim($this->getData()[$i])?>"><?= $this->getData()[$i]?></a>
                             </li>
                         <?php endfor;?>
                     </ul>

@@ -79,13 +79,32 @@ class MgrShop extends Database
     }
 
     /**
-     * @return array
+     * @param string $shopname
+     * @return array|bool
      */
-    public function showAllCategories(){
-        $q = $this->getDb()->prepare("SELECT * FROM categories");
-        $q->execute();
-        $data = $q->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+    public function showAllCategories(string $shopname){
+        try {
+            if (!empty($shopname)){
+                $q = $this->getDb()->prepare("SELECT business_categories FROM sallers WHERE shop_name = :shopname");
+                $q->bindValue('shopname', strip_tags($shopname), PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                     $data = $q->fetch(PDO::FETCH_ASSOC)["business_categories"];
+                     return explode(',', $data);
+                }
+
+            }else{
+                $q = $this->getDb()->prepare("SELECT business_categories FROM sallers WHERE shop_name = :shopname");
+                $q->bindValue('shopname', 'lbm', PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                    $data = $q->fetch(PDO::FETCH_ASSOC)["business_categories"];
+                    return explode(',', $data);
+                }
+            }
+
+        }catch (PDOException $e){
+            $e->getMessage();
+        }
+        return false;
     }
 
     /**
@@ -106,6 +125,67 @@ class MgrShop extends Database
             return Functions::sentNotif('Update successfully');
         }
         return false;
+    }
+
+    /**
+     * @param string $start
+     * @param string $end
+     * @param string $code
+     * @param string $amount
+     * @return bool|string
+     * Cette fonction crée un code discount
+     */
+    public function createDiscount(string $start, string $end, string $code, string $amount, $pass){
+        session_start();
+        try {
+            $id = $_SESSION['saller_id'];
+
+            $qr = parent::getDb()->prepare("SELECT saller_password FROM sallers WHERE id = $id");
+            $qr->execute();
+            $p = $qr->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($pass,  $p['saller_password'])){
+                $q = parent::getDb()->prepare("SELECT discount FROM sallers WHERE id = :id");
+                if($q->execute(['id' => $id])){
+                    $d = $q->fetch(PDO::FETCH_ASSOC);
+                    if($d['discount'] !== ''){
+                        $this->tab = json_decode($d['discount'], true);
+                        $this->tab [] = ['id' => count($this->tab)+1, 'start' => strip_tags($start), 'end' => strip_tags($end),
+                            'amount' => strip_tags($amount), 'state' => 'standbay', 'code' => strip_tags($code)
+                        ];
+
+                        $qs = parent::getDb()->prepare("UPDATE sallers SET discount = :disc WHERE id = $id");
+                        $qs->bindValue('disc', json_encode($this->tab), PDO::PARAM_STR_CHAR);
+                        if ($qs->execute()){
+                            return true;
+
+                        }else{
+                            return 'Someone is wrong please try again later !!!';
+                        }
+
+                    }else{
+                        $tab = [];
+                        $tab [] = ['id' => '1', 'start' => strip_tags($start), 'end' => strip_tags($end),
+                            'amount' => strip_tags($amount), 'state' => 'standbay', 'code' => strip_tags($code)
+                        ];
+
+                        $q_ = parent::getDb()->prepare("UPDATE sallers SET discount = :disc WHERE id = $id");
+                        $q_->bindValue('disc', json_encode($tab), PDO::PARAM_STR_CHAR);
+                        if ($q_->execute()){
+                            return true;
+
+                        }else{
+                            return 'Someone is wrong please try again later !!!';
+                        }
+                    }
+                }else{
+                    return 'Someone is wrong please try again later !!!';
+                }
+            }else{
+                return 'Password is wrong.';
+            }
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
     }
 
 }

@@ -274,24 +274,25 @@ class RestApi extends Database
                 $q->execute();
                 $data = $q->fetch(PDO::FETCH_ASSOC);
                 $tab = explode(',', $data["business_categories"]);
-                $position = array_keys($tab, trim($item))[0];
-                unset($tab[$position]);
+                $ntb =[];
+                foreach ($tab as $itm){array_push($ntb, ltrim($itm));}
+                $position = array_keys($ntb, ltrim($item))[0];
+                unset($ntb[$position]);
 
                 $qr = parent::getDb()->prepare("UPDATE sallers SET business_categories = :val WHERE id = $saller_id");
-                $qr->execute(["val" => implode(',', $tab)]);
-
+                $qr->execute(["val" => implode(',', $ntb)]);
                 return $item.' '.'has been delete successfully';
 
             }elseif($action === "edit"){
                 $q = parent::getDb()->prepare("SELECT business_categories FROM sallers WHERE id = $saller_id");
                 $q->execute();
                 $data = $q->fetch(PDO::FETCH_ASSOC);
-                $tab = json_decode($data["business_categories"]);
-                $position = array_keys($tab, trim($item))[0];
+                $tab = explode(',', $data["business_categories"]);
+                $position = array_keys($tab, $item)[0];
                 $tab[$position] = $newVal;
 
                 $qr = parent::getDb()->prepare("UPDATE sallers SET business_categories = :value WHERE id = $saller_id");
-                $qr->execute(["value" => json_encode($tab)]);
+                $qr->execute(["value" => implode(',', $tab)]);
 
                 return 'Update Success';
             }

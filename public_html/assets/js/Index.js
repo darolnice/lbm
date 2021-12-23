@@ -445,6 +445,17 @@ class Index {
                     }
 
                 }// dashboard send check resq
+                if(response["response_code"] === 200 && response["res_id"] === 1589){
+                    let idx = new Index();
+                    if(response['message'] === true){
+                        document.querySelectorAll('#disc_id input').forEach(ipt =>{
+                           ipt.value = '';
+                        });
+                        idx.lbmAlert('Discount Add successfully');
+                    }else {
+                        idx.lbmAlert(response['message'], 'danger');
+                    }
+                }// create new discount
             }
         });
     }

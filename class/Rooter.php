@@ -99,7 +99,7 @@ class Rooter
                         'jxregist2'         => ["api"   => "AjaxApiRes",  "method" => "jxregist2"],
                         'jxadsrh'           => ["api"   => "AjaxApiRes",  "method" => "jxadsrh"],
                         'jxchkresq'         => ["api"   => "AjaxApiRes",  "method" => "jxchkresq"],
-
+                        'jxDisc'            => ["api"   => "AjaxApiRes",  "method" => "jxDisc"],
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
 

@@ -11,7 +11,7 @@
         <div class="short__by">
             <h5 class="mt-3 mb-3 small">
                 <img class="mt-3 i_size" id="notif__" src="<?= S_ASSETS?>images/svg/dashboard_black_24dp.svg" alt="user image">
-                <?= $_SESSION['shop_name']?> DASHBOARD</h5>
+                <?= Functions::SNFormatFront($_SESSION['shop_name'])?> DASHBOARD</h5>
             <b class="nam smal"><?= $this->getSallerData()[0]['username'];?></b>
 
             <div id="d0" class="mt-3 mb-3"><p>
@@ -34,7 +34,7 @@
                     PRODUCTS <b class="float-right mr-1">&blacktriangledown;</b></p>
                 <button data-view="new__prod">Add Product</button>
                 <button data-view="mgr_cat">Manage Category</button>
-                <button data-view="n_sub_cat">Add Sub-Category</button>
+                <button data-view="n_sub_cat">Add Tags</button>
                 <?php if($_SESSION['shop_name'] !== 'lbm'): ?>
                     <button data-view="__chk_prod">Sent Check Request</button>
                 <?php endif;?>
@@ -99,7 +99,7 @@
                 <p>
                     <img class="mt-3 i_size" id="notif__" src="<?= S_ASSETS?>images/svg/leaderboard_black_24dp.svg" alt="user image">
                     STATISTIQUES <b class="float-right mr-1">&blacktriangledown;</b></p>
-                <button data-view="">View All</button>
+                <button data-view="__stat_view">View All</button>
             </div>
 
             <?php if ($_SESSION['shop_name'] !== "lbm"): ?>
@@ -114,8 +114,9 @@
                     <p>
                         <img class="mt-3 i_size" id="notif__" src="<?= S_ASSETS?>images/svg/support_agent_black_24dp.svg" alt="user image">
                         CALL CENTER <b class="float-right mr-1">&blacktriangledown;</b></p>
-                    <button data-view="">Local Call</button>
-                    <button data-view="">Whatsapp Call</button>
+                    <button data-view="lcal">Local Call</button>
+                    <button class="___call d-none" id="#tel 694253565"></button>
+                    <button data-view="wcal">Whatsapp Call</button>
                 </div>
             <?php endif;?>
 
@@ -465,7 +466,7 @@
                         </div>
 
                         <div class="discount_form">
-                            <form method="POST">
+                            <form id="disc_id" method="POST" name="newDis">
                                 <label for="dateD">Start Date</label>
                                 <input id="dateD" type="date" name="dateD" required>
 
@@ -474,39 +475,52 @@
                                 <input id="dateF" type="date" name="dateF" required>
 
                                 <input type="text" name="discountC" placeholder="Enter Discount Code (10 Characters max)" maxlength="10" required>
-                                <input id="discountA" type="text" name="discountA" placeholder="Enter Discount Value (US$)" autocomplete="off" required>
-                                <input type="password" name="Dpasse" id="Dpasse" placeholder="Enter your password" required autocomplete="off">
+                                <input type="number" name="discountA" placeholder="Enter Discount Value (US$)" id="discountA" autocomplete="off" required>
+                                <input type="password" name="Dpasse" placeholder="Enter your password" id="Dpasse" required>
 
                                 <div class="Dbtn">
-                                    <button class="mr-1" style="background-color: crimson" id="Dcancel" type="button">Cancel</button>
-                                    <button id="Dsbt" type="submit">Create</button>
+                                    <button class="mr-1" style="background-color: crimson" value="btn" id="Dcancel">Cancel</button>
+                                    <button id="Dsbt" value="btn" type="submit">Create</button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
                     <div class="discountList" style="display: none">
-                        <strong style="font-size: 11px;">DISCOUNT REGISTER LIST</strong><br><br>
-                        <?php for($h=0; $h<10; $h++): ?>
-                            <div class="row-cols-md-3 discount_">
-                            <div class="datesList">
-                                <p><strong>START :</strong> <b>11/11/2021</b></p>
-                                <p><strong>END :</strong> <b>31/12/2021</b></p>
-                            </div>
+                        <?php if (count($this->getTabl()) > 0): ?>
+                            <strong style="font-size: 11px;">DISCOUNT REGISTER LIST</strong><br><br>
+                            <?php for($h=0; $h<count($this->getTabl()); $h++): ?>
+                                <div class="row-cols-md-3 discount_">
+                                <div class="datesList">
+                                    <p><strong>START :</strong> <b><?= $this->getTabl()[$h]['start']?></b></p>
+                                    <p><strong>END :</strong> <b><?= $this->getTabl()[$h]['end']?></b></p>
+                                </div>
 
-                            <div class="AmountDiscList">
-                                <p><strong>AMOUNT :</strong> <b>200.99 US$</b></p>
-                                <p><strong>STATE :</strong> <b>Exploité</b></p>
-                            </div>
+                                <div class="AmountDiscList">
+                                    <p><strong>AMOUNT :</strong> <b><?= $this->getTabl()[$h]['amount']?></b></p>
+                                    <p><strong>STATE :</strong> <b><?= $this->getTabl()[$h]['state']?></b></p>
+                                </div>
 
-                            <div class="AmountDiscBtn">
-                                <button class="mr-4 Disc_activ" style="color: green;">ACTIVE</button>
-                                <button class="mr-3 ml-3 Disc_activ" style="color: gray">DESABLED</button>
-                                <button class="mr-5 Disc_Edit" style="color: blue;margin-left: 1px;">EDIT</button>
-                                <button class="Disc_rem ml-md-1" style="color: crimson">DELETE</button>
+                                <div class="AmountDiscBtn">
+                                    <button class="mr-4 Disc_activ" style="color: green;" data-id="<?= $this->getTabl()[$h]['id']?>">
+                                        ACTIVE
+                                    </button>
+                                    <button class="mr-3 ml-3 Disc_activ" style="color: gray" data-id="<?= $this->getTabl()[$h]['id']?>">
+                                        DESABLED
+                                    </button>
+                                    <button class="mr-5 Disc_Edit" data-id="<?= $this->getTabl()[$h]['id']?>"
+                                            style="color: blue; margin-left: 1px;">
+                                        EDIT
+                                    </button>
+                                    <button class="Disc_rem ml-md-1" style="color: crimson" data-id="<?= $this->getTabl()[$h]['id']?>">
+                                        DELETE
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <?php endfor;?>
+                            <?php endfor;?>
+                        <?php else:?>
+                            <strong style="font-size: 11px;">NO DISCOUNT REGISTER</strong><br><br>
+                        <?php endif;?>
                     </div>
 
                     <?php if (!empty($this->getSubAdminData())): ?>
@@ -622,13 +636,11 @@
                         </div>
                     </div>
 
-
                     <?php $tab = explode(',', $this->saller_data[0]['business_categories']);?>
-
                     <?php if (count($tab) > 0): ?>
                         <div class="n_sub_cat" id="c_style" style="display: none">
                         <button class="close" id="clse">&times;</button>
-                        <h6 class="small text-center ml-0 mb-3 mt-5">ADD SUB-CATEGORY</h6>
+                        <h6 class="small text-center ml-0 mb-3 mt-5">ADD TAG</h6>
 
                         <div class="cat__list">
                                 <?php for ($g=0; $g<count($tab); $g++): ?>
@@ -657,21 +669,21 @@
                                         style="font-size: 12px;">SUBMIT</button>
                             </form>
                             <div class="cat__list_">
-                                    <?php for ($m=0; $m<count($tab); $m++): ?>
-                                        <div class= "cat_item_">
-                                            <b class="font-weight-lighter"><?= $tab[$m]?></b>
+                                <?php for ($m=0; $m<count($tab); $m++): ?>
+                                    <div class= "cat_item_">
+                                        <b class="font-weight-lighter"><?= $tab[$m]?></b>
 
-                                            <img src="<?= S_ASSETS ?>images/svg/edit.png" alt="edit button">
-                                            <form method="post">
-                                                <input id="edit_cat" type="text" name="sub" placeholder="Enter new name here">
-                                                <button id="mgr__cat_btn"
-                                                        data-item=" <?= $tab[$m]?>"
-                                                        class="btn-sm"
-                                                        type="submit">DELETE
-                                                </button>
-                                            </form>
-                                        </div>
-                                    <?php endfor;?>
+                                        <img src="<?= S_ASSETS ?>images/svg/edit.png" alt="edit button">
+                                        <form method="post">
+                                            <input id="edit_cat" type="text" name="sub" placeholder="Enter new name here">
+                                            <button id="mgr__cat_btn"
+                                                    data-item=" <?= $tab[$m]?>"
+                                                    class="btn-sm"
+                                                    type="submit">DELETE
+                                            </button>
+                                        </form>
+                                    </div>
+                                <?php endfor;?>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -1298,6 +1310,11 @@
                             </div>
                         </div>
                     <?php endif;?>
+
+                    <div class="__stat_view" id="c_style" style="display:none">
+                        <button class="close" id="clse">&times;</button>
+                        <p class="text-dark mt-3">Sorry your statistiques is not available now</p>
+                    </div>
 
                     <?php if ($_GET['sp']): ?>
                         <div class="p__list mb-5" id="c_style" style="display: block">

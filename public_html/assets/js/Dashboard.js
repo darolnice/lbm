@@ -300,6 +300,7 @@ class Dashboard {
         $('.custumer_l').hide();
         $('.faqq').hide();
         $('.__chk_prod').hide();
+        $('.__stat_view').hide();
 
         new Index().scrollTo(0);
         $(elementToShow).fadeIn();
@@ -373,7 +374,7 @@ $(document).ready(function () {
         });
     });
 
-    let specials = ['setting', 'addinpromo'];
+    let specials = ['setting', 'addinpromo', 'lcal', 'wcal', 'newDiscount'];
     document.querySelectorAll('.short__by button').forEach(elemnt =>{
         let view = elemnt.dataset['view'];
         elemnt.addEventListener("click", function () {
@@ -384,7 +385,19 @@ $(document).ready(function () {
                 if (view === "addinpromo"){
                     new Dashboard().addinpromo();
                 }
-
+                if (view === "lcal"){
+                    alert('call');
+                    return null;
+                }
+                if (view === "wcal"){
+                    alert('call');
+                    return null;
+                }
+                if (view === "newDiscount"){
+                    $('#Dpasse').val('');
+                    let selector = '.'+view;
+                    new Dashboard().showElemet(selector);
+                }
             }else {
                 let selector = '.'+view;
                 new Dashboard().showElemet(selector);
@@ -492,13 +505,14 @@ $(document).ready(function () {
                 options(itm.getAttribute("data-item"));
             }else {
                 if (itm.parentElement.firstElementChild.value !== ''){
+                    let nv = itm.parentElement.firstElementChild.value;
                     $.ajax({
-                        type: 'POST',
+                        type:'POST',
                         url: 'jxMgrC',
                         data: {
                             action: 'edit',
-                            item:  itm.getAttribute("data-item"),
-                            newVal: itm.parentElement.firstElementChild.value
+                            item:   itm.getAttribute("data-item"),
+                            newVal: new Index().toCapitalize(nv)
                         },
                         dataType: 'json',
                         success: function (response) {
@@ -528,7 +542,7 @@ $(document).ready(function () {
                         url: 'jxMgrC',
                         data: {
                             action: 'delete',
-                            item:  choose,
+                            item: choose,
                             newVal: null
                         },
                         dataType: 'json',
@@ -655,6 +669,21 @@ $(document).ready(function () {
             }
         }
         new Index().jxPostData("jxNewProd", this, arr);
+    });
+
+    document.forms['newDis'].addEventListener('submit', function (e) {
+        inputs = this;
+        let val = [];
+        for(var i=0; i<inputs.length; i++){
+            if (inputs[i].value !== ''){
+                e.preventDefault();
+                val.push(inputs[i].value)
+            }else {
+                new Index().lbmAlert('Please complete all form', 'danger');
+                return
+            }
+        }
+        new Index().jxPostData('jxDisc', this, val);
     });
 
     let inpFile = document.querySelector('#inpFile');

@@ -8,14 +8,9 @@
 
 class Partials
 {
-
-
-
-
     private $notif;
     private $mess;
     private $data;
-
 
     public function getData()
     {
@@ -31,40 +26,54 @@ class Partials
     }
 
 
-
+    /**
+     *
+     */
     public static function showFooter(){
         include_once S_VIEWS.'partials/_footer.view.php';
     }
 
+    /**
+     *
+     */
     public function showNav(){
-        $this->data = ($db = new MgrShop)->showAllCategories();
+        $usr = new MgrUser();
+        $this->data = (new MgrShop)->showAllCategories(Functions::SNFormatBack($_GET['name']));
 
         if ($_SESSION['saller_id']){
-            $this->notif = (new MgrUser)->getAllNotifs('sallers', $_SESSION['saller_id']);
-            $this->mess = (new MgrUser)->getAllMess($_SESSION['username'],  null);
+            $this->notif = $usr->getAllNotifs('sallers', $_SESSION['saller_id']);
+            $this->mess = $usr->getAllMess($_SESSION['username'],  null);
 
         }elseif ($_SESSION['current_user_id']){
-            $this->notif = (new MgrUser)->getAllNotifs('users', $_SESSION['current_user_id']);
-            $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
+            $this->notif = $usr->getAllNotifs('users', $_SESSION['current_user_id']);
+            $this->mess = $usr->getAllMess($_SESSION['username'], null);
         }
 
         include_once S_VIEWS.'partials/_nav.view.php';
         $this->getData();
         $this->getNotif();
         $this->getMess();
+
+//        echo '<pre>';
+//            foreach ($this->getData() as $item){
+//                trim($item);
+//            }
+//        var_dump(trim(' romeo'));
+//        echo '<pre>';
     }
 
     public function showHomeNav(){
         session_start();
-        $this->data = ($db = new MgrShop)->showAllCategories();
+        $usr = new MgrUser();
+        $this->data = (new MgrShop)->showAllCategories(Functions::SNFormatBack($_GET['name']));
 
         if ($_SESSION['saller_id']){
-            $this->notif = (new MgrUser)->getAllNotifs('sallers', $_SESSION['saller_id']);
-            $this->mess = (new MgrUser)->getAllMess($_SESSION['username'],  null);
+            $this->notif = $usr->getAllNotifs('sallers', $_SESSION['saller_id']);
+            $this->mess = $usr->getAllMess($_SESSION['username'],  null);
 
         }elseif($_SESSION['current_user_id']){
-            $this->notif = (new MgrUser)->getAllNotifs('users', $_SESSION['current_user_id']);
-            $this->mess = (new MgrUser)->getAllMess($_SESSION['username'],  null);
+            $this->notif = $usr->getAllNotifs('users', $_SESSION['current_user_id']);
+            $this->mess = $usr->getAllMess($_SESSION['username'],  null);
         }
 
         include_once S_VIEWS.'partials/_homeNav.view.php';

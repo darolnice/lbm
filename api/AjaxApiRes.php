@@ -1044,22 +1044,29 @@ class AjaxApiRes
     /**
      * Cette methode Converti en dollar toutes les devises et stoque
      * le resultat dans array somme
+     *
      * @param string $currency
      * @param $price
      * @param $qte
      * @param $pid
+     * @return bool
      */
-    function convertCurrency (string $currency, $price, $qte, $pid){
+    function convertCurrency (string $currency, $price, $qte, $pid): bool {
         if($currency === 'CFA'){
             $_SESSION['somme'][$pid] = round(($price / $this->DOLLAR) * $qte, 2);
+            return true;
         }elseif($currency === '€'){
             $_SESSION['somme'][$pid] = round(($price - $this->EURO) * $qte, 2);
+            return true;
         }elseif($currency === '£'){
             $_SESSION['somme'][$pid] = round(($price + $this->POUND) * $qte, 2);
+            return true;
         }elseif($currency === '¥'){
             $_SESSION['somme'][$pid] = round(($price + $this->YEN) * $qte,2);
+            return true;
         }else{
             $_SESSION['somme'][$pid] = round($price * $qte, 2);
+            return true;
         }
     }
 
@@ -1166,9 +1173,20 @@ class AjaxApiRes
             }
         }
 
-    } 
-  
+    }
 
+    /**
+     *
+     */
+    public function jxDisc(){
+        $post = filter_var_array($_POST['data'], FILTER_SANITIZE_SPECIAL_CHARS);
+        if (!(new Functions)->not_empty($post[0])){
+           $r = (new MgrShop)->createDiscount($post[0][0], $post[0][1], $post[0][2], $post[0][3], $post[0][4]);
+           $this->response($this->HTTP_OK, $r, 1589);
+        }else{
+            $this->response($this->HTTP_OK, 'Please complete all form', 1589);
+        }
+    }
 
 
 

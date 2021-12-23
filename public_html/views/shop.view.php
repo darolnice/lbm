@@ -27,6 +27,8 @@ $title = $_GET['name']." Shop";?>
                                     <?php $h = explode(',', $this->getData()[$i]['color']);?>
                                     <form method="post" class="form_color">
                                         <select name="color" id="prod_clr"
+                                                data-shpnam="<?= $this->getData()[$i]['shop_name'];?>"
+                                                data-pid="<?= $this->getData()[$i]['id'];?>"
                                                 style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['slc']?>">>
                                             <?php foreach ($h as $h__):?>
                                                 <option value="<?= $h__?>"><?= $h__?></option>
@@ -39,6 +41,8 @@ $title = $_GET['name']." Shop";?>
                                     <?php $k = explode(',', $this->getData()[$i]['size']);?>
                                     <form method="post" class="form_size">
                                         <select name="size" id="prod_sze"
+                                                data-shpnam="<?= $this->getData()[$i]['shop_name'];?>"
+                                                data-pid="<?= $this->getData()[$i]['id'];?>"
                                                 style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['slc']?>">
                                             <?php foreach ($k as $k__):?>
                                                 <option value="<?= $k__?>"><?= $k__?></option>
@@ -73,7 +77,7 @@ $title = $_GET['name']." Shop";?>
                             </div>
 
                             <div class="add">
-                                <button class="btn-group" id="ad"
+                                <button class="btn-group" id="_add_"
                                         style="display: block; background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"
                                         data-id="<?= $this->getData()[$i]['id'];?>"
                                         data-name="<?= $this->getData()[$i]['prod_name'];?>"
@@ -81,7 +85,7 @@ $title = $_GET['name']." Shop";?>
                                         data-max="<?= $this->getData()[$i]['quantity'];?>"
                                         data-color="<?= $this->getData()[$i]['color'];?>"
                                         data-size="<?= $this->getData()[$i]['size'];?>"
-                                        data-qte="<?= $this->getData()[$i]['quantity'];?>">BUY NOW</button>
+                                        data-shopname="<?= $this->getData()[$i]['shop_name'];?>">BUY NOW</button>
 
                                 <a class="btn-group"
                                    style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"

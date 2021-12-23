@@ -70,6 +70,7 @@ class Navigation
     private $hbest;
     private $sbest;
     private $reschk;
+    private $tabl = [];
 
 
 
@@ -78,11 +79,15 @@ class Navigation
 
 
 
+
+    public function getTabl(): array
+    {
+        return $this->tabl;
+    }
     public function getReschk()
     {
         return $this->reschk;
     }
-
     public function getHbest()
     {
         return $this->hbest;
@@ -463,10 +468,10 @@ class Navigation
     public function showShop(){
         session_start();
         setcookie('ssc', serialize('add_at'), time()+60*24);
-        setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
+
         $d = new MgrProducts();
         $f = new Functions();
-        $current_business = str_replace(" ",'_', $f->e($_GET['name']));
+        $current_business = Functions::SNFormatBack($_GET['name']);
 
         if($_COOKIE['spl']){
             if ($_GET['Search']){
@@ -491,6 +496,7 @@ class Navigation
             }
         }
         $this->shopPref = (new MgrUser)->getAllfromAnyBusiUser("sallers", $current_business);
+        setcookie('curr', utf8_decode($this->shopPref[0]['currency']), time()+60*24);
 
         if ($_SESSION['info']){
             Functions::set_flash_tab([$_SESSION['info']], 'danger');
@@ -501,6 +507,10 @@ class Navigation
         $this->getData();
         $this->getShopPref();
         $this->getData();
+
+//        echo '<pre>';
+//            var_dump($this->getShopPref()[0]["business_categories"]);
+//        echo '<pre>';
     }
 
     public function showSetting(){
@@ -510,11 +520,6 @@ class Navigation
 
         include_once S_VIEWS.'/setting.view.php';
         $this->getSData();
-
-//
-//        echo '<pre>';
-//            var_dump();
-//        echo '</pre>';
     }
 
     public function showPlans(){
@@ -534,7 +539,6 @@ class Navigation
             $this->shop_data = (new Pagination)->showDataWithPagination($_SESSION['shop_name'], $_SESSION['order by'], (int)$_GET['page']*10, 10);
         }
         $this->shop_data = (new Pagination)->showDataWithPagination($_SESSION['shop_name'], $_SESSION['order by'], 0, 10);
-
 
         if($_SESSION['shop_name'] === 'lbm'){
             $this->promoClient = (new Pagination)->showDataWithPagination('promo', $_SESSION['client_order'], 0, 10);
@@ -576,6 +580,7 @@ class Navigation
                 $this->all_readyin_p [] = $item['prod_id'];
             }
         }
+        foreach(json_decode($this->getSallerData()[0]['discount'], true) as $item){$this->tabl [] = $item;}
 
         include_once S_VIEWS.'/dashboard.view.php';
         $this->getSallerData();
@@ -600,10 +605,11 @@ class Navigation
         $this->getMess();
         $this->getAllReadyinP();
         $this->getReschk();
+        $this->getTabl();
+
 
 //        echo '<pre>';
-//            $tab = explode( ',', $this->saller_data[0]['business_categories']);
-//            var_dump($tab[0]);
+//
 //        echo '<pre>';
 
 
