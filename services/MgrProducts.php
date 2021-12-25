@@ -9,7 +9,6 @@
 class MgrProducts extends Database
 {
 
-
     /**
      * @param $currentShop
      * @param $sub_category
@@ -339,9 +338,9 @@ class MgrProducts extends Database
         try {
             $q = parent::getDb()->prepare("INSERT INTO reclamations (rec_id, transaction_id, rec_name, rec_mail,
                                                                          rec_phone, prod_name, quantity, reason, business_name, issu,
-                                                                         other_observations, add_at) 
-                                                    VALUES(:rec_id, :transaction_id, :rec_name, :rec_mail, :rec_phone, :prod_name, :quantity,
-                                                           :reason, :business_name, :issu, :other_observations, :add_at)"
+                                                                         other_observations) 
+                                                     VALUES(:rec_id, :transaction_id, :rec_name, :rec_mail, :rec_phone, :prod_name, :quantity,
+                                                            :reason, :business_name, :issu, :other_observations)"
             );
             $q->bindValue("rec_id", Functions::random_key(), PDO::PARAM_STR);
             $q->bindValue("transaction_id", $data[6], PDO::PARAM_STR);
@@ -354,23 +353,32 @@ class MgrProducts extends Database
             $q->bindValue("business_name", $data[7], PDO::PARAM_STR);
             $q->bindValue("issu", $data[8], PDO::PARAM_STR);
             $q->bindValue("other_observations", $data[9], PDO::PARAM_STR);
-            $q->bindValue("add_at", date("Y-M-D H:i:s"), PDO::PARAM_STR);
 
-            $q->execute();
-            $q->closeCursor();
+            if ($q->execute()){
+                $msg = "Cher " . $data[0] . " votre reclamation a été enregistré avec succes, le delai d'attente moyen est de 10 jours, merci pour votre confiance";
+                $headers = "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+                mail($data[1], SITE_NAME . "- RECLAMATIONS", $msg, $headers);
 
-            $msg = "Cher " . $data[0] . " votre reclamation a été enregistré avec succes, le delai d'attente moyen est de 10 jours, merci pour votre confiance";
-            $headers = "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-            mail($data[1], SITE_NAME . "- RECLAMATIONS", $msg, $headers);
+                (new RestApi)->notify([
+                    'format' => 'reclam',
+                    'sujet' => 'RECLAM',
+                    'destinataire' => $data[7],
+                    'message' => 'You have a new reclamation',
+                    'prod_name' => $data[4],
+                    'from_' => $data[0],
+                    'link' => 'dashboard#rec',
+                    'price' => null,
+                    'promo' => null,
+                    'img' => null,
 
-            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtoupper($_SERVER['HTTP_X_REQUESTED_WITH']) === "XMLHTTPREQUEST") {
-                return "Your reclamation add successfully";
+                ], HOST.$data[10]);
+
             }else{
-                (new Functions)->notif_errors(['Votre reclamation a été enregistré avec succes']);
+                return Functions::sentNotif('Someone is wrong please try again');
             }
 
         }catch (PDOException $e){
-            (new Functions)->notif_errors($e->getMessage());
+            return Functions::sentNotif($e->getMessage());
         }
         return false;
     }
@@ -384,30 +392,22 @@ class MgrProducts extends Database
         try {
             $q = parent::getDb()->prepare("SELECT * FROM transactions WHERE full_name = :full_name");
             $q->bindValue('full_name', $data[0], PDO::PARAM_STR);
-            $q->execute();
-            if ($q->rowCount() === 1){
+            if ($q->execute()){
                 $d = $q->fetchAll(PDO::FETCH_ASSOC);
-                if ($d[0]['full_name'] === $data[0] &&
-                    $d[0]['shop_name'] === $data[7] &&
-                    $d[0]['transaction_id'] === $data[6])
-                {
+                if($d[0]['full_name'] === $data[0] && $d[0]['shop_name'] === Functions::SNFormatBack($data[7]) && $d[0]['transaction_id'] === $data[6]){
                     return $this->addReclamation($data);
+
                 }else{
-                    if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtoupper($_SERVER['HTTP_X_REQUESTED_WITH']) === "XMLHTTPREQUEST"){
-                        return 'Bad data please check your transaction informations';
-                    }
-                    (new Functions)->notif_errors(['Bad data please check your transaction data']);
+                    return Functions::sentNotif('Bad data please check your transaction informations');
                 }
+
             }else{
-                if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtoupper($_SERVER['HTTP_X_REQUESTED_WITH']) === "XMLHTTPREQUEST"){
-                    return 'Bad data please check your transaction informations';
-                }
-                (new Functions)->notif_errors(['Bad data please check your informations']);
+                return Functions::sentNotif('Bad data please check your transaction informations');
             }
+
         }catch (PDOException $e){
             return $e->getMessage();
         }
-        return false;
     }
 
     /**

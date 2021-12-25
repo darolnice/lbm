@@ -3,6 +3,8 @@ class Index {
     constructor() {
     }
 
+    WEBSITE = 'https://lebolma.com/'
+
     /**
      *
      * @param position
@@ -456,6 +458,77 @@ class Index {
                         idx.lbmAlert(response['message'], 'danger');
                     }
                 }// create new discount
+                if(response["response_code"] === 200 && response["res_id"] === 1256){
+                    document.querySelectorAll('.one_n').forEach(div =>{div.remove()})
+                    for(var i=0; i<response['message'].length; i++){
+
+                        let div = document.createElement('div');
+                        div.setAttribute('class', 'one_n');
+
+                        let a = document.createElement("a");
+                        a.classList.add('text-decoration-none');
+                        a.setAttribute('href', response['message'][i]['link']);
+
+                        let p_Date = document.createElement('p');
+                        p_Date.setAttribute('class', 'notif_date');
+                        p_Date.innerHTML = response['message'][i]['add_at'];
+
+                        let p_Mess = document.createElement('p');
+                        p_Mess.setAttribute('class', 'notif_message');
+                        p_Mess.innerHTML = response['message'][i]['message'];
+
+                        let div2 = document.createElement("div");
+                        div2.classList.add('d-flex');
+                        div2.classList.add('w-100');
+                        div2.classList.add('_bbo');
+
+                        if (response['message'][i]['img'] !== null){
+                            let img = document.createElement('img');
+                            img.setAttribute('class', 'img_ctx w-25');
+                            img.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/'+response['message'][i]['img']);
+                            img.setAttribute('alt', 'image');
+
+                            div2.append(img);
+                        }
+
+                        let div3 = document.createElement("div");
+                        div3.classList.add('w-75');
+
+                        let p_Name = document.createElement('p');
+                        p_Name.setAttribute('class', 'notif_pn');
+                        p_Name.innerHTML = response['message'][i]['prod_name'];
+
+                        let p_Price = document.createElement('p');
+                        p_Price.setAttribute('class', 'notif_pp');
+                        p_Price.innerHTML = response['message'][i]['price'];
+
+                        let del = document.createElement('del');
+                        del.setAttribute('class', 'text-danger ml-3');
+                        del.innerHTML = response['message'][i]['promo'];
+
+                        let img2 = document.createElement('img');
+                        img2.setAttribute('class', 'del_notif');
+                        img2.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/svg/delete_black_24dp.svg');
+
+                        div.append(a);
+
+                        div2.append(div3);
+
+                        div3.append(p_Name);
+                        div3.append(p_Price);
+
+                        p_Price.append(del);
+
+                        a.append(p_Date)
+                        a.append(p_Mess)
+                        a.append(div2)
+                        a.append(img2)
+
+                        let note = document.querySelector('.notifdiv__');
+                        note.append(div);
+                    }
+
+                }// notif
             }
         });
     }
@@ -612,16 +685,16 @@ class Index {
 
 
     //Event source large
-    wsEventsLarge(){
+    mercureEventsLarge(){
         let url = new URL('https://localhost:3000/.well-known/mercure/');
         let user = new Index().getCookie('cookies_u_data');
 
         if(user !== null){
             // topic pour le chat de façon global
-            url.searchParams.append('topic', 'https://lebolma.com/l_global');
+            url.searchParams.append('topic', this.WEBSITE+'l_global');
 
             // topic pour les notifications
-            url.searchParams.append('topic', 'https://lebolma.com/l_notif');
+            url.searchParams.append('topic', this.WEBSITE+'l_notif');
 
             const es = new EventSource(url, {withCredentials: true});
             es.onmessage = (e)=>{
@@ -647,13 +720,13 @@ class Index {
     }
 
     //Event source visiteur
-    wsEventVisiteur(){
+    mercureEventVisiteur(){
         let url = new URL('http://localhost:3000/.well-known/mercure');
         let shp_u = new Index().getCookie('shp_u');
 
         if(shp_u !== null){
             // topic pour le shipping
-            url.searchParams.append('topic', 'https://lebolma.com/s_notif');
+            url.searchParams.append('topic', this.WEBSITE+'s_notif');
 
             const es_shp_u = new EventSource(url, {withCredentials: true});
             es_shp_u.onmessage = (e)=>{
@@ -665,13 +738,33 @@ class Index {
         }
     }
 
-    //Event source visiteur
-    wsEventchat(){
+    //Event source saller
+    mercureEventSaller(){
+        let url = new URL('http://localhost:3000/.well-known/mercure');
+        let shp_u = new Index().getCookie('shp_u');
+
+        if(shp_u !== null){
+            // sallers topic
+            url.searchParams.append('topic', this.WEBSITE+'sllNotif');
+
+            const es_shp_u = new EventSource(url, {withCredentials: true});
+            es_shp_u.onmessage = (e)=>{
+                let subjets = ['SHIP', 'RECLAM'];
+                if (subjets.includes(dta.sujet)){
+                    alert(e.dta['message']);
+                }
+            }
+            window.addEventListener('beforeunload', ()=>{(es_shp_u != null) ? es_shp_u.close(): null});
+        }
+    }
+
+    //Event source chat
+    mercureEventchat(){
         let url = new URL('http://localhost:3000/.well-known/mercure');
         let v_id = new Index().getCookie('v_id');
         if(v_id !== null){
             // topic des visiteurs pour le chat sur la page des produits
-            m_url.searchParams.append('topic', 'https://lebolma.com/c_chat');
+            m_url.searchParams.append('topic', this.WEBSITE+'c_chat');
 
             const es_v = new EventSource(url, {withCredentials: true});
             es_vs.onmessage = (e)=>{
@@ -723,7 +816,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-
     setInterval(function () {
         $("#alert_danger").fadeOut();
     },5000);
@@ -734,6 +826,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const n = $(".notifdiv__");
     if (document.querySelector("#notif__")){
         document.querySelector("#notif__").addEventListener("click", function () {
+            new Index().jxPostData('jxAllNtf', this, null);
             $(".notifmess").css('visibility', "hidden");
             if (n.css("visibility") === 'hidden'){
                 n.css('visibility', "visible");

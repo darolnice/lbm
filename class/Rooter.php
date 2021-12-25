@@ -102,6 +102,8 @@ class Rooter
                         'jxDisc'            => ["api"   => "AjaxApiRes",  "method" => "jxDisc"],
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
+                        "jxAllNtf"          => ["api"   => "AjaxApiRes",  "method" => "jxAllNtf"],
+
 
     ];
 

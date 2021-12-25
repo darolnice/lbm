@@ -8,6 +8,7 @@
 
 class MgrUser extends Database
 {
+    private $format;
 
     /**
      * @param $id
@@ -438,16 +439,20 @@ class MgrUser extends Database
     }
 
     /**
-     * @param $userTyp
-     * @param $id
+     * @param $destinataire
      * @return bool|mixed|string
      */
-    public function getAllNotifs($userTyp, $id){
+    public function getAllNotifs($destinataire){
         try {
-            $ql = parent::getDb()->prepare("SELECT notif FROM $userTyp WHERE id = :id ");
-            if ($ql->execute(["id"=>$id])){
+            $qr = parent::getDb()->prepare("SELECT activity FROM sallers WHERE shop_name = :shpname");
+            $qr->bindValue('shpname', strip_tags($destinataire), PDO::PARAM_STR_CHAR);
+            $qr->execute();
+            $activity = $qr->fetch(PDO::FETCH_ASSOC)['activity'];
+
+            $ql = parent::getDb()->prepare("SELECT * FROM notif WHERE destinataire = :dest1 OR destinataire = :dest2");
+            if ($ql->execute(["dest1" => $destinataire, 'dest2' => 'SPA-'.$activity])){
                 $data = $ql->fetchAll(PDO::FETCH_ASSOC);
-                return json_decode($data[0]['notif'], true);
+                return [$data];
             }
 
         }catch (PDOException $e){
@@ -481,5 +486,7 @@ class MgrUser extends Database
         }
         return false;
     }
+
+
 
 }

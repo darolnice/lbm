@@ -570,7 +570,7 @@ class Navigation
         $this->sub_admin_data = $d_->manageSubAdmin();
         $this->busiProd = $d->ProdSearch($_SESSION['shop_name'], $f->e($_GET['sp']));
 
-        $this->notif = json_decode($this->getSallerData()[0]['notif'], true);
+        $this->notif = $d_->getAllNotifs($_SESSION['shop_name']);
         $this->mess = $d_->getAllMess($_SESSION['username'], null);
         $this->reschk = $d_->getAllfromAnyBusiUser('checkResq', $_SESSION['shop_name']);
 
@@ -900,6 +900,7 @@ class Navigation
         $ann_prod_color = $f->e($_POST['ann_prod_color']);
         $ann_prod_size = $f->e($_POST['ann_prod_size']);
         $ann_prod_cmt = $f->e($_POST['ann_prod_cmt']);
+        $type = $f->e($_POST['ann_prod_typ']);
 
         $error__ = [];
 
@@ -965,7 +966,7 @@ class Navigation
                     $country, $city, $ann_prod_name,
                     $ann_prod_qte, $ann_prod_qly,
                     $ann_prod_price, $ann_prod_color,
-                    $ann_prod_size, $ann_prod_cmt, $imdata
+                    $ann_prod_size, $ann_prod_cmt, $imdata, 'sllNotif', $type
                 ];
 
                 $d->postAnnonce($data);
@@ -1063,8 +1064,8 @@ class Navigation
             if (count($errors) == 0){
                 try {
                     (new MgrProducts)->checkTransaction([$f->e($name), $f->e($email), $f->e($phone), $f->e($qte),
-                        $f->e($p_name), $f->e($reason), $f->e($tid), $f->e($businame),
-                        $f->e($issu), $f->e($rec_ta)
+                                                         $f->e($p_name), $f->e($reason), $f->e($tid),
+                                                         $f->e($businame), $f->e($issu), $f->e($rec_ta)
                     ]);
                 }catch(Exception $e) {
                     echo $e->getMessage();

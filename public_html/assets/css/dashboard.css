@@ -435,14 +435,14 @@ body{
     margin-right: 25px;
 }
 .cat__list_ #mgr__cat_btn{
-    background-color: #00afde!important;
+    background-color: #e33c3c!important;
     margin-top: 10px;
     border-radius: 3px;
     transition: 0.3s ease-in;
     outline: none!important;
 }
 .cat__list_ #mgr__cat_btn:hover{
-    background-color: #06bfec !important;
+    background-color: #ce2727 !important;
     color: white!important;
 }
 /********************************************** NEW CATEGORY END************************************/

@@ -580,27 +580,31 @@ class RestApi extends Database
 
 
     /**
-     * @param string $table
-     * @param string $data
+     * @param array $data
      * @param string $topic
-     * @param $id
      * @return bool|string
      */
-    public function notify(string $table, string $data, string $topic, $id){
+    public function notify(array $data, string $topic){
         try {
-            $sql = parent::getDb()->exec("SELECT notif FROM $table WHERE id = $id");
-            $ntf = $sql->fetch(PDO::FETCH_ASSOC);
-            $tab = json_decode($ntf, true);
-            array_push($tab, $data[3]);
+            $message  = strip_tags($data['message']);
 
-            $q = parent::getDb()->prepare("UPDATE $table SET notif = :new_notif WHERE id = $id");
-            $q->bindValue('new_notif', json_encode($tab), PDO::PARAM_STR_CHAR);
-            $q->bindValue('user_id',  $id, PDO::PARAM_STR_CHAR);
+            $q = parent::getDb()->prepare("INSERT INTO notif (format, destinataire, message, prod_name, price, promo, img)
+                                                     VALUE (:format, :destinataire, :message, :prod_name, :price, :promo, :img)"
+            );
+
+            $q->bindValue("format", $data['format'], PDO::PARAM_STR_CHAR);
+            $q->bindValue("destinataire", $data['destinataire'], PDO::PARAM_STR_CHAR);
+            $q->bindValue("message", $message, PDO::PARAM_STR_CHAR);
+            $q->bindValue("prod_name", strip_tags($data['prod_name']), PDO::PARAM_STR_CHAR);
+            $q->bindValue("price", strip_tags($data['price']), PDO::PARAM_STR_CHAR);
+            $q->bindValue("promo", strip_tags($data['promo']), PDO::PARAM_STR_CHAR);
+            $q->bindValue("img", strip_tags($data['img']), PDO::PARAM_STR_CHAR);
+
             if($q->execute()){
                 $data = [
-                    'initiateur' => strip_tags($data[0]),
-                    'sujet'      => strip_tags($data[1]),
-                    'message'    => strip_tags($data[2]),
+                    'initiateur' => 'lbm',
+                    'sujet'      => strip_tags($data['sujet']),
+                    'message'    => $message,
                     'date'       => date("Y-m-d H:i:s")
                 ];
                 (new AjaxApiRes)->mercurepost($topic, $data);

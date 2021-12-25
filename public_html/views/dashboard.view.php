@@ -137,8 +137,8 @@
                 <div class="notif_messa">
                     <img class="mt-3 mr-1" id="messa__" src="<?= S_ASSETS?>images/svg/email_black_24dp.svg" alt="user image">
 
-                        <?php if(count($this->getNotif()) > 0 ): ?>
-                            <div class="notCont"><?= count($this->getNotif())?></div>
+                        <?php if(count($this->getNotif()[0]) > 0 ): ?>
+                            <div class="notCont"><?= count($this->getNotif()[0])?></div>
                         <?php endif;?>
 
                         <?php if(count($this->getMess()) > 0 ): ?>
@@ -147,25 +147,6 @@
 
                         <div class="row notifdiv__">
                             <h6 class="text-primary">Notifications</h6>
-                            <?php for($m=0; $m<count($this->getNotif()); $m++): ?>
-                                <div class="one_n">
-                                    <a class="text-decoration-none" href="<?= $this->getNotif()[$m]['link']?>">
-                                        <p class="notif_date"><?= $this->getNotif()[$m]['date']?></p>
-                                        <p class="notif_message"><?= $this->getNotif()[$m]['message']?></p>
-                                        <div class="d-flex w-100 _bbo">
-                                            <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                                            <div class="w-75">
-                                                <p class="notif_pn"><?= $this->getNotif()[$m]['name']?></p>
-                                                <p class="notif_pp"><?= $this->getNotif()[$m]['price']?>
-                                                    <del class="text-danger ml-3"><?php ($this->getNotif()[$m]['promo'] === '0') ? print_r('') : print_r($this->getNotif()[$m]['promo'])?>
-                                                    </del>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <img class="del_notif" title="Delete this notification" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
-                                    </a>
-                                </div>
-                            <?php endfor;?>
                         </div>
 
                         <div class="row notifmess">
@@ -647,7 +628,7 @@
                                     <div class= "cat_item_">
                                         <b class="font-weight-lighter"><?= $tab[$g]?></b>
                                         <form method="post">
-                                            <input id="ipt_new_sbc" type="text" name="sub" placeholder="Enter sub categorie(s) separate with coma">
+                                            <input id="ipt_new_sbc" type="text" name="sub" placeholder="Enter tag(s) separate with coma">
                                             <button id="new_sub_cat" class="btn btn-primary btn-sm" type="submit">ENTER</button>
                                         </form>
                                     </div>
@@ -1813,7 +1794,7 @@
                     <div class="elbi">
                         <p>Product</p>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">02</b> Buy intent</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Buy intent</a>
                         </div>
                         <div class="msg">
                             <a><b class="text-primary" style="font-size: 16px;"><?= count($this->getMess())?></b> Unread message</a>
@@ -1835,7 +1816,7 @@
                     <div class="elbi">
                         <p>Shop</p>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;">00</b> Livraisons en cour</a>
+                            <a><b class="text-primary" style="font-size: 16px;">00</b> Transactions</a>
                         </div>
                         <div class="msg">
                             <a><b class="text-primary" style="font-size: 16px;">00</b> Livraisons en Attentes</a>

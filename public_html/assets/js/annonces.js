@@ -2,9 +2,7 @@ $(document).ready(function () {
 
     document.querySelectorAll('#res_ann').forEach(res =>{
         res.addEventListener('click', function () {
-
             if (document.getElementById('answer_form')){
-
                 if (!res.parentNode.parentNode.children[3].children[0].children[2].classList.contains("JS_res_ul")){
 
                     res.parentNode.parentNode.children[3].children[0].children[2].classList.replace("res_ul", "JS_res_ul");

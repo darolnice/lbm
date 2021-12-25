@@ -12,7 +12,7 @@
         <section id="add_ann_sec" class="container" style="display: none">
             <h2>Add your ad here !!!</h2>
 
-            <form method="post" enctype="multipart/form-data" class="form-group" id="post_ann_form">
+            <form method="post" action="annonces" enctype="multipart/form-data" class="form-group" id="post_ann_form">
                 <p>Personnal informations</p>
                 <input type="text" name="name" required value="<?= unserialize($_COOKIE['cud'])[0]?>" placeholder="Name">
                 <input type="text" name="phone" required value="<?= unserialize($_COOKIE['cud'])[2]?>" placeholder="Phone number">
@@ -21,6 +21,14 @@
                 <input type="text" name="city" required value="<?= unserialize($_COOKIE['cud'])[1]?>" placeholder="City">
 
                 <p>Products informations</p>
+                <label for="ann_prod_typ">TAG
+                    <select type="text" name="ann_prod_typ" id="ann_prod_typ" required>
+                        <?php foreach ((new Navigation)->getActivity() as $activ): ?>
+                            <option value="<?= $activ?>"><?= $activ?></option>
+                        <?php endforeach;?>
+                    </select>
+                </label>
+
                 <label for="ann_prod_name">Name
                     <input type="text" name="ann_prod_name" id="ann_prod_name" required>
                 </label>

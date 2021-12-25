@@ -53,7 +53,7 @@ $title = "Reclamations";
                 </div>
 
                 <div class="rec_img">
-                    <img src="<?= S_ASSETS ?>images/pet_care.png" alt="">
+                    <img src="<?= S_ASSETS ?>images/img/pet_care.png" alt="">
                 </div>
             </div>
 
@@ -194,7 +194,7 @@ $title = "Reclamations";
                 </div>
 
                 <div class="rec_img">
-                    <img src="<?= S_ASSETS ?>images/C10876760.jfif" alt="">
+                    <img src="<?= S_ASSETS ?>images/img/C10876760.jfif" alt="">
                 </div>
             </div>
         </section>

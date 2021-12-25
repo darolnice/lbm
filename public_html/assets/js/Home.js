@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // new Index().wsEventsLarge();
+    //new Index().wsEventsLarge();
 
     $("#main__footer").css("margin-top", '50vh');
 

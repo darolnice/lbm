@@ -59,7 +59,7 @@ $(document).ready(function () {
         new Index().jxPostData('jxAddRec', this, this['b_name'].value,
         this['b_email'].value, this['b_phone'].value, this['b_qte'].value,
         this['p_name'].value, this['b_reason'].value, this['b_busi_name'].value,
-        this['b_tid'].value, this['b_issu'].value, this['rec_ta'].value);
+        this['b_tid'].value, this['b_issu'].value, this['rec_ta'].value, 'sllNotif');
     });
 
     document.forms['alert_form'].addEventListener("submit", function (e) {

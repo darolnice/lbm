@@ -89,7 +89,7 @@ $title = $_GET['name']." Shop";?>
 
                                 <a class="btn-group"
                                    style="background-color: <?= json_decode($this->getShopPref()[0]['theme'], true)[0]['btnc']?>"
-                                   href="product?id=<?= Functions::ShopPrdLink($this->getData()[$i]['id'], $this->getData()[$i]['sub_category'].'&shop='.$_GET['name'])?>">VIEW PRODUCT</a>
+                                   href="product?id=<?= Functions::ShopPrdLink($this->getData()[$i]['id'], $this->getData()[$i]['sub_category'])?>">VIEW PRODUCT</a>
                             </div>
                         </div>
                     <?php endfor ?>

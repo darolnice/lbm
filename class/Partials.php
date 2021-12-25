@@ -41,11 +41,11 @@ class Partials
         $this->data = (new MgrShop)->showAllCategories(Functions::SNFormatBack($_GET['name']));
 
         if ($_SESSION['saller_id']){
-            $this->notif = $usr->getAllNotifs('sallers', $_SESSION['saller_id']);
+            $this->notif = $usr->getAllNotifs( $_SESSION['shop_name']);
             $this->mess = $usr->getAllMess($_SESSION['username'],  null);
 
         }elseif ($_SESSION['current_user_id']){
-            $this->notif = $usr->getAllNotifs('users', $_SESSION['current_user_id']);
+            $this->notif = $usr->getAllNotifs($_SESSION['username']);
             $this->mess = $usr->getAllMess($_SESSION['username'], null);
         }
 
@@ -68,11 +68,11 @@ class Partials
         $this->data = (new MgrShop)->showAllCategories(Functions::SNFormatBack($_GET['name']));
 
         if ($_SESSION['saller_id']){
-            $this->notif = $usr->getAllNotifs('sallers', $_SESSION['saller_id']);
+            $this->notif = $usr->getAllNotifs($_SESSION['shop_name']);
             $this->mess = $usr->getAllMess($_SESSION['username'],  null);
 
         }elseif($_SESSION['current_user_id']){
-            $this->notif = $usr->getAllNotifs('users', $_SESSION['current_user_id']);
+            $this->notif = $usr->getAllNotifs( $_SESSION['username']);
             $this->mess = $usr->getAllMess($_SESSION['username'],  null);
         }
 

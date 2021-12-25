@@ -65,6 +65,7 @@ $title = "Best"
         </div>
 
         <!-- scripts start -->
+        <script src="<?= S_ASSETS?>js/Index.js"></script>
         <script src="https://kit.fontawesome.com/1fb6f59a4b.js" crossorigin="anonymous"></script>
         <!-- scripts end -->
     </body>

@@ -32,6 +32,9 @@ class AjaxApiRes
         (new RestApi)->ajaxHomeSearchApi();
     }
 
+    /**
+     *
+     */
     public function jxadsrh()
     {
         (new MgrAnnonces)->jxsearch();
@@ -367,7 +370,9 @@ class AjaxApiRes
         }
     }
 
-
+    /**
+     *
+     */
     public function jxchkresq(){
         session_start();
         if ($_POST['data']){
@@ -456,7 +461,6 @@ class AjaxApiRes
          return  $acc + $curr;
     }
 
-
     /**
      *
      */
@@ -532,7 +536,8 @@ class AjaxApiRes
                 $f->e($_POST['data'][7]),
                 $f->e($_POST['data'][6]),
                 $f->e($_POST['data'][8]),
-                $f->e($_POST['data'][9])
+                $f->e($_POST['data'][9]),
+                $f->e($_POST['data'][10])
             ]);
             $this->response($this->HTTP_OK, $r, 1919);
         }
@@ -976,7 +981,6 @@ class AjaxApiRes
         }
     }
 
-
     /**
      * Cette methode gere l'ajout ou la mise à jour
      * d'un produit dans le panier
@@ -1187,6 +1191,27 @@ class AjaxApiRes
             $this->response($this->HTTP_OK, 'Please complete all form', 1589);
         }
     }
+
+    /**
+     *
+     */
+    public function jxAllNtf(){
+        session_start();
+        if (isset($_SESSION['saller_id'])){
+            $r = (new MgrUser)->getAllNotifs($_SESSION['shop_name']);
+        }else{
+            $r = (new MgrUser)->getAllNotifs($_SESSION['username']);
+        }
+
+        $this->response($this->HTTP_OK, $r[0], 1256);
+    }
+
+
+
+
+
+
+
 
 
 

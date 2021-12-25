@@ -15,9 +15,9 @@ class MgrAnnonces extends Database
         try{
             $ad_qry = parent::getDb()->prepare('INSERT INTO annonces (user_name, phone_number, email, country, city, prod_name, quantity,
                                                                        quality, price, color, size, ad_img1, ad_img2, comment_s)
-                                                           VALUES (:user_name, :phone_number, :email, :country, :city, :prod_name, :quantity,
-                                                                    :quality, :price, :color, :size, :ad_img1, :ad_img2, :comment_s
-                                                           )'
+                                                          VALUES (:user_name, :phone_number, :email, :country, :city, :prod_name, :quantity,
+                                                                  :quality, :price, :color, :size, :ad_img1, :ad_img2, :comment_s
+                                                          )'
 
             );
 
@@ -51,14 +51,25 @@ class MgrAnnonces extends Database
                 $ad_qry->bindValue('ad_img2', '', PDO::PARAM_STR_CHAR);
             }
 
-
             if ($ad_qry->execute()){
                 $ad_qry->closeCursor();
 
                 move_uploaded_file($data[12]['img1_tmp'], $img1_def_path);
                 move_uploaded_file($data[12]['img2_tmp'], $img2_def_path);
 
-                Functions::redir('annonces');
+                (new RestApi)->notify([
+                    'format' => 'ad',
+                    'sujet' => 'adv',
+                    'destinataire' => 'SPA-'.$data[14],
+                    'message' => 'Some user posted one advice who may interess you',
+                    'prod_name' => $data[5],
+                    'from_' => $data[0],
+                    'link' => 'annonce',
+                    'price' => $data[8],
+                    'promo' => null,
+                    'img' => $new_img1_name,
+
+                ], HOST.$data[13]);
             }
 
         }catch (PDOException $e){

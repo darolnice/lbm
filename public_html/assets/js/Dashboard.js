@@ -324,6 +324,7 @@ $(document).ready(function () {
     localStorage.setItem('current_user_mail', $('#up___mail').val());
 
     $('#notif_').on('click', function () {
+        new Index().jxPostData('jxAllNtf', this, null);
         const n = $(".notifdiv__");
         $(".notifmess").css('visibility', "hidden");
         if(n.css("visibility") === 'hidden'){
