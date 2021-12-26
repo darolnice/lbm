@@ -123,12 +123,12 @@
                 <img class="mt-3" id="messa__" src="<?= S_ASSETS?>images/svg/email_black_24dp.svg" alt="user image">
             </li>
 
-            <?php if(count($this->getNotif()[0]) > 0 ): ?>
-                <div class="notCont"><?= count($this->getNotif()[0])?></div>
+            <?php if($this->getNotif() > 0 ): ?>
+                <div class="notCont"><?= $this->getNotif()?></div>
             <?php endif;?>
 
-            <?php if(count($this->getMess()) > 0 ): ?>
-                <div class="notCont_mess"><?= count($this->getMess())?></div>
+            <?php if($this->getMess() > 0 ): ?>
+                <div class="notCont_mess"><?= $this->getMess()?></div>
             <?php endif;?>
 
             <li class="notif__">
@@ -141,23 +141,6 @@
 
             <div class="row notifmess">
                 <h6 class="text-primary">Messages</h6>
-                <?php if(count($this->getMess()) > 0 ): ?>
-                    <?php for($m=0; $m<count($this->getMess()); $m++): ?>
-                        <div class="one_n">
-                            <p class="notif_date"><?= $this->getMess()[$m]['sent_at']?></p>
-                            <p class="notif_message" id="_header_"><?= $this->getMess()[$m]['inf_mess']?></p>
-                            <div class="d-flex w-100 _bbo">
-                                <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                                <div class="w-75">
-                                    <p class="notif_pn"><?= $this->getMess()[$m]['expediteur']?></p>
-                                    <button class="text-dark v__btn" title="click here for quick see this message">View</button>
-                                    <p class="notif_pp" id="_message_"><?= $this->getMess()[$m]['message']?> </p>
-                                </div>
-                            </div>
-                            <img class="del_notif" title="Delete this message" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
-                        </div>
-                    <?php endfor;?>
-                <?php endif;?>
             </div>
         <?php endif;?>
 

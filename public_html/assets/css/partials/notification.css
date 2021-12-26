@@ -277,7 +277,14 @@
     outline: none!important;
 }
 
-
+.p_n_cmt{
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+    color: black;
+    font-size: 11.5px;
+    margin-top: -20px;
+}
 
 
 

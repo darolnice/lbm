@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     document.querySelectorAll('#res_ann').forEach(res =>{
         res.addEventListener('click', function () {
-            if (document.getElementById('answer_form')){
+            if (res.parentNode.parentNode.children[3].childElementCount === 2){
                 if (!res.parentNode.parentNode.children[3].children[0].children[2].classList.contains("JS_res_ul")){
 
                     res.parentNode.parentNode.children[3].children[0].children[2].classList.replace("res_ul", "JS_res_ul");
@@ -11,14 +11,20 @@ $(document).ready(function () {
 
                 }
                 else{
-                    res.parentNode.parentNode.children[3].children[0].children[2].classList.replace( "JS_res_ul", "res_ul",)
+                    res.parentNode.parentNode.children[3].children[0].children[2].classList.replace("JS_res_ul", "res_ul",)
                     res.parentNode.parentNode.children[3].children[1].style.display = 'none';
                     res.innerHTML = 'ANSWER';
                 }
             }else {
-                new Index().scrollTo(0);
-                $("h2").hide()
-                document.querySelector('.inf_ans').style.visibility = 'visible';
+                let idx = new Index();
+                if (idx.getCookie('cud')){
+                    idx.lbmAlert('You are not allow to answer this post', 'info');
+
+                }else {
+                    idx.scrollTo(0);
+                    $("h2").hide()
+                    document.querySelector('.inf_ans').style.visibility = 'visible';
+                }
             }
         });
     });
@@ -39,7 +45,6 @@ $(document).ready(function () {
         }else {
             idx.lbmAlert("Login please", "info");
         }
-
     });
 
     $('#ann_cancel_btn').on('click', function () {
@@ -51,10 +56,14 @@ $(document).ready(function () {
         item.addEventListener('click', function (e) {
             e.preventDefault();
             cmt = this.previousElementSibling;
+
             let ann_id = item.getAttribute('data-annonce_id');
+            let destinataire = item.getAttribute('data-cmter');
             let annonceur = item.getAttribute('data-annonceur');
+            let ann_img = item.getAttribute('data-annonce_img');
+            let prdname = item.getAttribute('data-annonce_prodName');
             if (cmt.value !== "") {
-                new Index().jxPostData("jxAnPsCmt", this.parentNode, ann_id, annonceur, cmt.value);
+                new Index().jxPostData("jxAnPsCmt", this.parentNode, ann_id, annonceur, cmt.value, ann_img, prdname, 'LBMADCMT', [destinataire]);
             }
         });
     });
@@ -107,5 +116,4 @@ $(document).ready(function () {
             }
         })
     }
-
 });

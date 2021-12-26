@@ -481,7 +481,10 @@ class AjaxApiRes
     public function jxAnPsCmt(){
         session_start();
         if (isset($_POST['data'])){
-            $res = (new RestApi())->postAndGetcomment($_POST['data'][0], $_POST['data'][1], $_POST['data'][2]);
+            $res = (new RestApi)->postAdComment(
+                $_POST['data'][0], $_POST['data'][1], $_POST['data'][2],
+                $_POST['data'][3], $_POST['data'][4], $_POST['data'][5], array_unique(unserialize($_POST['data'][6][0]))
+            );
             $this->response($this->HTTP_OK, $res, 1005);
         }
     }
@@ -661,7 +664,6 @@ class AjaxApiRes
             ]);
             $this->response($this->HTTP_OK, $r, 603);
         }
-        
     }
 
     /**
@@ -881,7 +883,6 @@ class AjaxApiRes
      *
      */
     public function jxPanelSrch(){
-
        if(isset($_GET['search'])){
            (new Pagination)->searchWithParams(htmlentities($_GET['search']), htmlentities($_GET['option']));
        }
@@ -902,21 +903,19 @@ class AjaxApiRes
      * @param array $data
      */
     public function mercurepost(string $topic, array $data = []){
-        define('JWT', 'eyJhbGciOiJIUzI1NiJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdLCJzdWJzY3JpYmUiOlsiaHR0cHM6Ly9leGFtcGxlLmNvbS9teS1wcml2YXRlLXRvcGljIiwie3NjaGVtZX06Ly97K2hvc3R9L2RlbW8vYm9va3Mve2lkfS5qc29ubGQiLCIvLndlbGwta25vd24vbWVyY3VyZS9zdWJzY3JpcHRpb25zey90b3BpY317L3N1YnNjcmliZXJ9Il0sInBheWxvYWQiOnsidXNlciI6Imh0dHBzOi8vZXhhbXBsZS5jb20vdXNlcnMvZHVuZ2xhcyIsInJlbW90ZUFkZHIiOiIxMjcuMC4wLjEifX19.z5YrkHwtkz3O_nOnhC_FP7_bmeISe3eykAkGbAl5K7c');
-
-        $postData = http_build_query([
-            'topic' => $topic,
-            'data'  => json_encode($data)
-        ]);
-
-        echo file_put_contents('http://localhost:3000/.well-known/mercure', false, stream_context_create([
-                'http' =>[
-                    'method'  => 'POST',
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization:
-                     Bearer ".JWT,
-                    'content' => $postData
-                ]
-        ]));
+//        define('JWT', 'eyJhbGciOiJIUzI1NiJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdLCJzdWJzY3JpYmUiOlsiaHR0cHM6Ly9leGFtcGxlLmNvbS9teS1wcml2YXRlLXRvcGljIiwie3NjaGVtZX06Ly97K2hvc3R9L2RlbW8vYm9va3Mve2lkfS5qc29ubGQiLCIvLndlbGwta25vd24vbWVyY3VyZS9zdWJzY3JpcHRpb25zey90b3BpY317L3N1YnNjcmliZXJ9Il0sInBheWxvYWQiOnsidXNlciI6Imh0dHBzOi8vZXhhbXBsZS5jb20vdXNlcnMvZHVuZ2xhcyIsInJlbW90ZUFkZHIiOiIxMjcuMC4wLjEifX19.z5YrkHwtkz3O_nOnhC_FP7_bmeISe3eykAkGbAl5K7c');
+//        $postData = http_build_query([
+//            'topic' => $topic,
+//            'data'  => json_encode($data)
+//        ]);
+//        echo file_put_contents('http://localhost:3000/.well-known/mercure', false, (int)stream_context_create([
+//            'http' =>[
+//                'method'  => 'POST',
+//                'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization:
+//                     Bearer ".JWT,
+//                'content' => $postData
+//            ]
+//        ]));
     }
 
     /**
@@ -1176,7 +1175,6 @@ class AjaxApiRes
                 $regi->registerStep2($data, '');
             }
         }
-
     }
 
     /**
@@ -1198,18 +1196,31 @@ class AjaxApiRes
     public function jxAllNtf(){
         session_start();
         if (isset($_SESSION['saller_id'])){
-            $r = (new MgrUser)->getAllNotifs($_SESSION['shop_name']);
+            $r = (new MgrUser)->getAllNotifs($_SESSION['shop_name'], false);
         }else{
-            $r = (new MgrUser)->getAllNotifs($_SESSION['username']);
+            $r = (new MgrUser)->getAllNotifs($_SESSION['username'], false);
         }
 
         $this->response($this->HTTP_OK, $r[0], 1256);
     }
 
 
+    /**
+     *
+     */
+    public function jxAllMess(){
+        session_start();
+        $r = (new MgrUser)->getAllMess($_SESSION['username'], false);
+        $this->response($this->HTTP_OK, $r[0], 138);
+    }
 
 
-
+    public function jxdelNotMess(){
+        if ($_POST['data']) {
+            $r = (new MgrUser)->delNotifMess($_POST['data'][0], $_POST['data'][1]);
+            if ($r){$this->response($this->HTTP_OK, true, 63);}
+        }
+    }
 
 
 

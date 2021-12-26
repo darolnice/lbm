@@ -14,11 +14,11 @@
 
             <form method="post" action="annonces" enctype="multipart/form-data" class="form-group" id="post_ann_form">
                 <p>Personnal informations</p>
-                <input type="text" name="name" required value="<?= unserialize($_COOKIE['cud'])[0]?>" placeholder="Name">
-                <input type="text" name="phone" required value="<?= unserialize($_COOKIE['cud'])[2]?>" placeholder="Phone number">
-                <input type="text" name="email" required value="<?= unserialize($_COOKIE['cud'])[3]?>" placeholder="E-mail">
-                <input type="text" name="country" required value="<?= unserialize($_COOKIE['cud'])[5]?>" placeholder="Country">
-                <input type="text" name="city" required value="<?= unserialize($_COOKIE['cud'])[1]?>" placeholder="City">
+                <input style="cursor: default" type="text" name="name" required value="<?= unserialize($_COOKIE['cud'])[0]?>" placeholder="Name" readonly>
+                <input style="cursor: default" type="text" name="phone" required value="<?= unserialize($_COOKIE['cud'])[2]?>" placeholder="Phone number" readonly>
+                <input style="cursor: default" type="email" name="email" required value="<?= unserialize($_COOKIE['cud'])[3]?>" placeholder="E-mail" readonly>
+                <input style="cursor: default" type="text" name="country" required value="<?= unserialize($_COOKIE['cud'])[5]?>" placeholder="Country" readonly>
+                <input style="cursor: default" type="text" name="city" required value="<?= unserialize($_COOKIE['cud'])[1]?>" placeholder="City" readonly>
 
                 <p>Products informations</p>
                 <label for="ann_prod_typ">TAG
@@ -105,7 +105,7 @@
                     </div>
 
                     <p class="annc_name"><?= $this->getAnnonceData()[$i]->user_name?></p>
-                    <?php if ($_SESSION["saller_id"]): ?>
+                    <?php if ($_SESSION["saller_id"] || $_SESSION["current_user_id"] === $this->getAnnonceData()[$i]->ann_id): ?>
                         <p class="annc_phone"><?= $this->getAnnonceData()[$i]->phone_number?></p>
                         <strong class="annc_mail"><?= $this->getAnnonceData()[$i]->email?></strong>
                         <strong class="annc_city"><?= $this->getAnnonceData()[$i]->country?></strong>
@@ -167,16 +167,20 @@
                     <div class="responses">
                         <b id="res_ttl">Responses</b>
                         <?php
+                            $cmter = [];
                             $responses = array_reverse((new MgrAnnonces)->showResponses($this->getAnnonceData()[$i]->id, $this->getAnnonceData()[$i]->user_name));
+                            foreach ($responses as $respons){
+                                $cmter [] = $respons['shop_name'];
+                            }
                         ?>
 
-                        <div class="resCont"><?=count($responses)?></div>
+                        <div class="resCont"><?= count($responses)?></div>
 
                         <ul class="res_ul">
                             <?php for($r=0; $r<count($responses); $r++):?>
                                 <li id="res_li">
                                     <p class="res-p">
-                                        <a href="shop?name=<?= Functions::SNFormatFront($responses[$r]['shop_name'])?>"><?='Shop : '.Functions::SNFormatFront($responses[$r]['shop_name'])?></a>
+                                        <a href="shop?name=<?= Functions::SNFormatFront($responses[$r]['shop_name'])?>"><?= Functions::SNFormatFront($responses[$r]['shop_name'])?></a>
                                     </p>
                                     <b class="anc__dte"><?= $responses[$r]['add_at']?></b>
                                     <h6><?= $responses[$r]['response']?></h6>
@@ -185,7 +189,7 @@
                         </ul>
                     </div>
 
-                    <?php if ($_SESSION["saller_id"]): ?>
+                    <?php if ($_SESSION["saller_id"] || $_SESSION["current_user_id"] === $this->getAnnonceData()[$i]->ann_id): ?>
                         <form id="answer_form" method="post" class="form-group">
                             <input class="c_id"
                                    style="display: none"
@@ -211,7 +215,10 @@
                                 <button type="submit"
                                         id="post__res__"
                                         name="answer_btn"
+                                        data-annonce_prodName="<?= $this->getAnnonceData()[$i]->prod_name?>"
+                                        data-annonce_img="<?= $this->getAnnonceData()[$i]->ad_img1?>"
                                         data-annonce_id="<?= $this->getAnnonceData()[$i]->id?>"
+                                        data-cmter='<?= serialize($cmter)?>'
                                         data-annonceur="<?= $this->getAnnonceData()[$i]->user_name?>">>>
                                 </button>
                             </div>

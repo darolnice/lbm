@@ -13,15 +13,16 @@ class MgrAnnonces extends Database
      */
     public function postAnnonce(array $data){
         try{
-            $ad_qry = parent::getDb()->prepare('INSERT INTO annonces (user_name, phone_number, email, country, city, prod_name, quantity,
+            $ad_qry = parent::getDb()->prepare('INSERT INTO annonces (user_name, ann_id, phone_number, email, country, city, prod_name, quantity,
                                                                        quality, price, color, size, ad_img1, ad_img2, comment_s)
-                                                          VALUES (:user_name, :phone_number, :email, :country, :city, :prod_name, :quantity,
+                                                          VALUES (:user_name, :ann_id, :phone_number, :email, :country, :city, :prod_name, :quantity,
                                                                   :quality, :price, :color, :size, :ad_img1, :ad_img2, :comment_s
                                                           )'
 
             );
 
             $ad_qry->bindValue('user_name', $data[0], PDO::PARAM_STR_CHAR);
+            $ad_qry->bindValue('ann_id', $data[15], PDO::PARAM_STR_CHAR);
             $ad_qry->bindValue('phone_number', $data[1], PDO::PARAM_STR_CHAR);
             $ad_qry->bindValue('email', $data[2], PDO::PARAM_STR_CHAR);
             $ad_qry->bindValue('country', $data[3], PDO::PARAM_STR_CHAR);
@@ -63,6 +64,7 @@ class MgrAnnonces extends Database
                     'destinataire' => 'SPA-'.$data[14],
                     'message' => 'Some user posted one advice who may interess you',
                     'prod_name' => $data[5],
+                    'comment' => null,
                     'from_' => $data[0],
                     'link' => 'annonce',
                     'price' => $data[8],
@@ -128,20 +130,17 @@ class MgrAnnonces extends Database
             $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id,
                                                                        annoncer,
                                                                        shop_name,
-                                                                       response,
-                                                                       add_at)
+                                                                       response)
                                                      VALUES (:annonce_id,
                                                              :annoncer,
                                                              :shop_name,
-                                                             :response,
-                                                             :add_at)");
+                                                             :response)");
 
             $pc->execute([
                 'annonce_id'=>$annonce_id,
                 'annoncer' => $annoncer,
                 'shop_name'=>$_SESSION['shop_name'],
                 'response'=> (new Functions())->e($comment),
-                'add_at'=> date("Y-M-D H:i:s")
             ]);
 
             $pc->closeCursor();

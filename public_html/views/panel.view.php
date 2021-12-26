@@ -88,55 +88,20 @@ $title = ''.$_SESSION['username'];
             <div class="p_notif_messa">
                 <img class="mt-3 mr-1" id="p_messa__" src="<?= S_ASSETS?>images/svg/email_black_24dp.svg" alt="user image">
 
-                <?php if(count($this->getNotif()) > 0 ): ?>
-                    <div class="notCont"><?= count($this->getNotif())?></div>
+                <?php if($this->getNotif() > 0): ?>
+                    <div class="notCont"><?= $this->getNotif()?></div>
                 <?php endif;?>
-                <?php if(count($this->getMess()) > 0 ): ?>
-                    <div class="notCont_mess"><?= count($this->getMess())?></div>
+
+                <?php if($this->getMess() > 0): ?>
+                    <div class="notCont_mess"><?= $this->getMess()?></div>
                 <?php endif;?>
 
                 <div class="row notifdiv__">
                     <h6 class="text-primary">Notifications</h6>
-                    <?php for($m=0; $m<count($this->getNotif()); $m++): ?>
-                        <div class="one_n">
-                            <a class="text-decoration-none" href="<?= $this->getNotif()[$m]['link']?>">
-                                <p class="notif_date"><?= $this->getNotif()[$m]['date']?></p>
-                                <p class="notif_message"><?= $this->getNotif()[$m]['message']?></p>
-                                <div class="d-flex w-100 _bbo">
-                                    <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                                    <div class="w-75">
-                                        <p class="notif_pn"><?= $this->getNotif()[$m]['name']?></p>
-                                        <p class="notif_pp"><?= $this->getNotif()[$m]['price']?>
-                                            <del class="text-danger ml-3"><?php ($this->getNotif()[$m]['promo'] === '0') ? print_r('') : print_r($this->getNotif()[$m]['promo'])?>
-                                            </del>
-                                        </p>
-                                    </div>
-                                </div>
-                                <img class="del_notif" title="Delete this notification" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
-                            </a>
-                        </div>
-                    <?php endfor;?>
                 </div>
 
                 <div class="row notifmess">
                     <h6 class="text-primary">Messages</h6>
-                    <?php if(count($this->getMess()) > 0 ): ?>
-                        <?php for($m=0; $m<count($this->getMess()); $m++): ?>
-                            <div class="one_n">
-                                <p class="notif_date"><?= $this->getMess()[$m]['sent_at']?></p>
-                                <p class="notif_message" id="_header_"><?= $this->getMess()[$m]['inf_mess']?></p>
-                                <div class="d-flex w-100 _bbo">
-                                    <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                                    <div class="w-75">
-                                        <p class="notif_pn"><?= $this->getMess()[$m]['expediteur']?></p>
-                                        <button class="text-dark v__btn" title="click here for quick see this message">View</button>
-                                        <p class="notif_pp" id="_message_"><?= $this->getMess()[$m]['message']?> </p>
-                                    </div>
-                                </div>
-                                <img class="del_notif" title="Delete this message" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
-                            </div>
-                        <?php endfor;?>
-                    <?php endif;?>
                 </div>
 
                 <img class="mt-3" id="p_notif__" src="<?= S_ASSETS?>images/svg/notifications_active_black_24dp.svg" alt="user image">
@@ -371,7 +336,7 @@ $title = ''.$_SESSION['username'];
 
                                         <div class="p_ann_res">
                                             <ul>
-                                                <b class="small">Responses</b>
+                                                <b class="small">Responses</b><br>
                                                 <?php
                                                     $responses = (new MgrAnnonces())->showResponses($this->getAnnonceD()[$e]->id, $this->getAnnonceD()[$e]->user_name);
                                                 ?>
@@ -402,6 +367,7 @@ $title = ''.$_SESSION['username'];
                                         <select id="p_p_qly" type="text" name="p_p_qly">
                                             <option value="New">New</option>
                                             <option value="Occasion">Occasion</option>
+                                            <option value="Occasion or New">Occasion or New</option>
                                         </select>
                                         <input id="p_p_n" type="text" name="p_p_n" placeholder="Product Name" required>
                                         <input id="p_p_prc" type="text" name="p_p_prc" placeholder="Price" required>
@@ -421,43 +387,43 @@ $title = ''.$_SESSION['username'];
 
         <div class="p_fv">
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getMess())?></h6>
+                <h6 class="text-primary"><?= $this->getMess()?></h6>
                 Messages non lu
             </div>
         </div>

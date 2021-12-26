@@ -103,7 +103,8 @@ class Rooter
                         "jxSearchAW"        => ["api"   => "AjaxApiRes",  "method" => "jxSearchAnyWhere"],
                         "ftcSetD"           => ["api"   => "AjaxApiRes",  "method" => "ftcSetD"],
                         "jxAllNtf"          => ["api"   => "AjaxApiRes",  "method" => "jxAllNtf"],
-
+                        "jxAllMess"         => ["api"   => "AjaxApiRes",  "method" => "jxAllMess"],
+                        "jxdel_not_mess"    => ["api"   => "AjaxApiRes",  "method" => "jxdelNotMess"],
 
     ];
 

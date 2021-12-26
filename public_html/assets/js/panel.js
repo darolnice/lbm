@@ -126,9 +126,9 @@ $(document).ready(function () {
         }
     });
 
-
     const n = $(".notifdiv__");
     document.querySelector("#p_notif__").addEventListener("click", function () {
+        new Index().jxPostData('jxAllNtf', this, null);
         $(".notifmess").css('visibility', "hidden");
         if (n.css("visibility") === 'hidden'){
             n.css('visibility', "visible");
@@ -137,6 +137,7 @@ $(document).ready(function () {
         }
     });
     document.querySelector("#p_messa__").addEventListener("click", function () {
+        new Index().jxPostData('jxAllMess', this, null);
         n.css('visibility', "hidden");
         const d = $(".notifmess");
         if (d.css("visibility") === 'hidden'){

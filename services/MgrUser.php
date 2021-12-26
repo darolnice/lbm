@@ -440,19 +440,71 @@ class MgrUser extends Database
 
     /**
      * @param $destinataire
-     * @return bool|mixed|string
+     * @param bool $count
+     * @return array|bool|string
      */
-    public function getAllNotifs($destinataire){
+    public function getAllNotifs($destinataire, bool $count = true){
         try {
+            $dest = strip_tags($destinataire);
+
             $qr = parent::getDb()->prepare("SELECT activity FROM sallers WHERE shop_name = :shpname");
-            $qr->bindValue('shpname', strip_tags($destinataire), PDO::PARAM_STR_CHAR);
+            $qr->bindValue('shpname', $dest, PDO::PARAM_STR_CHAR);
             $qr->execute();
             $activity = $qr->fetch(PDO::FETCH_ASSOC)['activity'];
 
-            $ql = parent::getDb()->prepare("SELECT * FROM notif WHERE destinataire = :dest1 OR destinataire = :dest2");
-            if ($ql->execute(["dest1" => $destinataire, 'dest2' => 'SPA-'.$activity])){
-                $data = $ql->fetchAll(PDO::FETCH_ASSOC);
-                return [$data];
+            if ($count){
+                $qp = parent::getDb()->prepare("SELECT count(*) FROM notif WHERE destinataire IN (:dest2, :dest1) AND state = 'unread'");
+                $qp->bindValue('dest1', $dest, PDO::PARAM_STR_CHAR);
+                $qp->bindValue('dest2', 'SPA-'.$activity, PDO::PARAM_STR_CHAR);
+
+                if ($qp->execute()){
+                    $data = $qp->fetchAll(PDO::FETCH_ASSOC)[0];
+                    return $data['count(*)'];
+                }
+
+            }else{
+                $ql = parent::getDb()->prepare("SELECT * FROM notif WHERE destinataire = :dest1 OR destinataire = :dest2 ORDER BY add_at DESC");
+                if ($ql->execute(["dest1" => $dest, 'dest2' => 'SPA-'.$activity])){
+                    $data = $ql->fetchAll(PDO::FETCH_ASSOC);
+
+                    $qu = parent::getDb()->prepare("UPDATE notif SET state = :state WHERE state = 'unread' AND destinataire = :dest1 OR destinataire = :dest2");
+                    $qu->execute(["dest1" => $dest, 'dest2' => 'SPA-'.$activity, 'state' => 'read']);
+
+                    return [$data];
+                }
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+
+    /**
+     * @param $destinataire
+     * @param bool $indice
+     * @return array|bool|string
+     */
+    public function getAllMess($destinataire, bool $indice = true){
+        try {
+            $dest = strip_tags($destinataire);
+            if ($indice){
+                $ql = parent::getDb()->prepare("SELECT count(*) FROM message WHERE statu = 'unread' AND destinataire = :dest");
+                if ($ql->execute(["dest" => $dest])){
+                    return $ql->fetchAll(PDO::FETCH_ASSOC)[0]['count(*)'];
+                }
+
+            }else{
+                $ql = parent::getDb()->prepare("SELECT * FROM message WHERE destinataire = :dest");
+                if ($ql->execute(["dest" => $dest])){
+                    $data = $ql->fetchAll(PDO::FETCH_ASSOC);
+
+                    $qu = parent::getDb()->prepare("UPDATE message SET statu = 'read' WHERE destinataire = :dest");
+                    $qu->execute(["dest" => $dest]);
+
+                    return [$data];
+                }
             }
 
         }catch (PDOException $e){
@@ -462,31 +514,35 @@ class MgrUser extends Database
     }
 
     /**
-     * @param $dest
-     * @return bool|mixed|string
+     * @param $id
+     * @param $table
+     * @return bool|string
      */
-    public function getAllMess($dest, $indice = null){
+    public function delNotifMess($id, $table){
         try {
-
-            if ($indice === null){
-                $ql = parent::getDb()->prepare("SELECT * FROM message WHERE statu = 0 AND destinataire = :dest");
-                if ($ql->execute(["dest"=>$dest])){
-                    return  $ql->fetchAll(PDO::FETCH_ASSOC);
+            if ($table === 'notif'){
+                $del = parent::getDb()->prepare("DELETE FROM notif WHERE id = :id");
+                $del->bindValue('id', strip_tags($id), PDO::PARAM_INT);
+                if ($del->execute()){
+                    return true;
+                }else{
+                   return Functions::sentNotif('Faill please try again');
                 }
-            }else{
 
-                $ql = parent::getDb()->prepare("SELECT * FROM message WHERE destinataire = :dest");
-                if ($ql->execute(["dest"=>$dest])){
-                    return $ql->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                $del = parent::getDb()->prepare("DELETE FROM message WHERE id = :id");
+                $del->bindValue('id', strip_tags($id), PDO::PARAM_INT);
+                if ($del->execute()){
+                    return true;
+                }else{
+                    return Functions::sentNotif('Faill please try again');
                 }
             }
 
         }catch (PDOException $e){
-            return $e->getMessage();
+           return $e->getMessage();
         }
-        return false;
     }
-
 
 
 }

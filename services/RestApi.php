@@ -388,27 +388,59 @@ class RestApi extends Database
 
     /**
      * @param $annonce_id
-     * @param string $annoncer
+     * @param $annoncer
+     * @param array $destinataires
      * @param $comment
+     * @param $adimg
+     * @param $adPrdname
+     * @param $topic
      * @return bool|string
      */
-    public function postAndGetcomment($annonce_id, string $annoncer, $comment){
+    public function postAdComment($annonce_id, $annoncer, $comment, $adimg, $adPrdname, $topic, array $destinataires){
         try {
+            if ($_SESSION['shop_name']){
+                $poster = $_SESSION['shop_name'];
+
+            }else{
+                $poster = strip_tags($annoncer);
+            }
+
             $pc = $this->getDb()->prepare("INSERT INTO responses (annonce_id, annoncer, shop_name, response)
                                                      VALUES (:annonce_id, :annoncer, :shop_name, :response)"
             );
+            $pc->bindValue('annonce_id', strip_tags($annonce_id), PDO::PARAM_STR_CHAR);
+            $pc->bindValue('annoncer', strip_tags($annoncer), PDO::PARAM_STR_CHAR);
+            $pc->bindValue('shop_name', $poster, PDO::PARAM_STR_CHAR);
+            $pc->bindValue('response', strip_tags($comment), PDO::PARAM_STR_CHAR);
 
-            $pc->execute([
-                'annonce_id'=>$annonce_id,
-                'annoncer' => $annoncer,
-                'shop_name'=>$_SESSION['shop_name'],
-                'response'=> (new Functions())->e($comment)    
-            ]);
-            $pc->closeCursor();
+            if ($pc->execute()){
+                array_push($destinataires, $annoncer);
+                $destUniq = array_unique($destinataires);
+                foreach ($destUniq as $item){
+                    if ($item === $poster){
+                        unset($destUniq[array_keys($destUniq, $poster)[0]]);
+                    }
+                }
 
-            if ($pc->rowCount() === 1){
+                foreach ($destUniq as $lastDest){
+                    $this->notify([
+                        'format' => 'comment',
+                        'sujet' => 'COMMENT',
+                        'destinataire' => $lastDest,
+                        'message' => Functions::SNFormatFront($poster).' vient d\'ajouter un commentaire à propos de votre annonce',
+                        'prod_name' => $adPrdname,
+                        'comment' => $comment,
+                        'from_' => Functions::SNFormatFront($poster),
+                        'link' => 'annonces?Search='.$adPrdname,
+                        'price' => null,
+                        'promo' => null,
+                        'img' => $adimg,
+
+                    ], HOST.$topic);
+                }
                 return "success";
             }
+
         }catch (PDOException $e){
             return $e->getMessage();
         }
@@ -588,8 +620,8 @@ class RestApi extends Database
         try {
             $message  = strip_tags($data['message']);
 
-            $q = parent::getDb()->prepare("INSERT INTO notif (format, destinataire, message, prod_name, price, promo, img)
-                                                     VALUE (:format, :destinataire, :message, :prod_name, :price, :promo, :img)"
+            $q = parent::getDb()->prepare("INSERT INTO notif (format, destinataire, message, prod_name, adComments, price, link, promo, img)
+                                                     VALUE (:format, :destinataire, :message, :prod_name, :adComments, :price, :link, :promo, :img)"
             );
 
             $q->bindValue("format", $data['format'], PDO::PARAM_STR_CHAR);
@@ -598,19 +630,19 @@ class RestApi extends Database
             $q->bindValue("prod_name", strip_tags($data['prod_name']), PDO::PARAM_STR_CHAR);
             $q->bindValue("price", strip_tags($data['price']), PDO::PARAM_STR_CHAR);
             $q->bindValue("promo", strip_tags($data['promo']), PDO::PARAM_STR_CHAR);
-            $q->bindValue("img", strip_tags($data['img']), PDO::PARAM_STR_CHAR);
+            $q->bindValue("adComments", strip_tags($data['comment']), PDO::PARAM_STR_CHAR);
+            $q->bindValue("img", $data['img'], PDO::PARAM_STR_CHAR);
+            $q->bindValue("link", strip_tags($data['link']), PDO::PARAM_STR_CHAR);
 
             if($q->execute()){
-                $data = [
+                $q->closeCursor();
+                $dta = [
                     'initiateur' => 'lbm',
                     'sujet'      => strip_tags($data['sujet']),
                     'message'    => $message,
                     'date'       => date("Y-m-d H:i:s")
                 ];
-                (new AjaxApiRes)->mercurepost($topic, $data);
-
-                $q->closeCursor();
-                return true;
+                (new AjaxApiRes)->mercurepost($topic, $dta);
             }
         }catch(PDOException $e){
             return $e->getMessage();

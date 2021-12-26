@@ -137,12 +137,12 @@
                 <div class="notif_messa">
                     <img class="mt-3 mr-1" id="messa__" src="<?= S_ASSETS?>images/svg/email_black_24dp.svg" alt="user image">
 
-                        <?php if(count($this->getNotif()[0]) > 0 ): ?>
-                            <div class="notCont"><?= count($this->getNotif()[0])?></div>
+                        <?php if($this->getNotif() > 0): ?>
+                            <div class="notCont"><?= $this->getNotif()?></div>
                         <?php endif;?>
 
-                        <?php if(count($this->getMess()) > 0 ): ?>
-                            <div class="notCont_mess"><?= count($this->getMess())?></div>
+                        <?php if($this->getMess() > 0): ?>
+                            <div class="notCont_mess"><?= $this->getMess()?></div>
                         <?php endif;?>
 
                         <div class="row notifdiv__">
@@ -151,23 +151,6 @@
 
                         <div class="row notifmess">
                             <h6 class="text-primary">Messages</h6>
-                            <?php if(count($this->getMess()) > 0 ): ?>
-                                <?php for($m=0; $m<count($this->getMess()); $m++): ?>
-                                    <div class="one_n">
-                                        <p class="notif_date"><?= $this->getMess()[$m]['sent_at']?></p>
-                                        <p class="notif_message" id="_header_"><?= $this->getMess()[$m]['inf_mess']?></p>
-                                        <div class="d-flex w-100 _bbo">
-                                            <img class="w-25" src="<?= S_ASSETS ?>images/img/lite.jpg" alt="image">
-                                            <div class="w-75">
-                                                <p class="notif_pn"><?= $this->getMess()[$m]['expediteur']?></p>
-                                                <button class="text-dark v__btn" title="click here for quick see this message">View</button>
-                                                <p class="notif_pp" id="_message_"><?= $this->getMess()[$m]['message']?> </p>
-                                            </div>
-                                        </div>
-                                        <img class="del_notif" title="Delete this message" src="<?= S_ASSETS ?>images/svg/delete_black_24dp.svg" alt="">
-                                    </div>
-                                <?php endfor;?>
-                            <?php endif;?>
                         </div>
 
                     <img class="mt-3" id="notif_" src="<?= S_ASSETS?>images/svg/notifications_active_black_24dp.svg" alt="user image">
@@ -1797,7 +1780,7 @@
                             <a><b class="text-primary" style="font-size: 16px;">00</b> Buy intent</a>
                         </div>
                         <div class="msg">
-                            <a><b class="text-primary" style="font-size: 16px;"><?= count($this->getMess())?></b> Unread message</a>
+                            <a><b class="text-primary" style="font-size: 16px;"><?= $this->getMess()?></b> Unread message</a>
                         </div>
                         <div class="msg">
                             <a><b class="text-primary" style="font-size: 16px;">00</b> Reclamations non traités</a>

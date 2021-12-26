@@ -362,9 +362,10 @@ class MgrProducts extends Database
                 (new RestApi)->notify([
                     'format' => 'reclam',
                     'sujet' => 'RECLAM',
-                    'destinataire' => $data[7],
+                    'destinataire' => Functions::SNFormatBack($data[7]),
                     'message' => 'You have a new reclamation',
                     'prod_name' => $data[4],
+                    'comment' => null,
                     'from_' => $data[0],
                     'link' => 'dashboard#rec',
                     'price' => null,

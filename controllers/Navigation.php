@@ -534,45 +534,48 @@ class Navigation
         $d = new MgrProducts();
         $d_ = new MgrUser();
         $f = new Functions();
+        $un = $_SESSION['username'];
+        $sn = $_SESSION['shop_name'];
+        $p = new Pagination();
 
         if(isset($_GET['page'])){
-            $this->shop_data = (new Pagination)->showDataWithPagination($_SESSION['shop_name'], $_SESSION['order by'], (int)$_GET['page']*10, 10);
+            $this->shop_data = $p->showDataWithPagination($sn, $_SESSION['order by'], (int)$_GET['page']*10, 10);
         }
-        $this->shop_data = (new Pagination)->showDataWithPagination($_SESSION['shop_name'], $_SESSION['order by'], 0, 10);
+        $this->shop_data = $p->showDataWithPagination($sn, $_SESSION['order by'], 0, 10);
 
-        if($_SESSION['shop_name'] === 'lbm'){
-            $this->promoClient = (new Pagination)->showDataWithPagination('promo', $_SESSION['client_order'], 0, 10);
+        if($sn === 'lbm'){
+            $this->promoClient = $p->showDataWithPagination('promo', $_SESSION['client_order'], 0, 10);
 
-            $this->allinFaq = (new Pagination)->showDataWithPagination("faq", 'id', 0, 10);
-            $this->allplan = (new Pagination)->showDataWithPagination("plans", 'id', 0, 10);
-            $this->allinpromo = (new Pagination)->showDataWithPagination("home_special_promo", 'id', 0, 10);
+            $this->allinFaq = $p->showDataWithPagination("faq", 'id', 0, 10);
+            $this->allplan = $p->showDataWithPagination("plans", 'id', 0, 10);
+            $this->allinpromo = $p->showDataWithPagination("home_special_promo", 'id', 0, 10);
 
-            $this->totalBu = (new Pagination)->totalCountFromAnyWhere("sallers");
-            $this->totalSu = (new Pagination)->totalCountFromAnyWhere("users");
+            $this->totalBu = $p->totalCountFromAnyWhere("sallers");
+            $this->totalSu = $p->totalCountFromAnyWhere("users");
 
-            $this->totalBuActif = (new Pagination)->totalActiveCount("sallers", 1);
-            $this->totalSuActif = (new Pagination)->totalActiveCount("users", 1);
+            $this->totalBuActif = $p->totalActiveCount("sallers", 1);
+            $this->totalSuActif = $p->totalActiveCount("users", 1);
 
-            $this->totalMenSallers = (new Pagination)->totalGenderCount("sallers", 1, "Men");
-            $this->totalWomanSallers = (new Pagination)->totalGenderCount("sallers", 1, "Woman");
+            $this->totalMenSallers = $p->totalGenderCount("sallers", 1, "Men");
+            $this->totalWomanSallers = $p->totalGenderCount("sallers", 1, "Woman");
 
-            $this->totalMenUsers = (new Pagination)->totalGenderCount("users", 1, "Men");
-            $this->totalWomanUsers = (new Pagination)->totalGenderCount("users", 1, "Woman");
+            $this->totalMenUsers = $p->totalGenderCount("users", 1, "Men");
+            $this->totalWomanUsers = $p->totalGenderCount("users", 1, "Woman");
 
-            $this->BusiClient = (new Pagination)->showDataWithPagination('sallers', $_SESSION['filter_user'], 0, 10000);
-            $this->SuClient = (new Pagination)->showDataWithPagination('users', $_SESSION['filter_user'], 0, 10000);
+            $this->BusiClient = $p->showDataWithPagination('sallers', $_SESSION['filter_user'], 0, 10000);
+            $this->SuClient = $p->showDataWithPagination('users', $_SESSION['filter_user'], 0, 10000);
 
         }else{
-            $this->promoClient = (new Pagination)->showDataWithPagination('promo', $_SESSION['client_order'], 0, 10);
+            $this->promoClient = $p->showDataWithPagination('promo', $_SESSION['client_order'], 0, 10);
         }
 
         $this->saller_data = $d_->current_saller_data($_SESSION['saller_id']);
         $this->sub_admin_data = $d_->manageSubAdmin();
-        $this->busiProd = $d->ProdSearch($_SESSION['shop_name'], $f->e($_GET['sp']));
+        $this->busiProd = $d->ProdSearch($sn, $f->e($_GET['sp']));
 
-        $this->notif = $d_->getAllNotifs($_SESSION['shop_name']);
-        $this->mess = $d_->getAllMess($_SESSION['username'], null);
-        $this->reschk = $d_->getAllfromAnyBusiUser('checkResq', $_SESSION['shop_name']);
+        $this->notif = $d_->getAllNotifs($sn, true);
+        $this->mess = $d_->getAllMess($un, true);
+        $this->reschk = $d_->getAllfromAnyBusiUser('checkResq', $sn);
 
         foreach($this->promoClient as $prd){
             $id = json_decode($prd['prod_data'], true);
@@ -887,11 +890,11 @@ class Navigation
         $this->getAnnonceData();
         $f = new Functions();
 
-        $name = $f->e($_POST['name']);
-        $phone = $f->e($_POST['phone']);
-        $mail = $f->e($_POST['email']);
-        $country = $f->e($_POST['country']);
-        $city = $f->e($_POST['city']);
+        $name = $f->e(unserialize($_COOKIE['cud'])[0]);
+        $phone = $f->e(unserialize($_COOKIE['cud'])[2]);
+        $mail = $f->e(unserialize($_COOKIE['cud'])[3]);
+        $country = $f->e(unserialize($_COOKIE['cud'])[5]);
+        $city = $f->e(unserialize($_COOKIE['cud'])[1]);
 
         $ann_prod_name = $f->e($_POST['ann_prod_name']);
         $ann_prod_qte = $f->e($_POST['ann_prod_qte']);
@@ -966,7 +969,7 @@ class Navigation
                     $country, $city, $ann_prod_name,
                     $ann_prod_qte, $ann_prod_qly,
                     $ann_prod_price, $ann_prod_color,
-                    $ann_prod_size, $ann_prod_cmt, $imdata, 'sllNotif', $type
+                    $ann_prod_size, $ann_prod_cmt, $imdata, 'sllNotif', $type, $_SESSION["current_user_id"]
                 ];
 
                 $d->postAnnonce($data);
@@ -993,8 +996,8 @@ class Navigation
 
         $this->annonceD = $mgrA->showAnnonces(null, strtolower($_SESSION['username']));
         $this->current_su_data = $d->current_su_data($_SESSION["current_user_id"]);
-        $this->notif = json_decode($this->getCurrentSuData()->notif, true);
-        $this->mess = (new MgrUser)->getAllMess($_SESSION['username'], null);
+        $this->notif = $d->getAllNotifs($_SESSION['username'], true);
+        $this->mess = $d->getAllMess($_SESSION['username'], true);
 
         include_once S_VIEWS.'/panel.view.php';
         $this->getCurrentSuData();

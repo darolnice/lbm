@@ -225,14 +225,21 @@ class Index {
                 }// check cart price
                 if(response["response_code"] === 200 && response["res_id"] === 1005){
                     if (response['message'] === 'success'){
-                        let shopname = new Index().getCookie('cookies_u_data').split('"')[9];
+                        let shopname = '';
+                        let idx = new Index();
+
+                        if (idx.getCookie('cookies_u_data')){
+                            shopname = idx.getCookie('cookies_u_data').split('"')[9];
+                        }else {
+                            shopname = idx.getCookie('cud').split('"')[1];
+                        }
 
                         let li = document.createElement('li');
                         li.setAttribute('id', 'res_li');
 
                         let a = document.createElement("a");
                         a.setAttribute('href', "shop?name="+shopname);
-                        a.innerHTML = "Shop : "+shopname;
+                        a.innerHTML = shopname;
 
                         let p = document.createElement("p");
                         p.setAttribute('class', "res-p");
@@ -502,12 +509,17 @@ class Index {
                         p_Price.setAttribute('class', 'notif_pp');
                         p_Price.innerHTML = response['message'][i]['price'];
 
+                        let cmt = document.createElement('p');
+                        cmt.setAttribute('class', 'p_n_cmt');
+                        cmt.innerHTML = response['message'][i]['adComments'];
+
                         let del = document.createElement('del');
                         del.setAttribute('class', 'text-danger ml-3');
                         del.innerHTML = response['message'][i]['promo'];
 
                         let img2 = document.createElement('img');
                         img2.setAttribute('class', 'del_notif');
+                        img2.setAttribute('data-nid', response['message'][i]['id']);
                         img2.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/svg/delete_black_24dp.svg');
 
                         div.append(a);
@@ -516,19 +528,119 @@ class Index {
 
                         div3.append(p_Name);
                         div3.append(p_Price);
+                        div3.append(cmt);
 
                         p_Price.append(del);
 
                         a.append(p_Date)
                         a.append(p_Mess)
                         a.append(div2)
-                        a.append(img2)
+                        div.append(img2)
 
                         let note = document.querySelector('.notifdiv__');
                         note.append(div);
                     }
+                    $('.notCont').hide();
+
+                    document.querySelectorAll('.del_notif').forEach(del =>{
+                        del.addEventListener('click', (e)=>{
+                            new Index().jxPostData('jxdel_not_mess', e.target, del.getAttribute('data-nid'), 'notif');
+                        });
+                    });
 
                 }// notif
+                if(response["response_code"] === 200 && response["res_id"] === 138){
+                    document.querySelectorAll('.one_n').forEach(div =>{div.remove()})
+                    for(var x=0; x<response['message'].length; x++){
+
+                        let div = document.createElement('div');
+                        div.setAttribute('class', 'one_n');
+
+                        let p_Date = document.createElement('p');
+                        p_Date.setAttribute('class', 'notif_date');
+                        p_Date.innerHTML = response['message'][x]['sent_at'];
+
+                        let p_Mess = document.createElement('p');
+                        p_Mess.setAttribute('class', 'notif_message');
+                        p_Mess.setAttribute('id', '_header_');
+                        p_Mess.innerHTML = response['message'][x]['inf_mess'];
+
+                        let div2 = document.createElement("div");
+                        div2.classList.add('d-flex');
+                        div2.classList.add('w-100');
+                        div2.classList.add('_bbo');
+
+                        if (response['message'][x]['ex_img'] !== null){
+                            let img = document.createElement('img');
+                            img.setAttribute('class', 'img_ctx w-25');
+                            img.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/'+response['message'][x]['ex_img']);
+                            img.setAttribute('alt', 'image');
+
+                            div2.append(img);
+                        }else {
+                            let img = document.createElement('img');
+                            img.setAttribute('class', 'img_ctx w-25');
+                            img.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/svg/person_black_24dp.svg');
+                            img.setAttribute('alt', 'image');
+
+                            div2.append(img);
+                        }
+
+                        let div3 = document.createElement("div");
+                        div3.classList.add('w-75');
+
+                        let p_Name = document.createElement('p');
+                        p_Name.setAttribute('class', 'notif_pn');
+                        p_Name.innerHTML = response['message'][x]['expediteur'];
+
+                        let btn = document.createElement('button');
+                        btn.setAttribute('class', 'text-dark v__btn');
+                        btn.setAttribute('title', 'Click here for quick see this message');
+                        btn.innerHTML = 'View';
+
+                        let p_Price = document.createElement('p');
+                        p_Price.setAttribute('class', 'notif_pp');
+                        p_Price.setAttribute('id', '_message_');
+                        p_Price.innerHTML = response['message'][x]['message'];
+
+
+                        let img2 = document.createElement('img');
+                        img2.setAttribute('class', 'del_notif');
+                        img2.setAttribute('title', 'Delete this message');
+                        img2.setAttribute('src', 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/svg/delete_black_24dp.svg');
+
+                        div2.append(div3);
+
+                        div3.append(p_Name);
+                        div3.append(p_Price);
+                        div3.append(btn);
+
+                        div.append(p_Date)
+                        div.append(p_Mess)
+                        div.append(div2)
+                        div.append(img2)
+
+                        let note = document.querySelector('.notifmess');
+                        note.append(div);
+                    }
+                    $('.notCont_mess').hide();
+
+                    document.querySelectorAll('.v__btn').forEach(btn =>{
+                        btn.addEventListener('click', ()=>{
+                            btn.style.display = 'none';
+                            btn.previousElementSibling.style.display = 'block';
+                        });
+                    });
+                }// messages
+                if(response["response_code"] === 200 && response["res_id"] === 63){
+                    let idx = new Index();
+                    if(response['message'] === true){
+                        context.parentNode.style.display = 'none';
+
+                    }else{
+                        idx.lbmAlert(response['message'], "danger");
+                    }
+                }
             }
         });
     }
@@ -838,6 +950,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (document.querySelector("#messa__")){
         document.querySelector("#messa__").addEventListener("click", function () {
+            new Index().jxPostData('jxAllMess', this, null);
             n.css('visibility', "hidden");
             const d = $(".notifmess");
             if (d.css("visibility") === 'hidden'){
@@ -847,12 +960,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        document.querySelectorAll('.v__btn').forEach(btn =>{
-            btn.addEventListener('click', ()=>{
-                btn.style.display = 'none';
-                btn.nextElementSibling.style.display = 'block';
-            });
-        });
     }
 
 

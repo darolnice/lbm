@@ -879,9 +879,9 @@ a{
 }
 
 .res_ann a{
-    /*border: 1px solid coral!important;*/
+    border: 1px solid coral!important;
     height: auto;
-    overflow: hidden;
+    display: contents;
     text-decoration: none!important;
     font-weight: 500;
 }
@@ -896,6 +896,7 @@ a{
 .p_a_prod{
     display: flex;
     /*border: 1px solid coral;*/
+    margin-left: -9px;
     height: 20px;
 }
 
@@ -907,25 +908,35 @@ a{
     overflow: hidden;
 }
 .p_a_p, .p_a_q{
-    /*border: 1px solid coral;*/
+    /* border: 1px solid coral; */
     width: 70px;
     color: black!important;
 }
 .p_a_qte{
-    /*border: 1px solid coral;*/
-    width: 50px;
+    /* border: 1px solid coral; */
+    width: 20px;
     color: black!important;
 }
 
 .p_ann_res b{
     color: royalblue;
     font-size: 11px;
-    margin-left: -40px;
+    /* margin-left: -10px; */
 }
 
+.p_ann_res ul{
+    padding-left: 5px;
+    box-shadow: 1px 1px 1px 1px #e1dcdc;
+    border-radius: 5px;
+    width: 104.5%;
+    margin-left: -15px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
 .p_ann_res ul li{
     color: black;
-    margin-left: -10px;
+    /* margin-left: -10px; */
+    list-style: none!important;
 }
 
 .p_ann_res ul li h6{
