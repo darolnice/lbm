@@ -748,19 +748,32 @@ class Index {
      * @param data
      */
     post_asyn_fetch(url, context = null, data){
+        let link_ = 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/';
+
         fetch(url, {
             method: "post",
             body: data,
         }).then(res => res.json()
             .then(dta => {
                  if (dta['res_id'] === 20){
-                     let link_ = 'http://127.0.0.1:8000/projets/lebolma/public_html/assets/images/upload/'+dta['message'];
-                     document.querySelector('.im--upload img').setAttribute('src', link_);
-                     document.querySelector('.admin_imag').setAttribute('src', link_);
+                     document.querySelector('.im--upload img').setAttribute('src', link_+dta['message']);
+                     document.querySelector('.admin_imag').setAttribute('src', link_+dta['message']);
                      $("#up_img_auth").val('');
                      $('#up_img_auth').fadeOut(300);
                      new Index().lbmAlert('Profil image update successfully');
-                 }else if (dta['res_id']){
+                 }
+
+                 else if (dta['res_id'] === 52){
+                     const pp = document.querySelector('#admin_persn');
+                     pp.setAttribute('src', link_+dta['message']);
+                     document.querySelector('#_supp_').setAttribute('data-crr', dta['message']);
+                     document.querySelector('.ppname').innerHTML = dta['message'];
+                     $('.su_pp_form').fadeOut(100);
+                     new Index().lbmAlert('Updade Successfully');
+                     return null;
+                 }
+
+                 else if (dta['res_id']){
                      new Index().lbmAlert(dta['message'], 'danger');
                  }
             })
@@ -959,7 +972,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 d.css('visibility', "hidden");
             }
         });
-
     }
 
 
@@ -1121,7 +1133,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-
 
         if(planBtn.classList.contains("d-none")){
             function plcMgr(){

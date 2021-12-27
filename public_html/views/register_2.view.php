@@ -41,13 +41,13 @@ $title = "Business accoumpt /2";
 
             <div class="cni-img-div">
                 <label>Card id face 1 <mark style="color: red">*</mark>
-                    <input id="s_cni_1" type="file" required="required" name="CardIdface1" hidden>
+                    <input id="s_cni_1" type="file" required name="CardIdface1" hidden>
                     <img class="thumb1" src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="first face card id">
                     <button type="button" class="smartbtn">Upload</button>
                 </label>
 
                 <label>Card id face 2 <mark style="color: red">*</mark>
-                    <input id="s_cni_2" type="file" required="required" name="CardIdface2" hidden>
+                    <input id="s_cni_2" type="file" required name="CardIdface2" hidden>
                     <img class="thumb2" src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="seconde face card id">
                     <button type="button" class="mb-2 smartbtn">Upload</button>
                 </label>

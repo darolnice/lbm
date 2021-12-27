@@ -10,9 +10,23 @@
 
 class Navigation
 {
-    private $country = ['USA', 'Cameroon', 'france', 'Italia', 'Canada', 'Gabon',
-                        'Congo brazaville', 'Ivoire coast', 'Tchad', 'Algeria'
+    private $country = ['Algeria','Angola','Australia','Austria','Belarus','Belgium','Benin',
+        'Brazil','Bulgaria','Burkina','Burundi','Cameroon','Canada','Cape Verde','Central African Rep',
+        'Tchad','Chile','China','Congo','Congo Democratic Rep','Croatia','Cuba','Denmark',
+        'Egypt','Equatorial Guinea','Estonia','Ethiopia','Finland','France','Gabon','Gambia',
+        'Germany','Ghana','Greece','Guinea','Guinea-Bissau','Iceland','India','Indonesia',
+        'Ireland Republic','Israel','Italy','Ivory Coast','Jamaica','Japan','Kenya',
+        'Korea South','Kuwait','Lebanon','Lesotho','Liberia','Libya','Luxembourg','Madagascar',
+        'Malawi','Malaysia','Mali','Malta','Mauritania','Mexico','Moldova','Monaco',
+        'Morocco','Mozambique','Namibia','Netherlands','New Zealand','Nicaragua',
+        'Niger','Nigeria','Papua New Guinea','Paraguay','Peru','Philippines',
+        'Portugal','Qatar','Romania','Russian Federation','Rwanda','Sao Tome & Principe',
+        'Saudi Arabia','Senegal','Seychelles','Sierra Leone','Singapore',
+        'Somalia','South Africa','Spain','Sudan','Swaziland','Sweden','Switzerland',
+        'Tanzania','Thailand','Togo','Tunisia','Turkey','Uganda','United Arab Emirates',
+        'United Kingdom','United States','Zambia','Zimbabwe'
     ];
+
     public function getCountry(): array
     {
         return $this->country;
@@ -71,15 +85,16 @@ class Navigation
     private $sbest;
     private $reschk;
     private $tabl = [];
+    private $reclamation;
+    private $transactions;
 
 
 
 
-
-
-
-
-
+    public function getReclamation()
+    {
+        return $this->reclamation;
+    }
     public function getTabl(): array
     {
         return $this->tabl;
@@ -208,7 +223,6 @@ class Navigation
     {
         return $this->faq;
     }
-
     public function getBest()
     {
         return $this->best;
@@ -241,7 +255,6 @@ class Navigation
     {
         return $this->annonceData;
     }
-
     public function getLbmProdData()
     {
         return $this->lbmProdData;
@@ -270,6 +283,11 @@ class Navigation
     {
         return $this->annonceD;
     }
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
 
     public function setCtnName($ctn_name): void
     {
@@ -992,10 +1010,12 @@ class Navigation
         session_start();
         Functions::Auth_SU_userISNT();
         $d = new MgrUser();
-        $mgrA = new MgrAnnonces();
 
-        $this->annonceD = $mgrA->showAnnonces(null, strtolower($_SESSION['username']));
+
+        $this->annonceD = (new MgrAnnonces)->showAnnonces(null, strtolower($_SESSION['username']));
+        $this->reclamation = (new MgrProducts)->getAllReclam($_SESSION['username']);
         $this->current_su_data = $d->current_su_data($_SESSION["current_user_id"]);
+        $this->transactions = (new MgrProducts)->getTransactions($_SESSION['username'], true);
         $this->notif = $d->getAllNotifs($_SESSION['username'], true);
         $this->mess = $d->getAllMess($_SESSION['username'], true);
 
@@ -1004,6 +1024,13 @@ class Navigation
         $this->getAnnonceD();
         $this->getNotif();
         $this->getMess();
+        $this->getReclamation();
+        $this->getTransactions();
+
+
+//        echo '<pre>';
+//            var_dump(json_decode($this->getTransactions()[0]['transaction_info'], true));
+//        echo '</pre>';
     }
 
     public function showForum(){

@@ -41,7 +41,8 @@ $title = ''.$_SESSION['username'];
             <form>
                 <input data-show="lt_cart" type="button" class="_crt_" value="Cart">
                 <input data-show="fav_prd_" type="button" class="fvr__" value="Favori">
-                <input data-show="hope_list_div" type="button" id="hop_list" class="pr" value="Hope list">
+                <input data-show="reclam_list_div" type="button" id="rec_list" class="pr" value="Reclamations">
+                <input data-show="transac_list_div" type="button" id="trn_list" class="pr" value="Transactions">
             </form>
         </div>
 
@@ -59,7 +60,7 @@ $title = ''.$_SESSION['username'];
         <div class="d4 mt-3">
             <button class="anc__btn">
                 <img class="mt-3 i_su" id="" src="<?= S_ASSETS?>images/svg/payments_white.svg" alt="user image">
-                ANNONCES <b class="float-right">&blacktriangledown;</b></button>
+                AD <b class="float-right">&blacktriangledown;</b></button>
         </div>
         <div class="bt4">
             <form method="post">
@@ -130,7 +131,7 @@ $title = ''.$_SESSION['username'];
                         <tr class="__tb_sn">
                             <td>
                                 <h6>
-                                    <img class="ict" src="<?= S_ASSETS?>images/svg/visibility_off_black_24dp.svg" alt="bag image">
+                                    <img class="ict" src="<?= S_ASSETS?>images/svg/badge_black_24dp.svg" alt="bag image">
                                     <a><?= $this->getCurrentSuData()->username?></a>
                                 </h6>
                                 <form id="sett_sub_item" method="post">
@@ -191,12 +192,15 @@ $title = ''.$_SESSION['username'];
                             <td>
                                 <h6>
                                     <img class="ict" src="<?= S_ASSETS?>images/svg/image_noir.svg" alt="bag image">
-                                    <a><?= $this->getCurrentSuData()->profil_image?></a>
+                                    <a class="ppname"><?= $this->getCurrentSuData()->profil_image?></a>
                                 </h6>
-                                <form id="sett_mt_item" method="post">
-                                    <input class="sett_pp_inSub" type="file" name="in_mt_nm">
-                                    <input class="sett_inSub_" type="password" placeholder="Enter password" name="_pwr">
-                                    <input class="sett_pp_i_Sub" name="in_sbmt_mt" type="submit" value="SAVE">
+                                <form class="su_pp_form" id="sett_mt_item" method="post" enctype="multipart/form-data">
+                                    <input class="sett_pp_inSub"
+                                           id="_supp_" type="file"
+                                           name="in_mt_nm" required
+                                           data-crr="<?= $this->getCurrentSuData()->profil_image?>">
+                                    <input class="sett_inSub_" id="supp_pass" type="password" placeholder="Enter password" name="_pwr" required>
+                                    <input class="sett_pp_i_Sub" id="su_pp_btn" name="in_sbmt_mt" type="submit" value="SAVE">
                                 </form>
                             </td>
                         </tr>
@@ -237,18 +241,24 @@ $title = ''.$_SESSION['username'];
                                     <b class="i3">Price</b>
                                 </div>
 
-                                <?php for ($n=0; $n<3; $n++):?>
-                                    <div class="item___">
-                                        <a class="_i1">Tecno pop 2</a>
-                                        <a class="_i2">2</a>
-                                        <a class="_i3">115890.99$</a>
-                                    </div>
-                                <?php endfor;?>
+                                <?php if ($_SESSION['cart']):?>
+                                    <?php foreach ($_SESSION['cart'] as $k => $v):?>
+                                        <?php foreach ($v as $k_ => $v_): ?>
+                                            <div class="item___">
+                                                <a class="_i1"><?= json_decode($v_)->prod_name?></a>
+                                                <a class="_i2"><?= json_decode($v_)->quantity?></a>
+                                                <a class="_i3"><?= (json_decode($v_)->price * json_decode($v_)->quantity). json_decode($v_)->currency?></a>
+                                            </div>
+                                        <?php endforeach;?>
+                                    <?php endforeach;?>
+                                <?php endif;?>
 
                                 <div class="items___">
                                     <b class="i1">SUBTOTAL</b>
                                     <b class="i2"></b>
-                                    <b class="i3">523$</b>
+                                    <?php if ($_SESSION['somme']):?>
+                                        <b class="i3"><?= array_sum($_SESSION["somme"]).' US$'?></b>
+                                    <?php endif;?>
                                 </div>
 
                                 <button class="chkout">CHECKOUT</button>
@@ -257,39 +267,127 @@ $title = ''.$_SESSION['username'];
                     </tr>
 
                         <tr class="__tb_desc">
-                        <td>
-                            <h6>
-                                <img class="ict" src="<?= S_ASSETS?>images/svg/favorite_black_24dp.svg" alt="bag image">
-                                <a>Favori</a>
-                            </h6>
+                            <td>
+                                <h6>
+                                    <img class="ict" src="<?= S_ASSETS?>images/svg/favorite_black_24dp.svg" alt="bag image">
+                                    <a>Favori</a>
+                                </h6>
 
-                            <div class="fav_prd_">
-                                <ul>
-                                    <?php for ($n=0; $n<3; $n++):?>
-                                        <li>
-                                            <h5>Toyota Rav 4 2008</h5>
-                                            <img src="<?= S_ASSETS?>images/svg/delete_sweep_black_24dp.svg" alt="bag image">
-                                        </li>
-                                    <?php endfor;?>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                                <div class="fav_prd_">
+                                    <ul>
+                                        <?php for ($n=0; $n<3; $n++):?>
+                                            <li>
+                                                <h5>Toyota Rav 4 2008</h5>
+                                                <img src="<?= S_ASSETS?>images/svg/delete_sweep_black_24dp.svg" alt="bag image">
+                                            </li>
+                                        <?php endfor;?>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
 
                         <tr class="__tb_cp">
                             <td>
                                 <h6>
-                                    <img class="ict" src="<?= S_ASSETS?>images/svg/link_black_24dp.svg" alt="bag image">
-                                    <a>Hope list</a>
+                                    <img class="ict" src="<?= S_ASSETS?>images/svg/warning_black_24dp.svg" alt="bag image">
+                                    <a>Reclamations</a>
                                 </h6>
-                                <div class="hope_list_div">
+                                <div class="reclam_list_div">
                                     <ul>
-                                        <?php for ($n=0; $n<3; $n++):?>
-                                            <li>
-                                                <h5>MacBook pro Touch Pad</h5>
-                                                <img src="<?= S_ASSETS?>images/svg/delete_sweep_black_24dp.svg" alt="bag image">
-                                            </li>
-                                        <?php endfor;?>
+                                        <?php if (count($this->getReclamation()) !== 0): ?>
+                                            <?php for ($n=0; $n<count($this->getReclamation()); $n++):?>
+                                                <li>
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Product Name">Product Name :</b>
+                                                        <?= $this->getReclamation()[$n]['prod_name']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Store name">Store name :</b>
+                                                        <?= Functions::SNFormatFront($this->getReclamation()[$n]['business_name'])?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Reclamation id">Reclamation Id :</b>
+                                                        <?= $this->getReclamation()[$n]['rec_id']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Transaction id">Transaction Id :</b>
+                                                        <?= $this->getReclamation()[$n]['transaction_id']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Your reason">Reason :</b>
+                                                        <?= $this->getReclamation()[$n]['reason']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Product Quantity">Product Quantity :</b>
+                                                        <?= $this->getReclamation()[$n]['quantity']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Issu">Issu :</b>
+                                                        <?= $this->getReclamation()[$n]['issu']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="add date">Add at :</b>
+                                                        <?= $this->getReclamation()[$n]['add_at']?>
+                                                    </p>
+
+                                                </li>
+                                            <?php endfor;?>
+                                        <?php endif;?>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="__tb_trs">
+                            <td>
+                                <h6>
+                                    <img class="ict" src="<?= S_ASSETS?>images/svg/swap_horiz_black_24dp.svg" alt="bag image">
+                                    <a>Transactions</a>
+                                </h6>
+                                <div class="transac_list_div">
+                                    <ul>
+                                        <?php if (count($this->getTransactions()) !== 0): ?>
+                                            <?php for ($h=0; $h<count($this->getTransactions()); $h++):?>
+                                                <li>
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Transaction id">Transaction Id :</b>
+                                                        <?= $this->getTransactions()[$h]['transaction_id']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Transaction Type">Transaction Type :</b>
+                                                        <?= $this->getTransactions()[$h]['t_type']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Store name">Store name :</b>
+                                                        <?= Functions::SNFormatFront($this->getTransactions()[$h]['shop_name'])?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Issu">Transactions Info :</b>
+                                                        <?php foreach (json_decode($this->getTransactions()[$h]['transaction_info'], true) as $item): ?>
+                                                            <?php foreach ($item as $value => $v): ?>
+                                                                <br><br><n style="font-family: 'Candara',serif;"><?= $value .' : '. $v?></n>
+                                                            <?php endforeach;?>
+                                                        <?php endforeach;?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="add date">Transaction Date :</b>
+                                                        <?= $this->getTransactions()[$h]['transaction_date']?>
+                                                    </p>
+
+                                                </li>
+                                            <?php endfor;?>
+                                        <?php endif;?>
                                     </ul>
                                 </div>
                             </td>
@@ -315,14 +413,14 @@ $title = ''.$_SESSION['username'];
             </div>
 
             <div class="panel_ann" style="display: block">
-                <p>Annonces</p>
+                <p>Ad</p>
                 <table class="table-hover jumbotron" id="tble">
                     <tbody class="panel-body" id="tbod">
                         <tr class="__tb_sn">
                             <td>
                                 <h6>
                                     <img class="ict" src="<?= S_ASSETS?>images/svg/room_black_24dp.svg" alt="bag image">
-                                    <a>Annonces</a>
+                                    <a>Ad List</a>
                                 </h6>
 
                                 <?php for ($e=0; $e<count($this->getAnnonceD()); $e++):?>
@@ -359,7 +457,7 @@ $title = ''.$_SESSION['username'];
                             <td>
                                 <h6>
                                     <img class="ict" src="<?= S_ASSETS?>images/svg/star_rate_black_24dp.svg" alt="bag image">
-                                    <a>Add Annonces</a>
+                                    <a>New Ad</a>
                                 </h6>
 
                                 <div class="p_form-add_ann">
@@ -391,28 +489,28 @@ $title = ''.$_SESSION['username'];
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?php (isset($_SESSION['cart'])) ? print count($_SESSION['cart']) : print 0?></h6>
+                Products In Cart
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?= 'Livr'?></h6>
+                Livraison en attente
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?= 'Reserv'?></h6>
+                Reservations
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?= count($this->getReclamation())?></h6>
+                Reclamations
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?= count($this->getAnnonceD())?></h6>
+                Annonces
             </div>
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
-                Messages non lu
+                <h6 class="text-primary"><?= count($this->getTransactions())?></h6>
+                Transactions
             </div>
             <div class="">
                 <h6 class="text-primary"><?= $this->getMess()?></h6>

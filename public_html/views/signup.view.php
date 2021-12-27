@@ -24,12 +24,7 @@ $title = "Sign up";
             </label>
 
             <label>City <mark style="color: red">*</mark>
-                <select id="country" required="required" name="city">
-                    <option value="DOUALA">DOUALA</option>
-                    <option value="QUEBEC">QUEBEC</option>
-                    <option value="PARIS">PARIS</option>
-                    <option value="NEW YORK">NEW YORK</option>
-                </select>
+                <input type="text" id="country" required="required" name="city">
             </label>
 
             <label>Genre<mark style="color: red">*</mark>

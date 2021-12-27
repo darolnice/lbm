@@ -427,7 +427,7 @@ class RestApi extends Database
                         'format' => 'comment',
                         'sujet' => 'COMMENT',
                         'destinataire' => $lastDest,
-                        'message' => Functions::SNFormatFront($poster).' vient d\'ajouter un commentaire à propos de votre annonce',
+                        'message' => Functions::SNFormatFront($poster).' vient d\'ajouter un commentaire à propos d\'une annonce',
                         'prod_name' => $adPrdname,
                         'comment' => $comment,
                         'from_' => Functions::SNFormatFront($poster),

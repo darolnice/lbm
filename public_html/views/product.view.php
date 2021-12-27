@@ -7,7 +7,6 @@ $title = "Product"
 <link rel="stylesheet" href="<?= S_ASSETS?>css/product.css">
 
 <body class="body">
-
     <section class="prd_im1">
         <?php if (isset($_SESSION['username'])):?>
             <div class="blog_post___">
@@ -37,18 +36,30 @@ $title = "Product"
                <div class="prn_img">
                    <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img1?>" alt="product">
                </div>
-               <div class="prn_img">
-                   <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img2?>" alt="product">
-               </div>
-               <div class="prn_img">
-                   <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img3?>" alt="product">
-               </div>
-               <div class="prn_img">
-                   <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img4?>" alt="product">
-               </div>
-               <div class="prn_img">
-                   <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img5?>" alt="product">
-               </div>
+
+               <?php if ($this->getShopProdData()->img2 !== ''): ?>
+                   <div class="prn_img">
+                       <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img2?>" alt="product">
+                   </div>
+               <?php endif;?>
+
+               <?php if ($this->getShopProdData()->img3 !== ''): ?>
+                   <div class="prn_img">
+                       <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img3?>" alt="product">
+                   </div>
+               <?php endif;?>
+
+               <?php if ($this->getShopProdData()->img4 !== ''): ?>
+                   <div class="prn_img">
+                       <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img4?>" alt="product">
+                   </div>
+               <?php endif;?>
+
+               <?php if ($this->getShopProdData()->img5 !== ''): ?>
+                   <div class="prn_img">
+                       <img id="" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img5?>" alt="product">
+                   </div>
+               <?php endif;?>
            </div>
 
            <?php if (isset($_SESSION['username'])):?>
@@ -60,21 +71,29 @@ $title = "Product"
        </div>
 
        <div class="contner">
-            <div class="carr" id="carousel1">
-                <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img2?>" alt="product">
-            </div>
+           <?php if ($this->getShopProdData()->img2 !== ''): ?>
+                <div class="carr" id="carousel1">
+                    <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img2?>" alt="product">
+                </div>
+           <?php endif;?>
 
-            <div class="carr" id="carousel2">
-                <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img3?>" alt="product">
-            </div>
+           <?php if ($this->getShopProdData()->img3 !== ''): ?>
+                <div class="carr" id="carousel2">
+                    <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img3?>" alt="product">
+                </div>
+           <?php endif;?>
 
-            <div class="carr" id="carousel3">
-                <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img4?>" alt="product">
-            </div>
+           <?php if ($this->getShopProdData()->img4 !== ''): ?>
+                <div class="carr" id="carousel3">
+                    <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img4?>" alt="product">
+                </div>
+           <?php endif;?>
 
-            <div class="carr" id="carousel4">
-                <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img5?>" alt="product">
-            </div>
+           <?php if ($this->getShopProdData()->img5 !== ''): ?>
+                <div class="carr" id="carousel4">
+                    <img class="im" src="<?= S_ASSETS?>images/upload/<?= $this->getShopProdData()->img5?>" alt="product">
+                </div>
+           <?php endif;?>
        </div>
 
        <div class="info">

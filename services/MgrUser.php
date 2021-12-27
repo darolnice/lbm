@@ -8,7 +8,6 @@
 
 class MgrUser extends Database
 {
-    private $format;
 
     /**
      * @param $id
@@ -269,41 +268,49 @@ class MgrUser extends Database
      */
     public function updateSuData($entre, $val1, $passW = null, $colomb = null)
     {
-        try {
-            if ($colomb === 'password') {
-                $q = parent::getDb()->prepare("SELECT password FROM users WHERE id = $entre");
-                $q->execute();
-                $d = $q->fetch(PDO::FETCH_ASSOC);
+        try{
+            $q = parent::getDb()->prepare("SELECT password FROM users WHERE id = $entre");
+            $q->execute();
+            $d = $q->fetch(PDO::FETCH_ASSOC);
+
+            if($colomb === 'password') {
                 if (password_verify($passW, $d['password'])) {
                     $query = parent::getDb()->prepare("UPDATE users SET $colomb = :newV WHERE id = $entre");
                     $query->execute(['newV' => password_hash($val1, PASSWORD_DEFAULT, ['cost' => 12])]);
                     return 'Password Update Successfully';
-                } else {
+                } else{
                     return 'Passwod is wrong';
                 }
             }
-            if ($colomb === 'city') {
+            if($colomb === 'city') {
                 $query = parent::getDb()->prepare("UPDATE users SET $colomb = :newV WHERE id = $entre");
                 $query->execute(['newV' => $val1]);
                 $_SESSION[$colomb] = $val1;
                 return 'City Update Successfully';
-            } else {
-                $q = parent::getDb()->prepare("SELECT password FROM users WHERE id = $entre");
-                $q->execute();
-                $d = $q->fetch(PDO::FETCH_ASSOC);
-                if (password_verify($passW, $d['password'])) {
-                    $query = parent::getDb()->prepare("UPDATE users SET $colomb = :newV WHERE id = $entre");
-                    $query->execute(['newV' => $val1]);
-                    $_SESSION[$colomb] = $val1;
-                    return 'Update Success';
-                } else {
+
+            }else {
+                if(password_verify($passW, $d['password'])) {
+                    if ($colomb === 'profil_image'){
+                        $qry = parent::getDb()->prepare("UPDATE users SET $colomb = :newV WHERE id = $entre");
+                        if ($qry->execute(['newV' => $val1])){
+                            return true;
+                        }
+
+                    }else{
+                        $query = parent::getDb()->prepare("UPDATE users SET $colomb = :newV WHERE id = $entre");
+                        $query->execute(['newV' => $val1]);
+                        $_SESSION[$colomb] = $val1;
+                        return 'Update Success';
+                    }
+
+                } else{
                     return 'Password is wrong';
                 }
             }
-
         } catch (PDOException $e) {
             return $e->getMessage();
         }
+        return false;
     }
 
     /**

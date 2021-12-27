@@ -18,7 +18,7 @@ class Panel
             },
             dataType: 'json',
             success: function (response) {
-                if (response['message'] === "Update Success"){
+                if(response['message'] === "Update Success"){
                     context.parentNode.parentNode.firstElementChild.firstElementChild.nextElementSibling.innerHTML = val[0];
                     context.parentElement.firstElementChild.value = '';
                     context.parentElement.firstElementChild.nextElementSibling.value = '';
@@ -26,11 +26,11 @@ class Panel
                     context.parentElement.style.display = 'none';
                     new  Index().lbmAlert(response['message']);
 
-                }else if (response['message'] === "Password is wrong"){
+                }else if(response['message'] === "Password is wrong"){
                     context.parentElement.firstElementChild.nextElementSibling.value = '';
                     new  Index().lbmAlert(response['message'], 'danger');
                 }
-                else if (response['message'] === "Password Update Successfully"){
+                else if(response['message'] === "Password Update Successfully"){
                     context.parentElement.firstElementChild.value = '';
                     context.parentElement.firstElementChild.nextElementSibling.value = '';
                     context.parentElement.style.display = 'none';
@@ -274,6 +274,25 @@ $(document).ready(function () {
         }else {
             new Index().lbmAlert('Invalid City!');
             return null;
+        }
+    });
+
+    let img = {};
+    let old = '';
+    const img_inp = document.querySelector('#_supp_');
+    img_inp.addEventListener('input', ()=>{
+        img =  img_inp.files[0];
+        old = img_inp.getAttribute('data-crr');
+    });
+    $('#su_pp_btn').on('click', function (e) {
+        e.preventDefault();
+        let pass = $('#supp_pass').val();
+        if (img !== "" && pass !== ""){
+            let fd = new FormData();
+            fd.append('oldImg', old);
+            fd.append('image', img);
+            fd.append('pass', pass);
+            new Index().post_asyn_fetch('jx2fa_', this, fd);
         }
     });
 

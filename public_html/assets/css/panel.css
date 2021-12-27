@@ -847,19 +847,19 @@ a{
 }
 
 /***************************/
-.fav_prd_, .hope_list_div{display: none}
-.fav_prd_ ul li, .hope_list_div ul li{
+.fav_prd_, .reclam_list_div, .transac_list_div{display: none}
+.fav_prd_ ul li{
     list-style: none!important;
     display: flex;
 }
-.fav_prd_ ul li img, .hope_list_div ul li img{
+.fav_prd_ ul li img{
     width: 15px;
     height: 15px;
     margin-top: 3px;
     margin-left: 10%;
     cursor: pointer;
 }
-.fav_prd_ ul li h5, .hope_list_div ul li h5{
+.fav_prd_ ul li h5{
     list-style: none!important;
     font-size: 12px;
     font-weight: 400;
@@ -868,8 +868,76 @@ a{
     /*border: 1px solid rgba(114, 24, 24, 0.53);*/
     line-height: 1.8;
 }
-/***************************/
 
+/***************************************/
+.reclam_list_div ul{
+    padding: 0;
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+}
+.reclam_list_div ul li{
+    list-style: none!important;
+    display: table;
+    /*border: 1px dashed rgba(165, 167, 165, 0.53);*/
+    width: 93%;
+    padding: 0!important;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 1px 1px 2px 1px #a09f9f;
+    border-radius: 5px;
+}
+.reclam_list_div ul li p{
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    margin-left: 0;
+    margin-top: 2px;
+    padding: 3px 3px 0 3px;
+    font-size: 11px;
+    font-weight: 600!important;
+    user-select: text;
+}
+.reclam_list_div ul li h5{
+    list-style: none!important;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Tahoma, serif;
+    cursor: pointer;
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    line-height: 1.8;
+}
+
+/***************************/
+.transac_list_div ul{
+                                 padding: 0;
+                                 /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+                             }
+.transac_list_div ul li{
+    list-style: none!important;
+    display: table;
+    /*border: 1px dashed rgba(165, 167, 165, 0.53);*/
+    width: 93%;
+    padding: 0!important;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 1px 1px 2px 1px #a09f9f;
+    border-radius: 3px;
+}
+.transac_list_div ul li p{
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    margin-left: 0;
+    margin-top: 2px;
+    padding: 2px 3px 0 10px;
+    font-size: 11.5px;
+    font-weight: 600!important;
+    user-select: text;
+}
+.transac_list_div ul li h5{
+    list-style: none!important;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Tahoma, serif;
+    cursor: pointer;
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    line-height: 1.8;
+}
 
 /****************************/
 .res_ann{

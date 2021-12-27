@@ -407,7 +407,7 @@ class AjaxApiRes
                     $value[] = $_POST['dta'][$h];
                 }
             }
-            $r = (new MgrUser())->updateSuData($_SESSION['current_user_id'], $f->e($value[0]), $f->e($value[1]), $_POST['indice']);
+            $r = (new MgrUser)->updateSuData($_SESSION['current_user_id'], $f->e($value[0]), $f->e($value[1]), $_POST['indice']);
 
             $res = ['Update Success', 'Password is wrong', 'Password Update Successfully', 'City Update Successfully'];
 
@@ -416,6 +416,30 @@ class AjaxApiRes
                 return false;
             }else{
                 $this->response($this->HTTP_BAD_REQUEST, 'Update Fail, please try again', 113);
+            }
+
+        }else {
+            if(Functions::checkImg($_FILES['image'])){
+                $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+                $newName = uniqid('PP-', true). '.'.$ext;
+                $r = (new MgrUser)->updateSuData($_SESSION['current_user_id'], $newName, strip_tags($_POST['pass']), 'profil_image');
+                if ($r){
+                    if (Functions::moveUloadImage($_FILES['image']['tmp_name'], $newName)){
+                        if ($_POST['oldImg'] !== ''){
+                            $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'public_html'.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.$_POST['oldImg'];
+                            if (unlink($path)){
+                                $_SESSION['profil_image'] = $newName;
+                                $this->response($this->HTTP_OK, $newName, 52);
+                                die();
+                            }
+
+                        }else{
+                            $_SESSION['profil_image'] = $newName;
+                            $this->response($this->HTTP_OK, $newName, 52);
+                            die();
+                        }
+                    }
+                }
             }
         }
         return null;
@@ -1239,5 +1263,4 @@ class AjaxApiRes
         http_response_code($response_code);
         echo json_encode(['response_code' => $response_code, 'message' => $message, 'res_id' => $res_id]);
     }
-
 }

@@ -71,7 +71,7 @@ $title = 'Check Cart';
                         <td id="crt_sze"><?= json_decode($v_)->size?></td>
                         <td id="crt_price"
                             data-qte="<?= json_decode($v_)->quantity?>"
-                            data-shopname="<?= json_decode($v_)->shop_name?>"
+                            data-shopname="<?= Functions::SNFormatBack(json_decode($v_)->shop_name)?>"
                             data-pid="<?= json_decode($v_)->prod_id?>">
                         </td>
                     </tr>

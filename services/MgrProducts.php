@@ -363,7 +363,7 @@ class MgrProducts extends Database
                     'format' => 'reclam',
                     'sujet' => 'RECLAM',
                     'destinataire' => Functions::SNFormatBack($data[7]),
-                    'message' => 'You have a new reclamation',
+                    'message' => 'You have a new reclamation '.$data[0],
                     'prod_name' => $data[4],
                     'comment' => null,
                     'from_' => $data[0],
@@ -380,6 +380,52 @@ class MgrProducts extends Database
 
         }catch (PDOException $e){
             return Functions::sentNotif($e->getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * @param string $username
+     * @return array|bool|string
+     */
+    public function getAllReclam(string $username) {
+        try {
+            $q = parent::getDb()->prepare("SELECT * FROM reclamations WHERE rec_name = :username ");
+            $q->bindValue("username", strip_tags($username), PDO::PARAM_STR_CHAR);
+            if ($q->execute()){
+                return $q->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+    /**
+     * @param string $username
+     * @param bool $userType
+     * @return array|bool|string
+     */
+    public function getTransactions(string $username, bool $userType = true) {
+        try {
+            if ($userType){
+                $q = parent::getDb()->prepare("SELECT * FROM transactions WHERE full_name = :username ");
+                $q->bindValue("username", $username, PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                    return $q->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+            }else{
+                $q = parent::getDb()->prepare("SELECT * FROM transactions WHERE shop_name = :shopname ");
+                $q->bindValue("shopname", $username, PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                    return $q->fetchAll(PDO::FETCH_ASSOC);
+                }
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
         }
         return false;
     }
