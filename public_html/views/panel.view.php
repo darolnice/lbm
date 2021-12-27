@@ -43,6 +43,7 @@ $title = ''.$_SESSION['username'];
                 <input data-show="fav_prd_" type="button" class="fvr__" value="Favori">
                 <input data-show="reclam_list_div" type="button" id="rec_list" class="pr" value="Reclamations">
                 <input data-show="transac_list_div" type="button" id="trn_list" class="pr" value="Transactions">
+                <input data-show="ship_list_div" type="button" id="shp_list" class="pr" value="Shipping">
             </form>
         </div>
 
@@ -392,6 +393,84 @@ $title = ''.$_SESSION['username'];
                                 </div>
                             </td>
                         </tr>
+
+                        <tr class="__tb_shpp">
+                            <td>
+                                <h6>
+                                    <img class="ict" src="<?= S_ASSETS?>images/svg/local_shipping_black_24dp.svg" alt="bag image">
+                                    <a>Shipping</a>
+                                </h6>
+                                <div class="ship_list_div">
+                                    <ul>
+                                        <?php if (count($this->getShipping()) !== 0): ?>
+                                            <?php for ($e=0; $e<count($this->getShipping()); $e++):?>
+                                                <li>
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Store name">Store name :</b>
+                                                        <?= Functions::SNFormatFront($this->getShipping()[$e]['from_'])?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="State">State :</b>
+                                                        <?= $this->getShipping()[$e]['state']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Transaction id">Transaction Id :</b>
+                                                        <?= $this->getShipping()[$e]['transaction_id']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Qualification">Qualification :</b>
+                                                        <?= $this->getShipping()[$e]['prod_nature']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Shipping Type">Type :</b>
+                                                        <?= $this->getShipping()[$e]['type']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Shipping Agence">Shipping Agence :</b>
+                                                        <?= $this->getShipping()[$e]['agent']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Store Adress">Store Adress :</b>
+                                                        <?= $this->getShipping()[$e]['shop_adress']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Store Phone Number">Store Phone Number :</b>
+                                                        <?= $this->getShipping()[$e]['shop_phone']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Delivery Adress">Delivery Adress :</b>
+                                                        <?= $this->getShipping()[$e]['client_adress']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Distance">Distance :</b>
+                                                        <?= $this->getShipping()[$e]['distance']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Duration Estimation">Duration Estimation :</b>
+                                                        <?= $this->getShipping()[$e]['duration_estimation']?>
+                                                    </p>
+
+                                                    <p class="small">
+                                                        <b class="font-weight-bold" title="Register at">Register at :</b>
+                                                        <?= $this->getShipping()[$e]['add_at']?>
+                                                    </p>
+                                                </li>
+                                            <?php endfor;?>
+                                        <?php endif;?>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -485,31 +564,31 @@ $title = ''.$_SESSION['username'];
 
         <div class="p_fv">
             <div class="">
-                <h6 class="text-primary"><?= $this->getMess()?></h6>
+                <h6 class="text-primary"><?php ($this->getMess() !== '0') ? print $this->getMess() : print '00' ?></h6>
                 Messages non lu
             </div>
             <div class="">
-                <h6 class="text-primary"><?php (isset($_SESSION['cart'])) ? print count($_SESSION['cart']) : print 0?></h6>
+                <h6 class="text-primary"><?php (isset($_SESSION['cart'])) ? print count($_SESSION['cart']) : print '00'?></h6>
                 Products In Cart
             </div>
             <div class="">
-                <h6 class="text-primary"><?= 'Livr'?></h6>
-                Livraison en attente
+                <h6 class="text-primary"><?php (count($this->getShipping()) !== 0) ? print count($this->getShipping()) : print '00'?></h6>
+                Shipping Standbay
             </div>
             <div class="">
                 <h6 class="text-primary"><?= 'Reserv'?></h6>
                 Reservations
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getReclamation())?></h6>
+                <h6 class="text-primary"><?php (count($this->getReclamation()) !== 0) ? print count($this->getReclamation()) : print '00' ?></h6>
                 Reclamations
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getAnnonceD())?></h6>
+                <h6 class="text-primary"><?php (count($this->getAnnonceD()) !== 0) ? print count($this->getAnnonceD()) : print '00'?></h6>
                 Annonces
             </div>
             <div class="">
-                <h6 class="text-primary"><?= count($this->getTransactions())?></h6>
+                <h6 class="text-primary"><?php (count($this->getTransactions()) !== 0) ? print count($this->getTransactions()) : print '00'?></h6>
                 Transactions
             </div>
             <div class="">

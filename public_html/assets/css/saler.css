@@ -13,13 +13,14 @@ body{
     --raduis: 3px;
 }
 
-.container{
+#_busi_{
     /*border: 1px solid coral;*/
     width: 30% !important;
-    height: 450px;
-    margin-top: 10% !important;
+    height: auto;
+    margin-top: 0 !important;
     display: block;
     background: none;
+    padding-top: 6%;
 }
 
 .ttl{
@@ -92,7 +93,6 @@ input::placeholder{
 
 .link, .s_signup_a{
     padding: 10px 50px 10px 45px;
-    /*border: 1px solid coral;*/
     color: white;
     text-decoration: none!important;
     border: 0.5px solid white;
@@ -101,7 +101,6 @@ input::placeholder{
     background-color: transparent;
     font-weight: normal;
     margin-top: 15px;
-    margin-bottom: -8px!important;
     transition: .6s ease-in-out;
 }
 .link:hover, .s_signup_a:hover{
@@ -121,7 +120,13 @@ input::placeholder{
     color: #fff;
 }
 
-
+.imgsu_acc{
+    margin-top: 24px;
+    margin-left: 8px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
 
 
 

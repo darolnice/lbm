@@ -769,7 +769,7 @@ class Index {
                      document.querySelector('#_supp_').setAttribute('data-crr', dta['message']);
                      document.querySelector('.ppname').innerHTML = dta['message'];
                      $('.su_pp_form').fadeOut(100);
-                     new Index().lbmAlert('Updade Successfully');
+                     new Index().lbmAlert('Profil Image Updade Successfully');
                      return null;
                  }
 
@@ -997,6 +997,8 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.lbm_a_success button').on('click', function () {
             $(".lbm_a_success").fadeOut();
         });
+
+        new Index().openLink('su_account', 'login', '_parent');
     }
     /**
      *  business end

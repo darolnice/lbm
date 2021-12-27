@@ -7,19 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
     let params = new URLSearchParams(window.location.search);
     let id = params.get("id");
     let sphn = params.get("shop");
+    let stock = $('.p_qte').text();
 
     let p_name = document.querySelector('.p_nm').innerHTML;
     let comp = 0;
 
     let prix = document.querySelector('.p_pce a');
-    var cart_data = {prod_id:id,
-                     shop_name:sphn,
-                     prod_name:p_name,
-                     color:'', size:'',
-                     price:prix.innerHTML,
-                     stock:$('.p_qte').text(),
-                     currency:prix.nextElementSibling.innerHTML,
-                     quantity:''
+    var cart_data = {prod_id: id,
+                     shop_name: sphn,
+                     prod_name: p_name,
+                     color: '',
+                     size: '',
+                     price: prix.innerHTML,
+                     stock: stock,
+                     currency: prix.nextElementSibling.innerHTML,
+                     quantity: ''
     }
 
     const cont = document.querySelectorAll(".sub_cont");
@@ -33,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.contant_saler').addEventListener('click', function (e) {
         e.preventDefault();
         // new Index().scrollTo(100);
-        $('.chat').fadeIn(300);
+        // $('.chat').fadeIn(300);
     });
-    $('.chat_close').on('click', ()=>{
-        $('.chat').fadeOut();
-    });
+    // $('.chat_close').on('click', ()=>{
+    //     $('.chat').fadeOut();
+    // });
 
     document.querySelector('.add_prd').addEventListener('click', function (e) {
         e.preventDefault();
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.querySelector('.prod_data').value = JSON.stringify(cart_data);
         document.querySelector('.prod_key').value = id+sphn;
-        if (qt !== 0 && qt !== null && qt !== ''){
+        if (qt !== 0 && qt !== null && qt !== '' && qt > 0 && qt <= stock){
             $.ajax({
                 type: 'POST',
                 url:  'cart',
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }else {
-            new Index().lbmAlert('Please Add Quantity', 'info');
+            new Index().lbmAlert('Please Add Available Quantity', 'info');
             return null;
         }
     });

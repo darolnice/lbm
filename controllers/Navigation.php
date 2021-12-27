@@ -87,10 +87,21 @@ class Navigation
     private $tabl = [];
     private $reclamation;
     private $transactions;
+    private $shipping;
 
 
 
 
+
+
+
+
+
+
+    public function getShipping()
+    {
+        return $this->shipping;
+    }
     public function getReclamation()
     {
         return $this->reclamation;
@@ -1010,14 +1021,16 @@ class Navigation
         session_start();
         Functions::Auth_SU_userISNT();
         $d = new MgrUser();
+        $Mgrp = new MgrProducts();
+        $username = $_SESSION['username'];
 
-
-        $this->annonceD = (new MgrAnnonces)->showAnnonces(null, strtolower($_SESSION['username']));
-        $this->reclamation = (new MgrProducts)->getAllReclam($_SESSION['username']);
+        $this->annonceD = (new MgrAnnonces)->showAnnonces(null, strtolower($username));
         $this->current_su_data = $d->current_su_data($_SESSION["current_user_id"]);
-        $this->transactions = (new MgrProducts)->getTransactions($_SESSION['username'], true);
-        $this->notif = $d->getAllNotifs($_SESSION['username'], true);
-        $this->mess = $d->getAllMess($_SESSION['username'], true);
+        $this->mess = $d->getAllMess($username, true);
+        $this->reclamation = $Mgrp->getAllReclam($username);
+        $this->transactions = $Mgrp->getTransactions($username, true);
+        $this->shipping = $Mgrp->getShipping($username, true);
+        $this->notif = $d->getAllNotifs($username, true);
 
         include_once S_VIEWS.'/panel.view.php';
         $this->getCurrentSuData();
@@ -1026,10 +1039,10 @@ class Navigation
         $this->getMess();
         $this->getReclamation();
         $this->getTransactions();
-
+        $this->getShipping();
 
 //        echo '<pre>';
-//            var_dump(json_decode($this->getTransactions()[0]['transaction_info'], true));
+//            var_dump(count($this->getShipping()));
 //        echo '</pre>';
     }
 

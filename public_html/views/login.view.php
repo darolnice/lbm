@@ -50,7 +50,6 @@ $title = 'Login';
         <input type="button" id="bs_account" class="s_signup_a" value="BUSINESS ACCOUNT">
         <img class="imgbusi" src="<?= S_ASSETS ?>images/svg/business_black_24dp.svg" alt="">
 
-
         <br><br><br>
         <a href="" class="reserved_">All right reserved &copy; LBM production lebolma.com</a>
     </form>

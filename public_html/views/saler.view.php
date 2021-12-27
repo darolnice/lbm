@@ -6,7 +6,7 @@
 
 <body class="body">
 
-    <section id="_busi_" class="container">
+    <section id="_busi_" class="container" style="height: auto">
         <div class="ttl text-center">
             <img style="margin-top: -5px;" src="<?= S_ASSETS ?>images/svg/person_outline_black_24dp.svg" alt="">
             BUSINESS ACCOUNT LOGIN</div>
@@ -48,11 +48,12 @@
                 <button class="btntwr">Signin with Twitter</button>
             </span>
 
+            <input type="button" id="su_account" class="s_signup_a" value="SIMPLE USER ACCOUNT">
+            <img class="imgsu_acc" src="<?= S_ASSETS ?>images/svg/login_white_24dp.svg" alt="">
+
             <br>
             <a href="" class="s_signup_a_">All right reserved &copy; LBM production lebolma.com</a>
         </form>
-
-
     </section>
 
 <!-- scripts start -->

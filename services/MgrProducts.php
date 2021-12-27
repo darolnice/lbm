@@ -431,6 +431,34 @@ class MgrProducts extends Database
     }
 
     /**
+     * @param string $username
+     * @param bool $userType
+     * @return array|bool|string
+     */
+    public function getShipping(string $username, bool $userType = true) {
+        try {
+            if ($userType){
+                $q = parent::getDb()->prepare("SELECT * FROM shipping WHERE to_ = :username ");
+                $q->bindValue("username", $username, PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                    return $q->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+            }else{
+                $q = parent::getDb()->prepare("SELECT * FROM shipping WHERE from_ = :shopname ");
+                $q->bindValue("shopname", $username, PDO::PARAM_STR_CHAR);
+                if ($q->execute()){
+                    return $q->fetchAll(PDO::FETCH_ASSOC);
+                }
+            }
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+    /**
      * @param array|null $data
      * @return string
      * @throws Exception

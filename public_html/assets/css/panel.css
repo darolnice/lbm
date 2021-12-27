@@ -847,7 +847,7 @@ a{
 }
 
 /***************************/
-.fav_prd_, .reclam_list_div, .transac_list_div{display: none}
+.fav_prd_, .reclam_list_div, .transac_list_div, .ship_list_div{display: none}
 .fav_prd_ ul li{
     list-style: none!important;
     display: flex;
@@ -906,9 +906,9 @@ a{
 
 /***************************/
 .transac_list_div ul{
-                                 padding: 0;
-                                 /*border: 1px solid rgba(114, 24, 24, 0.53);*/
-                             }
+     padding: 0;
+     /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+}
 .transac_list_div ul li{
     list-style: none!important;
     display: table;
@@ -930,6 +930,41 @@ a{
     user-select: text;
 }
 .transac_list_div ul li h5{
+    list-style: none!important;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Tahoma, serif;
+    cursor: pointer;
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    line-height: 1.8;
+}
+
+/***************************************************/
+.ship_list_div ul{
+    padding: 0;
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+}
+.ship_list_div ul li{
+    list-style: none!important;
+    display: table;
+    /*border: 1px dashed rgba(165, 167, 165, 0.53);*/
+    width: 93%;
+    padding: 0!important;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 1px 1px 2px 1px #a09f9f;
+    border-radius: 3px;
+}
+.ship_list_div ul li p{
+    /*border: 1px solid rgba(114, 24, 24, 0.53);*/
+    margin-left: 0;
+    margin-top: 2px;
+    padding: 2px 3px 0 10px;
+    font-size: 11.5px;
+    font-weight: 600!important;
+    user-select: text;
+}
+.ship_list_div ul li h5{
     list-style: none!important;
     font-size: 12px;
     font-weight: 400;

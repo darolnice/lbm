@@ -11,21 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cb68d4b-54a7-4209-bf27-587847d80d79" name="Default Changelist" comment="Theme shop">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/AjaxApiRes.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/AjaxApiRes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/Navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Navigation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/css/panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/panel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/css/saler.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/css/saler.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/assets/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/assets/js/panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/panel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/checkcart.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/checkcart.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/assets/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/assets/js/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/login.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/views/panel.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/panel.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/product.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/product.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/register_2.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/register_2.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/views/signup.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/signup.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/views/saler.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/views/saler.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/MgrProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrProducts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/MgrUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/MgrUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/RestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/RestApi.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -458,7 +454,8 @@
       <workItem from="1640245274993" duration="114033000" />
       <workItem from="1640543307434" duration="8954000" />
       <workItem from="1640583611713" duration="364000" />
-      <workItem from="1640584050421" duration="22903000" />
+      <workItem from="1640584050421" duration="24535000" />
+      <workItem from="1640615762693" duration="8685000" />
     </task>
     <task id="LOCAL-00001" summary="Theme shop">
       <created>1638811936455</created>
@@ -488,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640053002316</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update panel">
+      <created>1640608507531</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1640608507532</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +513,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Theme shop" />
     <MESSAGE value="ras" />
-    <option name="LAST_COMMIT_MESSAGE" value="ras" />
+    <MESSAGE value="update panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="update panel" />
   </component>
   <component name="WindowStateProjectService">
     <state x="263" y="18" key="#CLI_Interpreters" timestamp="1639301064046">
@@ -552,10 +557,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="511" y="206" key="#com.intellij.ide.actions.DebugLogConfigureAction/0.0.1366.728@0.0.1366.728" timestamp="1636096916744" />
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1640601809608">
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1640620221234">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1640601809608" />
+    <state x="853" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1640620221234" />
     <state x="404" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1639745472308">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -616,10 +621,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1638372353111" />
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1640604605240">
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1640620487597">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1640604605240" />
+    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1640620487597" />
     <state x="485" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638811807829">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
